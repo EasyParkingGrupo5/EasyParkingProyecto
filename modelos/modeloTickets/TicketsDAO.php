@@ -4,7 +4,7 @@ include_once PATH . 'modelos/ConBdMysql.php';
 
 class TicketsDAO extends ConDbMySql{
     public function __construct($servidor, $base, $loginDB, $passwordDB){
-        parent::__construct($servidor, $base, $usuario_db, $contrasenia_db);  
+        parent::__construct($servidor, $base, $loginDB, $passwordDB);  
     }
     
     public function seleccionarTodos(){
