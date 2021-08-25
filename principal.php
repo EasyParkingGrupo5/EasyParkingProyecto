@@ -60,19 +60,19 @@ session_start();
         </div>
         <div class="gestion">Menú de Operaciones de Tabla Tickets
             <br>
-            <a>Listar Tickets</a>
+            <a href="./Controlador.php?ruta=listarTickets">Listar Tickets</a>
             <br>
             <a>Agregar Ticket</a>
         </div>
         <div class="gestion">Menú de Operaciones de Tabla Vehículos
             <br>
-            <a>Listar Vehículos</a>
+            <a href="./Controlador.php?ruta=listarVehículos">Listar Vehículos</a>
             <br>
             <a>Agregar Vehiculo</a>
         </div>
         <div class="gestion">Menú de Operaciones de Tabla Reportes
             <br>
-            <a>Listar Reportes</a>
+            <a href="./Controlador.php?ruta=Listar Reportes">Listar Reportes</a>
             <br>
             <a>Agregar Resporte</a>
         </div>
