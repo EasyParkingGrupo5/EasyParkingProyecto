@@ -1,6 +1,7 @@
 <?php
 
 include_once PATH . 'controladores/LibrosControlador.php';
+include_once PATH . 'controladores/TicketsControlador.php';
 
 class ControladorPrincipal{
 
@@ -26,6 +27,9 @@ class ControladorPrincipal{
             case 'actualizarLibros':
                 $this -> actualizarLibros();
                 break;
+            case 'listarTickets':
+                $this -> listarTickets();
+                break;
         }
     }
 
@@ -36,7 +40,11 @@ class ControladorPrincipal{
     public function actualizarLibros(){
         $librosControlador = new LibrosControlador($this -> datos);
     }
-
+    
+    public function listarTickets(){
+        $ticketsControlador = new TicketsControlador($this -> datos);
+    }
+    
 }
 
 ?>
