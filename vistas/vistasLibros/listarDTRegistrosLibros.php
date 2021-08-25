@@ -29,11 +29,13 @@ if (isset($_SESSION['mensaje'])) {
     </head>
 	
 	<body>
+        <h1>Listado de la tabla Libros</h1>
+        <br>
 <?php
 if(isset($_SESSION['listaDeLibros'])){
 	
 	 $listaDeLibros=$_SESSION['listaDeLibros'];
-	 unset($_SESSION['listaDeLibros']);
+
 	
 }
 ?>

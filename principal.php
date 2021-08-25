@@ -74,7 +74,7 @@ session_start();
             <br>
             <a>Listar Reportes</a>
             <br>
-            <a>Agregar Resporte</a>
+            <a>Agregar Reporte</a>
         </div>
         <div class="gestion">Menú de Operaciones de Tabla Empleados
             <br>
@@ -84,7 +84,7 @@ session_start();
         </div>
         <div class="gestion">Menú de Operaciones de Tabla Tipos de Documentos
             <br>
-            <a>Listar Tipos de Documentos</a>
+            <a href="./Controlador.php?ruta=listarTiposDocumentos">Listar Tipos de Documentos</a>
             <br>
             <a>Agregar Tipo de Documento</a>
         </div>
