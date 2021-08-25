@@ -8,10 +8,10 @@ class TicketsControlador{
     
     public function __construct($datos){
         $this->datos = $datos;
-        $this->TicketsControlador();
+        $this->ticketsControlador();
     }
     
-    public function TicketsControlador(){
+    public function ticketsControlador(){
         switch ($this->datos['ruta']) {
             case 'listarTickets':
                 $this->listarTickets();
