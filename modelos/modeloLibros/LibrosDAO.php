@@ -74,28 +74,38 @@ class LibroDAO extends ConDbMySql{
     }
 
     public function actualizar($registro){
-        try {
-            $consulta = "UPDATE libros SET titulo = :titulo, autor = :autor, 
-            precio = :precio, categoriaLibro_catLibId = :categoriaLibro_catLibId WHERE isbn = :isbn;";
-            
-            $actualizar = $this -> conexion -> prepare($consulta);
+        try{
+            $autor = $registro[0]['autor'];
+            $titulo = $registro[0]['titulo'];
+            $precio = $registro[0]['precio'];
+            $categoria = $registro[0]['categoriaLibro_catLibId'];
+            $isbn = $registro[0]['isbn'];	
+			
+			
+			if(isset($isbn)){
+				
+                $actualizar = "UPDATE libros SET autor= ? , ";
+                $actualizar .= " titulo = ? , ";
+                $actualizar .= " precio = ? , ";
+                $actualizar .= " categoriaLibro_catLibId = ? ";
+                $actualizar .= " WHERE isbn= ? ; ";
+				
+				$actualizacion = $this->conexion->prepare($actualizar);
+				
+				$resultadoAct=$actualizacion->execute(array($autor,$titulo,$precio,$categoria, $isbn));
+				
+				        $this->cierreBd();
+						
+                return ['actualizacion' => $resultadoAct, 'mensaje' => "Actualización realizada."];				
+				
+			}
 
-            $actualizar -> bindParam(":titulo", $registro['titulo']);
-            $actualizar -> bindParam(":autor", $registro['autor']);
-            $actualizar -> bindParam(":precio", $registro['precio']);
-            $actualizar -> bindParam(":categoriaLibro_catLibId", $registro['categoriaLibro_catLibId']);
-            $actualizar -> bindParam(":isbn", $registro['isbn']);
-
-            $actualizacion = $actualizar -> execute();
-
-            $this->cierreBd();
-
-            return ['actualizacion' => $actualizacion, 'mensaje' => 'Resgistro Actualizado'];
 
         } catch (PDOException $pdoExc) {
-            $this->cierreBd();
-            return ['actualizacion' => $actualizacion, 'mensaje' => $pdoExc];
+			$this->cierreBd();
+            return ['actualizacion' => $resultadoAct, 'mensaje' => $pdoExc];
         }
+
     }
 
     public function eliminar($sId = array()){

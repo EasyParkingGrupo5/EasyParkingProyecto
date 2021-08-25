@@ -24,8 +24,11 @@ class ControladorPrincipal{
             case 'listarLibros':
                 $this -> listarLibros();
                 break;
-            case 'actualizarLibros':
-                $this -> actualizarLibros();
+            case 'actualizarLibro':
+                $this -> actualizarLibro();
+                break;
+            case 'confirmarActualizarLibro':
+                $this -> confirmarActualizarLibro();
                 break;
             case 'listarRoles':
                 $this -> listarRoles();
@@ -36,7 +39,11 @@ class ControladorPrincipal{
         $librosControlador = new LibrosControlador($this ->datos);
     }
 
-    public function actualizarLibros(){
+    public function actualizarLibro(){
+        $librosControlador = new LibrosControlador($this -> datos);
+    }
+
+    public function confirmarActualizarLibro(){
         $librosControlador = new LibrosControlador($this -> datos);
     }
 
