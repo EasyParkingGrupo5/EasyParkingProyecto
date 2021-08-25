@@ -1,38 +1,38 @@
 <?php
 
-include_once PATH . 'modelos/modeloVehículos/VehículosDAO.php';
+include_once PATH . 'modelos/modeloVehiculos/VehiculosDAO.php';
 
-class VehículosControlador{
+class VehiculosControlador{
 
     private $datos;
     
     public function __construct($datos){
         $this->datos = $datos;
-        $this->VehículosControlador();
+        $this->VehiculosControlador();
     }
     
-    public function VehículosControlador(){
+    public function VehiculosControlador(){
         switch ($this->datos['ruta']) {
-            case 'listarVehículos':
-                $this->listarVehículos();
+            case 'listarVehiculos':
+                $this->listarVehiculos();
                 break;
-            case 'actualizarVehículos':
-                $this->actualizarVehículos();
+            case 'actualizarVehiculos':
+                $this->actualizarVehiculos();
                 break;
         }
     }
-    public function listarVehículos(){
-        $gestarVehículos = new VehículosDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
-        $registroVehículos = $gestarVehículos -> seleccionarTodos();
+    public function listarVehiculos(){
+        $gestarVehiculos = new VehiculosDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $registroVehiculos = $gestarVehiculos -> seleccionarTodos();
     
         session_start();
     
-        $_SESSION['listaDeVehículos'] = $registroVehículos;
+        $_SESSION['listaDeVehiculos'] = $registroVehiculos;
     
-        header("location:principal.php?contenido=vistas/vistasVehículos/listarDTRegistrosVehículos.php");
+        header("location:principal.php?contenido=vistas/vistasVehiculos/listarDTRegistrosVehiculos.php");
     }
 
-    public  function actualizarVehículos(){
+    public  function actualizarVehiculos(){
         
     }
     

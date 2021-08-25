@@ -38,7 +38,7 @@ session_start();
             <br/>
             <a href="./Controlador.php?ruta=listarLibros">Listar Libros</a>
             <br/>
-            <a>Agregar</a>
+            <a href="./Controlador.php?ruta= mostra">Agregar</a>
         </div>
         <div class="gestion">Menú Operaciones de Tabla Rol
             <br>
@@ -66,13 +66,13 @@ session_start();
         </div>
         <div class="gestion">Menú de Operaciones de Tabla Vehículos
             <br>
-            <a href="./Controlador.php?ruta=listarVehículos">Listar Vehículos</a>
+            <a href="./Controlador.php?ruta=listarVehiculos">Listar Vehículos</a>
             <br>
             <a>Agregar Vehiculo</a>
         </div>
         <div class="gestion">Menú de Operaciones de Tabla Reportes
             <br>
-            <a href="./Controlador.php?ruta=Listar Reportes">Listar Reportes</a>
+            <a href="./Controlador.php?ruta=ListarReportes">Listar Reportes</a>
             <br>
             <a>Agregar Resporte</a>
         </div>
