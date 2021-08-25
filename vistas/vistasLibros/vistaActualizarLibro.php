@@ -78,7 +78,7 @@ if (isset($_SESSION['listarCategorias'])) {
                    
                     <td>
                         <br>
-                        <button type="reset" name="ruta" value="cancelarActualizarLibro" >Cancelar</button>
+                        <button type="submit" name="ruta" value="cancelarActualizarLibro" >Cancelar</button>
                     </td>
                     <td>
                         <br>

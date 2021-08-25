@@ -1,6 +1,7 @@
 <?php
 
 include_once PATH . 'controladores/LibrosControlador.php';
+include_once PATH . 'controladores/TiposDocumentosControlador.php';
 
 class ControladorPrincipal{
 
@@ -29,6 +30,21 @@ class ControladorPrincipal{
             case 'confirmarActualizarLibro':
                 $this -> confirmarActualizarLibro();
                 break;
+            case 'listarTiposDocumentos':
+                $this -> listarTiposDocumentos();
+                break;
+            case 'actualizarTipoDocumento':
+                $this -> actualizarTipoDocumento();
+                break;
+            case 'confirmarActualizarTipoDocumento':
+                $this -> confirmarActualizarTipoDocumento();
+                break;
+            case 'cancelarActualizarLibro':
+                $this -> cancelarActualizarLibro();
+                break;
+            case 'cancelarActualizarTipoDocumento':
+                $this -> cancelarActualizarTipoDocumento();
+                break;
         }
     }
 
@@ -43,6 +59,27 @@ class ControladorPrincipal{
     public function confirmarActualizarLibro(){
         $librosControlador = new LibrosControlador($this -> datos);
     }
+
+    public function cancelarActualizarLibro(){
+        $librosControlador = new LibrosControlador($this -> datos);
+    }
+
+    public function listarTiposDocumentos(){
+        $tiposDocumentos = new TiposDocumentosControlador($this -> datos);
+    }
+
+    public function actualizarTipoDocumento(){
+        $tiposDocumentos = new TiposDocumentosControlador($this -> datos);
+    }
+
+    public function confirmarActualizarTipoDocumento(){
+        $tiposDocumentos = new TiposDocumentosControlador($this -> datos);
+    }
+
+    public function cancelarActualizarTipoDocumento(){
+        $tiposDocumentos = new TiposDocumentosControlador($this -> datos);
+    }
+
 
 }
 
