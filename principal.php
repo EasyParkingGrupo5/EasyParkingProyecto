@@ -42,7 +42,7 @@ session_start();
         </div>
         <div class="gestion">Menú Operaciones de Tabla Rol
             <br>
-            <a>Listar Roles</a>
+            <a href="./Controlador.php?ruta=listarRoles">Listar Roles</a>
             <br>
             <a >Agregar</a>
         </div>
@@ -99,6 +99,7 @@ session_start();
             if(isset($_GET['contenido'])){
                 include($_GET['contenido']);
             }
+
             ?>
         </div>
     </div>
