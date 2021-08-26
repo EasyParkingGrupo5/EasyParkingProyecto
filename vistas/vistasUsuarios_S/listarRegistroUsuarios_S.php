@@ -30,20 +30,20 @@ if (isset($_SESSION['mensaje'])) {
 	
 	<body>
 <?php
-if(isset($_SESSION['listaDeRoles'])){
+if(isset($_SESSION['listaDeUsuarios'])){
 	
-    $listaDeRoles=$_SESSION['listaDeRoles'];
-	 unset($_SESSION['listaDeRoles']);
+    $listaDeUsuarios=$_SESSION['listaDeUsuarios'];
+	 unset($_SESSION['listaDeUsuarios']);
 	
 }
 ?>
     <table id="example" class="table-responsive table-hover table-bordered table-striped" style="width:100%">
         <thead>
             <tr>
-                <th>rolId</th> 
-                <th>rolNombre</th> 
-                <th>rolDescripcion</th> 
-                <th>rolEstado</th>  
+                <th>usuId</th> 
+                <th>usuLogin</th> 
+                <th>usuPassword</th> 
+                <th>usuRemember_token</th> 
                 <!--<th>Estado</th>-->
                 <th>Edit</th> 
                 <th>Delete</th> 
@@ -52,21 +52,21 @@ if(isset($_SESSION['listaDeRoles'])){
         <tbody>
             <?php
             $i = 0;
-            foreach ($listaDeRoles as $key => $value) {
+            foreach ($listaDeUsuarios as $key => $value) {
                 ?>
                 <tr>
-                    <td><?php echo $listaDeRoles[$i]->rolId; ?></td>  
-                    <td><?php echo $listaDeRoles[$i]->rolNombre; ?></td>  
-                    <td><?php echo $listaDeRoles[$i]->rolDescripcion; ?></td>  
-                    <td><?php echo $listaDeRoles[$i]->rolEstado; ?></td> 
-                    <!--<td>d>--> 
-                    <td><a href="Controlador.php?ruta=actualizarRol&rolId=<?php echo $listaDeRoles[$i]->rolId; ?>">Actualizar</a></td>  
-                    <td><a href="Controlador.php?ruta=eliminarRol&rolId=<?php echo $listaDeRoles[$i]->rolId; ?>" onclick="return confirm('Está seguro de eliminar el registro?')">Eliminar</a></td>  
+                    <td><?php echo $listaDeUsuarios[$i]->usuId; ?></td>  
+                    <td><?php echo $listaDeUsuarios[$i]->usuLogin; ?></td>  
+                    <td><?php echo $listaDeUsuarios[$i]->usuPassword; ?></td>  
+                    <td><?php echo $listaDeUsuarios[$i]->usuRemember_token; ?></td> 
+                    <!--<td>d>-->
+                    <td><a href="Controlador.php?ruta=actualizarUsuarios&usuId=<?php echo $listaDeUsuarios[$i]->usuId; ?>">Actualizar</a></td>  
+                    <td><a href="Controlador.php?ruta=eliminarUsuarios&usuId=<?php echo $listaDeUsuarios[$i]->usuId; ?>" onclick="return confirm('Está seguro de eliminar el registro?')">Eliminar</a></td>  
                 </tr>   
                 <?php
                 $i++;
             }
-            $listaDeRoles=null;
+            $listaDeUsuarios=null;
             ?>
         </tbody>
     </table>

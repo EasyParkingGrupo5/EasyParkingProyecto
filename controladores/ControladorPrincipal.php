@@ -2,6 +2,7 @@
 
 include_once PATH . 'controladores/LibrosControlador.php';
 include_once PATH . 'controladores/rolesControlador.php';
+include_once PATH . 'controladores/usuario_SControlador.php';
 
 class ControladorPrincipal{
 
@@ -32,6 +33,28 @@ class ControladorPrincipal{
                 break;
             case 'listarRoles':
                 $this -> listarRoles();
+                break;
+            case 'actualizarRol':
+                $this -> actualizarRol();
+                break;
+            case 'confirmarActualizarRol':
+                $this -> confirmarActualizarRol();
+                break;
+            case 'cancelarActualizarRol':
+                $this -> cancelarActualizarRol();
+                break;
+            case 'listarUsuarios':
+                $this -> listarUsuarios();
+                break;
+             case 'actualizarUsuarios':
+                $this -> actualizarUsuarios();
+                 break;
+            case 'confirmarActualizarUsuarios':
+                $this -> confirmarActualizarUsuarios();
+                break;
+            case 'cancelarActualizarUsuarios':
+                 $this -> cancelarActualizarUsuarios();
+                 break;
         }
     }
 
@@ -50,6 +73,37 @@ class ControladorPrincipal{
     public function listarRoles(){
         $rolesControlador = new rolesControlador($this -> datos);
     }
+
+    public function actualizarRol(){
+        $rolesControlador = new rolesControlador($this -> datos);
+    }
+
+    public function confirmarActualizarRol(){
+        $rolesControlador = new rolesControlador($this -> datos);
+    }
+
+    public function cancelarActualizarRol(){
+        $rolesControlador = new rolesControlador($this -> datos);
+    }
+
+
+    public function listarUsuarios(){
+        $usuariosControlador = new usuario_sControlador($this -> datos);
+    }
+
+    public function actualizarUsuarios(){
+        $rolesControlador = new usuario_sControlador($this -> datos);
+    }
+
+    public function confirmarActualizarUsuarios(){
+        $rolesControlador = new usuario_sControlador($this -> datos);
+    }
+
+    public function cancelarActualizarUsuarios(){
+        $rolesControlador = new usuario_sControlador($this -> datos);
+    }
+
+
 
 }
 

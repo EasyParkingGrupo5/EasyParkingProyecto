@@ -48,7 +48,7 @@ session_start();
         </div>
         <div class="gestion">Menú Operaciones de Tabla Usuario_s
             <br>
-            <a>Listar Usuarios</a>
+            <a href="./Controlador.php?ruta=listarUsuarios">Listar Usuarios</a>
             <br>
             <a>Agregar</a>
         </div>
