@@ -39,14 +39,14 @@ if(isset($_SESSION['listaDeRoles'])){
 ?>
     <table id="example" class="table-responsive table-hover table-bordered table-striped" style="width:100%">
         <thead>
+            <h3>Listado de la Tabla Rol</h3>
             <tr>
-                <th>rolId</th> 
-                <th>rolNombre</th> 
-                <th>rolDescripcion</th> 
-                <th>rolEstado</th>  
+                <th>Id</th> 
+                <th>Nombre</th> 
+                <th>Descripcion</th>
                 <!--<th>Estado</th>-->
-                <th>Edit</th> 
-                <th>Delete</th> 
+                <th>Actualizar</th> 
+                <th>Eliminar</th> 
             </tr>
         </thead>
         <tbody>
@@ -57,8 +57,7 @@ if(isset($_SESSION['listaDeRoles'])){
                 <tr>
                     <td><?php echo $listaDeRoles[$i]->rolId; ?></td>  
                     <td><?php echo $listaDeRoles[$i]->rolNombre; ?></td>  
-                    <td><?php echo $listaDeRoles[$i]->rolDescripcion; ?></td>  
-                    <td><?php echo $listaDeRoles[$i]->rolEstado; ?></td> 
+                    <td><?php echo $listaDeRoles[$i]->rolDescripcion; ?></td>
                     <!--<td>d>--> 
                     <td><a href="Controlador.php?ruta=actualizarRol&rolId=<?php echo $listaDeRoles[$i]->rolId; ?>">Actualizar</a></td>  
                     <td><a href="Controlador.php?ruta=eliminarRol&rolId=<?php echo $listaDeRoles[$i]->rolId; ?>" onclick="return confirm('Está seguro de eliminar el registro?')">Eliminar</a></td>  

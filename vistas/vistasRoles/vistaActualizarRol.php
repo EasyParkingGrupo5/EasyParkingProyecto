@@ -1,5 +1,9 @@
 <?php
 
+echo "<pre>";
+print_r($_SESSION['actualizarDatosRoles']);
+echo "</pre>";
+
 if (isset($_SESSION['actualizarDatosRoles'])){
     $actualizarDatosRoles = $_SESSION['actualizarDatosRoles'];
     unset($_SESSION['actualizarRol']);
@@ -13,7 +17,7 @@ if (isset($_SESSION['actualizarDatosRoles'])){
 <div>
     <fieldset>
         <center>
-        <form role="form" action="controlador.php" method="post" id="formActualizarRols">
+        <form role="form" action="Controlador.php" method="post" id="formActualizarRols">
             <table>
                 <tr>
                     <td>Id:</td>
@@ -41,8 +45,10 @@ if (isset($_SESSION['actualizarDatosRoles'])){
                 </tr>
                 <tr>
                     <td>
-                        <button type="reset" name="ruta" value="cancelarActualizarRol">Cancelar</button>
-                        <button type="submit" name="ruta" value="confirmaActualizarRol">Confirmar</button>
+                        <button type="submit" name="ruta" value="cancelarActualizarRol">Cancelar</button>
+                    </td>
+                    <td>
+                        <button type="submit" name="ruta" value="confirmarActualizarRol">Confirmar</button>
                     </td>
                 </tr>
             </table>

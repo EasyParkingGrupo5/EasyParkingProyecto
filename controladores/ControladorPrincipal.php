@@ -1,12 +1,10 @@
  <?php
 
 include_once PATH . 'controladores/LibrosControlador.php';
-<<<<<<< HEAD
 include_once PATH . 'controladores/rolesControlador.php';
-include_once PATH . 'controladores/usuario_SControlador.php';
-=======
+include_once PATH . 'controladores/usuario_sControlador.php';
 include_once PATH . 'controladores/TiposDocumentosControlador.php';
->>>>>>> 4dde86c7e7386e2390d6b9bd7ff15a72b2c9eff6
+include_once PATH . 'controladores/usuario_sRolesControlador.php';
 
 class ControladorPrincipal{
 
@@ -35,7 +33,6 @@ class ControladorPrincipal{
             case 'confirmarActualizarLibro':
                 $this -> confirmarActualizarLibro();
                 break;
-<<<<<<< HEAD
             case 'listarRoles':
                 $this -> listarRoles();
                 break;
@@ -60,7 +57,6 @@ class ControladorPrincipal{
             case 'cancelarActualizarUsuarios':
                  $this -> cancelarActualizarUsuarios();
                  break;
-=======
             case 'listarTiposDocumentos':
                 $this -> listarTiposDocumentos();
                 break;
@@ -76,7 +72,18 @@ class ControladorPrincipal{
             case 'cancelarActualizarTipoDocumento':
                 $this -> cancelarActualizarTipoDocumento();
                 break;
->>>>>>> 4dde86c7e7386e2390d6b9bd7ff15a72b2c9eff6
+            case 'listarUsuarios_SRoles':
+                $this -> listarUsuarios_SRoles();
+                 break;
+            case 'actualizarUsuarios_SRoles':
+                $this -> actualizarUsuarios_SRoles();
+                break;
+            case 'confirmarActualizarUsuarios_SRoles':
+                $this -> confirmarActualizarUsuarios_SRoles();
+                break;
+            case 'cancelarActualizarUsuarios_SRoles':
+                $this -> cancelarActualizarUsuarios_SRoles();
+                break;
         }
     }
 
@@ -92,43 +99,39 @@ class ControladorPrincipal{
         $librosControlador = new LibrosControlador($this -> datos);
     }
 
-<<<<<<< HEAD
     public function listarRoles(){
-        $rolesControlador = new rolesControlador($this -> datos);
+        $rolesControlador = new RolesControlador($this -> datos);
     }
 
     public function actualizarRol(){
-        $rolesControlador = new rolesControlador($this -> datos);
+        $rolesControlador = new RolesControlador($this -> datos);
     }
 
     public function confirmarActualizarRol(){
-        $rolesControlador = new rolesControlador($this -> datos);
+        $rolesControlador = new RolesControlador($this -> datos);
     }
 
     public function cancelarActualizarRol(){
-        $rolesControlador = new rolesControlador($this -> datos);
+        $rolesControlador = new RolesControlador($this -> datos);
     }
 
 
     public function listarUsuarios(){
-        $usuariosControlador = new usuario_sControlador($this -> datos);
+        $usuariosControlador = new Usuario_sControlador($this -> datos);
     }
 
     public function actualizarUsuarios(){
-        $rolesControlador = new usuario_sControlador($this -> datos);
+        $rolesControlador = new Usuario_sControlador($this -> datos);
     }
 
     public function confirmarActualizarUsuarios(){
-        $rolesControlador = new usuario_sControlador($this -> datos);
+        $rolesControlador = new Usuario_sControlador($this -> datos);
     }
 
     public function cancelarActualizarUsuarios(){
-        $rolesControlador = new usuario_sControlador($this -> datos);
+        $rolesControlador = new Usuario_sControlador($this -> datos);
     }
 
-
-
-=======
     public function cancelarActualizarLibro(){
         $librosControlador = new LibrosControlador($this -> datos);
     }
@@ -149,8 +152,22 @@ class ControladorPrincipal{
         $tiposDocumentos = new TiposDocumentosControlador($this -> datos);
     }
 
+    public function listarUsuarios_SRoles(){
+        $Usuarios_SRolesControlador = new Usuarios_SRolesControlador($this -> datos);
+    }
 
->>>>>>> 4dde86c7e7386e2390d6b9bd7ff15a72b2c9eff6
+    public function actualizarUsuarios_SRoles(){
+        $Usuarios_SRolesControlador = new Usuarios_SRolesControlador($this -> datos);
+    }
+
+    public function confirmarActualizarUsuarios_SRoles(){
+        $Usuarios_SRolesControlador = new Usuarios_SRolesControlador($this -> datos);
+    }
+
+    public function cancelarActualizarUsuarios_SRoles(){
+        $Usuarios_SRolesControlador = new Usuarios_SRolesControlador($this -> datos);
+    }
+
 }
 
 ?>

@@ -54,7 +54,7 @@ session_start();
         </div>
         <div class="gestion">Menú Operaciones de Tabla Usuario_s_roles
             <br>
-            <a>Listar </a>
+            <a href="./Controlador.php?ruta=listarUsuarios_SRoles">Listar roles del usuario </a>
             <br>
             <a>Agregar</a>
         </div>

@@ -75,26 +75,23 @@ class RolDAO extends ConDbMySql{
     public function actualizar($registro){
 
         try {
-            $consulta = "UPDATE rol SET  rolNombre = :rolNombre, rolDescripcion = :rolDescripcion, 
-            rolEstado = :rolEstado, rolUsuSesion = :rolUsuSesion, rol_created_at = :rol_created_at,
-            rol_updated_at = :rol_updated_at WHERE rolId = :rolId";
+
+            $nombre = $registro[0]['rolNombre'];
+            $descripcion = $registro[0]['rolDescripcion'];
+            $rolId = $registro[0]['rolId'];
             
-            $actualizar = $this -> conexion -> prepare($consulta);
+            if(isset($rolId)){
+                $consulta = "UPDATE rol SET  rolNombre = ?, rolDescripcion = ?
+                WHERE rolId = ?";
+                
+                $actualizar = $this -> conexion -> prepare($consulta);
 
-            $actualizar -> bindParam(":rol_updated_at", $registro['rol_updated_at']);
-            $actualizar -> bindParam(":rolNombre", $registro['rolNombre']);
-            $actualizar -> bindParam(":rolDescripcion", $registro['rolDescripcion']);
-            $actualizar -> bindParam(":rolEstado", $registro['rolEstado']);
-            $actualizar -> bindParam(":rolUsuSesion", $registro['rolUsuSesion']);
-            $actualizar -> bindParam(":rol_created_at", $registro['rol_created_at']);
-            $actualizar -> bindParam(":rolId", $registro['rolId']);
+                $actualizacion = $actualizar->execute(array($nombre, $descripcion, $rolId));
 
-            $actualizacion = $actualizar->execute();
+                $this->cierreBd();
 
-            $this->cierreBd();
-
-            return ['actualizacion' => $actualizacion, 'mensaje' => 'Resgistro Actualizado'];
-
+                return ['actualizacion' => $actualizacion, 'mensaje' => 'Resgistro Actualizado'];
+            }
         } catch (PDOException $pdoExc) {
             return ['actualizacion' => $actualizacion, 'mensaje' => $pdoExc];
         }

@@ -39,14 +39,14 @@ if(isset($_SESSION['listaDeUsuarios'])){
 ?>
     <table id="example" class="table-responsive table-hover table-bordered table-striped" style="width:100%">
         <thead>
+            <h3>Listado de la Tabla Usuario</h3>
             <tr>
-                <th>usuId</th> 
-                <th>usuLogin</th> 
-                <th>usuPassword</th> 
-                <th>usuRemember_token</th> 
+                <th>Id</th> 
+                <th>Login</th> 
+                <th>Contraseña</th>
                 <!--<th>Estado</th>-->
-                <th>Edit</th> 
-                <th>Delete</th> 
+                <th>Actualizar</th> 
+                <th>Eliminar</th> 
             </tr>
         </thead>
         <tbody>
@@ -57,8 +57,7 @@ if(isset($_SESSION['listaDeUsuarios'])){
                 <tr>
                     <td><?php echo $listaDeUsuarios[$i]->usuId; ?></td>  
                     <td><?php echo $listaDeUsuarios[$i]->usuLogin; ?></td>  
-                    <td><?php echo $listaDeUsuarios[$i]->usuPassword; ?></td>  
-                    <td><?php echo $listaDeUsuarios[$i]->usuRemember_token; ?></td> 
+                    <td><?php echo $listaDeUsuarios[$i]->usuPassword; ?></td>
                     <!--<td>d>-->
                     <td><a href="Controlador.php?ruta=actualizarUsuarios&usuId=<?php echo $listaDeUsuarios[$i]->usuId; ?>">Actualizar</a></td>  
                     <td><a href="Controlador.php?ruta=eliminarUsuarios&usuId=<?php echo $listaDeUsuarios[$i]->usuId; ?>" onclick="return confirm('Está seguro de eliminar el registro?')">Eliminar</a></td>  

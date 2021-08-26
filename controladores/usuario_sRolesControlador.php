@@ -1,34 +1,34 @@
 <?php
 
-include_once PATH . 'modelos/modeloUsuario_s/Usuario_sDAO.php';
+include_once PATH . 'modelos/modeloUsuario_s_roles/Usuario_s_rolesDAO.php';
 
-class Usuario_sControlador{
+class Usuarios_SRolesControlador{
 
     private $datos;
     
     public function __construct($datos){
         $this->datos = $datos;
-        $this->usuario_sControlador();
+        $this->Usuarios_SRolesControlador();
     }
     
-    public function Usuario_sControlador(){
+    public function Usuarios_SRolesControlador(){
         switch ($this->datos['ruta']) {
-            case 'listarUsuarios':
-                $this->listarUsuarios();
+            case 'listarUsuarios_SRoles':
+                $this->listarUsuarios_SRoles();
                 break;
-            case 'actualizarUsuarios':
-                $this->actualizarUsuarios();
+            case 'actualizarUsuarios_SRoles':
+                $this->actualizarUsuarios_SRoles();
                 break;
             case 'confirmarActualizarUsuarios':
-                 $this -> confirmarActualizarUsuarios();
+                 $this -> confirmarActualizarUsuarios_SRoles();
                 break;
             case 'cancelarActualizarUsuarios':
-                 $this -> cancelarActualizarUsuarios();
+                 $this -> cancelarActualizarUsuarios_SRoles();
                  break;
         }
     }
-    public function listarUsuarios(){
-        $gestarUsuarios = new Usuario_sDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+    public function listarUsuarios_SRoles(){
+        $gestarUsuarios = new UsuarioRolesDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
         $registroUsuarios = $gestarUsuarios -> seleccionarTodos();
     
         session_start();
@@ -38,9 +38,9 @@ class Usuario_sControlador{
         header("location:principal.php?contenido=vistas/vistasUsuarios_S/listarRegistroUsuarios_s.php");
     }
 
-    public  function actualizarUsuarios(){
+    public  function actualizarUsuarios_SRoles(){
 
-        $gestarUsuarios = new Usuario_sDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $gestarUsuarios = new UsuarioRolesDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
         $actualizarUsuarios = $gestarUsuarios -> seleccionarID(array($this->datos['usuId']));
 
         $actualizarDatosUsuarios = $actualizarUsuarios['registroEncontrado'][0];
@@ -48,13 +48,13 @@ class Usuario_sControlador{
         session_start();
         $_SESSION['actualizarDatosUsuarios']=$actualizarDatosUsuarios;
 
-        header("location:principal.php?contenido=vistas/vistasUsuarios_S/vistaActualizarUsuarios_S.php");
+        header("location:principal.php?contenido=vistas/vistasUsuarios_S/vistaActualizarUsuarios_s.php");
         
     }
 
-    public function confirmarActualizarUsuarios(){
+    public function confirmarActualizarUsuarios_SRoles(){
 
-        $gestarUsuarios = new Usuario_sDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $gestarUsuarios = new UsuarioRolesDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
         $actualizarUsuarios = $gestarUsuarios -> actualizar(array($this->datos));
 
         session_start();
@@ -63,7 +63,7 @@ class Usuario_sControlador{
 
     }
 
-    public function cancelarActualizarUsuarios(){
+    public function cancelarActualizarUsuarios_SRoles(){
 
         session_start();
                 $_SESSION['mensaje'] = "Desistió de la actualización";

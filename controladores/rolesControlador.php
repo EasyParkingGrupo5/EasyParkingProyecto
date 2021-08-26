@@ -2,7 +2,7 @@
 
 include_once PATH . 'modelos/modeloRol/rolDAO.php';
 
-class rolesControlador{
+class RolesControlador{
 
     private $datos;
     
@@ -11,7 +11,7 @@ class rolesControlador{
         $this->rolesControlador();
     }
     
-    public function rolesControlador(){
+    public function RolesControlador(){
         switch ($this->datos['ruta']) {
             case 'listarRoles':
                 $this->listarRoles();

@@ -18,7 +18,7 @@ if (isset($_SESSION['actualizarDatosUsuarios'])){
                 <tr>
                     <td>Id:</td>
                     <td>
-                        <input class="form-control" placeholder="Id" name="usuLogin" type="number" patter="" required="requires" value="<?php 
+                        <input class="form-control" placeholder="Id" name="usuId" type="number" patter="" required="requires" value="<?php 
                         if(isset($actualizarDatosUsuarios->usuId)){echo($actualizarDatosUsuarios->usuId);} 
                         ?>">
                     </td>
@@ -40,17 +40,9 @@ if (isset($_SESSION['actualizarDatosUsuarios'])){
                     </td>
                 </tr>
                 <tr>
-                    <td>Contraseña de recuperacion:</td>
                     <td>
-                        <input class="form-control" placeholder="Contraseña de recuperacions" name="usuRemember_token" type="text" patter="" required="requires" value="<?php
-                         if(isset($actualizarDatosUsuarios->usuRemember_token)){echo($actualizarDatosUsuarios->usuRemember_token);} 
-                         ?>">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <button type="reset" name="ruta" value="cancelarActualizarRol">Cancelar</button>
-                        <button type="submit" name="ruta" value="confirmaActualizarRol">Confirmar</button>
+                        <button type="submit" name="ruta" value="cancelarActualizarUsuarios">Cancelar</button>
+                        <button type="submit" name="ruta" value="confirmarActualizarUsuarios">Confirmar</button>
                     </td>
                 </tr>
             </table>
