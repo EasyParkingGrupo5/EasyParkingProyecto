@@ -1,8 +1,12 @@
  <?php
 
 include_once PATH . 'controladores/LibrosControlador.php';
+<<<<<<< HEAD
 include_once PATH . 'controladores/rolesControlador.php';
 include_once PATH . 'controladores/usuario_SControlador.php';
+=======
+include_once PATH . 'controladores/TiposDocumentosControlador.php';
+>>>>>>> 4dde86c7e7386e2390d6b9bd7ff15a72b2c9eff6
 
 class ControladorPrincipal{
 
@@ -31,6 +35,7 @@ class ControladorPrincipal{
             case 'confirmarActualizarLibro':
                 $this -> confirmarActualizarLibro();
                 break;
+<<<<<<< HEAD
             case 'listarRoles':
                 $this -> listarRoles();
                 break;
@@ -55,6 +60,23 @@ class ControladorPrincipal{
             case 'cancelarActualizarUsuarios':
                  $this -> cancelarActualizarUsuarios();
                  break;
+=======
+            case 'listarTiposDocumentos':
+                $this -> listarTiposDocumentos();
+                break;
+            case 'actualizarTipoDocumento':
+                $this -> actualizarTipoDocumento();
+                break;
+            case 'confirmarActualizarTipoDocumento':
+                $this -> confirmarActualizarTipoDocumento();
+                break;
+            case 'cancelarActualizarLibro':
+                $this -> cancelarActualizarLibro();
+                break;
+            case 'cancelarActualizarTipoDocumento':
+                $this -> cancelarActualizarTipoDocumento();
+                break;
+>>>>>>> 4dde86c7e7386e2390d6b9bd7ff15a72b2c9eff6
         }
     }
 
@@ -70,6 +92,7 @@ class ControladorPrincipal{
         $librosControlador = new LibrosControlador($this -> datos);
     }
 
+<<<<<<< HEAD
     public function listarRoles(){
         $rolesControlador = new rolesControlador($this -> datos);
     }
@@ -105,6 +128,29 @@ class ControladorPrincipal{
 
 
 
+=======
+    public function cancelarActualizarLibro(){
+        $librosControlador = new LibrosControlador($this -> datos);
+    }
+
+    public function listarTiposDocumentos(){
+        $tiposDocumentos = new TiposDocumentosControlador($this -> datos);
+    }
+
+    public function actualizarTipoDocumento(){
+        $tiposDocumentos = new TiposDocumentosControlador($this -> datos);
+    }
+
+    public function confirmarActualizarTipoDocumento(){
+        $tiposDocumentos = new TiposDocumentosControlador($this -> datos);
+    }
+
+    public function cancelarActualizarTipoDocumento(){
+        $tiposDocumentos = new TiposDocumentosControlador($this -> datos);
+    }
+
+
+>>>>>>> 4dde86c7e7386e2390d6b9bd7ff15a72b2c9eff6
 }
 
 ?>

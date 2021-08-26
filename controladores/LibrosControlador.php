@@ -23,6 +23,9 @@ class LibrosControlador{
             case 'confirmarActualizarLibro': 
                 $this->confirmarActualizarLibro();
                 break;
+            case 'cancelarActualizarLibro':
+                $this -> cancelarActualizarLibro();
+                break;
         }
     }
     public function listarLibros(){
@@ -60,6 +63,11 @@ class LibrosControlador{
         session_start();
 
         $_SESSION['mensaje'] = "Registro Actualizado";
+        header("location:Controlador.php?ruta=listarLibros");
+    }
+
+    public function cancelarActualizarLibro(){
+        
         header("location:Controlador.php?ruta=listarLibros");
     }
     
