@@ -72,7 +72,7 @@ session_start();
         </div>
         <div class="gestion">Menú de Operaciones de Tabla Reportes
             <br>
-            <a href="./Controlador.php?ruta=ListarReportes">Listar Reportes</a>
+            <a href="./Controlador.php?ruta=listarReportes">Listar Reportes</a>
             <br>
             <a>Agregar Resporte</a>
         </div>
