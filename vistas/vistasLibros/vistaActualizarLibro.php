@@ -10,10 +10,58 @@ if (isset($_SESSION['listarCategorias'])) {
 }
 
 ?>
+<style type="text/css">
 
-<div class="penek-heading">
-    <h2 class="panel-title">Gestión de Libros</h2>
-    <h3 class="panel-title">Actualización de Libro</h3>
+form{
+	width:350px;
+	padding:16px;
+	border-radius:10px;
+	margin:auto;
+	background-color:white;
+    border: black 3px solid;
+}
+
+form button[type="submit"]{
+	cursor:pointer;
+}
+
+form input[type="text"]{
+    margin: 5px;
+    width: 200px;
+}
+
+form input[type="number"]{
+    margin: 5px;
+    width: 200px;
+}
+
+form select{
+    margin: 5px;
+    width: 200px;
+}
+
+.titulo{
+    display: flex;
+    justify-content: center;
+}
+
+.botonCancelar{
+    margin-left: center;
+}
+
+.botonActualizar{
+    margin-left: 60px;
+}
+
+.letras{
+    justify-content: center;
+    text-align: left;
+}
+
+</style>
+<div>
+    <h2 class="titulo">Gestión de Libros</h2>
+    <h3 class ="titulo">Actualización de Libro</h3>
 </div>
 <div>
     <fieldset>
@@ -21,44 +69,44 @@ if (isset($_SESSION['listarCategorias'])) {
         <form role="form" action="Controlador.php" method="POST" id="formRegistro" >
             <table>
                 <tr>
-                    <td>Id:</td>
+                    <td class="letras">Id:</td>
                     <td>
-                        <input type="form-control" placeholder="Id" name = "isbn" type="number" pattern="" size="50" require="required" autofocus readonly="readonly"
+                        <input placeholder="Id" name = "isbn" type="number" pattern="" require="required" autofocus readonly="readonly"
                         value="<?php if (isset($actualizarLibro->isbn)) {
                             echo $actualizarLibro->isbn;}?>">
                     </td>
                 </tr>
                 <tr>
-                    <td>Titulo:</td>
+                    <td class="letras">Titulo:</td>
                     <td>
-                            <input type="form-control" type="text" name="titulo" placeholder="Titulo"  size="50"
+                            <input type="text" name="titulo" placeholder="Titulo"
                             value="<?php if (isset($actualizarLibro->titulo)) {
                                 echo $actualizarLibro->titulo;
                             } ?>">
                     </td>
                 </tr>
                 <tr>
-                    <td>Autor:</td>
+                    <td class="letras">Autor:</td>
                     <td>
-                            <input type="form-control" type="text" name="autor" placeholder="Autor" size="50" 
+                            <input type="text" name="autor" placeholder="Autor"
                             value="<?php if (isset($actualizarLibro->autor)) {
                                 echo $actualizarLibro->autor;
                             } ?>">
                     </td>
                 </tr>
                 <tr>
-                    <td>Precio:</td>
+                    <td class="letras">Precio:</td>
                     <td>
-                            <input type="number" name="precio" placeholder="Precio" style="width: 330px"
+                            <input type="number" name="precio" placeholder="Precio"
                             value="<?php if (isset($actualizarLibro->precio)) {
                                 echo $actualizarLibro->precio;
                             } ?>">
                     </td>
                 </tr>
                 <tr>
-                    <td>Categoria:</td>
+                    <td class="letras">Categoria:</td>
                     <td>
-                            <select name="categoriaLibro_catLibId" id="categoriaLibro_catLibId" style="width: 338px">
+                            <select name="categoriaLibro_catLibId" id="categoriaLibro_catLibId">
                                 <?php for ($i=0; $i < $categoriasCantidad; $i++) { 
                                 ?>
                                     <option value="<?php echo $listarCategorias[$i]->catLibId; ?>" 
@@ -78,15 +126,15 @@ if (isset($_SESSION['listarCategorias'])) {
                    
                     <td>
                         <br>
-                        <button type="submit" name="ruta" value="cancelarActualizarLibro" >Cancelar</button>
+                        <button class="botonCancelar" type="submit" name="ruta" value="cancelarActualizarLibro" >Cancelar</button>
                     </td>
                     <td>
                         <br>
-                        &nbsp;&nbsp;||&nbsp;&nbsp;<button type="submit" name="ruta" value="confirmarActualizarLibro">Actualizar Libro</button>
+                        <button class="botonActualizar" type="submit" name="ruta" value="confirmarActualizarLibro">Actualizar Libro</button>
                     </td>
                 </tr>
             </table>
-        </form>
+        </form><br>
         </center>   
     </fieldset>
 </div>

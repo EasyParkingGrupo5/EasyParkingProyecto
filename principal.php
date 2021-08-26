@@ -7,6 +7,7 @@ session_start();
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,10 +31,28 @@ session_start();
             margin-left: auto;
             margin-right: auto;
         }
+        .imagenEasy{
+            display: block;
+            position: relative;
+            top: 77px;
+            left: 170px;
+            margin: -80px;
+        }
+        .imagenSena{
+            display: block;
+            position: relative;
+            top: 35px;
+            left: 945px;
+            margin: -80px;
+            
+        }
     </style>
 </head>
 <body>
-    <div id="principal">Interfaz
+    <div id="principal">
+                <img class="imagenEasy" src="./Logo.png" width="120" height="120">
+                <img class="imagenSena" src="./LogoSena.png" width="120" height="120">
+                <center><font face="Helvetica Neue" size="48" color="#000000">Interfaz<br/>EasyParking</font></center>
         <div class="gestion">Menú Operaciones de Tabla Libros
             <br/>
             <a href="./Controlador.php?ruta=listarLibros">Listar Libros</a>
