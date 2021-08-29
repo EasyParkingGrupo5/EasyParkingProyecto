@@ -57,7 +57,10 @@ session_start();
             <br/>
             <a href="./Controlador.php?ruta=listarLibros">Listar Libros</a>
             <br/>
-            <a>Agregar</a>
+            <a href="./Controlador.php?ruta=agregarLibro">Agregar</a>
+            <br>
+                <a href="./Controlador.php?ruta=listarLibrosInactivos">Listar Libros Inactivos</a>
+                
         </div>
         <div class="gestion">Menú Operaciones de Tabla Rol
             <br>

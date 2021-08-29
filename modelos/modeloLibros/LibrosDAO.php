@@ -1,6 +1,6 @@
 <?php
 
-include_once PATH . 'modelos/ConBdMysql.php';
+include_once 'modelos/ConBdMysql.php';
 
 
 class LibroDAO extends ConDbMySql{
@@ -8,13 +8,16 @@ class LibroDAO extends ConDbMySql{
         parent::__construct($servidor, $base, $loginDB, $passwordDB);  
     }
     
-    public function seleccionarTodos(){
+    public function seleccionarTodos($estado){
         $planconsulta = "SELECT l.isbn,l.titulo,l.autor,l.precio,cl.catLibId,cl.catLibNombre ";
         $planconsulta.="FROM libros l ";
         $planconsulta.="JOIN categorialibro cl ON l.categoriaLibro_catLibId=cl.catLibId "; 
-        $planconsulta.="ORDER BY l.isbn ASC ";
+        $planconsulta.="where l.estado = :estado";
 
         $registroLibros = $this->conexion->prepare($planconsulta);
+
+        $registroLibros -> bindParam(":estado", $estado);
+
         $registroLibros->execute();
 
         $listadoRegistrosLibros = array();
@@ -62,9 +65,7 @@ class LibroDAO extends ConDbMySql{
 
             $insercion = $insertar->execute();
 
-            $clavePrimaria = $this->conexion->lastInsertId();
-
-            return ['Inserto'=>1,'resultado'=>$clavePrimaria];
+            return ['Inserto'=>1,'resultado'=>$registro['isbn']];
 
             $this->cierreBd();
 

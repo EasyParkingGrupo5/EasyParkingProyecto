@@ -33,6 +33,21 @@ class ControladorPrincipal{
             case 'confirmarActualizarLibro':
                 $this -> confirmarActualizarLibro();
                 break;
+            case 'agregarLibro':
+                $this -> agregarLibro();
+                break;
+            case 'confirmarInsertarLibro':
+                $this -> confirmarInsertarLibro();
+                break;
+            case 'eliminarLibro':
+                $this -> eliminarLibro();
+                break;
+            case 'listarLibrosInactivos':
+                $this -> listarLibrosInactivos();
+                break;
+            case 'habilitarLibro':
+                $this -> habilitarLibro();
+                break;
             case 'listarRoles':
                 $this -> listarRoles();
                 break;
@@ -96,6 +111,26 @@ class ControladorPrincipal{
     }
 
     public function confirmarActualizarLibro(){
+        $librosControlador = new LibrosControlador($this -> datos);
+    }
+
+    public function agregarLibro(){
+        $librosControlador = new LibrosControlador($this -> datos);
+    }
+
+    public function confirmarInsertarLibro(){
+        $librosControlador = new LibrosControlador($this -> datos);
+    }
+
+    public function eliminarLibro(){
+        $librosControlador = new LibrosControlador($this -> datos);
+    }
+
+    public function listarLibrosInactivos(){
+        $librosControlador = new LibrosControlador($this -> datos);
+    }
+
+    public function habilitarLibro(){
         $librosControlador = new LibrosControlador($this -> datos);
     }
 
