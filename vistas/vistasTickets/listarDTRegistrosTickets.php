@@ -36,9 +36,8 @@ if(isset($_SESSION['listaDeTickets'])){
                 <th>Fecha</th> 
                 <th>Hora Ingreso</th>
                 <th>Hora Salida</th>
-                <th>Valo Final</th>  
+                <th>Valo Final</th>
                 <!--<th>Estado</th>--> 
-                <th>Categoria</th> 
                 <th>Edit</th> 
                 <th>Delete</th> 
             </tr>

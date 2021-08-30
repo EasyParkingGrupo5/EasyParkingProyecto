@@ -1,7 +1,7 @@
 <?php
-echo "<pre>";
+/*echo "<pre>";
 print_r($_SESSION['listaDeVehiculos']);
-echo "</pre>";
+echo "</pre>";*/
 ?>
 <!DOCTYPE html>
 <html>
