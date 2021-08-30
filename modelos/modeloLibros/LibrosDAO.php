@@ -62,7 +62,6 @@ class LibroDAO extends ConDbMySql{
             $insertar -> bindParam(":autor", $registro['autor']);
             $insertar -> bindParam(":precio", $registro['precio']);
             $insertar -> bindParam(":categoriaLibro_catLibId", $registro['categoriaLibro_catLibId']);
-
             $insercion = $insertar->execute();
 
             return ['Inserto'=>1,'resultado'=>$registro['isbn']];
@@ -135,7 +134,7 @@ class LibroDAO extends ConDbMySql{
                 $actualizar = "UPDATE libros SET estado = ? WHERE isbn = ?";
                 $actualizacion = $this->conexion->prepare($actualizar);
                 $actualizacion = $actualizacion->execute(array($cambiarEstado, $sId[0]));
-                return ['actualizacion' => $actualizacion, 'mensaje' => 'Resgistro Activado'];
+                return ['actualizacion' => $actualizacion, 'mensaje' => 'Registro Activado'];
             }
         } catch (PDOException $pdoExc) {
             return ['actualizacion' => $actualizacion, 'mensaje' => $pdoExc];
@@ -150,7 +149,7 @@ class LibroDAO extends ConDbMySql{
                 $actualizar = "UPDATE libros SET estado = ? WHERE isbn = ?";
                 $actualizacion = $this->conexion->prepare($actualizar);
                 $actualizacion = $actualizacion->execute(array($cambiarEstado, $sId[0]));
-                return ['actualizacion' => $actualizacion, 'mensaje' => 'Resgistro Desactivado'];
+                return ['actualizacion' => $actualizacion, 'mensaje' => 'Registro Desactivado'];
             }
         } catch (PDOException $pdoExc) {
             return ['actualizacion' => $actualizacion, 'mensaje' => $pdoExc];

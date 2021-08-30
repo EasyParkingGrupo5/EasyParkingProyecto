@@ -66,7 +66,7 @@ form select{
 <div>
     <fieldset>
         <center>
-        <form role="form" action="Controlador.php" method="POST" id="formRegistro" >
+        <form role="form" action="Controlador.php" method="POST" id="formRegistro" autocomplete="off">
             <table>
                 <tr>
                     <td class="letras">Id:</td>

@@ -59,9 +59,8 @@ class TiposDocumentosDAO extends ConDbMySql{
 
             $clavePrimaria = $this->conexion->lastInsertId();
 
-            return ['Inserto'=>1,'resultado'=>$clavePrimaria];
-
             $this->cierreBd();
+            return ['Inserto'=>1,'resultado'=>$clavePrimaria];
 
         } catch (PDOException $pdoExc) {
             return ['Inserto'=>0,$pdoExc->errorInfo[2]];
