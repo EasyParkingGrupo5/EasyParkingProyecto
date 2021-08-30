@@ -42,7 +42,7 @@ final class LibrosDAOTest extends TestCase{
         $registro['precio'] = 100000;
         $registro['categoriaLibro_catLibId'] = 1;
 
-        $esperado['Inserto'] = 1;
+        $esperado['Inserto'] = true;
         $esperado['resultado'] = $registro['isbn'];
 
         $this -> assertEquals($esperado, $libros -> insertar($registro));
@@ -54,38 +54,39 @@ final class LibrosDAOTest extends TestCase{
         $registro[0]['titulo'] = 'Gorgona';
         $registro[0]['precio'] = '4';
         $registro[0]['categoriaLibro_catLibId'] = '1';
-        $registro[0]['isbn'] = 1;
+        $registro[0]['isbn'] = '1';
 
-        $esperado['actualizacion'] = 1;
+        $esperado['actualizacion'] = true;
         $esperado['mensaje'] = 'Actualización realizada.';
 
         $this -> assertEquals($esperado, $libros -> actualizar($registro));
     }
 
     public function testEliminar(){
-        $sId = array(1);
+
+        $libros = new LibroDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+
+        $sId = array('1');
 
         $esperado['eliminado'] = true;
         $esperado['registroEliminado'] = $sId;
-
-        $libros = new LibroDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
 
         $this -> assertEquals($esperado, $libros -> eliminar($sId));
     }
 
     public function testHabilitar(){
-        $sId = array(1);
+        $libros = new LibroDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+
+        $sId = array(128);
 
         $esperado['actualizacion'] = true;
         $esperado['mensaje'] = 'Registro Activado';
-
-        $libros = new LibroDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
 
         $this -> assertEquals($esperado, $libros -> habilitar($sId));
     }
 
     public function testEliminarLogico(){
-        $sId = array(1);
+        $sId = array(128);
 
         $esperado['actualizacion'] = true;
         $esperado['mensaje'] = 'Registro Desactivado';

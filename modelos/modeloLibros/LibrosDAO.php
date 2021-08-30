@@ -115,7 +115,6 @@ class LibroDAO extends ConDbMySql{
         $eliminar = $this->conexion->prepare($consulta);
         $eliminar->bindParam(':isbn', $sId[0],PDO::PARAM_INT);
         $resultado = $eliminar->execute();
-        print_r($resultado);
         $this->cierreBd();
 
         if(!empty($resultado)){
