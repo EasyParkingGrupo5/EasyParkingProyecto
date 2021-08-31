@@ -65,11 +65,6 @@ class LibroDAO extends ConDbMySql{
             $insercion = $insertar->execute();
 
             return ['Inserto'=>true,'resultado'=>$registro['isbn']];
-<<<<<<< HEAD
-=======
-
-            return ['Inserto'=>1,'resultado'=>$clavePrimaria];
->>>>>>> develop
 
             $this->cierreBd();
 
