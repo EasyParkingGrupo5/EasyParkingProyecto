@@ -5,6 +5,11 @@ include_once PATH . 'controladores/rolesControlador.php';
 include_once PATH . 'controladores/usuario_sControlador.php';
 include_once PATH . 'controladores/TiposDocumentosControlador.php';
 include_once PATH . 'controladores/usuario_sRolesControlador.php';
+include_once PATH . 'controladores/TicketsControlador.php';
+include_once PATH . 'controladores/VehículosControlador.php';
+include_once PATH . 'controladores/ReportesControlador.php';
+
+
 
 class ControladorPrincipal{
 
@@ -98,6 +103,15 @@ class ControladorPrincipal{
                 break;
             case 'cancelarActualizarUsuarios_SRoles':
                 $this -> cancelarActualizarUsuarios_SRoles();
+                break;
+            case 'listarTickets':
+                $this -> listarTickets();
+                break;
+                case 'listarVehiculos':
+                $this -> listarVehiculos();
+                break;
+            case 'listarReportes':
+                $this -> listarReportes();
                 break;
         }
     }
@@ -203,6 +217,18 @@ class ControladorPrincipal{
         $Usuarios_SRolesControlador = new Usuarios_SRolesControlador($this -> datos);
     }
 
+    
+    public function listarTickets(){
+        $ticketsControlador = new TicketsControlador($this -> datos);
+    }
+    
+    public function listarVehiculos(){
+        $vehiculosControlador = new VehiculosControlador($this -> datos);
+    }
+    
+    public function listarReportes(){
+        $reportesControlador = new ReportesControlador($this -> datos);
+    }
 }
 
 ?>
