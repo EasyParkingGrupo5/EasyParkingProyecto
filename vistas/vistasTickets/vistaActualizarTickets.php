@@ -31,45 +31,45 @@ if (isset($_SESSION['listarCategorias'])) {
                 <tr>
                     <td>Numero:</td>
                     <td>
-                            <input type="form-control" type="text" name="Numero" placeholder="Numero"  size="50"
-                            value="<?php if (isset($actualizarTickets->Numero)) {
-                                echo $actualizarTickets->Numero;
+                            <input type="form-control" type="text" name="ticNumero" placeholder="ticNumero"  size="50"
+                            value="<?php if (isset($actualizarTickets->ticNumero)) {
+                                echo $actualizarTickets->ticNumero;
                             } ?>">
                     </td>
                 </tr>
                 <tr>
                     <td>Fecha:</td>
                     <td>
-                            <input type="form-control" type="text" name="Fecha" placeholder="Fecha" size="50" 
-                            value="<?php if (isset($actualizarTickets->Fecha)) {
-                                echo $actualizarTickets->Fecha;
+                            <input type="form-control" type="text" name="ticFecha" placeholder="ticFecha" size="50" 
+                            value="<?php if (isset($actualizarTickets->ticFecha)) {
+                                echo $actualizarTickets->ticFecha;
                             } ?>">
                     </td>
                 </tr>
                 <tr>
                     <td>Hora Ingreso:</td>
                     <td>
-                            <input type="number" name="HoraIngreso" placeholder="HoraIngreso" style="width: 330px"
-                            value="<?php if (isset($actualizarTickets->HoraIngreso)) {
-                                echo $actualizarTickets->HoraIngreso;
+                            <input type="number" name="ticHoraIngreso" placeholder="ticHoraIngreso" style="width: 330px"
+                            value="<?php if (isset($actualizarTickets->ticHoraIngreso)) {
+                                echo $actualizarTickets->ticHoraIngreso;
                             } ?>">
                     </td>
                 </tr>
                 <tr>
                     <td>Hora Salida:</td>
                     <td>
-                            <input type="number" name="HoraSalida" placeholder="Horasalida" style="width: 330px"
-                            value="<?php if (isset($actualizarTickets->HoraSalida)) {
-                                echo $actualizarTickets->HoraSalida;
+                            <input type="number" name="ticHoraSalida" placeholder="ticHoraSalida" style="width: 330px"
+                            value="<?php if (isset($actualizarTickets->ticHoraSalida)) {
+                                echo $actualizarTickets->ticHoraSalida;
                             } ?>">
                     </td>
                 </tr>
                 <tr>
                     <td>Valo Final:</td>
                     <td>
-                            <input type="number" name="ValoFinal" placeholder="ValoFinal" style="width: 330px"
-                            value="<?php if (isset($actualizarTickets->ValoFinal)) {
-                                echo $actualizarTickets->ValoFinal;
+                            <input type="number" name="ticValorFinal" placeholder="ticValorFinal" style="width: 330px"
+                            value="<?php if (isset($actualizarTickets->ticValorFinal)) {
+                                echo $actualizarTickets->ticValorFinal;
                             } ?>">
                     </td>
                 </tr>

@@ -23,35 +23,35 @@ if (isset($_SESSION['listarCategorias'])) {
                 <tr>
                     <td>Id:</td>
                     <td>
-                        <input type="form-control" placeholder="Id" name = "repId" type="number" pattern="" size="50" require="required" autofocus readonly="readonly"
-                        value="<?php if (isset($actualizarVehiculos->ticId)) {
-                            echo $actualizarVehiculos->ticId;}?>">
+                        <input type="form-control" placeholder="repId" name = "repId" type="number" pattern="" size="50" require="required" autofocus readonly="readonly"
+                        value="<?php if (isset($actualizarReportes->repId)) {
+                            echo $actualizarReportes->repId;}?>">
                     </td>
                 </tr>
                 <tr>
-                    <td>Numero de Placa:</td>
+                    <td>Numero:</td>
                     <td>
-                            <input type="form-control" type="text" name="vehNumero_Placa" placeholder="vehNumero_Placa"  size="50"
-                            value="<?php if (isset($actualizarVehiculos->vehNumero_Placa)) {
-                                echo $actualizarVehiculos->vehNumero_Placa;
+                            <input type="form-control" type="text" name="repNumero" placeholder="repNumero"  size="50"
+                            value="<?php if (isset($actualizarReportes->repNumero)) {
+                                echo $actualizarReportes->repNumero;
                             } ?>">
                     </td>
                 </tr>
                 <tr>
-                    <td>Color:</td>
+                    <td>Fecha:</td>
                     <td>
-                            <input type="form-control" type="text" name="vehColor" placeholder="vehColor" size="50" 
-                            value="<?php if (isset($actualizarVehiculos->vehColor)) {
-                                echo $actualizarVehiculos->vehColor;
+                            <input type="form-control" type="text" name="repFecha" placeholder="repFecha" size="50" 
+                            value="<?php if (isset($actualizarReportes->repFecha)) {
+                                echo $actualizarReportes->repFecha;
                             } ?>">
                     </td>
                 </tr>
                 <tr>
-                    <td>Marca:</td>
+                    <td>Estado:</td>
                     <td>
-                            <input type="number" name="Marca" placeholder="Marca" style="width: 330px"
-                            value="<?php if (isset($actualizarVehiculos->Marca)) {
-                                echo $actualizarVehiculos->Marca;
+                            <input type="number" name="repEstado" placeholder="repEstado" style="width: 330px"
+                            value="<?php if (isset($actualizarReportes->repEstado)) {
+                                echo $actualizarReportes->repEstado;
                             } ?>">
                     </td>
                 </tr>
