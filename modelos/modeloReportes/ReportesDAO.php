@@ -86,6 +86,27 @@ class ReportesDAO extends ConDbMySql{
  
 
     public function actualizar($registro){
+        try {
+            $consulta = "UPDATE reportes SET repNumero = :repNumero, repFecha = :repFecha, 
+            repEstado = :repEstado WHERE repId = :repId;";
+            
+            $actualizar = $this -> conexion -> prepare($consulta);
+
+            $actualizar -> bindParam(":repNumero", $registro['repNumero']);
+            $actualizar -> bindParam(":repFecha", $registro['repFecha']);
+            $actualizar -> bindParam(":repEstado", $registro['repEstado']);
+            $actualizar -> bindParam(":repId", $registro['repId']);
+
+            $actualizacion = $actualizar -> execute();
+
+            $this->cierreBd();
+
+            return ['actualizacion' => $actualizacion, 'mensaje' => 'Resgistro Actualizado'];
+
+        } catch (PDOException $pdoExc) {
+            $this->cierreBd();
+            return ['actualizacion' => $actualizacion, 'mensaje' => $pdoExc];
+        }
         
     }
 
