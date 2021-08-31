@@ -4,7 +4,7 @@ include_once "../../modelos/ConBdMysql.php";
 include_once "../../modelos/ConstantesConexion.php";
 include_once "../../modelos/modeloLibros/LibrosDAO.php";
 
-$registro['isbn']=1;
+$registro['isbn']=128;
 $registro['titulo']="Hola mundo";
 $registro['autor']=null;
 $registro['precio']='60000';

@@ -4,7 +4,7 @@ include_once PATH . 'modelos/ConBdMysql.php';
 
 class Usuario_sDAO extends ConDbMySql{
     public function __construct($servidor, $base, $loginDB, $passwordDB){
-        parent::__construct($servidor, $base, $usuario_db, $contrasenia_db);  
+        parent::__construct($servidor, $base, $loginDB, $passwordDB);  
     }
     
     public function seleccionarTodos(){
@@ -76,28 +76,23 @@ class Usuario_sDAO extends ConDbMySql{
     public function actualizar($registro){
 
         try {
-            $consulta = "UPDATE usuario_s SET usuLogin = :usuLogin, 
-            usuPassword = :usuPassword, usuUsuSesion = :usuUsuSesion, usuEstado = :usuEstado,
-            usuRemember_token = :usuRemember_token, usu_created_at = :usu_created_at,
-            usu_updated_at = :usu_updated_at WHERE usuId = :usuId";
-            
-            $actualizar = $this -> conexion -> prepare($consulta);
 
-            $actualizar -> bindParam(":usuLogin", $registro['usuLogin']);
-            $actualizar -> bindParam(":usuPassword", $registro['usuPassword']);
-            $actualizar -> bindParam(":usuUsuSesion", $registro['usuEstado']);
-            $actualizar -> bindParam(":usuRemember_token", $registro[' usuRemember_token']);
-            $actualizar -> bindParam(":usu_created_at", $registro['usu_created_at']);
-            $actualizar -> bindParam(":usuEstado", $registro['usuEstado']);
-            $actualizar -> bindParam(":usu_updated_at", $registro['usu_updated_at']);
-            $actualizar -> bindParam(":usuId", $registro['usuId']);
+            $login = $registro[0]['usuLogin'];
+            $password = $registro[0]['usuPassword'];
+            $usuId = $registro[0]['usuId'];
 
-            $actualizacion = $actualizar->execute();
+            if(isset($usuId)){
+                $consulta = "UPDATE usuario_s SET usuLogin = ?, 
+                usuPassword = ? WHERE usuId = ?";
+                
+                $actualizar = $this -> conexion -> prepare($consulta);
 
-            $this->cierreBd();
+                $actualizacion = $actualizar->execute(array($login, $password, $usuId ));
 
-            return ['actualizacion' => $actualizacion, 'mensaje' => 'Resgistro Actualizado'];
+                $this->cierreBd();
 
+                return ['actualizacion' => $actualizacion, 'mensaje' => 'Resgistro Actualizado'];
+            }
         } catch (PDOException $pdoExc) {
             return ['actualizacion' => $actualizacion, 'mensaje' => $pdoExc];
         }

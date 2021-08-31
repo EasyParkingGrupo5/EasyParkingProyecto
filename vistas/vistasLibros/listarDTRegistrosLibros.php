@@ -2,7 +2,16 @@
 //echo "<pre>";
 //print_r($_SESSION['listaDeLibros']);
 //echo "</pre>";
+
+if (isset($_SESSION['mensaje'])) {
+    $mensaje = $_SESSION['mensaje'];
+    echo "<script languaje='javascript'>alert('$mensaje')</script>";
+    unset($_SESSION['mensaje']);
+}
+
 ?>
+
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -20,11 +29,13 @@
     </head>
 	
 	<body>
+        <h1>Listado de la tabla Libros</h1>
+        <br>
 <?php
 if(isset($_SESSION['listaDeLibros'])){
 	
 	 $listaDeLibros=$_SESSION['listaDeLibros'];
-	 unset($_SESSION['listaDeLibros']);
+
 	
 }
 ?>
@@ -37,8 +48,8 @@ if(isset($_SESSION['listaDeLibros'])){
                 <th>Precio</th> 
                 <!--<th>Estado</th>--> 
                 <th>Categoria</th> 
-                <th>Edit</th> 
-                <th>Delete</th> 
+                <th>Editar</th> 
+                <th>Eliminar</th> 
             </tr>
         </thead>
         <tbody>
@@ -54,7 +65,7 @@ if(isset($_SESSION['listaDeLibros'])){
                     <!--<td>d>-->  
                     <td><?php echo $listaDeLibros[$i]->catLibNombre; ?></td>  
                     <td><a href="Controlador.php?ruta=actualizarLibro&idAct=<?php echo $listaDeLibros[$i]->isbn; ?>">Actualizar</a></td>  
-                    <td><a href="Controlador.php?ruta=eliminarLibro&idAct=<?php echo $listaDeLibros[$i]->isbn; ?>" onclick="return confirm('Está seguro de eliminar el registro?')">Eliminar</a></td>  
+                    <td><a href="Controlador.php?ruta=eliminarLibro&idAct=<?php echo $listaDeLibros[$i]->isbn; ?>" onclick="return confirm('¿Está seguro de eliminar el registro?')">Eliminar</a></td>  
                 </tr>   
                 <?php
                 $i++;

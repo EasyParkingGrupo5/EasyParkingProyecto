@@ -6,10 +6,11 @@ include_once '../../modelos/modeloLibros/LibrosDAO.php';
 
 $libros=new LibroDAO(SERVIDOR,BASE,USUARIO_DB,CONTRASENIA_DB);
 
-$listadoCompleto=$libros->seleccionarTodos();
+$listadoCompleto=$libros->seleccionarTodos(1);
+$array = json_decode(json_encode($listadoCompleto), true);
 
 echo "<pre>";
-print_r($listadoCompleto);
+print_r($array);
 echo "</pre>";
 
 ?>

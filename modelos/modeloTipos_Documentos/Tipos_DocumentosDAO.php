@@ -4,7 +4,7 @@ include_once PATH . 'modelos/ConBdMysql.php';
 
 class TiposDocumentosDAO extends ConDbMySql{
     public function __construct($servidor, $base, $loginDB, $passwordDB){
-        parent::__construct($servidor, $base, $usuario_db, $contrasenia_db);  
+        parent::__construct($servidor, $base, $loginDB, $passwordDB);  
     }
     
     public function seleccionarTodos(){
@@ -59,9 +59,8 @@ class TiposDocumentosDAO extends ConDbMySql{
 
             $clavePrimaria = $this->conexion->lastInsertId();
 
-            return ['Inserto'=>1,'resultado'=>$clavePrimaria];
-
             $this->cierreBd();
+            return ['Inserto'=>1,'resultado'=>$clavePrimaria];
 
         } catch (PDOException $pdoExc) {
             return ['Inserto'=>0,$pdoExc->errorInfo[2]];
@@ -70,20 +69,22 @@ class TiposDocumentosDAO extends ConDbMySql{
 
     public function actualizar($registro){
         try {
-            $consulta = "UPDATE tipos_documentos SET tipDocSigla = :tipDocSigla, tipDocNombre_documento = :tipDocNombre_documento
-            WHERE tipDocId = :tipDocId";
-            
-            $actualizar = $this -> conexion -> prepare($consulta);
+            $sigla = $registro[0]['tipDocSigla'];
+            $tipoDocumento = $registro[0]['tipDocNombre_documento'];
+            $idDocumento = $registro[0]['tipDocId'];
 
-            $actualizar -> bindParam(":tipDocSigla", $registro['tipDocSigla']);
-            $actualizar -> bindParam(":tipDocNombre_documento", $registro['tipDocNombre_documento']);
-            $actualizar -> bindParam(":tipDocId", $registro['tipDocId']);
+            if(isset($idDocumento)){
+                $consulta = "UPDATE tipos_documentos SET tipDocSigla = ?, tipDocNombre_documento = ?
+                WHERE tipDocId = ?";
+                
+                $actualizar = $this -> conexion -> prepare($consulta);
 
-            $actualizacion = $actualizar -> execute();
+                $actualizacion = $actualizar -> execute(array($sigla, $tipoDocumento, $idDocumento));
 
-            $this->cierreBd();
+                $this->cierreBd();
 
-            return ['actualizacion' => $actualizacion, 'mensaje' => 'Resgistro Actualizado'];
+                return ['actualizacion' => $actualizacion, 'mensaje' => 'Resgistro Actualizado'];
+            }
 
         } catch (PDOException $pdoExc) {
             return ['actualizacion' => $actualizacion, 'mensaje' => $pdoExc];

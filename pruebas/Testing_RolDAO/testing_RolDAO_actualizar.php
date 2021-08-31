@@ -5,7 +5,8 @@ include_once "../../modelos/ConstantesConexion.php";
 include_once "../../modelos/modeloRol/RolDAO.php";
 
 $registro['rolId']=1;
-$registro['rolNombre']='bucetero';
+$registro['rolDescripcion']='Administrador';
+$registro['rolNombre']='Administrador';
 
 $rolh= new RolDao(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
 
