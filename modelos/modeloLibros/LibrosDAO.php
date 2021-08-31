@@ -62,14 +62,14 @@ class LibroDAO extends ConDbMySql{
 
             $insercion = $insertar->execute();
 
-            $clavePrimaria = $this->conexion->lastInsertId();
+            return ['Inserto'=>true,'resultado'=>$registro['isbn']];
 
             return ['Inserto'=>1,'resultado'=>$clavePrimaria];
 
             $this->cierreBd();
 
         } catch (PDOException $pdoExc) {
-            return ['Inserto'=>0,$pdoExc->errorInfo[2]];
+            return ['Inserto'=>false,$pdoExc->errorInfo[2]];
         }
     }
 
@@ -94,7 +94,7 @@ class LibroDAO extends ConDbMySql{
 				
 				$resultadoAct=$actualizacion->execute(array($autor,$titulo,$precio,$categoria, $isbn));
 				
-				        $this->cierreBd();
+				$this->cierreBd();
 						
                 return ['actualizacion' => $resultadoAct, 'mensaje' => "Actualización realizada."];				
 				
