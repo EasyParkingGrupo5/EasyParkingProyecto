@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"version":1,"defects":{"LibrosDAOTest::testSeleccionarID":4,"LibrosDAOTest::testSeleccionarTodos":3,"LibrosDAOTest::testInsertar":3,"LibrosDAOTest::testActualizar":4},"times":{"LibrosDAOTest::testSeleccionarTodos":0.009,"LibrosDAOTest::testSeleccionarID":0.019,"LibrosDAOTest::testInsertar":0.075,"LibrosDAOTest::testActualizar":0.023,"LibrosDAOTest::testEliminar":0.02,"LibrosDAOTest::testHabilitar":0.055,"LibrosDAOTest::testEliminarLogico":0.021}}
+=======
+{"version":1,"defects":{"LibrosDAOTest::testSeleccionarTodos":4,"LibrosDAOTest::testSeleccionarID":4,"LibrosDAOTest::testInsertar":4,"LibrosDAOTest::testActualizar":4,"LibrosDAOTest::testEliminar":4,"LibrosDAOTest::testHabilitar":4,"LibrosDAOTest::testEliminarLogico":4},"times":{"LibrosDAOTest::testSeleccionarTodos":0.02,"LibrosDAOTest::testSeleccionarID":0.003,"LibrosDAOTest::testInsertar":0.008,"LibrosDAOTest::testActualizar":0.003,"LibrosDAOTest::testEliminar":0.003,"LibrosDAOTest::testHabilitar":0.002,"LibrosDAOTest::testEliminarLogico":0.002}}
+>>>>>>> main
