@@ -33,9 +33,9 @@ class Usuarios_SRolesControlador{
     
         session_start();
     
-        $_SESSION['listaDeUsuarios'] = $registroUsuarios;
+        $_SESSION['listaDeUsuarios_Roles'] = $registroUsuarios;
     
-        header("location:principal.php?contenido=vistas/vistasUsuarios_S/listarRegistroUsuarios_s.php");
+        header("location:principal.php?contenido=vistas/vistasUsuarios_S_Roles/listarRegistroUsuarios_S_Roles.php");
     }
 
     public  function actualizarUsuarios_SRoles(){
@@ -46,7 +46,7 @@ class Usuarios_SRolesControlador{
         $actualizarDatosUsuarios = $actualizarUsuarios['registroEncontrado'][0];
 
         session_start();
-        $_SESSION['actualizarDatosUsuarios']=$actualizarDatosUsuarios;
+        $_SESSION['actualizarDatosUsuarios_Roles']=$actualizarDatosUsuarios;
 
         header("location:principal.php?contenido=vistas/vistasUsuarios_S/vistaActualizarUsuarios_s.php");
         

@@ -1,9 +1,5 @@
 <?php
 
-echo "<pre>";
-print_r($_SESSION['actualizarDatosRoles']);
-echo "</pre>";
-
 if (isset($_SESSION['actualizarDatosRoles'])){
     $actualizarDatosRoles = $_SESSION['actualizarDatosRoles'];
     unset($_SESSION['actualizarRol']);
@@ -19,14 +15,6 @@ if (isset($_SESSION['actualizarDatosRoles'])){
         <center>
         <form role="form" action="Controlador.php" method="post" id="formActualizarRols">
             <table>
-                <tr>
-                    <td>Id:</td>
-                    <td>
-                        <input class="form-control" placeholder="Id" name="rolId" type="number" patter="" required="requires" value="<?php 
-                        if(isset($actualizarDatosRoles->rolId)){echo($actualizarDatosRoles->rolId);} 
-                        ?>">
-                    </td>
-                </tr>
                 <tr>
                     <td>Nombre:</td>
                     <td>

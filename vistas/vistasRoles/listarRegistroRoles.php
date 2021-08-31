@@ -40,8 +40,7 @@ if(isset($_SESSION['listaDeRoles'])){
     <table id="example" class="table-responsive table-hover table-bordered table-striped" style="width:100%">
         <thead>
             <h3>Listado de la Tabla Rol</h3>
-            <tr>
-                <th>Id</th> 
+            <tr> 
                 <th>Nombre</th> 
                 <th>Descripcion</th>
                 <!--<th>Estado</th>-->
@@ -54,8 +53,7 @@ if(isset($_SESSION['listaDeRoles'])){
             $i = 0;
             foreach ($listaDeRoles as $key => $value) {
                 ?>
-                <tr>
-                    <td><?php echo $listaDeRoles[$i]->rolId; ?></td>  
+                <tr>  
                     <td><?php echo $listaDeRoles[$i]->rolNombre; ?></td>  
                     <td><?php echo $listaDeRoles[$i]->rolDescripcion; ?></td>
                     <!--<td>d>--> 

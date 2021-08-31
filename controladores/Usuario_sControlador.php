@@ -35,7 +35,7 @@ class Usuario_sControlador{
     
         $_SESSION['listaDeUsuarios'] = $registroUsuarios;
     
-        header("location:principal.php?contenido=vistas/vistasUsuarios_S/listarRegistroUsuarios_s.php");
+        header("location:principal.php?contenido=vistas/vistasUsuarios_S/listarRegistroUsuarios_S.php");
     }
 
     public  function actualizarUsuarios(){
@@ -58,7 +58,6 @@ class Usuario_sControlador{
         $actualizarUsuarios = $gestarUsuarios -> actualizar(array($this->datos));
 
         session_start();
-            $_SESSION['mensaje'] = "Actualización realizada.";
             header("location:Controlador.php?ruta=listarUsuarios");	
 
     }
@@ -66,7 +65,6 @@ class Usuario_sControlador{
     public function cancelarActualizarUsuarios(){
 
         session_start();
-                $_SESSION['mensaje'] = "Desistió de la actualización";
 		        header("location:Controlador.php?ruta=listarUsuarios");	
 
     }
