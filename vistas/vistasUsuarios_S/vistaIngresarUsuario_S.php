@@ -36,10 +36,10 @@
                 </tr>
                 <tr>
                     <td>
-                        <button type="submit" name="ruta" value="listarRoles">Cancelar</button>
+                        <button type="submit" name="ruta" value="listarUsuarios">Cancelar</button>
                     </td>
                     <td>
-                        <button type="submit" name="ruta" value="insertarRol">Confirmar</button>
+                        <button type="submit" name="ruta" value="insertarUsuario">Confirmar</button>
                     </td>
                 </tr>
             </table>
