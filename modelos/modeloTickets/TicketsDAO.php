@@ -4,7 +4,7 @@ include_once PATH . 'modelos/ConBdMysql.php';
 
 class TicketsDAO extends ConDbMySql{
     public function __construct($servidor, $base, $loginDB, $passwordDB){
-        parent::__construct($servidor, $base, $usuario_db, $contrasenia_db);  
+        parent::__construct($servidor, $base, $loginDB, $passwordDB);  
     }
     
     public function seleccionarTodos(){
@@ -90,6 +90,31 @@ class TicketsDAO extends ConDbMySql{
     
 
     public function actualizar($registro){
+        try {
+            $consulta = "UPDATE Tickets SET Numero = :Numero, Fecha = :Fecha, 
+            HoraIngreso = :HoraIngreso, HoraSalida = :HoraSalida, ValorFinal = :ValorFinal,
+            WHERE ticId = :ticId;";
+            
+            $actualizar = $this -> conexion -> prepare($consulta);
+
+            $actualizar -> bindParam(":Numero", $registro['Numero']);
+            $actualizar -> bindParam(":Fecha", $registro['Fecha']);
+            $actualizar -> bindParam(":HoraIngreso", $registro['HoraIngreso']);
+            $actualizar -> bindParam(":HoraSalida", $registro['HoraSalida']);
+            $actualizar -> bindParam(":ValorFinal", $registro['ValorFinal']);
+            $actualizar -> bindParam(":ticId", $registro['ticId']);
+
+            $actualizacion = $actualizar -> execute();
+
+            $this->cierreBd();
+
+            return ['actualizacion' => $actualizacion, 'mensaje' => 'Resgistro Actualizado'];
+
+        } catch (PDOException $pdoExc) {
+            $this->cierreBd();
+            return ['actualizacion' => $actualizacion, 'mensaje' => $pdoExc];
+        }
+    
         
     }
 
