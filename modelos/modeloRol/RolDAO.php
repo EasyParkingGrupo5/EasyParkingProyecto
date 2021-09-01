@@ -48,17 +48,13 @@ class RolDAO extends ConDbMySql{
 
         try {
             
-            $consulta="INSERT INTO rol (rolId, rolNombre, rolDescripcion, rolEstado, rolUsuSesion, rol_created_at, rol_updated_at) VALUES (:rolId, :rolNombre, :rolDescripcion, :rolEstado, :rolUsuSesion, :rol_created_at, :rol_updated_at)" ;
+            $consulta="INSERT INTO rol (rolId, rolNombre, rolDescripcion) VALUES (:rolId, :rolNombre, :rolDescripcion)" ;
 
             $insertar=$this->conexion->prepare($consulta);
 
             $insertar -> bindParam(":rolId", $registro['rolId']);
             $insertar -> bindParam(":rolNombre", $registro['rolNombre']);
             $insertar -> bindParam(":rolDescripcion", $registro['rolDescripcion']);
-            $insertar -> bindParam(":rolEstado", $registro['rolEstado']);
-            $insertar -> bindParam(":rolUsuSesion", $registro['rolUsuSesion']);
-            $insertar -> bindParam(":rol_created_at", $registro['rol_created_at']);
-            $insertar -> bindParam(":rol_updated_at", $registro['rol_updated_at']);
 
             $insercion = $insertar->execute();
 

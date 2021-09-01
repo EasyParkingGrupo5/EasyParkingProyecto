@@ -57,8 +57,11 @@ class ControladorPrincipal{
             case 'confirmarActualizarRol':
                 $this -> confirmarActualizarRol();
                 break;
-            case 'cancelarActualizarRol':
-                $this -> cancelarActualizarRol();
+            case 'mostrarInsertarRoles':
+                $this -> mostrarInsertarRoles();
+                break;
+            case 'insertarRol':
+                $this -> insertarRol();
                 break;
             case 'listarUsuarios':
                 $this -> listarUsuarios();
@@ -72,6 +75,12 @@ class ControladorPrincipal{
             case 'cancelarActualizarUsuarios':
                  $this -> cancelarActualizarUsuarios();
                  break;
+            case 'mostrarInsertarUsuarios':
+                $this -> mostrarInsertarUsuarios();
+                break;
+            case 'insertarUsuario':
+                $this -> iInsertarUsuario();
+                break;
             case 'listarTiposDocumentos':
                 $this -> listarTiposDocumentos();
                 break;
@@ -150,6 +159,14 @@ class ControladorPrincipal{
         $rolesControlador = new RolesControlador($this -> datos);
     }
 
+    public function mostrarInsertarRoles(){
+        $rolesControlador = new RolesControlador($this -> datos);
+    }
+
+    public function insertarRol(){
+        $rolesControlador = new RolesControlador($this -> datos);
+    }
+
 
     public function listarUsuarios(){
         $usuariosControlador = new Usuario_sControlador($this -> datos);
@@ -164,6 +181,14 @@ class ControladorPrincipal{
     }
 
     public function cancelarActualizarUsuarios(){
+        $rolesControlador = new Usuario_sControlador($this -> datos);
+    }
+
+    public function mostrarInsertarUsuarios(){
+        $rolesControlador = new Usuario_sControlador($this -> datos);
+    }
+
+    public function insertarUsuario(){
         $rolesControlador = new Usuario_sControlador($this -> datos);
     }
 

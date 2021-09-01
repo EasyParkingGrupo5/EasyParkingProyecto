@@ -25,6 +25,12 @@ class RolesControlador{
             case 'cancelarActualizarRol':
                  $this -> cancelarActualizarRol();
                  break;
+            case 'mostrarInsertarRoles':
+                $this -> mostrarInsertarRoles();
+                break;
+            case 'insertarRol':
+                $this -> insertarRol();
+                break;
         }
     }
     public function listarRoles(){
@@ -70,6 +76,45 @@ class RolesControlador{
 		        header("location:Controlador.php?ruta=listarRoles");	
 
     }
+
+    public function mostrarInsertarRoles(){
+		
+        header("Location: principal.php?contenido=vistas/vistasRoles/vistaIngresarRol.php");
+
+}
+    
+    public function insertarRol(){
+		
+        
+        $buscarRol = new RolDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+
+        $rolHallado = $buscarRol->seleccionarId(array($this->datos['rolId']));
+
+        if (!$rolHallado['exitoSeleccionId']) {
+            $insertarRol = new RolDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);	
+            $insertoRol = $insertarRol->insertar($this->datos);  
+
+            $resultadoInsercionRol = $insertoRol['resultado'];  
+
+            session_start();
+           $_SESSION['mensaje'] = "Se ha insertado " . $this->datos['rolId'];
+            
+            header("location:Controlador.php?ruta=listarRoles");
+            
+        }else{
+        
+            session_start();
+            $_SESSION['rolId'] = $this->datos['rolId'];
+            $_SESSION['rolNombre'] = $this->datos['rolNombre'];
+            $_SESSION['rolDescripcion'] = $this->datos['rolDescripcionautor'];
+            $_SESSION['rolEstado'] = $this->datos['rolEstado'];				
+            
+            $_SESSION['mensaje'] = " El id que trata de insertar ya existe en el sistema ";
+
+            header("location:Controlador.php?ruta=InsertarRoles");					
+
+        }					
+}	
     
 }
 
