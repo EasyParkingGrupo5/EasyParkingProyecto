@@ -31,6 +31,15 @@ class Usuario_sControlador{
             case 'insertarUsuario':
                 $this -> insertarUsuario();
                 break;
+            case 'eliminarUsuario':
+                $this -> eliminarUsuario();
+                break;
+            case 'listarUsuariosInactivos':
+                $this -> listarUsuariosInactivos();
+                break;
+            case 'habilitarUsuario':
+                $this -> habilitarUsuario();
+                break;
         }
     }
     public function listarUsuarios(){
@@ -111,7 +120,39 @@ class Usuario_sControlador{
             header("location:Controlador.php?ruta=InsertarUsuarios");					
 
         }					
-}	
+    }	
+    public function eliminarUsuario(){
+        $gestarUsuarios = new Usuario_sDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $inhabilitarUsuarios = $gestarUsuarios -> eliminarLogico(array($this -> datos['usuId']));
+
+        session_start();
+
+        $_SESSION['mensaje'] = "Registro Eliminado";
+        header("location:Controlador.php?ruta=listarUsuarios");
+
+
+    }
+        
+    public function listarUsuariosInactivos(){
+        $gestarUsuarios = new Usuario_sDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $listarInactivos = $gestarUsuarios -> seleccionarTodos(0);
+
+        session_start();
+
+        $_SESSION['listaDeUsuarios'] = $listarInactivos;
+
+        header("location:principal.php?contenido=vistas/vistasUsuarios_S/listarUsuariosInactivos.php");
+    }
+
+    public function habilitarUsuario(){
+        $gestarRoles = new Usuario_sDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $inhabilitarRol = $gestarRoles -> habilitar(array($this -> datos['usuId']));
+
+        session_start();
+
+        $_SESSION['mensaje'] = "Registro Habilitado";
+        header("location:Controlador.php?ruta=listarRolesInactivos");
+    }
 }
 
 ?>

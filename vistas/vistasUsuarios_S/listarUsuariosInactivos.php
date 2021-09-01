@@ -39,14 +39,13 @@ if(isset($_SESSION['listaDeUsuarios'])){
 ?>
     <table id="example" class="table-responsive table-hover table-bordered table-striped" style="width:100%">
         <thead>
-            <h3>Listado de la Tabla Usuario</h3>
-            <tr>
+            <h3>Listado de Usuarios inhabilitados </h3>
+            <tr> 
                 <th>Id</th>
-                <th>Usuario</th> 
+                <th>Correo</th> 
                 <th>Contraseña</th>
                 <!--<th>Estado</th>-->
-                <th>Actualizar</th> 
-                <th>Eliminar</th> 
+                <th>Habilitar</th> 
             </tr>
         </thead>
         <tbody>
@@ -54,18 +53,17 @@ if(isset($_SESSION['listaDeUsuarios'])){
             $i = 0;
             foreach ($listaDeUsuarios as $key => $value) {
                 ?>
-                <tr>
+                <tr> 
                     <td><?php echo $listaDeUsuarios[$i]->usuId; ?></td> 
                     <td><?php echo $listaDeUsuarios[$i]->usuLogin; ?></td>  
                     <td><?php echo $listaDeUsuarios[$i]->usuPassword; ?></td>
-                    <!--<td>d>-->
-                    <td><a href="Controlador.php?ruta=actualizarUsuarios&usuId=<?php echo $listaDeUsuarios[$i]->usuId; ?>">Actualizar</a></td>  
-                    <td><a href="Controlador.php?ruta=eliminarUsuario&usuId=<?php echo $listaDeUsuarios[$i]->usuId; ?>" onclick="return confirm('Está seguro de eliminar el registro?')">Eliminar</a></td>  
+                    <!--<td>d>-->  
+                    <td><a href="Controlador.php?ruta=habilitarUsuario&usuId=<?php echo $listaDeUsuarios[$i]->usuId; ?>" onclick="return confirm('Está seguro de habilitar el registro?')">Habilitar</a></td>  
                 </tr>   
                 <?php
                 $i++;
             }
-            $listaDeUsuarios=null;
+            $listaDeRoles=null;
             ?>
         </tbody>
     </table>

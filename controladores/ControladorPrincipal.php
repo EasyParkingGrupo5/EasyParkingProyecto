@@ -95,6 +95,15 @@ class ControladorPrincipal{
             case 'insertarUsuario':
                 $this -> iInsertarUsuario();
                 break;
+            case 'eliminarUsuario':
+                $this -> eliminarUsuario();
+                break;
+            case 'listarUsuariosInactivos':
+                $this -> listarUsuariosInactivos();
+                break;
+            case 'habilitarUsuario':
+                $this -> habilitarUsuario();
+                break;
             case 'listarTiposDocumentos':
                 $this -> listarTiposDocumentos();
                 break;
@@ -225,6 +234,18 @@ class ControladorPrincipal{
 
     public function insertarUsuario(){
         $rolesControlador = new Usuario_sControlador($this -> datos);
+    }
+
+    public function eliminarUsuario(){
+        $librosControlador = new LibrosControlador($this -> datos);
+    }
+
+    public function listarUsuariosInactivos(){
+        $librosControlador = new LibrosControlador($this -> datos);
+    }
+
+    public function habilitarUsuario(){
+        $librosControlador = new LibrosControlador($this -> datos);
     }
 
     public function cancelarActualizarLibro(){

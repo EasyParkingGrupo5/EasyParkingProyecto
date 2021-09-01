@@ -75,6 +75,8 @@ session_start();
             <a href="./Controlador.php?ruta=listarUsuarios">Listar Usuarios</a>
             <br>
             <a href="./Controlador.php?ruta=mostrarInsertarUsuarios">Agregar</a>
+            <br>
+            <a href="./Controlador.php?ruta=listarUsuariosInactivos">Listar Usuarios Inactivos</a>
         </div>
         <div class="gestion">Menú Operaciones de Tabla Usuario_s_roles
             <br>
