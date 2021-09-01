@@ -237,15 +237,15 @@ class ControladorPrincipal{
     }
 
     public function eliminarUsuario(){
-        $librosControlador = new LibrosControlador($this -> datos);
+        $librosControlador = new Usuario_sControlador($this -> datos);
     }
 
     public function listarUsuariosInactivos(){
-        $librosControlador = new LibrosControlador($this -> datos);
+        $librosControlador = new Usuario_sControlador($this -> datos);
     }
 
     public function habilitarUsuario(){
-        $librosControlador = new LibrosControlador($this -> datos);
+        $librosControlador = new Usuario_sControlador($this -> datos);
     }
 
     public function cancelarActualizarLibro(){
