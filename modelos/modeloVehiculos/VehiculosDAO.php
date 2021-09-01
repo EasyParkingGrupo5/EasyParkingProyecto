@@ -4,7 +4,7 @@ include_once PATH . 'modelos/ConBdMysql.php';
 
 class VehiculosDAO extends ConDbMySql{
     public function __construct($servidor, $base, $loginDB, $passwordDB){
-        parent::__construct($servidor, $base, $usuario_db, $contrasenia_db);  
+        parent::__construct($servidor, $base, $loginDB, $passwordDB);  
     }
     
     public function seleccionarTodos(){
@@ -86,6 +86,28 @@ class VehiculosDAO extends ConDbMySql{
     }
 
     public function actualizar($registro){
+        try {
+            $consulta = "UPDATE vehiculos SET vehNumero_Placa = :vehNumero_Placa, vehColor = :vehColor, 
+            vehMarca = :vehMarca, vehEstado = :vehEstado WHERE vehId = :vehId;";
+            
+            $actualizar = $this -> conexion -> prepare($consulta);
+
+            $actualizar -> bindParam(":vehNumero_Placa", $registro['vehNumero_Placa']);
+            $actualizar -> bindParam(":vehColor", $registro['vehColor']);
+            $actualizar -> bindParam(":vehMarca", $registro['vehMarca']);
+            $actualizar -> bindParam(":vehEstado", $registro['vehEstado']);
+            $actualizar -> bindParam(":vehId", $registro['vehId']);
+
+            $actualizacion = $actualizar -> execute();
+
+            $this->cierreBd();
+
+            return ['actualizacion' => $actualizacion, 'mensaje' => 'Resgistro Actualizado'];
+
+        } catch (PDOException $pdoExc) {
+            $this->cierreBd();
+            return ['actualizacion' => $actualizacion, 'mensaje' => $pdoExc];
+        }
         
     }
 

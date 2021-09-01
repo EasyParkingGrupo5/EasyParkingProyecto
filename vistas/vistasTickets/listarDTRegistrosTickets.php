@@ -1,17 +1,8 @@
 <?php
-//echo "<pre>";
-//print_r($_SESSION['listaDeLibros']);
-//echo "</pre>";
-
-if (isset($_SESSION['mensaje'])) {
-    $mensaje = $_SESSION['mensaje'];
-    echo "<script languaje='javascript'>alert('$mensaje')</script>";
-    unset($_SESSION['mensaje']);
-}
-
+/*echo "<pre>";
+print_r($_SESSION['listaDeTickets']);
+echo "</pre>";*/
 ?>
-
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -30,42 +21,48 @@ if (isset($_SESSION['mensaje'])) {
 	
 	<body>
 <?php
-if(isset($_SESSION['listaDeRoles'])){
+if(isset($_SESSION['listaDeTickets'])){
 	
-    $listaDeRoles=$_SESSION['listaDeRoles'];
-	 unset($_SESSION['listaDeRoles']);
+	 $listaDeLibros=$_SESSION['listaDeTickets'];
+	 unset($_SESSION['listaDeTickets']);
 	
 }
 ?>
     <table id="example" class="table-responsive table-hover table-bordered table-striped" style="width:100%">
         <thead>
-            <h3>Listado de la Tabla Rol</h3>
-            <tr> 
-                <th>Id</th>
-                <th>Nombre</th> 
-                <th>Descripcion</th>
-                <!--<th>Estado</th>-->
-                <th>Actualizar</th> 
-                <th>Eliminar</th> 
+            <tr>
+                <th>Id</th> 
+                <th>Numero</th> 
+                <th>Fecha</th> 
+                <th>Hora Ingreso</th>
+                <th>Hora Salida</th>
+                <th>Valo Final</th>
+                <!--<th>Estado</th>--> 
+                <th>Edit</th> 
+                <th>Delete</th> 
             </tr>
         </thead>
         <tbody>
             <?php
             $i = 0;
-            foreach ($listaDeRoles as $key => $value) {
+            foreach ($listaDeTickets as $key => $value) {
                 ?>
-                <tr> 
-                    <td><?php echo $listaDeRoles[$i]->rolId; ?></td> 
-                    <td><?php echo $listaDeRoles[$i]->rolNombre; ?></td>  
-                    <td><?php echo $listaDeRoles[$i]->rolDescripcion; ?></td>
-                    <!--<td>d>--> 
-                    <td><a href="Controlador.php?ruta=actualizarRol&rolId=<?php echo $listaDeRoles[$i]->rolId; ?>">Actualizar</a></td>  
-                    <td><a href="Controlador.php?ruta=eliminarRol&rolId=<?php echo $listaDeRoles[$i]->rolId; ?>" onclick="return confirm('Está seguro de eliminar el registro?')">Eliminar</a></td>  
+                <tr>
+                    <td><?php echo $listaDeTickets[$i]->ticId; ?></td>  
+                    <td><?php echo $listaDeTickets[$i]->ticNumero; ?></td>  
+                    <td><?php echo $listaDeTickets[$i]->ticFecha; ?></td>  
+                    <td><?php echo $listaDeTickets[$i]->ticHoraIngreso; ?></td>
+                    <td><?php echo $listaDeTickets[$i]->ticHoraSalida; ?></td>
+                    <td><?php echo $listaDeTickets[$i]->ticValorFinal; ?></td>  
+                    <!--<td>d>-->  
+                    <td><?php echo $listaDeLTickets[$i]->ticId; ?></td>  
+                    <td><a href="Controlador.php?ruta=actualizarTickets&idAct=<?php echo $listaDeTickets[$i]->isbn; ?>">Actualizar</a></td>  
+                    <td><a href="Controlador.php?ruta=eliminarTickets&idAct=<?php echo $listaDeTickets[$i]->isbn; ?>" onclick="return confirm('Está seguro de eliminar el registro?')">Eliminar</a></td>  
                 </tr>   
                 <?php
                 $i++;
             }
-            $listaDeRoles=null;
+            $listaDeTickets=null;
             ?>
         </tbody>
     </table>
@@ -91,3 +88,5 @@ if(isset($_SESSION['listaDeRoles'])){
 
 </body>
 </html>
+	
+	

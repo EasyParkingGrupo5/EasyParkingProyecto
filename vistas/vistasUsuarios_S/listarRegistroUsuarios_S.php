@@ -41,6 +41,7 @@ if(isset($_SESSION['listaDeUsuarios'])){
         <thead>
             <h3>Listado de la Tabla Usuario</h3>
             <tr>
+                <th>Id</th>
                 <th>Usuario</th> 
                 <th>Contraseña</th>
                 <!--<th>Estado</th>-->
@@ -54,6 +55,7 @@ if(isset($_SESSION['listaDeUsuarios'])){
             foreach ($listaDeUsuarios as $key => $value) {
                 ?>
                 <tr>
+                    <td><?php echo $listaDeUsuarios[$i]->usuId; ?></td> 
                     <td><?php echo $listaDeUsuarios[$i]->usuLogin; ?></td>  
                     <td><?php echo $listaDeUsuarios[$i]->usuPassword; ?></td>
                     <!--<td>d>-->

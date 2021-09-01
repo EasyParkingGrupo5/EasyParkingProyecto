@@ -84,32 +84,31 @@ class Usuario_sControlador{
     public function insertarUsuario(){
 		
         
-        $buscarRol = new Usuario_sDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $buscarUsuario = new Usuario_sDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
 
-        $rolHallado = $buscarRol->seleccionarId(array($this->datos['rolId']));
+        $usuarioHallado = $buscarUsuario->seleccionarId(array($this->datos['usuId']));
 
-        if (!$rolHallado['exitoSeleccionId']) {
-            $insertarRol = new Usuario_sDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);	
-            $insertoRol = $insertarRol->insertar($this->datos);  
+        if (!$usuarioHallado['exitoSeleccionId']) {
+            $insertarUsuario = new Usuario_sDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);	
+            $insertoUsuario = $insertarUsuario->insertar($this->datos);  
 
-            $resultadoInsercionRol = $insertoRol['resultado'];  
+            $resultadoInsercionUsuario = $insertoUsuario['resultado'];  
 
             session_start();
-           $_SESSION['mensaje'] = "Se ha insertado " . $this->datos['rolId'];
+           $_SESSION['mensaje'] = "Se ha insertado " . $this->datos['usuId'];
             
             header("location:Controlador.php?ruta=listarUsuarios");
             
         }else{
         
             session_start();
-            $_SESSION['rolId'] = $this->datos['rolId'];
-            $_SESSION['rolNombre'] = $this->datos['rolNombre'];
-            $_SESSION['rolDescripcion'] = $this->datos['rolDescripcionautor'];
-            $_SESSION['rolEstado'] = $this->datos['rolEstado'];				
+            $_SESSION['usuId'] = $this->datos['usuId'];
+            $_SESSION['usuLogin'] = $this->datos['usuLogin'];
+            $_SESSION['usuPassword'] = $this->datos['usuPassword'];			
             
             $_SESSION['mensaje'] = " El id que trata de insertar ya existe en el sistema ";
 
-            header("location:Controlador.php?ruta=InsertarRoles");					
+            header("location:Controlador.php?ruta=InsertarUsuarios");					
 
         }					
 }	

@@ -1,17 +1,8 @@
 <?php
-//echo "<pre>";
-//print_r($_SESSION['listaDeLibros']);
-//echo "</pre>";
-
-if (isset($_SESSION['mensaje'])) {
-    $mensaje = $_SESSION['mensaje'];
-    echo "<script languaje='javascript'>alert('$mensaje')</script>";
-    unset($_SESSION['mensaje']);
-}
-
+echo "<pre>";
+print_r($_SESSION['listaDeReportes']);
+echo "</pre>";
 ?>
-
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -30,42 +21,43 @@ if (isset($_SESSION['mensaje'])) {
 	
 	<body>
 <?php
-if(isset($_SESSION['listaDeRoles'])){
+if(isset($_SESSION['listaDeReportes'])){
 	
-    $listaDeRoles=$_SESSION['listaDeRoles'];
-	 unset($_SESSION['listaDeRoles']);
+	 $listaDeReportes=$_SESSION['listaDeReportes'];
+	 unset($_SESSION['listaDeReportes']);
 	
 }
 ?>
     <table id="example" class="table-responsive table-hover table-bordered table-striped" style="width:100%">
         <thead>
-            <h3>Listado de la Tabla Rol</h3>
-            <tr> 
-                <th>Id</th>
-                <th>Nombre</th> 
-                <th>Descripcion</th>
-                <!--<th>Estado</th>-->
-                <th>Actualizar</th> 
-                <th>Eliminar</th> 
+            <tr>
+                <th>Id</th> 
+                <th>Numero</th> 
+                <th>Fecha</th>
+                <!--<th>Estado</th>--> 
+                <th>Empleados</th>  
+                <th>Edit</th> 
+                <th>Delete</th> 
             </tr>
         </thead>
         <tbody>
             <?php
             $i = 0;
-            foreach ($listaDeRoles as $key => $value) {
+            foreach ($listaDeReportes as $key => $value) {
                 ?>
-                <tr> 
-                    <td><?php echo $listaDeRoles[$i]->rolId; ?></td> 
-                    <td><?php echo $listaDeRoles[$i]->rolNombre; ?></td>  
-                    <td><?php echo $listaDeRoles[$i]->rolDescripcion; ?></td>
-                    <!--<td>d>--> 
-                    <td><a href="Controlador.php?ruta=actualizarRol&rolId=<?php echo $listaDeRoles[$i]->rolId; ?>">Actualizar</a></td>  
-                    <td><a href="Controlador.php?ruta=eliminarRol&rolId=<?php echo $listaDeRoles[$i]->rolId; ?>" onclick="return confirm('Está seguro de eliminar el registro?')">Eliminar</a></td>  
+                <tr>
+                    <td><?php echo $listaDeReportes[$i]->repId; ?></td>  
+                    <td><?php echo $listaDeReportes[$i]->repNumero ; ?></td>  
+                    <td><?php echo $listaDeReportes[$i]->repFecha; ?></td>    
+                    <!--<td>d>-->  
+                    <td><?php echo $listaDeReportes[$i]->empId; ?></td>  
+                    <td><a href="Controlador.php?ruta=actualizarReportes&idAct=<?php echo $listaDeReportes[$i]->isbn; ?>">Actualizar</a></td>  
+                    <td><a href="Controlador.php?ruta=eliminarReportes&idAct=<?php echo $listaDeReportes[$i]->isbn; ?>" onclick="return confirm('Está seguro de eliminar el registro?')">Eliminar</a></td>  
                 </tr>   
                 <?php
                 $i++;
             }
-            $listaDeRoles=null;
+            $listaDeReportes=null;
             ?>
         </tbody>
     </table>
