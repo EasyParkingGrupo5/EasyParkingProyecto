@@ -68,6 +68,15 @@ class ControladorPrincipal{
             case 'insertarRol':
                 $this -> insertarRol();
                 break;
+            case 'eliminarRol':
+                $this -> eliminarRol();
+                break;
+            case 'listarRolesInactivos':
+                $this -> listarRolesInactivos();
+                break;
+            case 'habilitarRol':
+                $this -> habilitarRol();
+                break;
             case 'listarUsuarios':
                 $this -> listarUsuarios();
                 break;
@@ -178,6 +187,18 @@ class ControladorPrincipal{
     }
 
     public function insertarRol(){
+        $rolesControlador = new RolesControlador($this -> datos);
+    }
+
+    public function eliminarRol(){
+        $rolesControlador = new RolesControlador($this -> datos);
+    }
+
+    public function listarRolesInactivos(){
+        $rolesControlador = new RolesControlador($this -> datos);
+    }
+
+    public function habilitarRol(){
         $rolesControlador = new RolesControlador($this -> datos);
     }
 

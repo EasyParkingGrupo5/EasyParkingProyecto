@@ -31,11 +31,20 @@ class RolesControlador{
             case 'insertarRol':
                 $this -> insertarRol();
                 break;
+            case 'eliminarRol':
+                $this -> eliminarRol();
+                break;
+            case 'listarRolesInactivos':
+                $this -> listarRolesInactivos();
+                break;
+            case 'habilitarRol':
+                $this -> habilitarRol();
+                break;
         }
     }
     public function listarRoles(){
         $gestarRoles = new RolDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
-        $registroRoles = $gestarRoles -> seleccionarTodos();
+        $registroRoles = $gestarRoles -> seleccionarTodos(1);
     
         session_start();
     
@@ -114,7 +123,40 @@ class RolesControlador{
             header("location:Controlador.php?ruta=InsertarRoles");					
 
         }					
-}	
+    }	
+
+    public function eliminarRol(){
+        $gestarRoles = new LibroDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $inhabilitarRoles = $gestarRoles -> eliminarLogico(array($this -> datos['rolId']));
+
+        session_start();
+
+        $_SESSION['mensaje'] = "Registro Eliminado";
+        header("location:Controlador.php?ruta=listarRoles");
+
+
+    }
+        
+    public function listarRolesInactivos(){
+        $gestarRoles = new RolDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $listarInactivos = $gestarRoles -> seleccionarTodos(0);
+
+        session_start();
+
+        $_SESSION['listaDeRoles'] = $listarInactivos;
+
+        header("location:principal.php?contenido=vistas/vistasRoles/listarRolesInactivos.php");
+    }
+
+    public function habilitarRol(){
+        $gestarRoles = new RolDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $inhabilitarRol = $gestarRoles -> habilitar(array($this -> datos['rolId']));
+
+        session_start();
+
+        $_SESSION['mensaje'] = "Registro Habilitado";
+        header("location:Controlador.php?ruta=listarRolesInactivos");
+    }
     
 }
 
