@@ -1,8 +1,9 @@
  <?php
 
+include_once PATH . 'controladores/RegistrarControlador.php';
 include_once PATH . 'controladores/LibrosControlador.php';
 include_once PATH . 'controladores/rolesControlador.php';
-include_once PATH . 'controladores/usuario_sControlador.php';
+include_once PATH . 'controladores/Usuario_sControlador.php';
 include_once PATH . 'controladores/TiposDocumentosControlador.php';
 include_once PATH . 'controladores/usuario_sRolesControlador.php';
 include_once PATH . 'controladores/TicketsControlador.php';
@@ -29,6 +30,15 @@ class ControladorPrincipal{
 
     public function control(){
         switch ($this->datos['ruta']) {
+            case 'registrar':
+                $this -> registrar();
+                break;
+            case 'gestionDeRegistro':
+                $this -> gestionDeRegistro();
+                break;
+            case 'gestionDeAcceso':
+                $this -> gestionDeAcceso();
+                break;
             case 'listarLibros':
                 $this -> listarLibros();
                 break;
@@ -114,6 +124,18 @@ class ControladorPrincipal{
                 $this -> listarReportes();
                 break;
         }
+    }
+
+    public function registrar(){
+        $registrar = new RegistrarControlador($this -> datos);
+    }
+
+    public function gestionDeRegistro(){
+        $usuariosControlador = new Usuario_sControlador($this -> datos);
+    }
+
+    public function gestionDeAcceso(){
+        $usuariosControlador = new Usuario_sControlador($this -> datos);
     }
 
     public function listarLibros(){

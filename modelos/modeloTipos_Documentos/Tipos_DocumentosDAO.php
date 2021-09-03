@@ -7,10 +7,13 @@ class TiposDocumentosDAO extends ConDbMySql{
         parent::__construct($servidor, $base, $loginDB, $passwordDB);  
     }
     
-    public function seleccionarTodos(){
-        $planconsulta = "SELECT * FROM tipos_documentos;";
+    public function seleccionarTodos($estado){
+        $planconsulta = "SELECT * FROM tipos_documentos WHERE tipDocEstado = :tipDocEstado;";
 
         $registroTiposDocumentos = $this->conexion->prepare($planconsulta);
+
+        $registroTiposDocumentos -> bindParam(":tipDocEstado", $estado);
+
         $registroTiposDocumentos->execute();
 
         $listadoRegistrosTiposDocumentos = array();

@@ -53,18 +53,12 @@ class UsuarioRolesDAO extends ConDbMySql{
 
         try {
             
-            $consulta="INSERT INTO usuario_s_roles (created_at, estado, fechaUserRol, id_rol, id_usuario_s, obsFechaUserRol, updated_at, usuRolUsuSesion) VALUES (:created_at, :estado, :fechaUserRol, :id_rol, :id_usuario_s, :obsFechaUserRol, :updated_at, :usuRolUsuSesion)" ;
+            $consulta="INSERT INTO usuario_s_roles (id_rol, id_usuario_s) VALUES (:id_rol, :id_usuario_s)" ;
 
             $insertar=$this->conexion->prepare($consulta);
 
-            $insertar -> bindParam(":created_at", $registro['created_at']);
-            $insertar -> bindParam(":estado", $registro['estado']);
-            $insertar -> bindParam(":fechaUserRol", $registro['fechaUserRol']);
-            $insertar -> bindParam(":id_rol", $registro['id_rol']);
-            $insertar -> bindParam(":id_usuario_s", $registro['id_usuario_s']);
-            $insertar -> bindParam(":obsFechaUserRol", $registro['obsFechaUserRol']);
-            $insertar -> bindParam(":updated_at", $registro['updated_at']);
-            $insertar -> bindParam(":usuRolUsuSesion", $registro['usuRolUsuSesion']);
+            $insertar -> bindParam(":id_rol", $registro[1]);
+            $insertar -> bindParam(":id_usuario_s", $registro[0]);
 
             $insertar =$insertar->execute();
 

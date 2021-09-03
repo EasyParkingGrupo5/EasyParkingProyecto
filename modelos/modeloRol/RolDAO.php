@@ -6,6 +6,27 @@ class RolDAO extends ConDbMySql{
     public function __construct($servidor, $base, $loginDB, $passwordDB){
         parent::__construct($servidor, $base, $loginDB, $passwordDB);  
     }
+
+    public function seleccionarRolPorPersona(){
+        
+        $consulta="SELECT rol.rolId, rol.rolNombre, rol.rolDescripcion FROM rol rol JOIN 
+        usuario_s_roles usr on usr.id_rol = rol.rolId JOIN usuario_s usu on usu.usuId = usr.id_usuario_s 
+        RIGHT JOIN empleados emp on emp.empId = usr.id_usuario_s WHERE emp.empNumeroDocumento = ?";
+
+        $lista=$this->conexion->prepare($consulta);
+        $lista->execute(array($sId[0]));
+
+        $registroEnco = array();
+
+        while( $registro = $lista->fetch(PDO::FETCH_OBJ)){
+            $registroEnco[]=$registro;
+        }
+        if (isset($registroEnco[0]->usuId) && $registroEnco[0]->usuId != FALSE) {
+            return ['exitoSeleccionId' => 1, 'registroEncontrado' => $registroEnco];
+        } else {
+            return ['exitoSeleccionId' => 0, 'registroEncontrado' => $registroEnco];
+        }
+    }
     
     public function seleccionarTodos(){
         $planconsulta = "SELECT * FROM rol;";
@@ -34,7 +55,6 @@ class RolDAO extends ConDbMySql{
         while( $registro = $lista->fetch(PDO::FETCH_OBJ)){
             $registroEnco[]=$registro;
         }
-          $this->cierreBd();
           
         if(!empty($registroEnco)){
             return ['exitoSeleccionId' => true, 'registroEncontrado' => $registroEnco];

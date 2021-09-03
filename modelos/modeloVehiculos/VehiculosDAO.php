@@ -1,6 +1,6 @@
 <?php
 
-include_once PATH . 'modelos/ConBdMysql.php';
+include_once 'modelos/ConBdMysql.php';
 
 class VehiculosDAO extends ConDbMySql{
     public function __construct($servidor, $base, $loginDB, $passwordDB){
@@ -53,9 +53,8 @@ class VehiculosDAO extends ConDbMySql{
 
     public function insertar($registro){
         try {
-            $consulta = "INSERT INTO vehiculos (vehId,vehNumero_Placa,vehColor,vehMarca,vehEstado,vehUsuSesion,vehCreated_At,
-            vehUpdated_At,Empleados_empId,Tickets_ticId) VALUES (:vehId,:vehNumero_Placa,:vehColor,:vehMarca,:vehEstado,:vehUsuSesion,:vehCreated_At,
-            :vehUpdated_At,:Empleados_empId,:Tickets_ticId);";
+            $consulta = "INSERT INTO vehiculos (vehId,vehNumero_Placa,vehColor,vehMarca, Empleados_empId,Tickets_ticId) 
+            VALUES (:vehId,:vehNumero_Placa,:vehColor,:vehMarca, :Empleados_empId,:Tickets_ticId);";
 
             $insertar = $this->conexion->prepare($consulta);
 
@@ -63,10 +62,6 @@ class VehiculosDAO extends ConDbMySql{
             $insertar -> bindParam(":vehNumero_Placa", $registro['vehNumero_Placa']);
             $insertar -> bindParam(":vehColor", $registro['vehColor']);
             $insertar -> bindParam(":vehMarca", $registro['vehMarca']);
-            $insertar -> bindParam(":vehEstado", $registro['vehEstado']);
-            $insertar -> bindParam(":vehUsuSesion", $registro['vehUsuSesion']);
-            $insertar -> bindParam(":vehCreated_At", $registro['vehCreated_At']);
-            $insertar -> bindParam(":vehUpdated_At", $registro['vehUpdated_At']);
             $insertar -> bindParam(":Empleados_empId", $registro['Empleados_empId']);
             $insertar -> bindParam(":Tickets_ticId", $registro['Tickets_ticId']);
         
@@ -75,12 +70,13 @@ class VehiculosDAO extends ConDbMySql{
 
             $clavePrimaria = $this->conexion->lastInsertId();
 
-            return ['Inserto'=>1,'resultado'=>$clavePrimaria];
+            return ['Inserto'=>true,'resultado'=>$clavePrimaria];
 
             $this->cierreBd();
 
-        }  
-          catch(Exception $e){return $e;}
+        } catch (PDOException $pdoExc) {
+            return ['Inserto'=>false,$pdoExc->errorInfo[2]];
+        }
         
 
     }

@@ -51,13 +51,14 @@ class EmpleadosDAO extends ConDbMySql{
 
     public function insertar($registro){
         try {
-            $consulta = "INSERT INTO empleados (empNumeroDocumento, empPrimerNombre, empSegundoNombre,
+            $consulta = "INSERT INTO empleados (empId, empNumeroDocumento, empPrimerNombre, empSegundoNombre,
              empPrimerApellido, empSegundoApellido, empTelefono, empTipoSangre, empRh, usuario_s_usuId, 
-             Tipos_Documentos_tipDocId ) VALUES (:empNumeroDocumento, :empPrimerNombre, :empSegundoNombre, 
+             Tipos_Documentos_tipDocId ) VALUES (:empId, :empNumeroDocumento, :empPrimerNombre, :empSegundoNombre, 
              :empPrimerApellido, :empSegundoApellido, :empTelefono, :empTipoSangre, :empRh, :usuario_s_usuId, :Tipos_Documentos_tipDocId);";
 
             $insertar = $this->conexion->prepare($consulta);
 
+            $insertar -> bindParam(":empId", $registro['empId']);
             $insertar -> bindParam(":empNumeroDocumento", $registro['empNumeroDocumento']);
             $insertar -> bindParam(":empPrimerNombre", $registro['empPrimerNombre']);
             $insertar -> bindParam(":empSegundoNombre", $registro['empSegundoNombre']);
@@ -66,7 +67,7 @@ class EmpleadosDAO extends ConDbMySql{
             $insertar -> bindParam(":empTelefono", $registro['empTelefono']);
             $insertar -> bindParam(":empTipoSangre", $registro['empTipoSangre']);
             $insertar -> bindParam(":empRh", $registro['empRh']);
-            $insertar -> bindParam(":usuario_s_usuId", $registro['usuario_s_usuId']);
+            $insertar -> bindParam(":usuario_s_usuId", $registro['empId']);
             $insertar -> bindParam(":Tipos_Documentos_tipDocId", $registro['Tipos_Documentos_tipDocId']);
 
             $insercion = $insertar->execute();

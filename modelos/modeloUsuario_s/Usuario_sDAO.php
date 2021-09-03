@@ -24,22 +24,37 @@ class Usuario_sDAO extends ConDbMySql{
 
     public function seleccionarID($sId){
 
-        $consulta="select * FROM usuario_s WHERE usuario_s.usuId=?";
+        if(!isset($sId[2])){
+            $consulta = "SELECT * FROM empleados emp JOIN usuario_s usu ON 
+            emp.empId = usu.usuId WHERE emp.empNumeroDocumento = ? or usu.usuLogin = ?; ";
+            $listar = $this->conexion->prepare($consulta);
+            $listar -> execute(array($sId[0], $sId[1]));
+        }
 
-        $lista=$this->conexion->prepare($consulta);
-        $lista->execute(array($sId[0]));
+        if(isset($sId[2])){
+            $consulta = "SELECT * FROM empleados emp JOIN usuario_s usu ON 
+            emp.empId = usu.usuId WHERE usu.usuPassword = ? AND usu.usuLogin = ?;";
+            $listar = $this->conexion->prepare($consulta);
+            $listar -> execute(array($sId[2], $sId[1]));
+        }
+
+        if(!isset($sId[1]) && !isset($sId[2])){
+            $consulta = "SELECT * FROM empleados emp JOIN usuario_s usu ON 
+            emp.empId = usu.usuId WHERE emp.empNumeroDocumento = ?;";
+            $listar = $this->conexion->prepare($consulta);
+            $listar -> execute(array($sId[0]));
+        }
 
         $registroEnco = array();
 
-        while( $registro = $lista->fetch(PDO::FETCH_OBJ)){
+        while( $registro = $listar->fetch(PDO::FETCH_OBJ)){
             $registroEnco[]=$registro;
         }
-          $this->cierreBd();
           
-        if(!empty($registroEnco)){
-            return ['exitoSeleccionId' => true, 'registroEncontrado' => $registroEnco];
+        if(isset($registroEnco[0]->usuId) && $registroEnco[0]->usuId != FALSE){
+            return ['exitoSeleccionId' => 1, 'registroEncontrado' => $registroEnco];
         }else{
-            return ['exitosaSeleccionId' => false, 'registroEncontrado' => $registroEnco];
+            return ['exitoSeleccionId' => 0, 'registroEncontrado' => $registroEnco];
         }
 
     }
@@ -48,27 +63,21 @@ class Usuario_sDAO extends ConDbMySql{
 
         try {
             
-            $consulta="INSERT INTO usuario_s (usuEstado, usuId, usuLogin, usuPassword, usuRemember_token, usuUsuSesion, usu_created_at, usu_updated_at) VALUES (:usuEstado, :usuId, :usuLogin, :usuPassword, :usuRemember_token, :usuUsuSesion, :usu_created_at, :usu_updated_at)" ;
+            $consulta = "INSERT INTO usuario_s (usuLogin, usuPassword) VALUES (:usuLogin, :usuPassword)" ;
 
             $insertar=$this->conexion->prepare($consulta);
-
-            $insertar -> bindParam(":usuEstado", $registro['usuEstado']);
-            $insertar -> bindParam(":usuId", $registro['usuId']);
+;
             $insertar -> bindParam(":usuLogin", $registro['usuLogin']);
             $insertar -> bindParam(":usuPassword", $registro['usuPassword']);
-            $insertar -> bindParam(":usuRemember_token", $registro['usuRemember_token']);
-            $insertar -> bindParam(":usuUsuSesion", $registro['usuUsuSesion']);
-            $insertar -> bindParam(":usu_created_at", $registro['usu_created_at']);
-            $insertar -> bindParam(":usu_updated_at", $registro['usu_updated_at']);
 
             $insertar =$insertar->execute();
 
             $clavePrimaria = $this->conexion->lastInsertId();
 
-            return ['Inserto'=>1,'resultado'=>$clavePrimaria];
+            return ['Inserto'=>true,'resultado'=>$clavePrimaria];
 
         } catch (PDOException $pdoExc) {
-            return ['Inserto'=>0,$pdoExc->errorInfo[2]];
+            return ['Inserto'=>false,$pdoExc->errorInfo[2]];
         }
 
     }
