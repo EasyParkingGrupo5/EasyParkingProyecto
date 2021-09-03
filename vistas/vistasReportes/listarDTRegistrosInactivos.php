@@ -1,8 +1,17 @@
 <?php
-/*echo "<pre>";
-print_r($_SESSION['listaDeReportes']);
-echo "</pre>";*/
+//echo "<pre>";
+//print_r($_SESSION['listaDeLReportes']);
+//echo "</pre>";
+
+if (isset($_SESSION['mensaje'])) {
+    $mensaje = $_SESSION['mensaje'];
+    echo "<script languaje='javascript'>alert('$mensaje')</script>";
+    unset($_SESSION['mensaje']);
+}
+
 ?>
+
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -20,11 +29,13 @@ echo "</pre>";*/
     </head>
 	
 	<body>
+        <h1>Listado de la tabla Reportes Inactivos</h1>
+        <br>
 <?php
 if(isset($_SESSION['listaDeReportes'])){
 	
-	 $listaDeReportes=$_SESSION['listaDeReportes'];
-	 unset($_SESSION['listaDeReportes']);
+	 $listaDeReportes=$_SESSION['listaDeRepostes'];
+
 	
 }
 ?>
@@ -33,12 +44,11 @@ if(isset($_SESSION['listaDeReportes'])){
             <tr>
                 <th>Id</th> 
                 <th>Numero</th> 
-                <th>Fecha</th>
+                <th>Fecha</th> 
+                <th>Empleado</th> 
                 <!--<th>Estado</th>--> 
-                <th>Empleados</th>
-                <th>vehiculos</th> 
-                <th>Edit</th> 
-                <th>Delete</th> 
+                <th>Vehiculo</th> 
+                <th>Habilitar</th>  
             </tr>
         </thead>
         <tbody>
@@ -48,13 +58,12 @@ if(isset($_SESSION['listaDeReportes'])){
                 ?>
                 <tr>
                     <td><?php echo $listaDeReportes[$i]->repId; ?></td>  
-                    <td><?php echo $listaDeReportes[$i]->repNumero ; ?></td>  
-                    <td><?php echo $listaDeReportes[$i]->repFecha; ?></td>
-                    <td><?php echo $listaDeReportes[$i]->empId; ?></td>
-                    <td><?php echo $listaDeReportes[$i]->vehId; ?></td>   
-                    <!--<td>d>-->   
-                    <td><a href="Controlador.php?ruta=actualizarReportes&idAct=<?php echo $listaDeReportes[$i]->repId; ?>">Actualizar</a></td>  
-                    <td><a href="Controlador.php?ruta=eliminarReportes&idAct=<?php echo $listaDeReportes[$i]->repId; ?>" onclick="return confirm('Está seguro de eliminar el registro?')">Eliminar</a></td>  
+                    <td><?php echo $listaDeReportes[$i]->repNumero; ?></td>  
+                    <td><?php echo $listaDeReportes[$i]->repFecha; ?></td>  
+                    <td><?php echo $listaDeReportes[$i]->empId; ?></td>  
+                    <!--<td>d>-->  
+                    <td><?php echo $listaDeReportes[$i]->vehId; ?></td>  
+                    <td><a href="Controlador.php?ruta=habilitarReportes&idAct=<?php echo $listaDeReportes[$i]->repId; ?>" onclick="return confirm('¿Está seguro de habilitar el registro?')">Habilitar</a></td>   
                 </tr>   
                 <?php
                 $i++;
