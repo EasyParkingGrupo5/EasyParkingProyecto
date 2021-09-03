@@ -86,31 +86,39 @@ class VehiculosDAO extends ConDbMySql{
     }
 
     public function actualizar($registro){
-        try {
-            $consulta = "UPDATE vehiculos SET vehNumero_Placa = :vehNumero_Placa, vehColor = :vehColor, 
-            vehMarca = :vehMarca, vehEstado = :vehEstado WHERE vehId = :vehId;";
-            
-            $actualizar = $this -> conexion -> prepare($consulta);
+        try{
+            $vehNumero_Placa = $registro[0]['vehNumero_Placa'];
+            $vehColor = $registro[0]['vehColor'];
+            $vehMarca = $registro[0]['vehMarca'];
+            $vehId = $registro[0]['vehId'];	
+			
+			
+			if(isset($isbn)){
+				
+                $actualizar = "UPDATE vehiculos SET vehNumero_Placa= ? , ";
+                $actualizar .= " vehColor = ? , ";
+                $actualizar .= " vehMarca = ? , ";
+                $actualizar .= " WHERE vehId= ? ; ";
+				
+				$actualizacion = $this->conexion->prepare($actualizar);
+				
+				$resultadoAct=$actualizacion->execute(array($vehNumero_Placa,$vehColor,$vehMarca,$vehId));
+				
+				        $this->cierreBd();
+						
+                return ['actualizacion' => $resultadoAct, 'mensaje' => "Actualización realizada."];				
+				
+			}
 
-            $actualizar -> bindParam(":vehNumero_Placa", $registro['vehNumero_Placa']);
-            $actualizar -> bindParam(":vehColor", $registro['vehColor']);
-            $actualizar -> bindParam(":vehMarca", $registro['vehMarca']);
-            $actualizar -> bindParam(":vehEstado", $registro['vehEstado']);
-            $actualizar -> bindParam(":vehId", $registro['vehId']);
-
-            $actualizacion = $actualizar -> execute();
-
-            $this->cierreBd();
-
-            return ['actualizacion' => $actualizacion, 'mensaje' => 'Resgistro Actualizado'];
 
         } catch (PDOException $pdoExc) {
-            $this->cierreBd();
-            return ['actualizacion' => $actualizacion, 'mensaje' => $pdoExc];
-        }
+			$this->cierreBd();
+            return ['actualizacion' => $resultadoAct, 'mensaje' => $pdoExc];
         
+        }
     }
 
+    
     public function eliminar($sId = array()){
         $consulta = "DELETE FROM vehiculos WHERE vehId = :vehId;";
 

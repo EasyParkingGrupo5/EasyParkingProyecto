@@ -68,15 +68,15 @@ class ControladorPrincipal{
             case 'listarUsuarios':
                 $this -> listarUsuarios();
                 break;
-             case 'actualizarUsuarios':
+            case 'actualizarUsuarios':
                 $this -> actualizarUsuarios();
-                 break;
+                break;
             case 'confirmarActualizarUsuarios':
                 $this -> confirmarActualizarUsuarios();
                 break;
             case 'cancelarActualizarUsuarios':
                  $this -> cancelarActualizarUsuarios();
-                 break;
+                break;
             case 'listarTiposDocumentos':
                 $this -> listarTiposDocumentos();
                 break;
@@ -107,11 +107,38 @@ class ControladorPrincipal{
             case 'listarTickets':
                 $this -> listarTickets();
                 break;
-                case 'listarVehiculos':
+            case 'actualizarTickets':
+                $this -> actualizarTickets();
+                break;
+            case 'confirmarActualizarTickets':
+                $this -> confirmarActualizarTickets();
+                break;
+            case 'cancelarActualizarTickets':
+                $this -> cancelarActualizarTickets();
+                break;
+            case 'listarVehiculos':
                 $this -> listarVehiculos();
+                break;
+            case 'actualizarVehiculos':
+                $this -> actualizarVehiculos();
+                break;
+            case 'confirmarActualizarVehiculos':
+                $this -> confirmarActualizarVehiculos();
+                break;
+            case 'cancelarActualizarVehiculos':
+                $this -> cancelarActualizarVehiculos();
                 break;
             case 'listarReportes':
                 $this -> listarReportes();
+                break;
+            case 'actualizarReportes':
+                $this -> actualizarReportes();
+                break;
+            case 'confirmarActualizarReportes':
+                $this -> confirmarActualizarReportes();
+                break;
+            case 'cancelarActualizarReportes':
+                $this -> cancelarActualizarReportes();
                 break;
         }
     }
@@ -216,17 +243,44 @@ class ControladorPrincipal{
     public function cancelarActualizarUsuarios_SRoles(){
         $Usuarios_SRolesControlador = new Usuarios_SRolesControlador($this -> datos);
     }
-
-    
     public function listarTickets(){
+        $ticketsControlador = new TicketsControlador($this -> datos);
+    }
+    public function actualizarTickets(){
+        $ticketsControlador = new TicketsControlador($this -> datos);
+    }
+    public function confirmarActualizarTickets(){
+        $ticketsControlador = new TicketsControlador($this -> datos);
+    }
+    public function cancelarActualizarTickets(){
         $ticketsControlador = new TicketsControlador($this -> datos);
     }
     
     public function listarVehiculos(){
         $vehiculosControlador = new VehiculosControlador($this -> datos);
     }
-    
+    public function actualizarVehiculos(){
+        $vehiculosControlador = new VehiculosControlador($this -> datos);
+    }
+    public function confirmarActualizarVehiculos(){
+        $vehiculosControlador = new VehiculosControlador($this -> datos);
+    }
+    public function cancelarActualizarVehiculos(){
+        $vehiculosControlador = new VehiculosControlador($this -> datos);
+    }
+
+
     public function listarReportes(){
+        $reportesControlador = new ReportesControlador($this -> datos);
+    }
+    public function actualizarReportes(){
+        $reportesControlador = new ReportesControlador($this -> datos);
+    }
+    public function confirmarActualizarReportes(){
+        $reportesControlador = new ReportesControlador($this -> datos);
+    }
+
+    public function cancelarActualizarReportes(){
         $reportesControlador = new ReportesControlador($this -> datos);
     }
 }

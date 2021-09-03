@@ -36,9 +36,10 @@ if(isset($_SESSION['listaDeVehiculos'])){
                 <th>Color</th> 
                 <th>Marca</th>
                 <!--<th>Estado</th>-->
-                <th>Numero de Tickets</th> 
-                <th>Edit</th> 
-                <th>Delete</th> 
+                <th>Empleado</th>
+                <th>Numero de Ticket</th> 
+                <th>Editar</th> 
+                <th>Eliminar</th> 
             </tr>
         </thead>
         <tbody>
@@ -51,9 +52,9 @@ if(isset($_SESSION['listaDeVehiculos'])){
                     <td><?php echo $listaDeVehiculos[$i]->vehNumero_Placa; ?></td>  
                     <td><?php echo $listaDeVehiculos[$i]->vehColor; ?></td>  
                     <td><?php echo $listaDeVehiculos[$i]->vehMarca; ?></td>
-                    
-                    <!--<td>d>-->  
-                    <td><?php echo $listaDeVehiculos[$i]->ticNumero; ?></td>  
+                    <td><?php echo $listaDeVehiculos[$i]->empId ; ?></td>
+                    <td><?php echo $listaDeVehiculos[$i]->ticNumero; ?></td>
+                    <!--<td>d>-->   
                     <td><a href="Controlador.php?ruta=actualizarVehiculoss&idAct=<?php echo $listaDeVehiculos[$i]->vehId; ?>">Actualizar</a></td>  
                     <td><a href="Controlador.php?ruta=eliminarVehiculos&idAct=<?php echo $listaDeVehiculos[$i]->vehId; ?>" onclick="return confirm('Está seguro de eliminar el registro?')">Eliminar</a></td>  
                 </tr>   
