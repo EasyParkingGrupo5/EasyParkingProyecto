@@ -1,7 +1,7 @@
 <?php
 
 define("BASE","easyparking");
-define("SERVIDOR","localhost");
+define("SERVIDOR","127.0.0.1:3307");
 define("USUARIO_DB","root");
 define("CONTRASENIA_DB","");
 

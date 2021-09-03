@@ -34,6 +34,21 @@ class Usuario_sControlador{
             case 'cancelarActualizarUsuarios':
                  $this -> cancelarActualizarUsuarios();
                  break;
+            case 'mostrarInsertarUsuarios':
+                $this -> mostrarInsertarUsuarios();
+                break;
+            case 'insertarUsuario':
+                $this -> insertarUsuario();
+                break;
+            case 'eliminarUsuario':
+                $this -> eliminarUsuario();
+                break;
+            case 'listarUsuariosInactivos':
+                $this -> listarUsuariosInactivos();
+                break;
+            case 'habilitarUsuario':
+                $this -> habilitarUsuario();
+                break;
         }
     }
 
@@ -118,7 +133,7 @@ class Usuario_sControlador{
     
         $_SESSION['listaDeUsuarios'] = $registroUsuarios;
     
-        header("location:principal.php?contenido=vistas/vistasUsuarios_S/listarRegistroUsuarios_s.php");
+        header("location:principal.php?contenido=vistas/vistasUsuarios_S/listarRegistroUsuarios_S.php");
     }
 
     public  function actualizarUsuarios(){
@@ -141,7 +156,6 @@ class Usuario_sControlador{
         $actualizarUsuarios = $gestarUsuarios -> actualizar(array($this->datos));
 
         session_start();
-            $_SESSION['mensaje'] = "Actualización realizada.";
             header("location:Controlador.php?ruta=listarUsuarios");	
 
     }
@@ -149,11 +163,79 @@ class Usuario_sControlador{
     public function cancelarActualizarUsuarios(){
 
         session_start();
-                $_SESSION['mensaje'] = "Desistió de la actualización";
 		        header("location:Controlador.php?ruta=listarUsuarios");	
 
     }
     
+    public function mostrarInsertarUsuarios(){
+		
+        header("Location: principal.php?contenido=vistas/vistasUsuarios_S/vistaIngresarUsuario_S.php");
+
+}
+    
+    public function insertarUsuario(){
+		
+        
+        $buscarUsuario = new Usuario_sDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+
+        $usuarioHallado = $buscarUsuario->seleccionarId(array($this->datos['usuId']));
+
+        if (!$usuarioHallado['exitoSeleccionId']) {
+            $insertarUsuario = new Usuario_sDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);	
+            $insertoUsuario = $insertarUsuario->insertar($this->datos);  
+
+            $resultadoInsercionUsuario = $insertoUsuario['resultado'];  
+
+            session_start();
+           $_SESSION['mensaje'] = "Se ha insertado " . $this->datos['usuId'];
+            
+            header("location:Controlador.php?ruta=listarUsuarios");
+            
+        }else{
+        
+            session_start();
+            $_SESSION['usuId'] = $this->datos['usuId'];
+            $_SESSION['usuLogin'] = $this->datos['usuLogin'];
+            $_SESSION['usuPassword'] = $this->datos['usuPassword'];			
+            
+            $_SESSION['mensaje'] = " El id que trata de insertar ya existe en el sistema ";
+
+            header("location:Controlador.php?ruta=InsertarUsuarios");					
+
+        }					
+    }	
+    public function eliminarUsuario(){
+        $gestarUsuarios = new Usuario_sDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $inhabilitarUsuarios = $gestarUsuarios -> eliminarLogico(array($this -> datos['usuId']));
+
+        session_start();
+
+        $_SESSION['mensaje'] = "Registro Eliminado";
+        header("location:Controlador.php?ruta=listarUsuarios");
+
+
+    }
+        
+    public function listarUsuariosInactivos(){
+        $gestarUsuarios = new Usuario_sDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $listarInactivos = $gestarUsuarios -> seleccionarTodos(0);
+
+        session_start();
+
+        $_SESSION['listaDeUsuarios'] = $listarInactivos;
+
+        header("location:principal.php?contenido=vistas/vistasUsuarios_S/listarUsuariosInactivos.php");
+    }
+
+    public function habilitarUsuario(){
+        $gestarRoles = new Usuario_sDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $inhabilitarRol = $gestarRoles -> habilitar(array($this -> datos['usuId']));
+
+        session_start();
+
+        $_SESSION['mensaje'] = "Registro Habilitado";
+        header("location:Controlador.php?ruta=listarRolesInactivos");
+    }
 }
 
 ?>

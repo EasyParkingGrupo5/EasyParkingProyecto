@@ -7,10 +7,11 @@ class Usuario_sDAO extends ConDbMySql{
         parent::__construct($servidor, $base, $loginDB, $passwordDB);  
     }
     
-    public function seleccionarTodos(){
-        $planconsulta = "SELECT * FROM usuario_s;";
+    public function seleccionarTodos($estado){
+        $planconsulta = "SELECT * FROM usuario_s where usuEstado = :usuEstado;";
 
         $registroUsuario_s = $this->conexion->prepare($planconsulta);
+        $registroUsuario_s -> bindParam(":usuEstado", $estado);
         $registroUsuario_s->execute();
 
         $listadoRegistrosUsuario_s = array();

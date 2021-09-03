@@ -39,14 +39,13 @@ if(isset($_SESSION['listaDeRoles'])){
 ?>
     <table id="example" class="table-responsive table-hover table-bordered table-striped" style="width:100%">
         <thead>
-            <h3>Listado de la Tabla Rol</h3>
+            <h3>Listado de Roles inhabilitados </h3>
             <tr> 
                 <th>Id</th>
                 <th>Nombre</th> 
                 <th>Descripcion</th>
                 <!--<th>Estado</th>-->
-                <th>Actualizar</th> 
-                <th>Eliminar</th> 
+                <th>Habilitar</th> 
             </tr>
         </thead>
         <tbody>
@@ -58,9 +57,8 @@ if(isset($_SESSION['listaDeRoles'])){
                     <td><?php echo $listaDeRoles[$i]->rolId; ?></td> 
                     <td><?php echo $listaDeRoles[$i]->rolNombre; ?></td>  
                     <td><?php echo $listaDeRoles[$i]->rolDescripcion; ?></td>
-                    <!--<td>d>--> 
-                    <td><a href="Controlador.php?ruta=actualizarRol&rolId=<?php echo $listaDeRoles[$i]->rolId; ?>">Actualizar</a></td>  
-                    <td><a href="Controlador.php?ruta=eliminarRol&rolId=<?php echo $listaDeRoles[$i]->rolId; ?>" onclick="return confirm('Está seguro de eliminar el registro?')">Eliminar</a></td>  
+                    <!--<td>d>-->  
+                    <td><a href="Controlador.php?ruta=habilitarRol&rolId=<?php echo $listaDeRoles[$i]->rolId; ?>" onclick="return confirm('Está seguro de habilitar el registro?')">Habilitar</a></td>  
                 </tr>   
                 <?php
                 $i++;

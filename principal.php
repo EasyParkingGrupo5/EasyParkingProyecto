@@ -79,13 +79,17 @@ if (isset($_SESSION['mensaje']) && isset($_SESSION['nombre']) && isset($_SESSION
             <br>
             <a href="./Controlador.php?ruta=listarRoles">Listar Roles</a>
             <br>
-            <a >Agregar</a>
+            <a href="./Controlador.php?ruta=mostrarInsertarRoles">Agregar</a>
+            <br>
+            <a href="./Controlador.php?ruta=listarRolesInactivos">Listar Roles Inactivos</a>
         </div>
         <div class="gestion">Menú Operaciones de Tabla Usuario_s
             <br>
             <a href="./Controlador.php?ruta=listarUsuarios">Listar Usuarios</a>
             <br>
-            <a>Agregar</a>
+            <a href="./Controlador.php?ruta=mostrarInsertarUsuarios">Agregar</a>
+            <br>
+            <a href="./Controlador.php?ruta=listarUsuariosInactivos">Listar Usuarios Inactivos</a>
         </div>
         <div class="gestion">Menú Operaciones de Tabla Usuario_s_roles
             <br>
