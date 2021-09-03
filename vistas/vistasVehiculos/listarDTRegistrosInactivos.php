@@ -1,6 +1,6 @@
 <?php
 //echo "<pre>";
-//print_r($_SESSION['listaDeTickets']);
+//print_r($_SESSION['listaDeVehiculos']);
 //echo "</pre>";
 
 if (isset($_SESSION['mensaje'])) {
@@ -29,12 +29,12 @@ if (isset($_SESSION['mensaje'])) {
     </head>
 	
 	<body>
-        <h1>Listado de la tabla Tickets</h1>
+        <h1>Listado de la tabla Vehiculos Inactivos</h1>
         <br>
 <?php
-if(isset($_SESSION['listaDeTickets'])){
+if(isset($_SESSION['listaDeVehiculos'])){
 	
-	 $listaDeTickets=$_SESSION['listaDeTickets'];
+	 $listaDeVehiculos=$_SESSION['listaDeVehiculos'];
 
 	
 }
@@ -43,38 +43,34 @@ if(isset($_SESSION['listaDeTickets'])){
         <thead>
             <tr>
                 <th>Id</th> 
-                <th>Numero</th> 
-                <th>Fecha</th> 
-                <th>Hora Ingreso</th> 
-                <th>Hora Salida</th> 
-                <th>Valor Valor Final</th>
+                <th>Numero de Placa</th> 
+                <th>Color</th> 
+                <th>Marca</th> 
+                <!--<th>Estado</th>--> 
                 <th>Empleado</th>
-                <th>Tipo Tarifa</th>
-                <th>Editar</th> 
-                <th>Eliminar</th> 
+                <th>Numero de Ticket</th> 
+                <th>Habilitar</th>  
             </tr>
         </thead>
         <tbody>
             <?php
             $i = 0;
-            foreach ($listaDeTickets as $key => $value) {
+            foreach ($listaDeVehiculos as $key => $value) {
                 ?>
                 <tr>
-                    <td><?php echo $listaDeTickets[$i]->ticId; ?></td>  
-                    <td><?php echo $listaDeTickets[$i]->ticNumero; ?></td>  
-                    <td><?php echo $listaDeTickets[$i]->ticFecha; ?></td>  
-                    <td><?php echo $listaDeTickets[$i]->ticHoraIngreso; ?></td>
-                    <td><?php echo $listaDeTickets[$i]->ticHoraSalida; ?></td>
-                    <td><?php echo $listaDeTickets[$i]->ticValorFinal; ?></td>
-                    <td><?php echo $listaDeTickets[$i]->empId; ?></td>  
-                    <td><?php echo $listaDeTickets[$i]->tarTipoVehiculo.' - '.$listaDeTickets[$i]->tarValorTarifa; ?></td> 
-                    <td><a href="Controlador.php?ruta=actualizarTickets&idAct=<?php echo $listaDeTickets[$i]->ticId; ?>">Actualizar</a></td>  
-                    <td><a href="Controlador.php?ruta=eliminarTickets&idAct=<?php echo $listaDeTickets[$i]->ticId; ?>" onclick="return confirm('¿Está seguro de eliminar el registro?')">Eliminar</a></td>  
+                    <td><?php echo $listaDeVehiculos[$i]->vehId; ?></td>  
+                    <td><?php echo $listaDeVehiculos[$i]->vehNumero_Placa; ?></td>  
+                    <td><?php echo $listaDeVehiculos[$i]->vehColor; ?></td>  
+                    <td><?php echo $listaDeVehiculos[$i]->vehMarca; ?></td>
+                    <td><?php echo $listaDeVehiculos[$i]->empId ; ?></td>  
+                    <!--<td>d>-->  
+                    <td><?php echo $listaDeVehiculos[$i]->ticNumero; ?></td>  
+                    <td><a href="Controlador.php?ruta=habilitarVehiculos&idAct=<?php echo $listaDeVehiculos[$i]->isbn; ?>" onclick="return confirm('¿Está seguro de habilitar el registro?')">Habilitar</a></td>   
                 </tr>   
                 <?php
                 $i++;
             }
-            $listaDeTickets=null;
+            $listaDeVehiculos=null;
             ?>
         </tbody>
     </table>
@@ -100,5 +96,3 @@ if(isset($_SESSION['listaDeTickets'])){
 
 </body>
 </html>
-	
-	

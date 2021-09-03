@@ -29,7 +29,7 @@ if (isset($_SESSION['mensaje'])) {
     </head>
 	
 	<body>
-        <h1>Listado de la tabla Tickets</h1>
+        <h1>Listado de la tabla Tickets Inactivos</h1>
         <br>
 <?php
 if(isset($_SESSION['listaDeTickets'])){
@@ -45,13 +45,13 @@ if(isset($_SESSION['listaDeTickets'])){
                 <th>Id</th> 
                 <th>Numero</th> 
                 <th>Fecha</th> 
-                <th>Hora Ingreso</th> 
-                <th>Hora Salida</th> 
-                <th>Valor Valor Final</th>
-                <th>Empleado</th>
-                <th>Tipo Tarifa</th>
-                <th>Editar</th> 
-                <th>Eliminar</th> 
+                <th>Hora Ingreso</th>
+                <th>Hora Salida</th>
+                <th>Valor Final</th>  
+                <!--<th>Estado</th>--> 
+                <th>Empleado</th> 
+                <th>Tipo Tarifa</th>  
+                <th>Habilitar</th>  
             </tr>
         </thead>
         <tbody>
@@ -64,12 +64,11 @@ if(isset($_SESSION['listaDeTickets'])){
                     <td><?php echo $listaDeTickets[$i]->ticNumero; ?></td>  
                     <td><?php echo $listaDeTickets[$i]->ticFecha; ?></td>  
                     <td><?php echo $listaDeTickets[$i]->ticHoraIngreso; ?></td>
-                    <td><?php echo $listaDeTickets[$i]->ticHoraSalida; ?></td>
+                    <td><?php echo $listaDeTickets[$i]->ticHoraSalida; ?></td>    
                     <td><?php echo $listaDeTickets[$i]->ticValorFinal; ?></td>
-                    <td><?php echo $listaDeTickets[$i]->empId; ?></td>  
-                    <td><?php echo $listaDeTickets[$i]->tarTipoVehiculo.' - '.$listaDeTickets[$i]->tarValorTarifa; ?></td> 
-                    <td><a href="Controlador.php?ruta=actualizarTickets&idAct=<?php echo $listaDeTickets[$i]->ticId; ?>">Actualizar</a></td>  
-                    <td><a href="Controlador.php?ruta=eliminarTickets&idAct=<?php echo $listaDeTickets[$i]->ticId; ?>" onclick="return confirm('¿Está seguro de eliminar el registro?')">Eliminar</a></td>  
+                    <td><?php echo $listaDeTickets[$i]->empId; ?></td>
+                    <td><?php echo $listaDeTickets[$i]->tarValorTarifa; ?></td>   
+                    <td><a href="Controlador.php?ruta=habilitarTickets&idAct=<?php echo $listaDeTickets[$i]->ticId; ?>" onclick="return confirm('¿Está seguro de habilitar el registro?')">Habilitar</a></td>   
                 </tr>   
                 <?php
                 $i++;
@@ -100,5 +99,3 @@ if(isset($_SESSION['listaDeTickets'])){
 
 </body>
 </html>
-	
-	

@@ -20,13 +20,13 @@ session_start();
             margin-right: auto;
         }
         .gestion{
-            width: 80%;
+            width: 90%;
             border: black 3px solid;
             margin-left: auto;
             margin-right: auto;
         }
         #contenido{
-            width: 80%;
+            width: 90%;
             border: black 3px solid;
             margin-left: auto;
             margin-right: auto;
