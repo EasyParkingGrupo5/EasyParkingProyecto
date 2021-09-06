@@ -21,7 +21,6 @@ class TiposDocumentosDAO extends ConDbMySql{
         while( $registro = $registroTiposDocumentos->fetch(PDO::FETCH_OBJ)){
             $listadoRegistrosTiposDocumentos[]=$registro;
         }
-          $this->cierreBd();
           return $listadoRegistrosTiposDocumentos;
     }
 
@@ -37,7 +36,6 @@ class TiposDocumentosDAO extends ConDbMySql{
         while( $registro = $listar->fetch(PDO::FETCH_OBJ)){
             $registroEncontrado[]=$registro;
         }
-          $this->cierreBd();
           
         if(!empty($registroEncontrado)){
             return ['exitoSeleccionId' => true, 'registroEncontrado' => $registroEncontrado];

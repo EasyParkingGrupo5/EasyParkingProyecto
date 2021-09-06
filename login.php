@@ -15,7 +15,7 @@ if (isset($_SESSION['mensaje'])) {
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Login</title>
-        <link rel="stylesheet" href="css/login.css">
+        <link rel="stylesheet" href="css/loginStyle/login.css">
         <script type="text/javascript" src="javascript/funciones.js" defer></script>
         <script type="text/javascript" src="javascript/md5.js"></script>  
         <script src="https://kit.fontawesome.com/570e942042.js" crossorigin="anonymous"></script>      
