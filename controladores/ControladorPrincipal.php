@@ -90,9 +90,9 @@ class ControladorPrincipal{
             case 'listarUsuarios':
                 $this -> listarUsuarios();
                 break;
-             case 'actualizarUsuarios':
+            case 'actualizarUsuarios':
                 $this -> actualizarUsuarios();
-                 break;
+                break;
             case 'confirmarActualizarUsuarios':
                 $this -> confirmarActualizarUsuarios();
                 break;
@@ -326,9 +326,16 @@ class ControladorPrincipal{
     public function cancelarActualizarUsuarios_SRoles(){
         $Usuarios_SRolesControlador = new Usuarios_SRolesControlador($this -> datos);
     }
-
-    
     public function listarTickets(){
+        $ticketsControlador = new TicketsControlador($this -> datos);
+    }
+    public function actualizarTickets(){
+        $ticketsControlador = new TicketsControlador($this -> datos);
+    }
+    public function confirmarActualizarTickets(){
+        $ticketsControlador = new TicketsControlador($this -> datos);
+    }
+    public function cancelarActualizarTickets(){
         $ticketsControlador = new TicketsControlador($this -> datos);
     }
     
@@ -369,6 +376,16 @@ class ControladorPrincipal{
     }
     
     public function listarReportes(){
+        $reportesControlador = new ReportesControlador($this -> datos);
+    }
+    public function actualizarReportes(){
+        $reportesControlador = new ReportesControlador($this -> datos);
+    }
+    public function confirmarActualizarReportes(){
+        $reportesControlador = new ReportesControlador($this -> datos);
+    }
+
+    public function cancelarActualizarReportes(){
         $reportesControlador = new ReportesControlador($this -> datos);
     }
 }

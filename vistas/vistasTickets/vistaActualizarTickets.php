@@ -2,14 +2,70 @@
 
 
 if (isset($_SESSION['actualizarTickets'])) {
-    $actualizarLibro = $_SESSION['actualizarTickets'];
+    $actualizarTickets = $_SESSION['actualizarTickets'];
 }
-if (isset($_SESSION['listarCategorias'])) {
-    $listarCategorias = $_SESSION['listarCategorias'];
-    $categoriasCantidad = count($listarCategorias);
+/*echo'<pre>';
+print_r($_SESSION['actualizarTickets']);
+echo'</pre>';*/
+if (isset($_SESSION['listarEmpleados'])) {
+    $listarEmpleados = $_SESSION['listarEmpleados'];
+    $empleadosCantidad = count($listarEmpleados);
+}
+if (isset($_SESSION['listarTarifa'])) {
+    $listarTarifa = $_SESSION['listarTarifa'];
+    $tarifaCantidad = count($listarTarifa);
 }
 
 ?>
+<style type="text/css">
+
+form{
+	width:550px;
+	padding:16px;
+	border-radius:10px;
+	margin:auto;
+	background-color:white;
+    border: black 3px solid;
+}
+
+form button[type="submit"]{
+	cursor:pointer;
+}
+
+form input[type="text"]{
+    margin: 5px;
+    width: 200px;
+}
+
+form input[type="number"]{
+    margin: 5px;
+    width: 200px;
+}
+
+form select{
+    margin: 5px;
+    width: 200px;
+}
+
+.titulo{
+    display: flex;
+    justify-content: center;
+}
+
+.botonCancelar{
+    margin-left: center;
+}
+
+.botonActualizar{
+    margin-left: 60px;
+}
+
+.letras{
+    justify-content: center;
+    text-align: left;
+}
+
+</style>
 
 <div class="penek-heading">
     <h2 class="panel-title">Gestión de Tickets</h2>
@@ -49,7 +105,7 @@ if (isset($_SESSION['listarCategorias'])) {
                 <tr>
                     <td>Hora Ingreso:</td>
                     <td>
-                            <input type="number" name="ticHoraIngreso" placeholder="ticHoraIngreso" style="width: 330px"
+                            <input type="text" name="ticHoraIngreso" placeholder="ticHoraIngreso" style="width: 330px"
                             value="<?php if (isset($actualizarTickets->ticHoraIngreso)) {
                                 echo $actualizarTickets->ticHoraIngreso;
                             } ?>">
@@ -58,14 +114,14 @@ if (isset($_SESSION['listarCategorias'])) {
                 <tr>
                     <td>Hora Salida:</td>
                     <td>
-                            <input type="number" name="ticHoraSalida" placeholder="ticHoraSalida" style="width: 330px"
+                            <input type="text" name="ticHoraSalida" placeholder="ticHoraSalida" style="width: 330px"
                             value="<?php if (isset($actualizarTickets->ticHoraSalida)) {
                                 echo $actualizarTickets->ticHoraSalida;
                             } ?>">
                     </td>
                 </tr>
                 <tr>
-                    <td>Valo Final:</td>
+                    <td>Valor Final:</td>
                     <td>
                             <input type="number" name="ticValorFinal" placeholder="ticValorFinal" style="width: 330px"
                             value="<?php if (isset($actualizarTickets->ticValorFinal)) {
@@ -74,18 +130,36 @@ if (isset($_SESSION['listarCategorias'])) {
                     </td>
                 </tr>
                 <tr>
-                    <td>Categoria:</td>
+                    <td>Empleado:</td>
                     <td>
-                            <select name="categoriaLibro_catLibId" id="categoriaLibro_catLibId" style="width: 338px">
-                                <?php for ($i=0; $i < $categoriasCantidad; $i++) { 
+                            <select name="empId" id="empId" style="width: 338px">
+                                <?php for ($i=0; $i < $empleadosCantidad; $i++) { 
                                 ?>
-                                    <option value="<?php echo $listarCategorias[$i]->catLibId; ?>" 
-                                    <?php if (isset($listarCategorias[$i]->catLibId) && isset($actualizarLibro->categoriaLibro_catLibId) && $listarCategorias[$i]->catLibId == $actualizarLibro->categoriaLibro_catLibId) {
+                                    <option value="<?php echo $listarEmpleados[$i]->empId; ?>" 
+                                    <?php if (isset($listarEmpleados[$i]->empId) && isset($actualizarTickets->Empleados_empId) && $listarEmpleados[$i]->empId == $actualizarTickets->Empleados_empId) {
+                                        echo " selected";
+                                    } ?>
+                                    >
+
+                                    <?php echo $listarEmpleados[$i]->empId.' - '.$listarEmpleados[$i]->empPrimerNombre.' '.$listarEmpleados[$i]->empPrimerApellido; ?></option>
+                                <?php
+                                }
+                                ?>
+                            </select>
+                    </td>
+                </tr>
+                <td>Tipo Tarifa:</td>
+                    <td>
+                            <select name="tarValorTarifa" id="tarValorTarifa" style="width: 338px">
+                                <?php for ($i=0; $i < $tarifaCantidad; $i++) { 
+                                ?>
+                                    <option value="<?php echo $listarTarifa[$i]->tarId; ?>" 
+                                    <?php if (isset($listarTarifa[$i]->tarId) && isset($actualizarTickets->Tarifas_tarId) && $listarTarifa[$i]->tarId == $actualizarTickets->Tarifas_tarId) {
                                         echo "selected";
                                     } ?>
                                     >
 
-                                    <?php echo $listarCategorias[$i]->catLibNombre; ?></option>
+                                    <?php echo $listarTarifa[$i]->tarTipoVehiculo.' - '.$listarTarifa[$i] ->tarValorTarifa.' pesos minuto'; ?></option>
                                 <?php
                                 }
                                 ?>

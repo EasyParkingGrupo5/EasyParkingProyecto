@@ -103,6 +103,7 @@ class VehiculosDAO extends ConDbMySql{
     
 }
 
+    
     public function eliminar($sId = array()){
         $consulta = "DELETE FROM vehiculos WHERE vehId = :vehId;";
 

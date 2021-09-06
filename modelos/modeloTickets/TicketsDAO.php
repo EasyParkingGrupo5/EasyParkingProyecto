@@ -90,29 +90,40 @@ class TicketsDAO extends ConDbMySql{
     
 
     public function actualizar($registro){
-        try {
-            $consulta = "UPDATE Tickets SET Numero = :Numero, Fecha = :Fecha, 
-            HoraIngreso = :HoraIngreso, HoraSalida = :HoraSalida, ValorFinal = :ValorFinal,
-            WHERE ticId = :ticId;";
-            
-            $actualizar = $this -> conexion -> prepare($consulta);
+        try{
+            $ticNumero = $registro[0]['ticNumero'];
+            $ticFecha = $registro[0]['ticFecha'];
+            $ticHoraIngreso = $registro[0]['ticHoraIngreso'];
+            $ticHoraSalida = $registro[0]['ticHoraSalida'];
+            $ticValorFinal = $registro[0]['ticValorFinal'];
+            $ticEstado = $registro[0]['ticEstado'];
+            $ticId = $registro[0]['ticId'];	
+			
+			
+			if(isset($ticId)){
+				
+                $actualizar = "UPDATE tickets SET ticNumero= ? , ";
+                $actualizar .= " ticFecha = ? , ";
+                $actualizar .= " ticHoraIngreso = ? , ";
+                $actualizar .= " ticHoraSalida = ? ";
+                $actualizar .= " ticValorFinal = ? ";
+                $actualizar .= " WHERE ticId= ? ; ";
+				
+				$actualizacion = $this->conexion->prepare($actualizar);
+				
+				$resultadoAct=$actualizacion->execute(array($ticNumero,$ticFecha,$ticHoraIngreso,$ticHoraSalida, 
+                $ticValorFinal,$ticId));
+				
+				        $this->cierreBd();
+						
+                return ['actualizacion' => $resultadoAct, 'mensaje' => "Actualización realizada."];				
+				
+			}
 
-            $actualizar -> bindParam(":Numero", $registro['Numero']);
-            $actualizar -> bindParam(":Fecha", $registro['Fecha']);
-            $actualizar -> bindParam(":HoraIngreso", $registro['HoraIngreso']);
-            $actualizar -> bindParam(":HoraSalida", $registro['HoraSalida']);
-            $actualizar -> bindParam(":ValorFinal", $registro['ValorFinal']);
-            $actualizar -> bindParam(":ticId", $registro['ticId']);
-
-            $actualizacion = $actualizar -> execute();
-
-            $this->cierreBd();
-
-            return ['actualizacion' => $actualizacion, 'mensaje' => 'Resgistro Actualizado'];
 
         } catch (PDOException $pdoExc) {
-            $this->cierreBd();
-            return ['actualizacion' => $actualizacion, 'mensaje' => $pdoExc];
+			$this->cierreBd();
+            return ['actualizacion' => $resultadoAct, 'mensaje' => $pdoExc];
         }
     
         
