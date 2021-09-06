@@ -127,7 +127,7 @@ class Usuario_sControlador{
 
     public function listarUsuarios(){
         $gestarUsuarios = new Usuario_sDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
-        $registroUsuarios = $gestarUsuarios -> seleccionarTodos();
+        $registroUsuarios = $gestarUsuarios -> seleccionarTodos(1);
     
         session_start();
     
@@ -228,13 +228,13 @@ class Usuario_sControlador{
     }
 
     public function habilitarUsuario(){
-        $gestarRoles = new Usuario_sDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
-        $inhabilitarRol = $gestarRoles -> habilitar(array($this -> datos['usuId']));
+        $gestarUsuarios = new Usuario_sDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $inhabilitarUsuarios = $gestarUsuarios -> habilitar(array($this -> datos['usuId']));
 
         session_start();
 
         $_SESSION['mensaje'] = "Registro Habilitado";
-        header("location:Controlador.php?ruta=listarRolesInactivos");
+        header("location:Controlador.php?ruta=listarUsuariosInactivos");
     }
 }
 

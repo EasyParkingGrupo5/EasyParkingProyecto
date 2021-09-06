@@ -144,11 +144,32 @@ class ControladorPrincipal{
             case 'listarTickets':
                 $this -> listarTickets();
                 break;
-                case 'listarVehiculos':
+            case 'listarVehiculos':
                 $this -> listarVehiculos();
                 break;
-            case 'listarReportes':
-                $this -> listarReportes();
+            case 'actualizarVehiculos':
+                $this -> actualizarVehiculos();
+                break;
+            case 'cancelarActualizarVehiculo':
+                $this -> cancelarActualizarVehiculo();
+                break;
+            case 'confirmarActualizarVehiculo':
+                $this -> actualizarVehiculos();
+                break;
+            case 'mostrarInsertarVehiculos':
+                $this -> mostrarInsertarVehiculos();
+                break;
+            case 'insertarVehiculo':
+                $this -> insertarVehiculo();
+                break;
+            case 'eliminarVehiculos':
+                $this -> eliminarVehiculos();
+                break;
+            case 'listarVehiculosInactivos':
+                $this -> listarVehiculosInactivos();
+                break;
+            case 'habilitarVehiculo':
+                $this -> habilitarVehiculo();
                 break;
         }
     }
@@ -312,6 +333,38 @@ class ControladorPrincipal{
     }
     
     public function listarVehiculos(){
+        $vehiculosControlador = new VehiculosControlador($this -> datos);
+    }
+
+    public function actualizarVehiculos(){
+        $vehiculosControlador = new VehiculosControlador($this -> datos);
+    }
+
+    public function confirmarActualizarVehiculo(){
+        $vehiculosControlador = new VehiculosControlador($this -> datos);
+    }
+
+    public function cancelarActualizarVehiculo(){
+        $vehiculosControlador = new VehiculosControlador($this -> datos);
+    }
+
+    public function mostrarInsertarVehiculos(){
+        $vehiculosControlador = new VehiculosControlador($this -> datos);
+    }
+
+    public function insertarVehiculo(){
+        $vehiculosControlador = new VehiculosControlador($this -> datos);
+    }
+
+    public function eliminarVehiculos(){
+        $vehiculosControlador = new VehiculosControlador($this -> datos);
+    }
+
+    public function listarVehiculosInactivos(){
+        $vehiculosControlador = new VehiculosControlador($this -> datos);
+    }
+
+    public function habilitarVehiculo(){
         $vehiculosControlador = new VehiculosControlador($this -> datos);
     }
     
