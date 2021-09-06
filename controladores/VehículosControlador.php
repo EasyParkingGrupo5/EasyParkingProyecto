@@ -166,14 +166,14 @@ class VehiculosControlador{
         header("location:Controlador.php?ruta=listarVehiculosInactivos");
     }
     
-}
 
-public function cancelarActualizarVehiculos(){
+
+    public function cancelarActualizarVehiculos(){
     
     header("location:Controlador.php?ruta=listarVehiculos");
-}
+    }
 
-public function agregarVehiculos(){
+    public function agregarVehiculos(){
     $gestarEmpleados = new EmpleadosDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
     $listarEmpleados = $gestarEmpleados -> seleccionarTodos();
 
@@ -182,9 +182,9 @@ public function agregarVehiculos(){
     $_SESSION['listarEmpleados'] = $listarEmpleados;
 
     header('location:principal.php?contenido=vistas/vistasVehiculos/vistaInsertarVehiculos.php');
-}
+    }
 
-public function confirmarInsertarVehiculos(){
+    public function confirmarInsertarVehiculos(){
     $gestarVehiculos = new VehiculosDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
     $buscarVehiculos = $gestarVehiculos -> seleccionarID(array($this->datos['isbn']));
 
@@ -211,42 +211,7 @@ public function confirmarInsertarVehiculos(){
             header("location:Controlador.php?ruta=agregarVehiculos");
     }
 
-    }
-    
-    public function eliminarVehiculos(){
-        $gestarVehiculos = new VehiculosDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
-        $inhabilitarVehiculos = $gestarVehiculos -> eliminarLogico(array($this -> datos['idAct']));
-
-        session_start();
-
-        $_SESSION['mensaje'] = "Registro Eliminado";
-        header("location:Controlador.php?ruta=listarVehiculos");
-
-
-    }
-
-    public function listarVehiculosInactivos(){
-        $gestarVehiculos = new VehiculosDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
-        $listarInactivos = $gestarVehiculos -> seleccionarTodos(0);
-
-        session_start();
-
-        $_SESSION['listaDeVehiculos'] = $listarInactivos;
-
-        header("location:principal.php?contenido=vistas/vistasVehiculos/listarDTRegistrosInactivos.php");
-    }
-
-    public function habilitarVehiculos(){
-        $gestarVehiculos = new VehiculosDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
-        $inhabilitarVehiculos = $gestarVehiculos -> habilitar(array($this -> datos['idAct']));
-
-        session_start();
-
-        $_SESSION['mensaje'] = "Registro Habilitado";
-        header("location:Controlador.php?ruta=listarVehiculosInactivos");
-    }
+   }
 }
 
 ?>
-
-

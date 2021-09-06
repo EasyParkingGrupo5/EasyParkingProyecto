@@ -110,18 +110,10 @@ form select{
                 <td>Valor Tarifa:</td>
                     <td>
                             <select name="tarValorTarifa" id="tarValorTarifa" style="width: 338px">
-                                <?php for ($i=0; $i < $tarifasCantidad; $i++) { 
-                                ?>
-                                    <option value="<?php echo $listarTarifas[$i]->tarId; ?>" 
-                                    <?php if (isset($listarTarifas[$i]->tarId) && isset($actualizarVehiculos->tarValorTarifa) && $listarValorTarifa[$i]->tarId == $actualizarTarifas->tarValorTarifa) {
-                                        echo "selected";
-                                    } ?>
-                                    >
-
-                                    <?php echo $listarTarifas[$i]->tarValorTarifa; ?></option>
-                                <?php
-                                }
-                                ?>
+                                    <option value="MASDA">MASDA</option>
+                                    <option value="Bmw">Bmw</option>
+                                    <option value="Renault">Renault</option>
+                                    <option value="Chevrolet">Chevrolet</option>
                             </select>
                     </td>
                 </tr>
