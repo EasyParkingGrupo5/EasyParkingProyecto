@@ -7,16 +7,11 @@ class VehiculosDAO extends ConDbMySql{
         parent::__construct($servidor, $base, $loginDB, $passwordDB);  
     }
     
-    public function seleccionarTodos(){
-        $planconsulta = "SELECT veh.vehId, veh.vehNumero_Placa, 
-        veh.vehColor, veh.vehMarca, veh.vehEstado, veh.vehUsuSesion, 
-        veh.vehCreated_At, veh.vehUpdated_At, emp.empId, 
-        emp.empNumeroDocumento, tic.ticId, tic.ticNumero 
-        FROM vehiculos veh JOIN empleados emp ON veh.Empleados_empId = 
-        emp.empId JOIN tickets tic ON veh.Tickets_ticId = tic.ticId; 
-        ";
+    public function seleccionarTodos($estado){
+        $planconsulta = "SELECT * FROM vehiculos  WHERE vehEstado= :vehEstado;";
 
         $registroVehiculos = $this->conexion->prepare($planconsulta);
+        $registroVehiculos -> bindParam(":vehEstado", $estado);
         $registroVehiculos->execute();
 
         $listadoRegistrosVehiculos = array();
@@ -83,30 +78,32 @@ class VehiculosDAO extends ConDbMySql{
 
     public function actualizar($registro){
         try {
-            $consulta = "UPDATE vehiculos SET vehNumero_Placa = :vehNumero_Placa, vehColor = :vehColor, 
-            vehMarca = :vehMarca, vehEstado = :vehEstado WHERE vehId = :vehId;";
-            
+
+            $placa = $registro[0]['vehNumero_Placa'];
+            $color = $registro[0]['vehColor'];
+            $marca = $registro[0]['vehMarca'];
+            $vehId = $registro[0]['vehId'];
+
+            if(isset($vehId)){
+
+            $consulta = "UPDATE vehiculos SET vehNumero_Placa = ?, vehColor = ?, 
+            vehMarca = ? WHERE vehId = ?;";
+
             $actualizar = $this -> conexion -> prepare($consulta);
 
-            $actualizar -> bindParam(":vehNumero_Placa", $registro['vehNumero_Placa']);
-            $actualizar -> bindParam(":vehColor", $registro['vehColor']);
-            $actualizar -> bindParam(":vehMarca", $registro['vehMarca']);
-            $actualizar -> bindParam(":vehEstado", $registro['vehEstado']);
-            $actualizar -> bindParam(":vehId", $registro['vehId']);
-
-            $actualizacion = $actualizar -> execute();
+            $actualizacion = $actualizar -> execute(array($placa, $color, $marca, $vehId));
 
             $this->cierreBd();
 
             return ['actualizacion' => $actualizacion, 'mensaje' => 'Resgistro Actualizado'];
-
-        } catch (PDOException $pdoExc) {
-            $this->cierreBd();
-            return ['actualizacion' => $actualizacion, 'mensaje' => $pdoExc];
         }
-        
+    } catch (PDOException $pdoExc) {
+        return ['actualizacion' => $actualizacion, 'mensaje' => $pdoExc];
     }
+    
+}
 
+    
     public function eliminar($sId = array()){
         $consulta = "DELETE FROM vehiculos WHERE vehId = :vehId;";
 

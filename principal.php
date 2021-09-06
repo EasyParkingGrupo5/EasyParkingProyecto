@@ -33,13 +33,13 @@ if (isset($_SESSION['mensaje']) && isset($_SESSION['nombre']) && isset($_SESSION
             margin-right: auto;
         }
         .gestion{
-            width: 80%;
+            width: 90%;
             border: black 3px solid;
             margin-left: auto;
             margin-right: auto;
         }
         #contenido{
-            width: 80%;
+            width: 90%;
             border: black 3px solid;
             margin-left: auto;
             margin-right: auto;
@@ -107,7 +107,9 @@ if (isset($_SESSION['mensaje']) && isset($_SESSION['nombre']) && isset($_SESSION
             <br>
             <a href="./Controlador.php?ruta=listarVehiculos">Listar Vehículos</a>
             <br>
-            <a>Agregar Vehiculo</a>
+            <a href="./Controlador.php?ruta=mostrarInsertarVehiculos">Agregar Vehiculo</a>
+            <br>
+            <a href="./Controlador.php?ruta=listarVehiculosInactivos">Listar Vehiculos Inactivos</a>
         </div>
         <div class="gestion">Menú de Operaciones de Tabla Reportes
             <br>

@@ -1,8 +1,17 @@
 <?php
-/*echo "<pre>";
-print_r($_SESSION['listaDeVehiculos']);
-echo "</pre>";*/
+//echo "<pre>";
+//print_r($_SESSION['listaDeVehiculos']);
+//echo "</pre>";
+
+if (isset($_SESSION['mensaje'])) {
+    $mensaje = $_SESSION['mensaje'];
+    echo "<script languaje='javascript'>alert('$mensaje')</script>";
+    unset($_SESSION['mensaje']);
+}
+
 ?>
+
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -20,17 +29,14 @@ echo "</pre>";*/
     </head>
 	
 	<body>
+        <h1>Listado de la tabla Vehiculos Inactivos</h1>
+        <br>
 <?php
 if(isset($_SESSION['listaDeVehiculos'])){
 	
 	 $listaDeVehiculos=$_SESSION['listaDeVehiculos'];
-	 unset($_SESSION['listaDeVehiculos']);
-	
-}
 
-if (isset($_SESSION['listaDeTickets'])) {
-    $listarCategorias = $_SESSION['listaDeTickets'];
-    $categoriasCantidad = count($listarCategorias);
+	
 }
 ?>
     <table id="example" class="table-responsive table-hover table-bordered table-striped" style="width:100%">
@@ -39,15 +45,15 @@ if (isset($_SESSION['listaDeTickets'])) {
                 <th>Id</th> 
                 <th>Numero de Placa</th> 
                 <th>Color</th> 
-                <th>Marca</th>
-                <!--<th>Estado</th>-->
-                <th>Edit</th> 
-                <th>Delete</th> 
+                <th>Marca</th> 
+                <!--<th>Estado</th>--> 
+                <th>Empleado</th>
+                <th>Numero de Ticket</th> 
+                <th>Habilitar</th>  
             </tr>
         </thead>
         <tbody>
             <?php
-
             $i = 0;
             foreach ($listaDeVehiculos as $key => $value) {
                 ?>
@@ -56,10 +62,10 @@ if (isset($_SESSION['listaDeTickets'])) {
                     <td><?php echo $listaDeVehiculos[$i]->vehNumero_Placa; ?></td>  
                     <td><?php echo $listaDeVehiculos[$i]->vehColor; ?></td>  
                     <td><?php echo $listaDeVehiculos[$i]->vehMarca; ?></td>
-                    
-                    <!--<td>d>-->
-                    <td><a href="Controlador.php?ruta=actualizarVehiculos&vehId=<?php echo $listaDeVehiculos[$i]->vehId; ?>">Actualizar</a></td>  
-                    <td><a href="Controlador.php?ruta=eliminarVehiculos&vehId=<?php echo $listaDeVehiculos[$i]->vehId; ?>" onclick="return confirm('Está seguro de eliminar el registro?')">Eliminar</a></td>  
+                    <td><?php echo $listaDeVehiculos[$i]->empId ; ?></td>  
+                    <!--<td>d>-->  
+                    <td><?php echo $listaDeVehiculos[$i]->ticNumero; ?></td>  
+                    <td><a href="Controlador.php?ruta=habilitarVehiculos&idAct=<?php echo $listaDeVehiculos[$i]->isbn; ?>" onclick="return confirm('¿Está seguro de habilitar el registro?')">Habilitar</a></td>   
                 </tr>   
                 <?php
                 $i++;

@@ -42,7 +42,6 @@ if (isset($_SESSION['listaDeTickets'])) {
                 <th>Marca</th>
                 <!--<th>Estado</th>-->
                 <th>Edit</th> 
-                <th>Delete</th> 
             </tr>
         </thead>
         <tbody>
@@ -57,9 +56,8 @@ if (isset($_SESSION['listaDeTickets'])) {
                     <td><?php echo $listaDeVehiculos[$i]->vehColor; ?></td>  
                     <td><?php echo $listaDeVehiculos[$i]->vehMarca; ?></td>
                     
-                    <!--<td>d>-->
-                    <td><a href="Controlador.php?ruta=actualizarVehiculos&vehId=<?php echo $listaDeVehiculos[$i]->vehId; ?>">Actualizar</a></td>  
-                    <td><a href="Controlador.php?ruta=eliminarVehiculos&vehId=<?php echo $listaDeVehiculos[$i]->vehId; ?>" onclick="return confirm('Está seguro de eliminar el registro?')">Eliminar</a></td>  
+                    <!--<td>d>--> 
+                    <td><a href="Controlador.php?ruta=habilitarVehiculo&vehId=<?php echo $listaDeVehiculos[$i]->vehId; ?>" onclick="return confirm('Está seguro de habilitar el registro?')">Habilitar</a></td>  
                 </tr>   
                 <?php
                 $i++;

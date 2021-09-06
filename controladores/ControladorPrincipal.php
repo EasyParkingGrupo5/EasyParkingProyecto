@@ -90,9 +90,9 @@ class ControladorPrincipal{
             case 'listarUsuarios':
                 $this -> listarUsuarios();
                 break;
-             case 'actualizarUsuarios':
+            case 'actualizarUsuarios':
                 $this -> actualizarUsuarios();
-                 break;
+                break;
             case 'confirmarActualizarUsuarios':
                 $this -> confirmarActualizarUsuarios();
                 break;
@@ -144,11 +144,32 @@ class ControladorPrincipal{
             case 'listarTickets':
                 $this -> listarTickets();
                 break;
-                case 'listarVehiculos':
+            case 'listarVehiculos':
                 $this -> listarVehiculos();
                 break;
-            case 'listarReportes':
-                $this -> listarReportes();
+            case 'actualizarVehiculos':
+                $this -> actualizarVehiculos();
+                break;
+            case 'cancelarActualizarVehiculo':
+                $this -> cancelarActualizarVehiculo();
+                break;
+            case 'confirmarActualizarVehiculo':
+                $this -> actualizarVehiculos();
+                break;
+            case 'mostrarInsertarVehiculos':
+                $this -> mostrarInsertarVehiculos();
+                break;
+            case 'insertarVehiculo':
+                $this -> insertarVehiculo();
+                break;
+            case 'eliminarVehiculos':
+                $this -> eliminarVehiculos();
+                break;
+            case 'listarVehiculosInactivos':
+                $this -> listarVehiculosInactivos();
+                break;
+            case 'habilitarVehiculo':
+                $this -> habilitarVehiculo();
                 break;
         }
     }
@@ -305,17 +326,66 @@ class ControladorPrincipal{
     public function cancelarActualizarUsuarios_SRoles(){
         $Usuarios_SRolesControlador = new Usuarios_SRolesControlador($this -> datos);
     }
-
-    
     public function listarTickets(){
+        $ticketsControlador = new TicketsControlador($this -> datos);
+    }
+    public function actualizarTickets(){
+        $ticketsControlador = new TicketsControlador($this -> datos);
+    }
+    public function confirmarActualizarTickets(){
+        $ticketsControlador = new TicketsControlador($this -> datos);
+    }
+    public function cancelarActualizarTickets(){
         $ticketsControlador = new TicketsControlador($this -> datos);
     }
     
     public function listarVehiculos(){
         $vehiculosControlador = new VehiculosControlador($this -> datos);
     }
+
+    public function actualizarVehiculos(){
+        $vehiculosControlador = new VehiculosControlador($this -> datos);
+    }
+
+    public function confirmarActualizarVehiculo(){
+        $vehiculosControlador = new VehiculosControlador($this -> datos);
+    }
+
+    public function cancelarActualizarVehiculo(){
+        $vehiculosControlador = new VehiculosControlador($this -> datos);
+    }
+
+    public function mostrarInsertarVehiculos(){
+        $vehiculosControlador = new VehiculosControlador($this -> datos);
+    }
+
+    public function insertarVehiculo(){
+        $vehiculosControlador = new VehiculosControlador($this -> datos);
+    }
+
+    public function eliminarVehiculos(){
+        $vehiculosControlador = new VehiculosControlador($this -> datos);
+    }
+
+    public function listarVehiculosInactivos(){
+        $vehiculosControlador = new VehiculosControlador($this -> datos);
+    }
+
+    public function habilitarVehiculo(){
+        $vehiculosControlador = new VehiculosControlador($this -> datos);
+    }
     
     public function listarReportes(){
+        $reportesControlador = new ReportesControlador($this -> datos);
+    }
+    public function actualizarReportes(){
+        $reportesControlador = new ReportesControlador($this -> datos);
+    }
+    public function confirmarActualizarReportes(){
+        $reportesControlador = new ReportesControlador($this -> datos);
+    }
+
+    public function cancelarActualizarReportes(){
         $reportesControlador = new ReportesControlador($this -> datos);
     }
 }

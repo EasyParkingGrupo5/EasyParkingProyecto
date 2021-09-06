@@ -1,15 +1,62 @@
 <?php
 
 
-if (isset($_SESSION['actualizarVehiculos'])) {
-    $actualizarLibro = $_SESSION['actualizarVehiculos'];
-}
-if (isset($_SESSION['listarCategorias'])) {
-    $listarCategorias = $_SESSION['listarCategorias'];
-    $categoriasCantidad = count($listarCategorias);
+if (isset($_SESSION['actualizarDatosVehiculos'])) {
+    $actualizarVehiculos = $_SESSION['actualizarDatosVehiculos'];
 }
 
+
+
 ?>
+<style type="text/css">
+
+form{
+	width:550px;
+	padding:16px;
+	border-radius:10px;
+	margin:auto;
+	background-color:white;
+    border: black 3px solid;
+}
+
+form button[type="submit"]{
+	cursor:pointer;
+}
+
+form input[type="text"]{
+    margin: 5px;
+    width: 200px;
+}
+
+form input[type="number"]{
+    margin: 5px;
+    width: 200px;
+}
+
+form select{
+    margin: 5px;
+    width: 200px;
+}
+
+.titulo{
+    display: flex;
+    justify-content: center;
+}
+
+.botonCancelar{
+    margin-left: center;
+}
+
+.botonActualizar{
+    margin-left: 60px;
+}
+
+.letras{
+    justify-content: center;
+    text-align: left;
+}
+
+</style>
 
 <div class="penek-heading">
     <h2 class="panel-title">Gestión de Vehiculos</h2>
@@ -24,8 +71,8 @@ if (isset($_SESSION['listarCategorias'])) {
                     <td>Id:</td>
                     <td>
                         <input type="form-control" placeholder="Id" name = "vehId" type="number" pattern="" size="50" require="required" autofocus readonly="readonly"
-                        value="<?php if (isset($actualizarVehiculos->ticId)) {
-                            echo $actualizarVehiculos->ticId;}?>">
+                        value="<?php if (isset($actualizarVehiculos->vehId)) {
+                            echo $actualizarVehiculos->vehId;}?>">
                     </td>
                 </tr>
                 <tr>
@@ -49,42 +96,35 @@ if (isset($_SESSION['listarCategorias'])) {
                 <tr>
                     <td>Marca:</td>
                     <td>
-                            <input type="number" name="Marca" placeholder="Marca" style="width: 330px"
-                            value="<?php if (isset($actualizarVehiculos->Marca)) {
-                                echo $actualizarVehiculos->Marca;
-                            } ?>">
+                        <select name="vehMarca" id="vehMarca">
+                            <option value="<?php for ($i=0; $i < $actualizarVehiculos; $i++){
+ 
+                                 $marca = $actualizarVehiculos[i]->vehMarca;
+
+                                 return $marca;
+
+                                }?>"><?php echo $marca; ?>  </option>
+                        </select>
                     </td>
                 </tr>
-                <tr>
-                </tr>
-                <tr>
-                    <td>Numero de Tickets:</td>
+                <td>Valor Tarifa:</td>
                     <td>
-                            <select name="ticNumero" id="ticNumero" style="width: 338px">
-                                <?php for ($i=0; $i < $numeroCantidad; $i++) { 
-                                ?>
-                                    <option value="<?php echo $listarNumero[$i]->ticNumero; ?>" 
-                                    <?php if (isset($listarNumero[$i]->ticNumero) && isset($actualizarVehiculos->ticNumero) && $listarNumero[$i]->ticNumero == $actualizarVehiculos->ticNumero) {
-                                        echo "selected";
-                                    } ?>
-                                    >
-
-                                    <?php echo $listarNumero[$i]->ticNumero; ?></option>
-                                <?php
-                                }
-                                ?>
+                            <select name="tarValorTarifa" id="tarValorTarifa" style="width: 338px">
+                                    <option value="MASDA">MASDA</option>
+                                    <option value="Bmw">Bmw</option>
+                                    <option value="Renault">Renault</option>
+                                    <option value="Chevrolet">Chevrolet</option>
                             </select>
                     </td>
                 </tr>
                 <tr>
-                   
                     <td>
                         <br>
-                        <button type="submit" name="ruta" value="cancelarActualizarTickets" >Cancelar</button>
+                        <button type="submit" name="ruta" value="cancelarActualizarVehiculo" >Cancelar</button>
                     </td>
                     <td>
                         <br>
-                        &nbsp;&nbsp;||&nbsp;&nbsp;<button type="submit" name="ruta" value="confirmarActualizarTickets">Actualización de Tickets</button>
+                        <button type="submit" name="ruta" value="confirmarActualizarVehiculo">Confirmar</button>
                     </td>
                 </tr>
             </table>
