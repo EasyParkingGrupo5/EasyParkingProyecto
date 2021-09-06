@@ -8,6 +8,55 @@ if (isset($_SESSION['actualizarDatosVehiculos'])) {
 
 
 ?>
+<style type="text/css">
+
+form{
+	width:550px;
+	padding:16px;
+	border-radius:10px;
+	margin:auto;
+	background-color:white;
+    border: black 3px solid;
+}
+
+form button[type="submit"]{
+	cursor:pointer;
+}
+
+form input[type="text"]{
+    margin: 5px;
+    width: 200px;
+}
+
+form input[type="number"]{
+    margin: 5px;
+    width: 200px;
+}
+
+form select{
+    margin: 5px;
+    width: 200px;
+}
+
+.titulo{
+    display: flex;
+    justify-content: center;
+}
+
+.botonCancelar{
+    margin-left: center;
+}
+
+.botonActualizar{
+    margin-left: 60px;
+}
+
+.letras{
+    justify-content: center;
+    text-align: left;
+}
+
+</style>
 
 <div class="penek-heading">
     <h2 class="panel-title">Gestión de Vehiculos</h2>
@@ -56,6 +105,24 @@ if (isset($_SESSION['actualizarDatosVehiculos'])) {
 
                                 }?>"><?php echo $marca; ?>  </option>
                         </select>
+                    </td>
+                </tr>
+                <td>Valor Tarifa:</td>
+                    <td>
+                            <select name="tarValorTarifa" id="tarValorTarifa" style="width: 338px">
+                                <?php for ($i=0; $i < $tarifasCantidad; $i++) { 
+                                ?>
+                                    <option value="<?php echo $listarTarifas[$i]->tarId; ?>" 
+                                    <?php if (isset($listarTarifas[$i]->tarId) && isset($actualizarVehiculos->tarValorTarifa) && $listarValorTarifa[$i]->tarId == $actualizarTarifas->tarValorTarifa) {
+                                        echo "selected";
+                                    } ?>
+                                    >
+
+                                    <?php echo $listarTarifas[$i]->tarValorTarifa; ?></option>
+                                <?php
+                                }
+                                ?>
+                            </select>
                     </td>
                 </tr>
                 <tr>

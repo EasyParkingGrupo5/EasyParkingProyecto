@@ -1,7 +1,7 @@
 <?php
-echo "<pre>";
+/*echo "<pre>";
 print_r($_SESSION['listaDeReportes']);
-echo "</pre>";
+echo "</pre>";*/
 ?>
 <!DOCTYPE html>
 <html>
@@ -35,7 +35,8 @@ if(isset($_SESSION['listaDeReportes'])){
                 <th>Numero</th> 
                 <th>Fecha</th>
                 <!--<th>Estado</th>--> 
-                <th>Empleados</th>  
+                <th>Empleados</th>
+                <th>vehiculos</th> 
                 <th>Edit</th> 
                 <th>Delete</th> 
             </tr>
@@ -48,11 +49,12 @@ if(isset($_SESSION['listaDeReportes'])){
                 <tr>
                     <td><?php echo $listaDeReportes[$i]->repId; ?></td>  
                     <td><?php echo $listaDeReportes[$i]->repNumero ; ?></td>  
-                    <td><?php echo $listaDeReportes[$i]->repFecha; ?></td>    
-                    <!--<td>d>-->  
-                    <td><?php echo $listaDeReportes[$i]->empId; ?></td>  
-                    <td><a href="Controlador.php?ruta=actualizarReportes&idAct=<?php echo $listaDeReportes[$i]->isbn; ?>">Actualizar</a></td>  
-                    <td><a href="Controlador.php?ruta=eliminarReportes&idAct=<?php echo $listaDeReportes[$i]->isbn; ?>" onclick="return confirm('Está seguro de eliminar el registro?')">Eliminar</a></td>  
+                    <td><?php echo $listaDeReportes[$i]->repFecha; ?></td>
+                    <td><?php echo $listaDeReportes[$i]->empId; ?></td>
+                    <td><?php echo $listaDeReportes[$i]->vehId; ?></td>   
+                    <!--<td>d>-->   
+                    <td><a href="Controlador.php?ruta=actualizarReportes&idAct=<?php echo $listaDeReportes[$i]->repId; ?>">Actualizar</a></td>  
+                    <td><a href="Controlador.php?ruta=eliminarReportes&idAct=<?php echo $listaDeReportes[$i]->repId; ?>" onclick="return confirm('Está seguro de eliminar el registro?')">Eliminar</a></td>  
                 </tr>   
                 <?php
                 $i++;

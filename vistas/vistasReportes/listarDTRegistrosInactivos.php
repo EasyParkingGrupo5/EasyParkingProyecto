@@ -1,6 +1,6 @@
 <?php
 //echo "<pre>";
-//print_r($_SESSION['listaDeTickets']);
+//print_r($_SESSION['listaDeLReportes']);
 //echo "</pre>";
 
 if (isset($_SESSION['mensaje'])) {
@@ -29,12 +29,12 @@ if (isset($_SESSION['mensaje'])) {
     </head>
 	
 	<body>
-        <h1>Listado de la tabla Tickets</h1>
+        <h1>Listado de la tabla Reportes Inactivos</h1>
         <br>
 <?php
-if(isset($_SESSION['listaDeTickets'])){
+if(isset($_SESSION['listaDeReportes'])){
 	
-	 $listaDeTickets=$_SESSION['listaDeTickets'];
+	 $listaDeReportes=$_SESSION['listaDeRepostes'];
 
 	
 }
@@ -45,36 +45,30 @@ if(isset($_SESSION['listaDeTickets'])){
                 <th>Id</th> 
                 <th>Numero</th> 
                 <th>Fecha</th> 
-                <th>Hora Ingreso</th> 
-                <th>Hora Salida</th> 
-                <th>Valor Valor Final</th>
-                <th>Empleado</th>
-                <th>Tipo Tarifa</th>
-                <th>Editar</th> 
-                <th>Eliminar</th> 
+                <th>Empleado</th> 
+                <!--<th>Estado</th>--> 
+                <th>Vehiculo</th> 
+                <th>Habilitar</th>  
             </tr>
         </thead>
         <tbody>
             <?php
             $i = 0;
-            foreach ($listaDeTickets as $key => $value) {
+            foreach ($listaDeReportes as $key => $value) {
                 ?>
                 <tr>
-                    <td><?php echo $listaDeTickets[$i]->ticId; ?></td>  
-                    <td><?php echo $listaDeTickets[$i]->ticNumero; ?></td>  
-                    <td><?php echo $listaDeTickets[$i]->ticFecha; ?></td>  
-                    <td><?php echo $listaDeTickets[$i]->ticHoraIngreso; ?></td>
-                    <td><?php echo $listaDeTickets[$i]->ticHoraSalida; ?></td>
-                    <td><?php echo $listaDeTickets[$i]->ticValorFinal; ?></td>
-                    <td><?php echo $listaDeTickets[$i]->empId; ?></td>  
-                    <td><?php echo $listaDeTickets[$i]->tarTipoVehiculo.' - '.$listaDeTickets[$i]->tarValorTarifa; ?></td> 
-                    <td><a href="Controlador.php?ruta=actualizarTickets&idAct=<?php echo $listaDeTickets[$i]->ticId; ?>">Actualizar</a></td>  
-                    <td><a href="Controlador.php?ruta=eliminarTickets&idAct=<?php echo $listaDeTickets[$i]->ticId; ?>" onclick="return confirm('¿Está seguro de eliminar el registro?')">Eliminar</a></td>  
+                    <td><?php echo $listaDeReportes[$i]->repId; ?></td>  
+                    <td><?php echo $listaDeReportes[$i]->repNumero; ?></td>  
+                    <td><?php echo $listaDeReportes[$i]->repFecha; ?></td>  
+                    <td><?php echo $listaDeReportes[$i]->empId; ?></td>  
+                    <!--<td>d>-->  
+                    <td><?php echo $listaDeReportes[$i]->vehId; ?></td>  
+                    <td><a href="Controlador.php?ruta=habilitarReportes&idAct=<?php echo $listaDeReportes[$i]->repId; ?>" onclick="return confirm('¿Está seguro de habilitar el registro?')">Habilitar</a></td>   
                 </tr>   
                 <?php
                 $i++;
             }
-            $listaDeTickets=null;
+            $listaDeReportes=null;
             ?>
         </tbody>
     </table>
@@ -100,5 +94,3 @@ if(isset($_SESSION['listaDeTickets'])){
 
 </body>
 </html>
-	
-	

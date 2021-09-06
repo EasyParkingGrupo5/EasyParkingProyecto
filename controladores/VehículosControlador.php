@@ -168,4 +168,85 @@ class VehiculosControlador{
     
 }
 
+public function cancelarActualizarVehiculos(){
+    
+    header("location:Controlador.php?ruta=listarVehiculos");
+}
+
+public function agregarVehiculos(){
+    $gestarEmpleados = new EmpleadosDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+    $listarEmpleados = $gestarEmpleados -> seleccionarTodos();
+
+    session_start();
+
+    $_SESSION['listarEmpleados'] = $listarEmpleados;
+
+    header('location:principal.php?contenido=vistas/vistasVehiculos/vistaInsertarVehiculos.php');
+}
+
+public function confirmarInsertarVehiculos(){
+    $gestarVehiculos = new VehiculosDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+    $buscarVehiculos = $gestarVehiculos -> seleccionarID(array($this->datos['isbn']));
+
+    if(!$buscarVehiculos['exitoSeleccionId']){
+        $insertarVehiculos = new VehiculosDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $insertoVehiculos = $insertarVehiculos -> insertar($this -> datos);
+
+        session_start();
+
+        $_SESSION['mensaje'] = 'Fue insertado con exito con el código '.$insertoVehiculos['resultado'];
+        header("location:Controlador.php?ruta=listarVehiculos");
+    }else{
+        session_start();
+            $_SESSION['vehId'] = $this->datos['vehId'];
+            $_SESSION['vehNumero_Placa'] = $this->datos['vehNumero_Placa'];
+            $_SESSION['vehColor'] = $this->datos['vehColor'];
+            $_SESSION['vehColor'] = $this->datos['vehColor'];
+            $_SESSION['vehMarca'] = $this->datos['vehMarca'];
+            $_SESSION['empId'] = $this->datos['empId'];
+            $_SESSION['ticNumero'] = $this->datos['ticNumero'];					
+                
+            $_SESSION['mensaje'] = "El código " . $this->datos['vehId'] . " ya existe en el sistema.";
+
+            header("location:Controlador.php?ruta=agregarVehiculos");
+    }
+
+    }
+    
+    public function eliminarVehiculos(){
+        $gestarVehiculos = new VehiculosDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $inhabilitarVehiculos = $gestarVehiculos -> eliminarLogico(array($this -> datos['idAct']));
+
+        session_start();
+
+        $_SESSION['mensaje'] = "Registro Eliminado";
+        header("location:Controlador.php?ruta=listarVehiculos");
+
+
+    }
+
+    public function listarVehiculosInactivos(){
+        $gestarVehiculos = new VehiculosDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $listarInactivos = $gestarVehiculos -> seleccionarTodos(0);
+
+        session_start();
+
+        $_SESSION['listaDeVehiculos'] = $listarInactivos;
+
+        header("location:principal.php?contenido=vistas/vistasVehiculos/listarDTRegistrosInactivos.php");
+    }
+
+    public function habilitarVehiculos(){
+        $gestarVehiculos = new VehiculosDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $inhabilitarVehiculos = $gestarVehiculos -> habilitar(array($this -> datos['idAct']));
+
+        session_start();
+
+        $_SESSION['mensaje'] = "Registro Habilitado";
+        header("location:Controlador.php?ruta=listarVehiculosInactivos");
+    }
+}
+
 ?>
+
+
