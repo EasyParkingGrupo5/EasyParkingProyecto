@@ -29,6 +29,9 @@ class TicketsControlador{
             case 'confirmarActualizarTickets':
                 $this->confirmarActualizarTickets();
                 break;
+            case 'mostrarInsertarticket':
+                $this -> mostrarInsertarticket();
+                break;
         }
     }
     public function listarTickets(){
@@ -84,13 +87,13 @@ class TicketsControlador{
         header("location:Controlador.php?ruta=listarTickets");
     }
 
-    public function agregarTickets(){
-        $gestarEmpleados = new EmpleadosDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
-        $listarEmpleados = $gestarEmpleados -> seleccionarTodos();
+    public function mostrarInsertarticket(){
+        $gestarTickets = new TicketsDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $listarTickets = $gestarTickets -> seleccionarTodos(1);
 
         session_start();
 
-        $_SESSION['listarEmpleados'] = $listarEmpleados;
+        $_SESSION['listarTickets'] = $listarTickets;
 
         header('location:principal.php?contenido=vistas/vistasTickets/vistaInsertarTickets.php');
     }
