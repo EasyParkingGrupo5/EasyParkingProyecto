@@ -1,20 +1,31 @@
 <?php
 
 
+
 if (isset($_SESSION['actualizarDatosVehiculos'])) {
     $actualizarVehiculos = $_SESSION['actualizarDatosVehiculos'];
 }
 
 if (isset($_SESSION['listarTickets'])) {
     $listarTickets = $_SESSION['listarTickets'];
-    $categoriasCantidadTickeds = count($listarTickets);
+    $ticketCantidad = count($listarTickets);
 }
 
 if (isset($_SESSION['listarEmpleados'])) {
     $listarEmpleados = $_SESSION['listarEmpleados'];
-    $categoriasCantidadEmpleados = count($listarEmpleados);
+    $empleadosCantidad = count($listarEmpleados);
 }
 
+//echo "<pre>";
+//print_r($_SESSION['actualizarDatosVehiculos']);
+//echo "</pre>";
+//echo "<pre>";
+//print_r($_SESSION['listarTickets']);
+//echo "</pre>";
+//echo "<pre>";
+//print_r($_SESSION['listarEmpleados']);
+//echo "</pre>";
+//exit();
 
 
 ?>
@@ -75,7 +86,7 @@ form select{
 <div>
     <fieldset>
         <center>
-        <form role="form" action="Controlador.php" method="POST" id="formRegistro" >
+        <form role="form" action="Controlador.php" method="POST" id="formVehiculos" >
             <table>
                 <tr>
                     <td>Id:</td>
@@ -115,18 +126,18 @@ form select{
                     </td>
                 </tr>
                 <tr>
-                <td class="letras">Empleado:</td>
+                <td>Empleado:</td>
                     <td>
-                            <select name="Empleados_empId" id="Empleados_empId">
-                                <?php for ($i=0; $i < $categoriasCantidadEmpleados; $i++) { 
+                            <select name="Empleados_empId" id="empId" style="width: 338px">
+                                <?php for ($i=0; $i < $empleadosCantidad; $i++) { 
                                 ?>
-                                    <option value="<?php echo $categoriasCantidadEmpleados[$i]->empId; ?>" 
+                                    <option value="<?php echo $listarEmpleados[$i]->empId; ?>" 
                                     <?php if (isset($listarEmpleados[$i]->empId) && isset($actualizarVehiculos->Empleados_empId) && $listarEmpleados[$i]->empId == $actualizarVehiculos->Empleados_empId) {
-                                        echo "selected";
+                                        echo " selected";
                                     } ?>
                                     >
 
-                                    <?php echo $listarEmpleados[$i]->empId."."." ". $listarEmpleados[$i]->empPrimerNombre." ". $listarEmpleados[$i]->empPrimerApellido; ?></option>
+                                    <?php echo $listarEmpleados[$i]->empId.' - '.$listarEmpleados[$i]->empPrimerNombre.' '.$listarEmpleados[$i]->empPrimerApellido; ?></option>
                                 <?php
                                 }
                                 ?>
@@ -134,10 +145,10 @@ form select{
                     </td>
                 </tr>
                 <tr>
-                <td class="letras">Ticket:</td>
+                <td>Tipo Tarifa:</td>
                     <td>
-                            <select name="categoriaLibro_catLibId" id="categoriaLibro_catLibId">
-                                <?php for ($i=0; $i < $categoriasCantidadTickeds; $i++) { 
+                            <select name="Tickets_ticId" id="Tickets_ticId" style="width: 338px">
+                                <?php for ($i=0; $i < $ticketCantidad; $i++) { 
                                 ?>
                                     <option value="<?php echo $listarTickets[$i]->ticId; ?>" 
                                     <?php if (isset($listarTickets[$i]->ticId) && isset($actualizarVehiculos->Tickets_ticId) && $listarTickets[$i]->ticId == $actualizarVehiculos->Tickets_ticId) {
@@ -145,7 +156,7 @@ form select{
                                     } ?>
                                     >
 
-                                    <?php echo $listarTickets[$i]->ticId."."." ".$listarTickets[$i]->ticNumero; ?></option>
+                                    <?php echo $listarTickets[$i]->ticId.' - '.$listarTickets[$i] ->ticNumero.' pesos minuto'; ?></option>
                                 <?php
                                 }
                                 ?>
@@ -160,7 +171,7 @@ form select{
                     </td>
                     <td>
                         <br>
-                        <button type="submit" name="ruta" value="confirmarActualizarVehiculo">Confirmar</button>
+                        <button type="submit" name="ruta" value="confirmarActualizarVehiculo">Confirmar       </button>
                     </td>
                 </tr>
             </table>

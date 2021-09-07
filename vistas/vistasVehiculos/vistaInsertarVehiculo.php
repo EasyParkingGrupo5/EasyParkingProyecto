@@ -2,14 +2,22 @@
 
 if (isset($_SESSION['listarTickets'])) {
     $listarTickets = $_SESSION['listarTickets'];
-    $categoriasCantidadTickeds = count($listarTickets);
+    $ticketCantidad = count($listarTickets);
 }
 
 if (isset($_SESSION['listarEmpleados'])) {
     $listarEmpleados = $_SESSION['listarEmpleados'];
-    $categoriasCantidadEmpleados = count($listarEmpleados);
+    $empleadosCantidad = count($listarEmpleados);
 }
 
+//echo "<pre>";
+//print_r($_SESSION['listarTickets']);
+//echo "</pre>";
+//echo "<pre>";
+//print_r($_SESSION['listarEmpleados']);
+//echo "</pre>";
+
+//exit();
 
 
 ?>
@@ -48,14 +56,6 @@ if (isset($_SESSION['listarEmpleados'])) {
                 </tr>
                 <tr>
                 <tr>
-                    <td>Estado:</td>
-                    <td>
-                        <input class="form-control" placeholder="Estado" name="vehColor" value="1" type="number" patter=""  min="1" max="1" autocomplete="off" value="<?php 
-                        if(isset($_SESSION['vehEstado'])){echo($_SESSION['vehEstado']);} 
-                        ?>">
-                    </td>
-                </tr>
-                <tr>
                     <td>Marca:</td>
                     <td>
                         <input class="form-control" placeholder="Marca" name="vehMarca" type="text" patter="" autocomplete="off"  value="<?php
@@ -64,18 +64,18 @@ if (isset($_SESSION['listarEmpleados'])) {
                     </td>
                 </tr>
                 <tr>
-                <td class="letras">Empleado:</td>
+                <td>Empleado:</td>
                     <td>
-                            <select name="Empleados_empId" id="Empleados_empId">
-                                <?php for ($i=0; $i < $categoriasCantidadEmpleados; $i++) { 
+                            <select name="Empleados_empId" id="empId" style="width: 338px">
+                                <?php for ($i=0; $i < $empleadosCantidad; $i++) { 
                                 ?>
-                                    <option value="<?php echo $categoriasCantidadEmpleados[$i]->empId; ?>" 
+                                    <option value="<?php echo $listarEmpleados[$i]->empId; ?>" 
                                     <?php if (isset($listarEmpleados[$i]->empId) && isset($actualizarVehiculos->Empleados_empId) && $listarEmpleados[$i]->empId == $actualizarVehiculos->Empleados_empId) {
-                                        echo "selected";
+                                        echo " selected";
                                     } ?>
                                     >
 
-                                    <?php echo $listarEmpleados[$i]->empId."."." ". $listarEmpleados[$i]->empPrimerNombre." ". $listarEmpleados[$i]->empPrimerApellido; ?></option>
+                                    <?php echo $listarEmpleados[$i]->empId.' - '.$listarEmpleados[$i]->empPrimerNombre.' '.$listarEmpleados[$i]->empPrimerApellido; ?></option>
                                 <?php
                                 }
                                 ?>
@@ -83,10 +83,10 @@ if (isset($_SESSION['listarEmpleados'])) {
                     </td>
                 </tr>
                 <tr>
-                <td class="letras">Ticket:</td>
+                <td>Tipo Tarifa:</td>
                     <td>
-                            <select name="categoriaLibro_catLibId" id="categoriaLibro_catLibId">
-                                <?php for ($i=0; $i < $categoriasCantidadTickeds; $i++) { 
+                            <select name="Tickets_ticId" id="Tickets_ticId" style="width: 338px">
+                                <?php for ($i=0; $i < $ticketCantidad; $i++) { 
                                 ?>
                                     <option value="<?php echo $listarTickets[$i]->ticId; ?>" 
                                     <?php if (isset($listarTickets[$i]->ticId) && isset($actualizarVehiculos->Tickets_ticId) && $listarTickets[$i]->ticId == $actualizarVehiculos->Tickets_ticId) {
@@ -94,7 +94,7 @@ if (isset($_SESSION['listarEmpleados'])) {
                                     } ?>
                                     >
 
-                                    <?php echo $listarTickets[$i]->ticId."."." ".$listarTickets[$i]->ticNumero; ?></option>
+                                    <?php echo $listarTickets[$i]->ticId.' - '.$listarTickets[$i] ->ticNumero.' pesos minuto'; ?></option>
                                 <?php
                                 }
                                 ?>
