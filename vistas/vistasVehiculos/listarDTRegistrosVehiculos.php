@@ -29,8 +29,11 @@ if(isset($_SESSION['listaDeVehiculos'])){
 }
 
 if (isset($_SESSION['listaDeTickets'])) {
-    $listarCategorias = $_SESSION['listaDeTickets'];
-    $categoriasCantidad = count($listarCategorias);
+    $listarDeTickets = $_SESSION['listaDeTickets'];
+}
+
+if (isset($_SESSION['listaDeEmpleados'])) {
+    $listarDeEmpleados = $_SESSION['listaDeEmpleados'];
 }
 ?>
     <table id="example" class="table-responsive table-hover table-bordered table-striped" style="width:100%">
@@ -40,7 +43,10 @@ if (isset($_SESSION['listaDeTickets'])) {
                 <th>Numero de Placa</th> 
                 <th>Color</th> 
                 <th>Marca</th>
+                <th>Empleado</th>
+                <th>Id Ticket</th>
                 <!--<th>Estado</th>-->
+                <th>Numero de ticket</th>
                 <th>Edit</th> 
                 <th>Delete</th> 
             </tr>
@@ -56,7 +62,9 @@ if (isset($_SESSION['listaDeTickets'])) {
                     <td><?php echo $listaDeVehiculos[$i]->vehNumero_Placa; ?></td>  
                     <td><?php echo $listaDeVehiculos[$i]->vehColor; ?></td>  
                     <td><?php echo $listaDeVehiculos[$i]->vehMarca; ?></td>
-                    
+                    <td><?php echo $listaDeVehiculos[$i]->Empleados_empId; ?></td>
+                    <td><?php echo $listaDeVehiculos[$i]->Tickets_ticId; ?></td>
+                    <td><?php echo $listarDeTickets[$i]->ticNumero; ?></td>
                     <!--<td>d>-->
                     <td><a href="Controlador.php?ruta=actualizarVehiculos&vehId=<?php echo $listaDeVehiculos[$i]->vehId; ?>">Actualizar</a></td>  
                     <td><a href="Controlador.php?ruta=eliminarVehiculos&vehId=<?php echo $listaDeVehiculos[$i]->vehId; ?>" onclick="return confirm('Está seguro de eliminar el registro?')">Eliminar</a></td>  

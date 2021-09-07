@@ -5,6 +5,16 @@ if (isset($_SESSION['actualizarDatosVehiculos'])) {
     $actualizarVehiculos = $_SESSION['actualizarDatosVehiculos'];
 }
 
+if (isset($_SESSION['listarTickets'])) {
+    $listarTickets = $_SESSION['listarTickets'];
+    $categoriasCantidadTickeds = count($listarTickets);
+}
+
+if (isset($_SESSION['listarEmpleados'])) {
+    $listarEmpleados = $_SESSION['listarEmpleados'];
+    $categoriasCantidadEmpleados = count($listarEmpleados);
+}
+
 
 
 ?>
@@ -96,20 +106,7 @@ form select{
                 <tr>
                     <td>Marca:</td>
                     <td>
-                        <select name="vehMarca" id="vehMarca">
-                            <option value="<?php for ($i=0; $i < $actualizarVehiculos; $i++){
- 
-                                 $marca = $actualizarVehiculos[i]->vehMarca;
-
-                                 return $marca;
-
-                                }?>"><?php echo $marca; ?>  </option>
-                        </select>
-                    </td>
-                </tr>
-                <td>Valor Tarifa:</td>
-                    <td>
-                            <select name="tarValorTarifa" id="tarValorTarifa" style="width: 338px">
+                            <select name="vehMarca" id="vehMarca" >
                                     <option value="MASDA">MASDA</option>
                                     <option value="Bmw">Bmw</option>
                                     <option value="Renault">Renault</option>
@@ -117,6 +114,45 @@ form select{
                             </select>
                     </td>
                 </tr>
+                <tr>
+                <td class="letras">Empleado:</td>
+                    <td>
+                            <select name="Empleados_empId" id="Empleados_empId">
+                                <?php for ($i=0; $i < $categoriasCantidadEmpleados; $i++) { 
+                                ?>
+                                    <option value="<?php echo $categoriasCantidadEmpleados[$i]->empId; ?>" 
+                                    <?php if (isset($listarEmpleados[$i]->empId) && isset($actualizarVehiculos->Empleados_empId) && $listarEmpleados[$i]->empId == $actualizarVehiculos->Empleados_empId) {
+                                        echo "selected";
+                                    } ?>
+                                    >
+
+                                    <?php echo $listarEmpleados[$i]->empId."."." ". $listarEmpleados[$i]->empPrimerNombre." ". $listarEmpleados[$i]->empPrimerApellido; ?></option>
+                                <?php
+                                }
+                                ?>
+                            </select>
+                    </td>
+                </tr>
+                <tr>
+                <td class="letras">Ticket:</td>
+                    <td>
+                            <select name="categoriaLibro_catLibId" id="categoriaLibro_catLibId">
+                                <?php for ($i=0; $i < $categoriasCantidadTickeds; $i++) { 
+                                ?>
+                                    <option value="<?php echo $listarTickets[$i]->ticId; ?>" 
+                                    <?php if (isset($listarTickets[$i]->ticId) && isset($actualizarVehiculos->Tickets_ticId) && $listarTickets[$i]->ticId == $actualizarVehiculos->Tickets_ticId) {
+                                        echo "selected";
+                                    } ?>
+                                    >
+
+                                    <?php echo $listarTickets[$i]->ticId."."." ".$listarTickets[$i]->ticNumero; ?></option>
+                                <?php
+                                }
+                                ?>
+                            </select>
+                    </td>
+                </tr>
+
                 <tr>
                     <td>
                         <br>

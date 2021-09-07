@@ -49,12 +49,17 @@ class VehiculosControlador{
 
         $gestarTickets = new TicketsDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
         $registroTickets = $gestarTickets -> seleccionarTodos(1);
+
+        $gestarEmpleados = new EmpleadosDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $registroEmpleados = $gestarEmpleados -> seleccionarTodos(1);
     
         session_start();
 
         $_SESSION['listaDeTickets'] = $registroTickets;
     
         $_SESSION['listaDeVehiculos'] = $registroVehiculos;
+
+        $_SESSION['listaDeEmpleados'] = $registroEmpleados;
     
         header("location:principal.php?contenido=vistas/vistasVehiculos/listarDTRegistrosVehiculos.php");
     }
@@ -63,11 +68,19 @@ class VehiculosControlador{
 
         $gestarVehiculos = new VehiculosDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
         $actualizarVehiculos = $gestarVehiculos -> seleccionarID(array($this->datos['vehId']));
+        
+        $gestarTickets = new TicketsDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $actualizarTickets = $gestarTickets -> seleccionarTodos(1);
+
+        $gestarEmpleados = new EmpleadosDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $actualizarEmpleados = $gestarEmpleados -> seleccionarTodos(1);
 
         $actualizarDatosVehiculos = $actualizarVehiculos['registroEncontrado'][0];
 
         session_start();
         $_SESSION['actualizarDatosVehiculos']=$actualizarDatosVehiculos;
+        $_SESSION['listarTickets']=$actualizarTickets;
+        $_SESSION['listarEmpleados']=$actualizarEmpleados;
 
         header("location:principal.php?contenido=vistas/vistasVehiculos/vistaActualizarVehiculos.php");
         
@@ -81,14 +94,6 @@ class VehiculosControlador{
         session_start();
             $_SESSION['mensaje'] = "Actualización realizada.";
             header("location:Controlador.php?ruta=listarVehiculos");	
-
-    }
-
-    public function cancelarActualizarVehiculo(){
-
-        session_start();
-                $_SESSION['mensaje'] = "Desistió de la actualización";
-		        header("location:Controlador.php?ruta=listarVehiculos");	
 
     }
 
@@ -107,12 +112,21 @@ class VehiculosControlador{
 
     if (!$vehiculoHallado['exitoSeleccionId']) {
         $insertarVehiculo = new VehiculosDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);	
-        $insertoVehiculo = $insertarVehiculo->insertar($this->datos);  
+        $insertoVehiculo = $insertarVehiculo->insertar($this->datos); 
+        
+        $gestarTickets = new TicketsDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $actualizarTickets = $gestarTickets -> seleccionarTodos(1);
+
+        $gestarEmpleados = new EmpleadosDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $actualizarEmpleados = $gestarEmpleados -> seleccionarTodos(1);
 
         $resultadoInsercionVehiculo = $insertoVehiculo['vehId'];  
 
         session_start();
        $_SESSION['mensaje'] = "Se ha insertado " . $this->datos['vehId'];
+       $_SESSION['listarTickets']=$actualizarTickets;
+        $_SESSION['listarEmpleados']=$actualizarEmpleados;
+        $_SESSION['vehiculoHallado']= $vehiculoHallado;
         
         header("location:Controlador.php?ruta=listarVehiculos");
         
@@ -168,7 +182,7 @@ class VehiculosControlador{
     
 
 
-    public function cancelarActualizarVehiculos(){
+    public function cancelarActualizarVehiculo(){
     
     header("location:Controlador.php?ruta=listarVehiculos");
     }
