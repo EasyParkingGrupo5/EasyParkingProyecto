@@ -8,7 +8,7 @@ class TicketsDAO extends ConDbMySql{
     }
     
     public function seleccionarTodos($estado){
-        $planconsulta = "SELECT * FROM tickets WHERE ticEstado=:ticEstado";
+        $planconsulta = "SELECT * FROM tickets t JOIN tarifas ta ON ta.tarId=t.Tarifas_tarId WHERE t.ticEstado=:ticEstado";
 
         $registroTickets = $this->conexion->prepare($planconsulta);
         $registroTickets->bindParam(':ticEstado',$estado);

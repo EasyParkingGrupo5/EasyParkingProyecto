@@ -280,8 +280,7 @@ class ControladorPrincipal{
     public function cancelarActualizarVehiculos(){
         $vehiculosControlador = new VehiculosControlador($this -> datos);
     }
-
-
+    
     public function listarReportes(){
         $reportesControlador = new ReportesControlador($this -> datos);
     }

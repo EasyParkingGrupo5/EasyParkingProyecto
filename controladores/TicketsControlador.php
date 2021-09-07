@@ -23,28 +23,37 @@ class TicketsControlador{
             case 'actualizarTickets':
                 $this->actualizarTickets();
                 break;
+            case 'confirmarActualizarTickets': 
+                 $this->confirmarActualizarTickets();
+                break;
+            case 'cancelarActualizarTickets':
+                 $this -> cancelarActualizarTickets();
+                break;
+            case 'agregarTickets':
+                $this -> agregarTickets();
+                break;
+            case 'confirmarInsertarTickets':
+                $this -> confirmarInsertarTickets();
+                break;
             case 'eliminarTickets':
-                $this->eliminarTickets();
+                $this -> eliminarTickets();
                 break;
-            case 'confirmarActualizarTickets':
-                $this->confirmarActualizarTickets();
+            case 'listarTicketsInactivos':
+                 $this -> listarTicketsInactivos();
                 break;
-            case 'mostrarInsertarticket':
-                $this -> mostrarInsertarticket();
-                break;
+            case 'habilitarTickets':
+                $this -> habilitarTickets();
+                 break;
+            
         }
     }
     public function listarTickets(){
         $gestarTickets = new TicketsDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
         $registroTickets = $gestarTickets -> seleccionarTodos(1);
-        $gestarTarifas = new TarifasDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
-        $registroTarifas = $gestarTarifas -> seleccionarTodos(1);
-    
     
         session_start();
     
         $_SESSION['listaDeTickets'] = $registroTickets;
-        $_SESSION['listaDeTarifas'] = $registroTarifas;
     
         header("location:principal.php?contenido=vistas/vistasTickets/listarDTRegistrosTickets.php");
     }
@@ -71,7 +80,6 @@ class TicketsControlador{
         header("location:principal.php?contenido=vistas/vistasTickets/vistaActualizarTickets.php");
         
     }
-
     public function confirmarActualizarTickets(){
         $gestarTickets = new TicketsDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
         $confirmarActualizarTickets = $gestarTickets -> actualizar(array($this->datos));
@@ -87,13 +95,13 @@ class TicketsControlador{
         header("location:Controlador.php?ruta=listarTickets");
     }
 
-    public function mostrarInsertarticket(){
-        $gestarTickets = new TicketsDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
-        $listarTickets = $gestarTickets -> seleccionarTodos(1);
+    public function agregarTickets(){
+        $gestarEmpleados = new EmpleadosDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $listarEmpleados = $gestarEmpleados -> seleccionarTodos();
 
         session_start();
 
-        $_SESSION['listarTickets'] = $listarTickets;
+        $_SESSION['listarEmpleados'] = $listarEmpleados;
 
         header('location:principal.php?contenido=vistas/vistasTickets/vistaInsertarTickets.php');
     }
@@ -164,3 +172,5 @@ class TicketsControlador{
     }
 
 ?>
+
+  
