@@ -23,6 +23,9 @@ class TicketsControlador{
             case 'actualizarTickets':
                 $this->actualizarTickets();
                 break;
+            case 'confirmarActualizarTickets':
+                $this->confirmarActualizarTickets();
+                break;
         }
     }
     public function listarTickets(){
@@ -148,10 +151,5 @@ class TicketsControlador{
             header("location:Controlador.php?ruta=listarTicketsInactivos");
         }
     }
-
-?>
-
-  
-}
 
 ?>

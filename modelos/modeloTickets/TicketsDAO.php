@@ -96,7 +96,8 @@ class TicketsDAO extends ConDbMySql{
             $ticHoraIngreso = $registro[0]['ticHoraIngreso'];
             $ticHoraSalida = $registro[0]['ticHoraSalida'];
             $ticValorFinal = $registro[0]['ticValorFinal'];
-            $ticEstado = $registro[0]['ticEstado'];
+            $empleados_empId = $registro[0]['Empleados_empId'];
+            $tarifas_tarId = $registro[0]['Tarifas_tarId'];
             $ticId = $registro[0]['ticId'];	
 			
 			
@@ -105,14 +106,16 @@ class TicketsDAO extends ConDbMySql{
                 $actualizar = "UPDATE tickets SET ticNumero= ? , ";
                 $actualizar .= " ticFecha = ? , ";
                 $actualizar .= " ticHoraIngreso = ? , ";
-                $actualizar .= " ticHoraSalida = ? ";
-                $actualizar .= " ticValorFinal = ? ";
+                $actualizar .= " ticHoraSalida = ?, ";
+                $actualizar .= " ticValorFinal = ?, ";
+                $actualizar .= " Empleados_empId = ?, ";
+                $actualizar .= " Tarifas_tarId = ? ";
                 $actualizar .= " WHERE ticId= ? ; ";
 				
 				$actualizacion = $this->conexion->prepare($actualizar);
 				
 				$resultadoAct=$actualizacion->execute(array($ticNumero,$ticFecha,$ticHoraIngreso,$ticHoraSalida, 
-                $ticValorFinal,$ticId));
+                $ticValorFinal,$empleados_empId,$tarifas_tarId,$ticId));
 				
 				        $this->cierreBd();
 						
