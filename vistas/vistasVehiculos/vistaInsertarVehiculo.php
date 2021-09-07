@@ -1,5 +1,17 @@
 <?php
 
+if (isset($_SESSION['listarTickets'])) {
+    $listarTickets = $_SESSION['listarTickets'];
+    $categoriasCantidadTickeds = count($listarTickets);
+}
+
+if (isset($_SESSION['listarEmpleados'])) {
+    $listarEmpleados = $_SESSION['listarEmpleados'];
+    $categoriasCantidadEmpleados = count($listarEmpleados);
+}
+
+
+
 ?>
 <div class="panel-heading">
      <h2 class="panel-title">Gestion de Vehiculo</h2>
@@ -52,22 +64,43 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Id del empleado:</td>
+                <td class="letras">Empleado:</td>
                     <td>
-                        <input class="form-control" placeholder="Id del empleado" name="Empleados_empId" type="number" patter="" autocomplete="off"  value="<?php
-                         if(isset($_SESSION['Empleados_empId'])){echo($_SESSION['Empleados_empId']);} 
-                         ?>">
+                            <select name="Empleados_empId" id="Empleados_empId">
+                                <?php for ($i=0; $i < $categoriasCantidadEmpleados; $i++) { 
+                                ?>
+                                    <option value="<?php echo $categoriasCantidadEmpleados[$i]->empId; ?>" 
+                                    <?php if (isset($listarEmpleados[$i]->empId) && isset($actualizarVehiculos->Empleados_empId) && $listarEmpleados[$i]->empId == $actualizarVehiculos->Empleados_empId) {
+                                        echo "selected";
+                                    } ?>
+                                    >
+
+                                    <?php echo $listarEmpleados[$i]->empId."."." ". $listarEmpleados[$i]->empPrimerNombre." ". $listarEmpleados[$i]->empPrimerApellido; ?></option>
+                                <?php
+                                }
+                                ?>
+                            </select>
                     </td>
                 </tr>
                 <tr>
-                    <td>Id del ticket:</td>
+                <td class="letras">Ticket:</td>
                     <td>
-                        <input class="form-control" placeholder="Id del ticket" name="Tickets_ticId" type="number" patter="" autocomplete="off"  value="<?php
-                         if(isset($_SESSION['Tickets_ticId'])){echo($_SESSION['Tickets_ticId']);} 
-                         ?>">
+                            <select name="categoriaLibro_catLibId" id="categoriaLibro_catLibId">
+                                <?php for ($i=0; $i < $categoriasCantidadTickeds; $i++) { 
+                                ?>
+                                    <option value="<?php echo $listarTickets[$i]->ticId; ?>" 
+                                    <?php if (isset($listarTickets[$i]->ticId) && isset($actualizarVehiculos->Tickets_ticId) && $listarTickets[$i]->ticId == $actualizarVehiculos->Tickets_ticId) {
+                                        echo "selected";
+                                    } ?>
+                                    >
+
+                                    <?php echo $listarTickets[$i]->ticId."."." ".$listarTickets[$i]->ticNumero; ?></option>
+                                <?php
+                                }
+                                ?>
+                            </select>
                     </td>
                 </tr>
-                <tr>
                     <td>
                         <button type="submit" name="ruta" value="listarVehiculos">Cancelar</button>
                     </td>
