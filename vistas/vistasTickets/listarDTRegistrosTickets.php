@@ -38,6 +38,12 @@ if(isset($_SESSION['listaDeTickets'])){
 
 	
 }
+if(isset($_SESSION['listaDeTarifas'])){
+	
+    $listaDeTarifas=$_SESSION['listaDeTarifas'];
+
+   
+}
 ?>
     <table id="example" class="table-responsive table-hover table-bordered table-striped" style="width:100%">
         <thead>
@@ -66,8 +72,8 @@ if(isset($_SESSION['listaDeTickets'])){
                     <td><?php echo $listaDeTickets[$i]->ticHoraIngreso; ?></td>
                     <td><?php echo $listaDeTickets[$i]->ticHoraSalida; ?></td>
                     <td><?php echo $listaDeTickets[$i]->ticValorFinal; ?></td>
-                    <td><?php echo $listaDeTickets[$i]->empId; ?></td>  
-                    <td><?php echo $listaDeTickets[$i]->tarTipoVehiculo.' - '.$listaDeTickets[$i]->tarValorTarifa; ?></td> 
+                    <td><?php echo $listaDeTickets[$i]->Empleados_empId ; ?></td>  
+                    <td><?php echo $listaDeTickets[$i]->Tarifas_tarId.' - '.$listaDeTarifas[$i]->tarValorTarifa;?></td> 
                     <td><a href="Controlador.php?ruta=actualizarTickets&idAct=<?php echo $listaDeTickets[$i]->ticId; ?>">Actualizar</a></td>  
                     <td><a href="Controlador.php?ruta=eliminarTickets&idAct=<?php echo $listaDeTickets[$i]->ticId; ?>" onclick="return confirm('¿Está seguro de eliminar el registro?')">Eliminar</a></td>  
                 </tr>   

@@ -84,7 +84,7 @@ session_start();
             <br>
             <a href="./Controlador.php?ruta=listarTickets">Listar Tickets</a>
             <br>
-            <a>Agregar Ticket</a>
+            <a href="./Controlador.php?ruta=mostrarInsertarticket">Agregar Ticket</a>
         </div>
         <div class="gestion">Menú de Operaciones de Tabla Vehículos
             <br>

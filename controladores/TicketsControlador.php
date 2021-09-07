@@ -23,6 +23,9 @@ class TicketsControlador{
             case 'actualizarTickets':
                 $this->actualizarTickets();
                 break;
+            case 'eliminarTickets':
+                $this->eliminarTickets();
+                break;
             case 'confirmarActualizarTickets':
                 $this->confirmarActualizarTickets();
                 break;
@@ -30,11 +33,15 @@ class TicketsControlador{
     }
     public function listarTickets(){
         $gestarTickets = new TicketsDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
-        $registroTickets = $gestarTickets -> seleccionarTodos();
+        $registroTickets = $gestarTickets -> seleccionarTodos(1);
+        $gestarTarifas = new TarifasDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $registroTarifas = $gestarTarifas -> seleccionarTodos(1);
+    
     
         session_start();
     
         $_SESSION['listaDeTickets'] = $registroTickets;
+        $_SESSION['listaDeTarifas'] = $registroTarifas;
     
         header("location:principal.php?contenido=vistas/vistasTickets/listarDTRegistrosTickets.php");
     }
@@ -46,10 +53,10 @@ class TicketsControlador{
         $actualizarDatosTickets = $actualizarTickets['registroEncontrado'][0];
 
         $gestarEmpleados = new EmpleadosDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
-        $listarEmpleados = $gestarEmpleados -> seleccionarTodos();
+        $listarEmpleados = $gestarEmpleados -> seleccionarTodos(1);
 
         $gestarTarifas = new TarifasDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
-        $listarValorTarifa = $gestarTarifas -> seleccionarTodos ();
+        $listarValorTarifa = $gestarTarifas -> seleccionarTodos (1);
 
         
         session_start();
@@ -61,6 +68,7 @@ class TicketsControlador{
         header("location:principal.php?contenido=vistas/vistasTickets/vistaActualizarTickets.php");
         
     }
+
     public function confirmarActualizarTickets(){
         $gestarTickets = new TicketsDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
         $confirmarActualizarTickets = $gestarTickets -> actualizar(array($this->datos));

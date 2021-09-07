@@ -7,14 +7,11 @@ class TicketsDAO extends ConDbMySql{
         parent::__construct($servidor, $base, $loginDB, $passwordDB);  
     }
     
-    public function seleccionarTodos(){
-        $planconsulta = "select tic.ticId, tic.ticNumero, tic.ticFecha, tic.ticHoraIngreso, tic.ticHoraSalida, tic.ticValorFinal, 
-        tic.ticEstado, tic.tic_created_at, tic.tic_updated_at, tic.ticUsuSesion,emp.empId, 			
-        emp.empNumeroDocumento, tar.tarTipoVehiculo, tar.tarValorTarifa 
-        from tickets tic JOIN empleados emp ON tic.Empleados_empId=emp.empId 
-        JOIN tarifas tar on tic.Tarifas_tarId=tar.tarId;";
+    public function seleccionarTodos($estado){
+        $planconsulta = "SELECT * FROM tickets WHERE ticEstado=:ticEstado";
 
         $registroTickets = $this->conexion->prepare($planconsulta);
+        $registroTickets->bindParam(':ticEstado',$estado);
         $registroTickets->execute();
 
         $listadoRegistrosTickets = array();

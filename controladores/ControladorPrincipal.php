@@ -110,11 +110,17 @@ class ControladorPrincipal{
             case 'actualizarTickets':
                 $this -> actualizarTickets();
                 break;
+                case 'eliminarTickets':
+                    $this -> eliminarTickets();
+                    break;
             case 'confirmarActualizarTickets':
                 $this -> confirmarActualizarTickets();
                 break;
             case 'cancelarActualizarTickets':
                 $this -> cancelarActualizarTickets();
+                break;
+            case 'mostrarInsertarticket':
+                $this -> mostrarInsertarticket();
                 break;
             case 'listarVehiculos':
                 $this -> listarVehiculos();
@@ -249,10 +255,16 @@ class ControladorPrincipal{
     public function actualizarTickets(){
         $ticketsControlador = new TicketsControlador($this -> datos);
     }
+    public function eliminarTickets(){
+        $ticketsControlador = new TicketsControlador($this -> datos);
+    }
     public function confirmarActualizarTickets(){
         $ticketsControlador = new TicketsControlador($this -> datos);
     }
     public function cancelarActualizarTickets(){
+        $ticketsControlador = new TicketsControlador($this -> datos);
+    }
+    public function mostrarInsertarticket(){
         $ticketsControlador = new TicketsControlador($this -> datos);
     }
     
