@@ -77,21 +77,40 @@ class VehiculosDAO extends ConDbMySql{
     }
 
     public function actualizar($registro){
+           //print_r($registro);
+
+        //exit();
+
         try {
 
             $placa = $registro[0]['vehNumero_Placa'];
             $color = $registro[0]['vehColor'];
             $marca = $registro[0]['vehMarca'];
             $vehId = $registro[0]['vehId'];
+            $empleados = $registro[0]['Empleados_empId'];
+            $tarifas = $registro[0]['Tickets_ticId'];
 
             if(isset($vehId)){
 
-            $consulta = "UPDATE vehiculos SET vehNumero_Placa = ?, vehColor = ?, 
-            vehMarca = ? WHERE vehId = ?;";
+            $consulta = "UPDATE vehiculos " ;
+            $consulta.=" SET vehNumero_Placa = ?,";
+            $consulta.=" vehColor = ?,";
+            $consulta.=" vehMarca = ?, ";
+            $consulta.=" Tickets_ticId = ?, ";
+            $consulta.=" Empleados_empId = ? ";
+            $consulta.= "WHERE vehId = ?;";
+
+            //echo $placa."   ".$color."   ".$marca."   ".$vehId."   ".$empleados."   ".$tarifas;
+
+
+            //echo "<br>";
+            //echo $consulta;
+
+            //exit();
 
             $actualizar = $this -> conexion -> prepare($consulta);
 
-            $actualizacion = $actualizar -> execute(array($placa, $color, $marca, $vehId));
+            $actualizacion = $actualizar -> execute(array($placa, $color, $marca, $tarifas, $empleados, $vehId));
 
             $this->cierreBd();
 
@@ -101,7 +120,7 @@ class VehiculosDAO extends ConDbMySql{
         return ['actualizacion' => $actualizacion, 'mensaje' => $pdoExc];
     }
     
-}
+   }
 
     
     public function eliminar($sId = array()){

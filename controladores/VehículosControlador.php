@@ -1,7 +1,8 @@
 <?php
 
 include_once PATH . 'modelos/modeloVehiculos/VehiculosDAO.php';
-include_once PATH . 'modelos/modeloTickets/TiccketsDAO.php';
+include_once PATH . 'modelos/modeloTickets/TicketsDAO.php';
+include_once PATH . 'modelos/modeloEmpleados/EmpleadosDAO.php';
 
 class VehiculosControlador{
 
@@ -66,16 +67,18 @@ class VehiculosControlador{
 
     public  function actualizarVehiculos(){
 
+
+
         $gestarVehiculos = new VehiculosDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
         $actualizarVehiculos = $gestarVehiculos -> seleccionarID(array($this->datos['vehId']));
+
+        $actualizarDatosVehiculos = $actualizarVehiculos['registroEncontrado'][0];
         
         $gestarTickets = new TicketsDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
         $actualizarTickets = $gestarTickets -> seleccionarTodos(1);
 
         $gestarEmpleados = new EmpleadosDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
         $actualizarEmpleados = $gestarEmpleados -> seleccionarTodos(1);
-
-        $actualizarDatosVehiculos = $actualizarVehiculos['registroEncontrado'][0];
 
         session_start();
         $_SESSION['actualizarDatosVehiculos']=$actualizarDatosVehiculos;
@@ -88,11 +91,14 @@ class VehiculosControlador{
 
     public function confirmarActualizarVehiculo(){
 
+        //print_r($this->datos);
+
+        //exit();
+
         $gestarVehiculos = new VehiculosDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
         $actualizarVehiculos = $gestarVehiculos -> actualizar(array($this->datos));
 
         session_start();
-            $_SESSION['mensaje'] = "Actualización realizada.";
             header("location:Controlador.php?ruta=listarVehiculos");	
 
     }
@@ -104,6 +110,10 @@ class VehiculosControlador{
     }
 
     public function insertarVehiculo(){
+
+    //print_r($this->datos);
+
+        //exit();
 		
         
     $buscarVehiculo = new VehiculosDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
