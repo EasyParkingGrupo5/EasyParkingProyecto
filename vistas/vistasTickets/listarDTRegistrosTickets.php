@@ -73,7 +73,7 @@ if(isset($_SESSION['listaDeTarifas'])){
                     <td><?php echo $listaDeTickets[$i]->ticHoraSalida; ?></td>
                     <td><?php echo $listaDeTickets[$i]->ticValorFinal; ?></td>
                     <td><?php echo $listaDeTickets[$i]->Empleados_empId ; ?></td>  
-                    <td><?php echo $listaDeTickets[$i]->tarTipoVehiculo.' - '.$listaDeTarifas[$i]->tarValorTarifa;?></td> 
+                    <td><?php echo $listaDeTickets[$i]->tarTipoVehiculo.' - '.$listaDeTickets[$i]->tarValorTarifa;?></td> 
                     <td><a href="Controlador.php?ruta=actualizarTickets&idAct=<?php echo $listaDeTickets[$i]->ticId; ?>">Actualizar</a></td>  
                     <td><a href="Controlador.php?ruta=eliminarTickets&idAct=<?php echo $listaDeTickets[$i]->ticId; ?>" onclick="return confirm('¿Está seguro de eliminar el registro?')">Eliminar</a></td>  
                 </tr>   
