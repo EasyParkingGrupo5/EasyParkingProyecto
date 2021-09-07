@@ -8,7 +8,7 @@ class VehiculosDAO extends ConDbMySql{
     }
     
     public function seleccionarTodos($estado){
-        $planconsulta = "SELECT * FROM vehiculos  WHERE vehEstado= :vehEstado;";
+        $planconsulta = "SELECT * FROM vehiculos v JOIN tickets t on v.Tickets_ticId=t.ticId JOIN empleados e on e.empId=v.Empleados_empId WHERE vehEstado= :vehEstado;";
 
         $registroVehiculos = $this->conexion->prepare($planconsulta);
         $registroVehiculos -> bindParam(":vehEstado", $estado);
@@ -48,12 +48,11 @@ class VehiculosDAO extends ConDbMySql{
 
     public function insertar($registro){
         try {
-            $consulta = "INSERT INTO vehiculos (vehId,vehNumero_Placa,vehColor,vehMarca, Empleados_empId,Tickets_ticId) 
-            VALUES (:vehId,:vehNumero_Placa,:vehColor,:vehMarca, :Empleados_empId,:Tickets_ticId);";
+            $consulta = "INSERT INTO vehiculos (vehNumero_Placa,vehColor,vehMarca, Empleados_empId, Tickets_ticId) 
+            VALUES (:vehNumero_Placa,:vehColor,:vehMarca, :Empleados_empId,:Tickets_ticId);";
 
             $insertar = $this->conexion->prepare($consulta);
 
-            $insertar -> bindParam(":vehId", $registro['vehId']);
             $insertar -> bindParam(":vehNumero_Placa", $registro['vehNumero_Placa']);
             $insertar -> bindParam(":vehColor", $registro['vehColor']);
             $insertar -> bindParam(":vehMarca", $registro['vehMarca']);

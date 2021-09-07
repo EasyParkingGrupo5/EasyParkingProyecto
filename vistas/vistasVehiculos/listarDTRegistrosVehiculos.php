@@ -62,9 +62,9 @@ if (isset($_SESSION['listaDeEmpleados'])) {
                     <td><?php echo $listaDeVehiculos[$i]->vehNumero_Placa; ?></td>  
                     <td><?php echo $listaDeVehiculos[$i]->vehColor; ?></td>  
                     <td><?php echo $listaDeVehiculos[$i]->vehMarca; ?></td>
-                    <td><?php echo $listaDeVehiculos[$i]->Empleados_empId; ?></td>
-                    <td><?php echo $listaDeVehiculos[$i]->Tickets_ticId; ?></td>
-                    <td><?php echo $listarDeTickets[$i]->ticNumero; ?></td>
+                    <td><?php echo $listaDeVehiculos[$i]->empId; ?></td>
+                    <td><?php echo $listaDeVehiculos[$i]->ticId; ?></td>
+                    <td><?php echo $listaDeVehiculos[$i]->ticNumero; ?></td>
                     <!--<td>d>-->
                     <td><a href="Controlador.php?ruta=actualizarVehiculos&vehId=<?php echo $listaDeVehiculos[$i]->vehId; ?>">Actualizar</a></td>  
                     <td><a href="Controlador.php?ruta=eliminarVehiculos&vehId=<?php echo $listaDeVehiculos[$i]->vehId; ?>" onclick="return confirm('Está seguro de eliminar el registro?')">Eliminar</a></td>  

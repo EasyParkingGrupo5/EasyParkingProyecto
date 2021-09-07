@@ -31,14 +31,6 @@ if (isset($_SESSION['listarEmpleados'])) {
         <form role="form" action="Controlador.php" method="post" id="formInsertarVehiculo">
             <table>
                 <tr>
-                    <td>Id:</td>
-                    <td>
-                        <input class="form-control" placeholder="Id" autocomplete="off" name="vehId" type="number" patter=""  value="<?php 
-                        if(isset($_SESSION['vehId'])){echo($_SESSION['vehId']);} 
-                        ?>">
-                    </td>
-                </tr>
-                <tr>
                     <td>Numero de placa:</td>
                     <td>
                         <input class="form-control" placeholder="Numero de placa" autocomplete="off" name="vehNumero_Placa" type="text" patter=""  value="<?php 
@@ -56,17 +48,20 @@ if (isset($_SESSION['listarEmpleados'])) {
                 </tr>
                 <tr>
                 <tr>
-                    <td>Marca:</td>
+                <td>Marca:</td>
                     <td>
-                        <input class="form-control" placeholder="Marca" name="vehMarca" type="text" patter="" autocomplete="off"  value="<?php
-                         if(isset($_SESSION['vehMarca'])){echo($_SESSION['vehMarca']);} 
-                         ?>">
+                            <select name="vehMarca" id="vehMarca" >
+                                    <option value="MASDA">MASDA</option>
+                                    <option value="Bmw">Bmw</option>
+                                    <option value="Renault">Renault</option>
+                                    <option value="Chevrolet">Chevrolet</option>
+                            </select>
                     </td>
                 </tr>
                 <tr>
                 <td>Empleado:</td>
                     <td>
-                            <select name="Empleados_empId" id="empId" style="width: 338px">
+                            <select name="Empleados_empId"  style="width: 338px">
                                 <?php for ($i=0; $i < $empleadosCantidad; $i++) { 
                                 ?>
                                     <option value="<?php echo $listarEmpleados[$i]->empId; ?>" 
@@ -85,16 +80,16 @@ if (isset($_SESSION['listarEmpleados'])) {
                 <tr>
                 <td>Tipo Tarifa:</td>
                     <td>
-                            <select name="Tickets_ticId" id="Tickets_ticId" style="width: 338px">
+                            <select name="Tickets_ticId"  style="width: 338px">
                                 <?php for ($i=0; $i < $ticketCantidad; $i++) { 
                                 ?>
-                                    <option value="<?php echo $listarTickets[$i]->ticId; ?>" 
+                                    <option  value="<?php echo $listarTickets[$i]->ticId; ?>" 
                                     <?php if (isset($listarTickets[$i]->ticId) && isset($actualizarVehiculos->Tickets_ticId) && $listarTickets[$i]->ticId == $actualizarVehiculos->Tickets_ticId) {
                                         echo "selected";
                                     } ?>
                                     >
 
-                                    <?php echo $listarTickets[$i]->ticId.' - '.$listarTickets[$i] ->ticNumero.' pesos minuto'; ?></option>
+                                    <?php echo $listarTickets[$i]->ticId.' - '.$listarTickets[$i] ->ticNumero; ?></option>
                                 <?php
                                 }
                                 ?>
