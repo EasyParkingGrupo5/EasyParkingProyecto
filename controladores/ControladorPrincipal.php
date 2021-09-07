@@ -140,18 +140,30 @@ class ControladorPrincipal{
             case 'cancelarActualizarVehiculos':
                 $this -> cancelarActualizarVehiculos();
                 break;
-            case 'listarReportes':
-                $this -> listarReportes();
-                break;
-            case 'actualizarReportes':
-                $this -> actualizarReportes();
-                break;
-            case 'confirmarActualizarReportes':
-                $this -> confirmarActualizarReportes();
-                break;
-            case 'cancelarActualizarReportes':
-                $this -> cancelarActualizarReportes();
-                break;
+                case 'listarReportes':
+                    $this -> listarReportes();
+                    break;
+                case 'actualizarReportes':
+                    $this -> actualizarReportes();
+                    break;
+                case 'eliminarReportes':
+                    $this -> eliminarReportes();
+                    break;
+                case 'confirmarActualizarReportes':
+                    $this -> confirmarActualizarReportes();
+                    break;
+                case 'cancelarActualizarReportes':
+                    $this -> cancelarActualizarReportes();
+                    break;
+                case 'listarReportesInactivos':
+                    $this -> listarReportesInactivos();
+                    break;
+                case 'mostrarInsertarReportes':
+                    $this -> mostrarInsertarReportes();
+                    break;
+                case 'habilitarReportes':
+                    $this -> habilitarReportes();
+                    break;
         }
     }
 
@@ -305,6 +317,16 @@ class ControladorPrincipal{
     }
 
     public function cancelarActualizarReportes(){
+        $reportesControlador = new ReportesControlador($this -> datos);
+    }
+    public function listarReportesInactivos(){
+        $reportesControlador = new ReportesControlador($this -> datos);
+    }
+    public function mostrarInsertarReportes(){
+        $reportesControlador = new ReportesControlador($this -> datos);
+    }
+    
+    public function habilitarReportes(){
         $reportesControlador = new ReportesControlador($this -> datos);
     }
 }

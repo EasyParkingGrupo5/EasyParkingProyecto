@@ -7,15 +7,13 @@ class ReportesDAO extends ConDbMySql{
         parent::__construct($servidor, $base, $loginDB, $passwordDB);  
     }
     
-    public function seleccionarTodos(){
-        $planconsulta = "SELECT rep.repId, rep.repNumero, rep.repFecha, 
-        rep.repEstado, rep.rep_created_at, rep.rep_updated_at, 
-        rep.repUsuSesion, emp.empId, emp.empNumeroDocumento, veh.vehId, 
-        veh.vehNumero_Placa FROM reportes rep JOIN empleados emp ON 
-        rep.Empleados_empId = emp.empId JOIN vehiculos veh ON 
-        rep.Vehiculos_vehId = veh.vehId;";
+    public function seleccionarTodos($estado){
+        $planconsulta = "SELECT * FROM reportes r JOIN vehiculos ve  ON ve.vehId=ve.Vehiculos_vehId WHERE r.ticEstado=:repEstado";
 
         $registroReportes = $this->conexion->prepare($planconsulta);
+    
+        $registroReportes->bindParam(':Estado',$estado);
+        
         $registroReportes->execute();
 
         $listadoRegistrosReportes = array();
@@ -23,8 +21,8 @@ class ReportesDAO extends ConDbMySql{
         while( $registro = $registroReportes->fetch(PDO::FETCH_OBJ)){
             $listadoRegistrosReportes[]=$registro;
         }
-          $this->cierreBd();
-          return $listadoRegistrosReportes;
+        $this->cierreBd();
+        return $listadoRegistrosReportes;
     }
 
     public function seleccionarID($sId){
@@ -86,26 +84,36 @@ class ReportesDAO extends ConDbMySql{
  
 
     public function actualizar($registro){
-        try {
-            $consulta = "UPDATE reportes SET repNumero = :repNumero, repFecha = :repFecha, 
-            repEstado = :repEstado WHERE repId = :repId;";
-            
-            $actualizar = $this -> conexion -> prepare($consulta);
+        try{
+            $repNumero = $registro[0]['repNumero'];
+            $repFecha = $registro[0]['repFecha'];
+            $Empleados_empId = $registro[0]['Empleados_empId'];
+            $Vehiculos_vehId = $registro[0]['Vehiculos_vehId'];
+            $repId = $registro[0]['repId'];	
+			
+			
+			if(isset($repId)){
+				
+                $actualizar = "UPDATE reportes SET repNumero= ? , ";
+                $actualizar .= " repFecha = ? , ";
+                $actualizar .= " Empleados_empId = ?, ";
+                $actualizar .= " Vehiculos_vehId = ? ";
+                $actualizar .= " WHERE repId= ? ; ";
+				
+				$actualizacion = $this->conexion->prepare($actualizar);
+				
+				$resultadoAct=$actualizacion->execute(array($repNumero,$repFecha,$empleados_empId,$Vehiculos_vehId,$repId));
+				
+				        $this->cierreBd();
+						
+                return ['actualizacion' => $resultadoAct, 'mensaje' => "Actualización realizada."];				
+				
+			}
 
-            $actualizar -> bindParam(":repNumero", $registro['repNumero']);
-            $actualizar -> bindParam(":repFecha", $registro['repFecha']);
-            $actualizar -> bindParam(":repEstado", $registro['repEstado']);
-            $actualizar -> bindParam(":repId", $registro['repId']);
-
-            $actualizacion = $actualizar -> execute();
-
-            $this->cierreBd();
-
-            return ['actualizacion' => $actualizacion, 'mensaje' => 'Resgistro Actualizado'];
 
         } catch (PDOException $pdoExc) {
-            $this->cierreBd();
-            return ['actualizacion' => $actualizacion, 'mensaje' => $pdoExc];
+			$this->cierreBd();
+            return ['actualizacion' => $resultadoAct, 'mensaje' => $pdoExc];
         }
         
     }

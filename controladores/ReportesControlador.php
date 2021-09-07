@@ -20,11 +20,32 @@ class ReportesControlador{
             case 'actualizarReportes':
                 $this->actualizarReportes();
                 break;
+            case 'confirmarActualizarReportes': 
+                $this->confirmarActualizarReportes();
+                break;
+            case 'cancelarActualizarReportes':
+                $this -> cancelarActualizarReportes();
+                break;
+            case 'agregarReportes':
+                $this -> agregarReportes();
+                break;
+            case 'confirmarInsertarReportes':
+                $this -> confirmarInsertarReportes();
+                break;
+            case 'eliminarReportes':
+                $this -> eliminarReportes();
+                break;
+            case 'listarReportesInactivos':
+                $this -> listarReportesInactivos();
+                break;
+            case 'habilitarReportes':
+                   $this -> habilitarReportes();
+                break;
         }
     }
     public function listarReportes(){
         $gestarReportes = new ReportesDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
-        $registroReportes = $gestarReportes -> seleccionarTodos();
+        $registroReportes = $gestarReportes -> seleccionarTodos(1);
     
         session_start();
     
@@ -40,12 +61,17 @@ class ReportesControlador{
         $actualizarDatosReportes = $actualizarReportes['registroEncontrado'][0];
 
         $gestarEmpleados = new EmpleadosDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
-        $listarEmpleados = $gestarEmpleados -> seleccionarTodos();
+        $listarEmpleados = $gestarEmpleados -> seleccionarTodos(1);
+
+        $gestarVehiculos = new VehiculosDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $listarVehiculos = $gestarVehiculos -> seleccionarTodos(1);
+        
+        
         session_start();
 
         $_SESSION['actualizarReportes'] = $actualizarDatosReportes;
         $_SESSION['listarEmpleados'] = $listarEmpleados;
-
+        $_SESSION['listarVehiculos'] = $listarVehiculos;
         header("location:principal.php?contenido=vistas/vistasReportes/vistaActualizarReportes.php");
     }
 
