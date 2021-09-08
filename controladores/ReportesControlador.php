@@ -85,12 +85,18 @@ class ReportesControlador{
         header("location:Controlador.php?ruta=listarReportes");
     }
     public function mostrarInsertarReportes(){
-        $gestarReportes = new ReportesDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
-        $listarReportes = $gestarReportes -> seleccionarTodos(1);
+
+        $gestarEmpleados = new EmpleadosDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $listarEmpleados = $gestarEmpleados -> seleccionarTodos(1);
+        
+        $gestarVehiculos = new VehiculosDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $listarVehiculos = $gestarVehiculos -> seleccionarTodos(1);
 
         session_start();
 
-        $_SESSION['listarReportes'] = $listarReportes;
+        
+        $_SESSION['listarEmpleados'] = $listarEmpleados;
+        $_SESSION['listarVehiculos'] = $listarVehiculos;
 
         header('location:principal.php?contenido=vistas/vistasReportes/vistaInsertarReportes.php');
     }
@@ -103,16 +109,16 @@ class ReportesControlador{
 
     public function confirmarInsertarReportes(){
         $gestarReportes = new ReportesDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
-        $buscarReportes = $gestarReportes -> seleccionarID(array($this->datos['isbn']));
+        $buscarReportes = $gestarReportes -> seleccionarID(array($this->datos['repId']));
 
-        if(!$buscarLibro['exitoSeleccionId']){
+        if(!$buscarReportes['exitoSeleccionId']){
             $insertarReportes = new ReportesDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
             $insertoReportes = $insertarReportes -> insertar($this -> datos);
 
             session_start();
 
-            $_SESSION['mensaje'] = 'Fue insertado con exito con el código '.$insertoLibro['resultado'];
-            header("location:Controlador.php?ruta=listarLibros");
+            $_SESSION['mensaje'] = 'Fue insertado con exito con el código '.$insertoReportes['resultado'];
+            header("location:Controlador.php?ruta=listarReportes");
         }else{
             session_start();
                 $_SESSION['repId'] = $this->datos['repId'];
@@ -123,7 +129,7 @@ class ReportesControlador{
 					
                 $_SESSION['mensaje'] = "El código " . $this->datos['repId'] . " ya existe en el sistema.";
 
-                header("location:Controlador.php?ruta=agregarLibro");
+                header("location:Controlador.php?ruta=mostrarInsertarReportes");
         }
 
         }

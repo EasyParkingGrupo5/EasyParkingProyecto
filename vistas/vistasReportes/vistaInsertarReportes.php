@@ -11,6 +11,15 @@ if (isset($_SESSION['mensaje'])) {
     echo "<script languaje='javascript'>alert('$mensaje')</script>";
     unset($_SESSION['mensaje']);
 }
+if (isset($_SESSION['listarEmpleados'])) {
+    $listarEmpleados = $_SESSION['listarEmpleados'];
+    $empleadosCantidad = count($listarEmpleados);
+}
+if (isset($_SESSION['listarVehiculos'])) {
+    $listarVehiculos = $_SESSION['listarVehiculos'];
+    $vehiculosCantidad = count($listarVehiculos);
+}
+
 
 
 
@@ -73,12 +82,7 @@ form select{
         <center>
         <form role="form" action="Controlador.php" method="POST" id="formRegistro" autocomplete="off">
             <table>
-                <tr>
-                    <td class="letras">Id:</td>
-                    <td>
-                        <input placeholder="Id" name = "repId" type="number" required="required" value="<?php if(isset($_SESSION['repId'])){echo $_SESSION['repId']; unset($_SESSION['repId']);}?>">
-                    </td>
-                </tr>
+
                 <tr>
                     <td class="letras">Numero:</td>
                     <td>
@@ -115,13 +119,13 @@ form select{
                             <select name="Vehiculos_vehId" id="vehId" style="width: 338px">
                                 <?php for ($i=0; $i < $vehiculosCantidad; $i++) { 
                                 ?>
-                                    <option value="<?php echo $listarVehiculos[$i]->tarId; ?>" 
-                                    <?php if (isset($listarVehiculos[$i]->vehId) && isset($actualizarReportes->Vehiculos_vehId) && $listarVehiculos[$i]->vehId == $actualizarVehiculos->Vehiculos_vehId) {
+                                    <option value="<?php echo $listarVehiculos[$i]->vehId; ?>" 
+                                    <?php if (isset($listarVehiculos[$i]->vehId) && isset($actualizarReportes->Vehiculos_vehId) && $listarVehiculos[$i]->vehId == $actualizarReportes->Vehiculos_vehId) {
                                         echo "selected";
                                     } ?>
                                     >
 
-                                    <?php echo $listarVehiculos[$i]->Vehiculos_vehId.' - '.$listarVehiculos[$i] ->vehTipoVehiculos.' pesos minuto'; ?></option>
+                                    <?php echo $listarVehiculos[$i]->vehId.' - '.$listarVehiculos[$i] ->vehNumero_Placa; ?></option>
                                 <?php
                                 }
                                 ?>
@@ -131,11 +135,11 @@ form select{
                    
                     <td>
                         <br>
-                        <button class="botonCancelar" type="submit" name="ruta" value="listarLibros" formnovalidate>Cancelar</button>
+                        <button class="botonCancelar" type="submit" name="ruta" value="listarReportes" formnovalidate>Cancelar</button>
                     </td>
                     <td>
                         <br>
-                        <button class="botonInsertar" type="submit" name="ruta" value="confirmarInsertarLibro">Insertar Libro</button>
+                        <button class="botonInsertar" type="submit" name="ruta" value="confirmarInsertarReportes">Insertar Reportes</button>
                     </td>
                 </tr>
             </table>

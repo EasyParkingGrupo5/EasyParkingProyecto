@@ -140,30 +140,33 @@ class ControladorPrincipal{
             case 'cancelarActualizarVehiculos':
                 $this -> cancelarActualizarVehiculos();
                 break;
-                case 'listarReportes':
-                    $this -> listarReportes();
-                    break;
-                case 'actualizarReportes':
-                    $this -> actualizarReportes();
-                    break;
-                case 'eliminarReportes':
-                    $this -> eliminarReportes();
-                    break;
-                case 'confirmarActualizarReportes':
-                    $this -> confirmarActualizarReportes();
-                    break;
-                case 'cancelarActualizarReportes':
-                    $this -> cancelarActualizarReportes();
-                    break;
-                case 'listarReportesInactivos':
-                    $this -> listarReportesInactivos();
-                case 'mostrarInsertarReportes':
-                    $this -> mostrarInsertarReportes();
-                    break;
-
-                case 'habilitarReportes':
-                    $this -> habilitarReportes();
-                    break;
+            case 'listarReportes':
+                $this -> listarReportes();
+                break;
+            case 'actualizarReportes':
+                $this -> actualizarReportes();
+                break;
+            case 'eliminarReportes':
+                $this -> eliminarReportes();
+                break;
+            case 'confirmarActualizarReportes':
+                $this -> confirmarActualizarReportes();
+                break;
+            case 'cancelarActualizarReportes':
+                $this -> cancelarActualizarReportes();
+                break;
+            case 'listarReportesInactivos':
+                $this -> listarReportesInactivos();
+                break;
+            case 'mostrarInsertarReportes':
+                $this -> mostrarInsertarReportes();
+                break;
+            case 'habilitarReportes':
+                $this -> habilitarReportes();
+                break;
+            case 'confirmarInsertarReportes':
+                $this -> confirmarInsertarReportes();
+                break;
         }
     }
 
@@ -332,6 +335,10 @@ class ControladorPrincipal{
     public function eliminarReportes(){
         $reportesControlador = new ReportesControlador($this -> datos);
     }
+    public function confirmarInsertarReportes(){
+        $reportesControlador = new ReportesControlador($this -> datos);
+    }
 }
+
 
 ?>

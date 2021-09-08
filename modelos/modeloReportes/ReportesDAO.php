@@ -55,20 +55,14 @@ class ReportesDAO extends ConDbMySql{
     public function insertar($registro){ 
         
         try {
-        $consulta = "INSERT INTO reportes (repId, repNumero, repFecha,repEstado, rep_created_at, rep_updated_at, 
-       repUsuSesion,Empleados_empId,Vehiculos_vehId) VALUES(:repId, :repNumero, :repFecha,:repEstado,:rep_created_at,:rep_updated_at, 
-       :repUsuSesion,:Empleados_empId,:Vehiculos_vehId);"; 
+        $consulta = "INSERT INTO reportes ( repNumero, repFecha, 
+       Empleados_empId,Vehiculos_vehId) VALUES( :repNumero,:repFecha,
+       :Empleados_empId,:Vehiculos_vehId);"; 
 
         $insertar = $this->conexion->prepare($consulta);
 
-       
-        $insertar -> bindParam(":repId", $registro['repId']);
         $insertar -> bindParam(":repNumero", $registro['repNumero']);
         $insertar -> bindParam(":repFecha", $registro['repFecha']);
-        $insertar -> bindParam(":repEstado", $registro['repEstado']);
-        $insertar -> bindParam(":rep_created_at", $registro['rep_created_at']);
-        $insertar -> bindParam(":rep_updated_at", $registro['rep_updated_at']);
-        $insertar -> bindParam(":repUsuSesion", $registro['repUsuSesion']);
         $insertar -> bindParam(":Empleados_empId", $registro['Empleados_empId']);
         $insertar -> bindParam(":Vehiculos_vehId", $registro['Vehiculos_vehId']);
  
