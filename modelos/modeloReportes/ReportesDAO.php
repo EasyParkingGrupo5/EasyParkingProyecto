@@ -8,11 +8,16 @@ class ReportesDAO extends ConDbMySql{
     }
     
     public function seleccionarTodos($estado){
-        $planconsulta = "SELECT * FROM reportes r JOIN vehiculos ve  ON ve.vehId=ve.Vehiculos_vehId WHERE r.ticEstado=:repEstado";
+        $planconsulta = "SELECT rep.repId, rep.repNumero, rep.repFecha, 
+        rep.repEstado, rep.rep_created_at, rep.rep_updated_at, 
+        rep.repUsuSesion, emp.empId, emp.empNumeroDocumento, veh.vehId, 
+        veh.vehNumero_Placa FROM reportes rep JOIN empleados emp ON 
+        rep.Empleados_empId = emp.empId JOIN vehiculos veh ON 
+        rep.Vehiculos_vehId = veh.vehId WHERE repEstado = :repEstado;";
 
         $registroReportes = $this->conexion->prepare($planconsulta);
     
-        $registroReportes->bindParam(':Estado',$estado);
+        $registroReportes->bindParam(':repEstado',$estado);
         
         $registroReportes->execute();
 
@@ -102,7 +107,7 @@ class ReportesDAO extends ConDbMySql{
 				
 				$actualizacion = $this->conexion->prepare($actualizar);
 				
-				$resultadoAct=$actualizacion->execute(array($repNumero,$repFecha,$empleados_empId,$Vehiculos_vehId,$repId));
+				$resultadoAct=$actualizacion->execute(array($repNumero,$repFecha,$Empleados_empId,$Vehiculos_vehId,$repId));
 				
 				        $this->cierreBd();
 						
