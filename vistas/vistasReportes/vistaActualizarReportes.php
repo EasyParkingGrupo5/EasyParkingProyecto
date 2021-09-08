@@ -2,7 +2,7 @@
 
 
 if (isset($_SESSION['actualizarReportes'])) {
-    $actualizarLibro = $_SESSION['actualizarReportes'];
+    $actualizarReportes = $_SESSION['actualizarReportes'];
 }
 if (isset($_SESSION['listarEmpleados'])) {
     $listarEmpleados = $_SESSION['listarEmpleados'];
@@ -102,7 +102,7 @@ form select{
                 <tr>
                     <td>Empleado:</td>
                     <td>
-                            <select name="empId" id="empId" style="width: 338px">
+                            <select name="Empleados_empId" id="empId" style="width: 338px">
                                 <?php for ($i=0; $i < $empleadosCantidad; $i++) { 
                                 ?>
                                     <option value="<?php echo $listarEmpleados[$i]->empId; ?>" 
@@ -121,16 +121,16 @@ form select{
                 <tr>
                     <td>vehiculos:</td>
                     <td>
-                            <select name="vehId " id="vehId " style="width: 338px">
-                                <?php for ($i=0; $i < $vehiculoCantidad; $i++) { 
+                            <select name="Vehiculos_vehId" id="vehId " style="width: 338px">
+                                <?php for ($i=0; $i < $vehiculosCantidad; $i++) { 
                                 ?>
-                                    <option value="<?php echo $tarTipoVehiculo[$i]->vehId; ?>" 
-                                    <?php if (isset($listarVehiculos[$i]->vehId) && isset($actualizarReportes->	vehNumero_Placa) && $listarVehiculos[$i]->vehId == $actualizarReportes->vehNumero_Placa) {
+                                    <option value="<?php echo $listarVehiculos[$i]->vehId; ?>" 
+                                    <?php if (isset($listarVehiculos[$i]->vehId) && isset($actualizarReportes->	Vehiculos_vehId) && $listarVehiculos[$i]->vehId == $actualizarReportes->Vehiculos_vehId) {
                                         echo "selected";
                                     } ?>
                                     >
 
-                                    <?php echo $listarVehiculos[$i]->vehNumero_Placa.' - '.$listarVehiculos[$i]->tarTipoVehiculo; ?></option>
+                                    <?php echo $listarVehiculos[$i]->vehId.' - '.$listarVehiculos[$i]->vehNumero_Placa; ?></option>
                                 <?php
                                 }
                                 ?>
