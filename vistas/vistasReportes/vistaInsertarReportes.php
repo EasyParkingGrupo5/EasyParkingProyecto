@@ -112,8 +112,8 @@ form select{
                 </tr>
                 <td>Vehiculos:</td>
                     <td>
-                            <select name="Vehiculos_vehId" id="vehTipoVehiculos" style="width: 338px">
-                                <?php for ($i=0; $i < $tarifaCantidad; $i++) { 
+                            <select name="Vehiculos_vehId" id="vehId" style="width: 338px">
+                                <?php for ($i=0; $i < $vehiculosCantidad; $i++) { 
                                 ?>
                                     <option value="<?php echo $listarVehiculos[$i]->tarId; ?>" 
                                     <?php if (isset($listarVehiculos[$i]->vehId) && isset($actualizarReportes->Vehiculos_vehId) && $listarVehiculos[$i]->vehId == $actualizarVehiculos->Vehiculos_vehId) {

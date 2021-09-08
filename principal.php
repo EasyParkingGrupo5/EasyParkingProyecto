@@ -98,7 +98,9 @@ session_start();
             <br>
             <a href="./Controlador.php?ruta=listarReportes">Listar Reportes</a>
             <br>
-            <a>Agregar Reporte</a>
+            <a href="./Controlador.php?ruta=mostrarInsertarReportes">Agregar Reporte</a>
+            <br>
+            <a href="./Controlador.php?ruta=listarReportesInactivos">Listar Reportes Inactivos</a>
         </div>
         <div class="gestion">Menú de Operaciones de Tabla Empleados
             <br>

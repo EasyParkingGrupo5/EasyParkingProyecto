@@ -26,8 +26,8 @@ class ReportesControlador{
             case 'cancelarActualizarReportes':
                 $this -> cancelarActualizarReportes();
                 break;
-            case 'agregarReportes':
-                $this -> agregarReportes();
+            case 'mostrarInsertarReportes':
+                $this -> mostrarInsertarReportes();
                 break;
             case 'confirmarInsertarReportes':
                 $this -> confirmarInsertarReportes();
@@ -39,7 +39,7 @@ class ReportesControlador{
                 $this -> listarReportesInactivos();
                 break;
             case 'habilitarReportes':
-                   $this -> habilitarReportes();
+                $this -> habilitarReportes();
                 break;
         }
     }
@@ -84,22 +84,22 @@ class ReportesControlador{
         $_SESSION['mensaje'] = "Registro Actualizado";
         header("location:Controlador.php?ruta=listarReportes");
     }
+    public function mostrarInsertarReportes(){
+        $gestarReportes = new ReportesDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $listarReportes = $gestarReportes -> seleccionarTodos(1);
+
+        session_start();
+
+        $_SESSION['listarReportes'] = $listarReportes;
+
+        header('location:principal.php?contenido=vistas/vistasReportes/vistaInsertarReportes.php');
+    }
 
     public function cancelarActualizarReportes(){
         
         header("location:Controlador.php?ruta=listarReportes");
     }
 
-    public function agregarReportes(){
-        $gestarEmpleados = new EmpleadosoDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
-        $listarEmpleados = $gestarEmpleados -> seleccionarTodos();
-
-        session_start();
-
-        $_SESSION['listarCategorias'] = $listarCategorias;
-
-        header('location:principal.php?contenido=vistas/vistasLibros/vistaInsertarLibro.php');
-    }
 
     public function confirmarInsertarReportes(){
         $gestarReportes = new ReportesDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);

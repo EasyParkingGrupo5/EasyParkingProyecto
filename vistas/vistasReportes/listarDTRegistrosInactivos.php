@@ -34,7 +34,7 @@ if (isset($_SESSION['mensaje'])) {
 <?php
 if(isset($_SESSION['listaDeReportes'])){
 	
-	 $listaDeReportes=$_SESSION['listaDeRepostes'];
+	 $listaDeReportes=$_SESSION['listaDeReportes'];
 
 	
 }

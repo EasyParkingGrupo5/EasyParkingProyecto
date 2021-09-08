@@ -157,10 +157,10 @@ class ControladorPrincipal{
                     break;
                 case 'listarReportesInactivos':
                     $this -> listarReportesInactivos();
-                    break;
                 case 'mostrarInsertarReportes':
                     $this -> mostrarInsertarReportes();
                     break;
+
                 case 'habilitarReportes':
                     $this -> habilitarReportes();
                     break;
