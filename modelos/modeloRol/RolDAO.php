@@ -6,11 +6,33 @@ class RolDAO extends ConDbMySql{
     public function __construct($servidor, $base, $loginDB, $passwordDB){
         parent::__construct($servidor, $base, $loginDB, $passwordDB);  
     }
+
+    public function seleccionarRolPorPersona(){
+        
+        $consulta="SELECT rol.rolId, rol.rolNombre, rol.rolDescripcion FROM rol rol JOIN 
+        usuario_s_roles usr on usr.id_rol = rol.rolId JOIN usuario_s usu on usu.usuId = usr.id_usuario_s 
+        RIGHT JOIN empleados emp on emp.empId = usr.id_usuario_s WHERE emp.empNumeroDocumento = ?";
+
+        $lista=$this->conexion->prepare($consulta);
+        $lista->execute(array($sId[0]));
+
+        $registroEnco = array();
+
+        while( $registro = $lista->fetch(PDO::FETCH_OBJ)){
+            $registroEnco[]=$registro;
+        }
+        if (isset($registroEnco[0]->usuId) && $registroEnco[0]->usuId != FALSE) {
+            return ['exitoSeleccionId' => 1, 'registroEncontrado' => $registroEnco];
+        } else {
+            return ['exitoSeleccionId' => 0, 'registroEncontrado' => $registroEnco];
+        }
+    }
     
-    public function seleccionarTodos(){
-        $planconsulta = "SELECT * FROM rol;";
+    public function seleccionarTodos($estado){
+        $planconsulta = "SELECT * FROM rol where rolEstado = :rolEstado;";
 
         $registroRol = $this->conexion->prepare($planconsulta);
+        $registroRol -> bindParam(":rolEstado", $estado);
         $registroRol->execute();
 
         $listadoRegistrosRol = array();
@@ -34,7 +56,6 @@ class RolDAO extends ConDbMySql{
         while( $registro = $lista->fetch(PDO::FETCH_OBJ)){
             $registroEnco[]=$registro;
         }
-          $this->cierreBd();
           
         if(!empty($registroEnco)){
             return ['exitoSeleccionId' => true, 'registroEncontrado' => $registroEnco];
@@ -48,17 +69,13 @@ class RolDAO extends ConDbMySql{
 
         try {
             
-            $consulta="INSERT INTO rol (rolId, rolNombre, rolDescripcion, rolEstado, rolUsuSesion, rol_created_at, rol_updated_at) VALUES (:rolId, :rolNombre, :rolDescripcion, :rolEstado, :rolUsuSesion, :rol_created_at, :rol_updated_at)" ;
+            $consulta="INSERT INTO rol (rolId, rolNombre, rolDescripcion) VALUES (:rolId, :rolNombre, :rolDescripcion)" ;
 
             $insertar=$this->conexion->prepare($consulta);
 
             $insertar -> bindParam(":rolId", $registro['rolId']);
             $insertar -> bindParam(":rolNombre", $registro['rolNombre']);
             $insertar -> bindParam(":rolDescripcion", $registro['rolDescripcion']);
-            $insertar -> bindParam(":rolEstado", $registro['rolEstado']);
-            $insertar -> bindParam(":rolUsuSesion", $registro['rolUsuSesion']);
-            $insertar -> bindParam(":rol_created_at", $registro['rol_created_at']);
-            $insertar -> bindParam(":rol_updated_at", $registro['rol_updated_at']);
 
             $insercion = $insertar->execute();
 

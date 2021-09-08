@@ -1,6 +1,6 @@
 <?php
 
-include_once PATH . 'modelos/ConBdMysql.php';
+include_once 'modelos/ConBdMysql.php';
 
 class TarifasDAO extends ConDbMySql{
     public function __construct($servidor, $base, $loginDB, $passwordDB){
@@ -45,11 +45,12 @@ class TarifasDAO extends ConDbMySql{
 
     public function insertar($registro){
         try {
-            $consulta = "INSERT INTO tarifas (tarTipoVehiculo,tarValorTarifa,tarEstado)
-             VALUES (:tarTipoVehiculo, :tarValorTarifa, :tarEstado);";
+            $consulta = "INSERT INTO tarifas (tarId, tarTipoVehiculo,tarValorTarifa,tarEstado)
+             VALUES (:tarId, :tarTipoVehiculo, :tarValorTarifa, :tarEstado);";
 
             $insertar = $this->conexion->prepare($consulta);
 
+            $insertar -> bindParam(":tarId", $registro['tarId']);
             $insertar -> bindParam(":tarTipoVehiculo", $registro['tarTipoVehiculo']);
             $insertar -> bindParam(":tarValorTarifa", $registro['tarValorTarifa']);
             $insertar -> bindParam(":tarEstado", $registro['tarEstado']);
@@ -58,12 +59,12 @@ class TarifasDAO extends ConDbMySql{
 
             $clavePrimaria = $this->conexion->lastInsertId();
 
-            return ['Inserto'=>1,'resultado'=>$clavePrimaria];
+            return ['Inserto'=>true,'resultado'=>$clavePrimaria];
 
             $this->cierreBd();
 
         } catch (PDOException $pdoExc) {
-            return ['Inserto'=>0,$pdoExc->errorInfo[2]];
+            return ['Inserto'=>false,$pdoExc->errorInfo[2]];
         }
     }
 
@@ -96,7 +97,6 @@ class TarifasDAO extends ConDbMySql{
         $eliminar = $this->conexion->prepare($consulta);
         $eliminar->bindParam(':tarId', $sId[0],PDO::PARAM_INT);
         $resultado = $eliminar->execute();
-        print_r($resultado);
         $this->cierreBd();
 
         if(!empty($resultado)){

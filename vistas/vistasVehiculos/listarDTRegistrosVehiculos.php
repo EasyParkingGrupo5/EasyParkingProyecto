@@ -27,6 +27,14 @@ if(isset($_SESSION['listaDeVehiculos'])){
 	 unset($_SESSION['listaDeVehiculos']);
 	
 }
+
+if (isset($_SESSION['listaDeTickets'])) {
+    $listarDeTickets = $_SESSION['listaDeTickets'];
+}
+
+if (isset($_SESSION['listaDeEmpleados'])) {
+    $listarDeEmpleados = $_SESSION['listaDeEmpleados'];
+}
 ?>
     <table id="example" class="table-responsive table-hover table-bordered table-striped" style="width:100%">
         <thead>
@@ -35,15 +43,17 @@ if(isset($_SESSION['listaDeVehiculos'])){
                 <th>Numero de Placa</th> 
                 <th>Color</th> 
                 <th>Marca</th>
-                <!--<th>Estado</th>-->
                 <th>Empleado</th>
-                <th>Numero de Ticket</th> 
-                <th>Editar</th> 
-                <th>Eliminar</th> 
+                <th>Id Ticket</th>
+                <!--<th>Estado</th>-->
+                <th>Numero de ticket</th>
+                <th>Edit</th> 
+                <th>Delete</th> 
             </tr>
         </thead>
         <tbody>
             <?php
+
             $i = 0;
             foreach ($listaDeVehiculos as $key => $value) {
                 ?>
@@ -52,11 +62,12 @@ if(isset($_SESSION['listaDeVehiculos'])){
                     <td><?php echo $listaDeVehiculos[$i]->vehNumero_Placa; ?></td>  
                     <td><?php echo $listaDeVehiculos[$i]->vehColor; ?></td>  
                     <td><?php echo $listaDeVehiculos[$i]->vehMarca; ?></td>
-                    <td><?php echo $listaDeVehiculos[$i]->empId ; ?></td>
+                    <td><?php echo $listaDeVehiculos[$i]->empId; ?></td>
+                    <td><?php echo $listaDeVehiculos[$i]->ticId; ?></td>
                     <td><?php echo $listaDeVehiculos[$i]->ticNumero; ?></td>
-                    <!--<td>d>-->   
-                    <td><a href="Controlador.php?ruta=actualizarVehiculoss&idAct=<?php echo $listaDeVehiculos[$i]->vehId; ?>">Actualizar</a></td>  
-                    <td><a href="Controlador.php?ruta=eliminarVehiculos&idAct=<?php echo $listaDeVehiculos[$i]->vehId; ?>" onclick="return confirm('Está seguro de eliminar el registro?')">Eliminar</a></td>  
+                    <!--<td>d>-->
+                    <td><a href="Controlador.php?ruta=actualizarVehiculos&vehId=<?php echo $listaDeVehiculos[$i]->vehId; ?>">Actualizar</a></td>  
+                    <td><a href="Controlador.php?ruta=eliminarVehiculos&vehId=<?php echo $listaDeVehiculos[$i]->vehId; ?>" onclick="return confirm('Está seguro de eliminar el registro?')">Eliminar</a></td>  
                 </tr>   
                 <?php
                 $i++;

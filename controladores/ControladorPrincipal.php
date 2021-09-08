@@ -1,8 +1,9 @@
  <?php
 
+include_once PATH . 'controladores/RegistrarControlador.php';
 include_once PATH . 'controladores/LibrosControlador.php';
 include_once PATH . 'controladores/rolesControlador.php';
-include_once PATH . 'controladores/usuario_sControlador.php';
+include_once PATH . 'controladores/Usuario_sControlador.php';
 include_once PATH . 'controladores/TiposDocumentosControlador.php';
 include_once PATH . 'controladores/usuario_sRolesControlador.php';
 include_once PATH . 'controladores/TicketsControlador.php';
@@ -29,6 +30,15 @@ class ControladorPrincipal{
 
     public function control(){
         switch ($this->datos['ruta']) {
+            case 'registrar':
+                $this -> registrar();
+                break;
+            case 'gestionDeRegistro':
+                $this -> gestionDeRegistro();
+                break;
+            case 'gestionDeAcceso':
+                $this -> gestionDeAcceso();
+                break;
             case 'listarLibros':
                 $this -> listarLibros();
                 break;
@@ -62,8 +72,20 @@ class ControladorPrincipal{
             case 'confirmarActualizarRol':
                 $this -> confirmarActualizarRol();
                 break;
-            case 'cancelarActualizarRol':
-                $this -> cancelarActualizarRol();
+            case 'mostrarInsertarRoles':
+                $this -> mostrarInsertarRoles();
+                break;
+            case 'insertarRol':
+                $this -> insertarRol();
+                break;
+            case 'eliminarRol':
+                $this -> eliminarRol();
+                break;
+            case 'listarRolesInactivos':
+                $this -> listarRolesInactivos();
+                break;
+            case 'habilitarRol':
+                $this -> habilitarRol();
                 break;
             case 'listarUsuarios':
                 $this -> listarUsuarios();
@@ -76,6 +98,21 @@ class ControladorPrincipal{
                 break;
             case 'cancelarActualizarUsuarios':
                  $this -> cancelarActualizarUsuarios();
+                 break;
+            case 'mostrarInsertarUsuarios':
+                $this -> mostrarInsertarUsuarios();
+                break;
+            case 'insertarUsuario':
+                $this -> iInsertarUsuario();
+                break;
+            case 'eliminarUsuario':
+                $this -> eliminarUsuario();
+                break;
+            case 'listarUsuariosInactivos':
+                $this -> listarUsuariosInactivos();
+                break;
+            case 'habilitarUsuario':
+                $this -> habilitarUsuario();
                 break;
             case 'listarTiposDocumentos':
                 $this -> listarTiposDocumentos();
@@ -137,26 +174,31 @@ class ControladorPrincipal{
             case 'actualizarVehiculos':
                 $this -> actualizarVehiculos();
                 break;
-            case 'confirmarActualizarVehiculos':
-                $this -> confirmarActualizarVehiculos();
+            case 'cancelarActualizarVehiculo':
+                $this -> cancelarActualizarVehiculo();
                 break;
-            case 'cancelarActualizarVehiculos':
-                $this -> cancelarActualizarVehiculos();
+            case 'confirmarActualizarVehiculo':
+                $this -> actualizarVehiculos();
                 break;
-            case 'listarReportes':
-                $this -> listarReportes();
+            case 'mostrarInsertarVehiculos':
+                $this -> mostrarInsertarVehiculos();
                 break;
-            case 'actualizarReportes':
-                $this -> actualizarReportes();
+            case 'insertarVehiculo':
+                $this -> insertarVehiculo();
                 break;
+            case 'eliminarVehiculos':
+                $this -> eliminarVehiculos();
             case 'eliminarReportes':
                 $this -> eliminarReportes();
                 break;
             case 'confirmarActualizarReportes':
                 $this -> confirmarActualizarReportes();
                 break;
-            case 'cancelarActualizarReportes':
-                $this -> cancelarActualizarReportes();
+            case 'listarVehiculosInactivos':
+                $this -> listarVehiculosInactivos();
+                break;
+            case 'habilitarVehiculo':
+                $this -> habilitarVehiculo();
                 break;
             case 'listarReportesInactivos':
                 $this -> listarReportesInactivos();
@@ -171,6 +213,18 @@ class ControladorPrincipal{
                 $this -> confirmarInsertarReportes();
                 break;
         }
+    }
+
+    public function registrar(){
+        $registrar = new RegistrarControlador($this -> datos);
+    }
+
+    public function gestionDeRegistro(){
+        $usuariosControlador = new Usuario_sControlador($this -> datos);
+    }
+
+    public function gestionDeAcceso(){
+        $usuariosControlador = new Usuario_sControlador($this -> datos);
     }
 
     public function listarLibros(){
@@ -221,6 +275,26 @@ class ControladorPrincipal{
         $rolesControlador = new RolesControlador($this -> datos);
     }
 
+    public function mostrarInsertarRoles(){
+        $rolesControlador = new RolesControlador($this -> datos);
+    }
+
+    public function insertarRol(){
+        $rolesControlador = new RolesControlador($this -> datos);
+    }
+
+    public function eliminarRol(){
+        $rolesControlador = new RolesControlador($this -> datos);
+    }
+
+    public function listarRolesInactivos(){
+        $rolesControlador = new RolesControlador($this -> datos);
+    }
+
+    public function habilitarRol(){
+        $rolesControlador = new RolesControlador($this -> datos);
+    }
+
 
     public function listarUsuarios(){
         $usuariosControlador = new Usuario_sControlador($this -> datos);
@@ -236,6 +310,26 @@ class ControladorPrincipal{
 
     public function cancelarActualizarUsuarios(){
         $rolesControlador = new Usuario_sControlador($this -> datos);
+    }
+
+    public function mostrarInsertarUsuarios(){
+        $rolesControlador = new Usuario_sControlador($this -> datos);
+    }
+
+    public function insertarUsuario(){
+        $rolesControlador = new Usuario_sControlador($this -> datos);
+    }
+
+    public function eliminarUsuario(){
+        $librosControlador = new Usuario_sControlador($this -> datos);
+    }
+
+    public function listarUsuariosInactivos(){
+        $librosControlador = new Usuario_sControlador($this -> datos);
+    }
+
+    public function habilitarUsuario(){
+        $librosControlador = new Usuario_sControlador($this -> datos);
     }
 
     public function cancelarActualizarLibro(){
@@ -305,13 +399,36 @@ class ControladorPrincipal{
     public function listarVehiculos(){
         $vehiculosControlador = new VehiculosControlador($this -> datos);
     }
+
     public function actualizarVehiculos(){
         $vehiculosControlador = new VehiculosControlador($this -> datos);
     }
-    public function confirmarActualizarVehiculos(){
+
+    public function confirmarActualizarVehiculo(){
         $vehiculosControlador = new VehiculosControlador($this -> datos);
     }
-    public function cancelarActualizarVehiculos(){
+
+    public function cancelarActualizarVehiculo(){
+        $vehiculosControlador = new VehiculosControlador($this -> datos);
+    }
+
+    public function mostrarInsertarVehiculos(){
+        $vehiculosControlador = new VehiculosControlador($this -> datos);
+    }
+
+    public function insertarVehiculo(){
+        $vehiculosControlador = new VehiculosControlador($this -> datos);
+    }
+
+    public function eliminarVehiculos(){
+        $vehiculosControlador = new VehiculosControlador($this -> datos);
+    }
+
+    public function listarVehiculosInactivos(){
+        $vehiculosControlador = new VehiculosControlador($this -> datos);
+    }
+
+    public function habilitarVehiculo(){
         $vehiculosControlador = new VehiculosControlador($this -> datos);
     }
     

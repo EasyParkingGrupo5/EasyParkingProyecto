@@ -2,6 +2,19 @@
 
 session_start();
 
+if (isset($_SESSION['mensaje']) && isset($_SESSION['nombre']) && isset($_SESSION['apellido'])) {
+    $mensaje = $_SESSION['mensaje'];
+    $nombre = $_SESSION['nombre'];
+    $apellido = $_SESSION['apellido'];
+    echo "<script languaje='javascript'>alert('$mensaje '+'$nombre '+'$apellido')</script>";
+    unset($_SESSION['mensaje']);
+    unset($_SESSION['nombre']);
+    unset($_SESSION['apellido']);
+}else if (isset($_SESSION['mensaje'])){
+    $mensaje = $_SESSION['mensaje'];
+    echo "<script languaje='javascript'>alert('$mensaje')</script>";
+    unset($_SESSION['mensaje']);
+}
 ?>
 
 <!DOCTYPE html>
@@ -66,13 +79,17 @@ session_start();
             <br>
             <a href="./Controlador.php?ruta=listarRoles">Listar Roles</a>
             <br>
-            <a >Agregar</a>
+            <a href="./Controlador.php?ruta=mostrarInsertarRoles">Agregar</a>
+            <br>
+            <a href="./Controlador.php?ruta=listarRolesInactivos">Listar Roles Inactivos</a>
         </div>
         <div class="gestion">Menú Operaciones de Tabla Usuario_s
             <br>
             <a href="./Controlador.php?ruta=listarUsuarios">Listar Usuarios</a>
             <br>
-            <a>Agregar</a>
+            <a href="./Controlador.php?ruta=mostrarInsertarUsuarios">Agregar</a>
+            <br>
+            <a href="./Controlador.php?ruta=listarUsuariosInactivos">Listar Usuarios Inactivos</a>
         </div>
         <div class="gestion">Menú Operaciones de Tabla Usuario_s_roles
             <br>
@@ -92,7 +109,9 @@ session_start();
             <br>
             <a href="./Controlador.php?ruta=listarVehiculos">Listar Vehículos</a>
             <br>
-            <a>Agregar Vehiculo</a>
+            <a href="./Controlador.php?ruta=mostrarInsertarVehiculos">Agregar Vehiculo</a>
+            <br>
+            <a href="./Controlador.php?ruta=listarVehiculosInactivos">Listar Vehiculos Inactivos</a>
         </div>
         <div class="gestion">Menú de Operaciones de Tabla Reportes
             <br>

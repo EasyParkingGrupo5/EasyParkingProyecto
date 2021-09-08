@@ -1,22 +1,17 @@
 <?php
 
-include_once PATH . 'modelos/ConBdMysql.php';
+include_once 'modelos/ConBdMysql.php';
 
 class VehiculosDAO extends ConDbMySql{
     public function __construct($servidor, $base, $loginDB, $passwordDB){
         parent::__construct($servidor, $base, $loginDB, $passwordDB);  
     }
     
-    public function seleccionarTodos(){
-        $planconsulta = "SELECT veh.vehId, veh.vehNumero_Placa, 
-        veh.vehColor, veh.vehMarca, veh.vehEstado, veh.vehUsuSesion, 
-        veh.vehCreated_At, veh.vehUpdated_At, emp.empId, 
-        emp.empNumeroDocumento, tic.ticId, tic.ticNumero 
-        FROM vehiculos veh JOIN empleados emp ON veh.Empleados_empId = 
-        emp.empId JOIN tickets tic ON veh.Tickets_ticId = tic.ticId; 
-        ";
+    public function seleccionarTodos($estado){
+        $planconsulta = "SELECT * FROM vehiculos v JOIN tickets t on v.Tickets_ticId=t.ticId JOIN empleados e on e.empId=v.Empleados_empId WHERE vehEstado= :vehEstado;";
 
         $registroVehiculos = $this->conexion->prepare($planconsulta);
+        $registroVehiculos -> bindParam(":vehEstado", $estado);
         $registroVehiculos->execute();
 
         $listadoRegistrosVehiculos = array();
@@ -53,20 +48,14 @@ class VehiculosDAO extends ConDbMySql{
 
     public function insertar($registro){
         try {
-            $consulta = "INSERT INTO vehiculos (vehId,vehNumero_Placa,vehColor,vehMarca,vehEstado,vehUsuSesion,vehCreated_At,
-            vehUpdated_At,Empleados_empId,Tickets_ticId) VALUES (:vehId,:vehNumero_Placa,:vehColor,:vehMarca,:vehEstado,:vehUsuSesion,:vehCreated_At,
-            :vehUpdated_At,:Empleados_empId,:Tickets_ticId);";
+            $consulta = "INSERT INTO vehiculos (vehNumero_Placa,vehColor,vehMarca, Empleados_empId, Tickets_ticId) 
+            VALUES (:vehNumero_Placa,:vehColor,:vehMarca, :Empleados_empId,:Tickets_ticId);";
 
             $insertar = $this->conexion->prepare($consulta);
 
-            $insertar -> bindParam(":vehId", $registro['vehId']);
             $insertar -> bindParam(":vehNumero_Placa", $registro['vehNumero_Placa']);
             $insertar -> bindParam(":vehColor", $registro['vehColor']);
             $insertar -> bindParam(":vehMarca", $registro['vehMarca']);
-            $insertar -> bindParam(":vehEstado", $registro['vehEstado']);
-            $insertar -> bindParam(":vehUsuSesion", $registro['vehUsuSesion']);
-            $insertar -> bindParam(":vehCreated_At", $registro['vehCreated_At']);
-            $insertar -> bindParam(":vehUpdated_At", $registro['vehUpdated_At']);
             $insertar -> bindParam(":Empleados_empId", $registro['Empleados_empId']);
             $insertar -> bindParam(":Tickets_ticId", $registro['Tickets_ticId']);
         
@@ -75,48 +64,62 @@ class VehiculosDAO extends ConDbMySql{
 
             $clavePrimaria = $this->conexion->lastInsertId();
 
-            return ['Inserto'=>1,'resultado'=>$clavePrimaria];
+            return ['Inserto'=>true,'resultado'=>$clavePrimaria];
 
             $this->cierreBd();
 
-        }  
-          catch(Exception $e){return $e;}
+        } catch (PDOException $pdoExc) {
+            return ['Inserto'=>false,$pdoExc->errorInfo[2]];
+        }
         
 
     }
 
     public function actualizar($registro){
-        try{
-            $vehNumero_Placa = $registro[0]['vehNumero_Placa'];
-            $vehColor = $registro[0]['vehColor'];
-            $vehMarca = $registro[0]['vehMarca'];
-            $vehId = $registro[0]['vehId'];	
-			
-			
-			if(isset($isbn)){
-				
-                $actualizar = "UPDATE vehiculos SET vehNumero_Placa= ? , ";
-                $actualizar .= " vehColor = ? , ";
-                $actualizar .= " vehMarca = ? , ";
-                $actualizar .= " WHERE vehId= ? ; ";
-				
-				$actualizacion = $this->conexion->prepare($actualizar);
-				
-				$resultadoAct=$actualizacion->execute(array($vehNumero_Placa,$vehColor,$vehMarca,$vehId));
-				
-				        $this->cierreBd();
-						
-                return ['actualizacion' => $resultadoAct, 'mensaje' => "Actualización realizada."];				
-				
-			}
+           //print_r($registro);
+
+        //exit();
+
+        try {
+
+            $placa = $registro[0]['vehNumero_Placa'];
+            $color = $registro[0]['vehColor'];
+            $marca = $registro[0]['vehMarca'];
+            $vehId = $registro[0]['vehId'];
+            $empleados = $registro[0]['Empleados_empId'];
+            $tarifas = $registro[0]['Tickets_ticId'];
+
+            if(isset($vehId)){
+
+            $consulta = "UPDATE vehiculos " ;
+            $consulta.=" SET vehNumero_Placa = ?,";
+            $consulta.=" vehColor = ?,";
+            $consulta.=" vehMarca = ?, ";
+            $consulta.=" Tickets_ticId = ?, ";
+            $consulta.=" Empleados_empId = ? ";
+            $consulta.= "WHERE vehId = ?;";
+
+            //echo $placa."   ".$color."   ".$marca."   ".$vehId."   ".$empleados."   ".$tarifas;
 
 
-        } catch (PDOException $pdoExc) {
-			$this->cierreBd();
-            return ['actualizacion' => $resultadoAct, 'mensaje' => $pdoExc];
-        
+            //echo "<br>";
+            //echo $consulta;
+
+            //exit();
+
+            $actualizar = $this -> conexion -> prepare($consulta);
+
+            $actualizacion = $actualizar -> execute(array($placa, $color, $marca, $tarifas, $empleados, $vehId));
+
+            $this->cierreBd();
+
+            return ['actualizacion' => $actualizacion, 'mensaje' => 'Resgistro Actualizado'];
         }
+    } catch (PDOException $pdoExc) {
+        return ['actualizacion' => $actualizacion, 'mensaje' => $pdoExc];
     }
+    
+   }
 
     
     public function eliminar($sId = array()){

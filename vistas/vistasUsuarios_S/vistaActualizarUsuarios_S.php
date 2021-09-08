@@ -15,14 +15,7 @@ if (isset($_SESSION['actualizarDatosUsuarios'])){
         <center>
         <form role="form" action="controlador.php" method="post" id="formActualizarRols">
             <table>
-                <tr>
-                    <td>Id:</td>
-                    <td>
-                        <input class="form-control" placeholder="Id" name="usuId" type="number" patter="" required="requires" value="<?php 
-                        if(isset($actualizarDatosUsuarios->usuId)){echo($actualizarDatosUsuarios->usuId);} 
-                        ?>">
-                    </td>
-                </tr>
+                
                 <tr>
                     <td>Usuario Login:</td>
                     <td>

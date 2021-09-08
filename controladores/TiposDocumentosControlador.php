@@ -29,7 +29,7 @@ class TiposDocumentosControlador{
 
     public function listarTiposDocumentos(){
         $gestarTiposDocumentos = new TiposDocumentosDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
-        $listarTiposDocumentos = $gestarTiposDocumentos -> seleccionarTodos();
+        $listarTiposDocumentos = $gestarTiposDocumentos -> seleccionarTodos(1);
 
         session_start();
 

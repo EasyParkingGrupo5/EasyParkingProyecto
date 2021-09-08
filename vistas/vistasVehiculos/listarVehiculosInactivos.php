@@ -1,17 +1,8 @@
 <?php
-//echo "<pre>";
-//print_r($_SESSION['listaDeLibros']);
-//echo "</pre>";
-
-if (isset($_SESSION['mensaje'])) {
-    $mensaje = $_SESSION['mensaje'];
-    echo "<script languaje='javascript'>alert('$mensaje')</script>";
-    unset($_SESSION['mensaje']);
-}
-
+/*echo "<pre>";
+print_r($_SESSION['listaDeVehiculos']);
+echo "</pre>";*/
 ?>
-
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -30,42 +21,48 @@ if (isset($_SESSION['mensaje'])) {
 	
 	<body>
 <?php
-if(isset($_SESSION['listaDeRoles'])){
+if(isset($_SESSION['listaDeVehiculos'])){
 	
-    $listaDeRoles=$_SESSION['listaDeRoles'];
-	 unset($_SESSION['listaDeRoles']);
+	 $listaDeVehiculos=$_SESSION['listaDeVehiculos'];
+	 unset($_SESSION['listaDeVehiculos']);
 	
+}
+
+if (isset($_SESSION['listaDeTickets'])) {
+    $listarCategorias = $_SESSION['listaDeTickets'];
+    $categoriasCantidad = count($listarCategorias);
 }
 ?>
     <table id="example" class="table-responsive table-hover table-bordered table-striped" style="width:100%">
         <thead>
-            <h3>Listado de la Tabla Rol</h3>
-            <tr> 
-                <th>Id</th>
-                <th>Nombre</th> 
-                <th>Descripcion</th>
+            <tr>
+                <th>Id</th> 
+                <th>Numero de Placa</th> 
+                <th>Color</th> 
+                <th>Marca</th>
                 <!--<th>Estado</th>-->
-                <th>Actualizar</th> 
-                <th>Eliminar</th> 
+                <th>Edit</th> 
             </tr>
         </thead>
         <tbody>
             <?php
+
             $i = 0;
-            foreach ($listaDeRoles as $key => $value) {
+            foreach ($listaDeVehiculos as $key => $value) {
                 ?>
-                <tr> 
-                    <td><?php echo $listaDeRoles[$i]->rolId; ?></td> 
-                    <td><?php echo $listaDeRoles[$i]->rolNombre; ?></td>  
-                    <td><?php echo $listaDeRoles[$i]->rolDescripcion; ?></td>
+                <tr>
+                    <td><?php echo $listaDeVehiculos[$i]->vehId; ?></td>  
+                    <td><?php echo $listaDeVehiculos[$i]->vehNumero_Placa; ?></td>  
+                    <td><?php echo $listaDeVehiculos[$i]->vehColor; ?></td>  
+                    <td><?php echo $listaDeVehiculos[$i]->vehMarca; ?></td>
+                    
                     <!--<td>d>--> 
-                    <td><a href="Controlador.php?ruta=actualizarRol&rolId=<?php echo $listaDeRoles[$i]->rolId; ?>">Actualizar</a></td>  
-                    <td><a href="Controlador.php?ruta=eliminarRol&rolId=<?php echo $listaDeRoles[$i]->rolId; ?>" onclick="return confirm('Está seguro de eliminar el registro?')">Eliminar</a></td>  
+                    <td><a href="Controlador.php?ruta=habilitarVehiculo&vehId=<?php echo $listaDeVehiculos[$i]->vehId; ?>" onclick="return confirm('Está seguro de habilitar el registro?')">Habilitar</a></td>  
                 </tr>   
                 <?php
                 $i++;
             }
-            $listaDeRoles=null;
+            $listaDeVehiculos=null;
             ?>
         </tbody>
     </table>

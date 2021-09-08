@@ -1,21 +1,32 @@
 <?php
 
 
-if (isset($_SESSION['actualizarVehiculos'])) {
-    $actualizarLibro = $_SESSION['actualizarVehiculos'];
+
+if (isset($_SESSION['actualizarDatosVehiculos'])) {
+    $actualizarVehiculos = $_SESSION['actualizarDatosVehiculos'];
 }
+
+if (isset($_SESSION['listarTickets'])) {
+    $listarTickets = $_SESSION['listarTickets'];
+    $ticketCantidad = count($listarTickets);
+}
+
 if (isset($_SESSION['listarEmpleados'])) {
     $listarEmpleados = $_SESSION['listarEmpleados'];
     $empleadosCantidad = count($listarEmpleados);
 }
-if (isset($_SESSION['listarTickets'])) {
-    $listarTickets = $_SESSION['listarTickets'];
-    $ticketsCantidad = count($listarTickets);
-}
-if (isset($_SESSION['listarTarifas'])) {
-    $listarTarifas = $_SESSION['listarTarifas'];
-    $tarifasCantidad = count($listarTarifas);
-}
+
+//echo "<pre>";
+//print_r($_SESSION['actualizarDatosVehiculos']);
+//echo "</pre>";
+//echo "<pre>";
+//print_r($_SESSION['listarTickets']);
+//echo "</pre>";
+//echo "<pre>";
+//print_r($_SESSION['listarEmpleados']);
+//echo "</pre>";
+//exit();
+
 
 ?>
 <style type="text/css">
@@ -75,7 +86,7 @@ form select{
 <div>
     <fieldset>
         <center>
-        <form role="form" action="Controlador.php" method="POST" id="formRegistro" >
+        <form role="form" action="Controlador.php" method="POST" id="formVehiculos" >
             <table>
                 <tr>
                     <td>Id:</td>
@@ -106,16 +117,18 @@ form select{
                 <tr>
                     <td>Marca:</td>
                     <td>
-                            <input type="text" name="vehMarca" placeholder="vehMarca" style="width: 330px"
-                            value="<?php if (isset($actualizarVehiculos->vehMarca)) {
-                                echo $actualizarVehiculos->vehMarca;
-                            } ?>">
+                            <select name="vehMarca" id="vehMarca" >
+                                    <option value="MASDA">MASDA</option>
+                                    <option value="Bmw">Bmw</option>
+                                    <option value="Renault">Renault</option>
+                                    <option value="Chevrolet">Chevrolet</option>
+                            </select>
                     </td>
                 </tr>
                 <tr>
-                    <td>Empleado:</td>
+                <td>Empleado:</td>
                     <td>
-                            <select name="empId" id="empId" style="width: 338px">
+                            <select name="Empleados_empId" id="empId" style="width: 338px">
                                 <?php for ($i=0; $i < $empleadosCantidad; $i++) { 
                                 ?>
                                     <option value="<?php echo $listarEmpleados[$i]->empId; ?>" 
@@ -131,53 +144,34 @@ form select{
                             </select>
                     </td>
                 </tr>
-
                 <tr>
-                    <td>Numero de Ticket:</td>
+                <td>Tipo Tarifa:</td>
                     <td>
-                            <select name="ticNumero" id="ticNumero" style="width: 338px">
-                                <?php for ($i=0; $i < $ticketsCantidad; $i++) { 
+                            <select name="Tickets_ticId" id="Tickets_ticId" style="width: 338px">
+                                <?php for ($i=0; $i < $ticketCantidad; $i++) { 
                                 ?>
                                     <option value="<?php echo $listarTickets[$i]->ticId; ?>" 
-                                    <?php if (isset($listarTickets[$i]->ticId) && isset($actualizarTickets->ticNumero) && $listarTickets[$i]->ticId == $actualizarTickets->ticNumero) {
+                                    <?php if (isset($listarTickets[$i]->ticId) && isset($actualizarVehiculos->Tickets_ticId) && $listarTickets[$i]->ticId == $actualizarVehiculos->Tickets_ticId) {
                                         echo "selected";
                                     } ?>
                                     >
 
-                                    <?php echo $listarTickets[$i]->ticId; ?></option>
+                                    <?php echo $listarTickets[$i]->ticId.' - '.$listarTickets[$i] ->ticNumero.' pesos minuto'; ?></option>
                                 <?php
                                 }
                                 ?>
                             </select>
                     </td>
                 </tr>
-                <td>Valor Tarifa:</td>
-                    <td>
-                            <select name="tarValorTarifa" id="tarValorTarifa" style="width: 338px">
-                                <?php for ($i=0; $i < $tarifasCantidad; $i++) { 
-                                ?>
-                                    <option value="<?php echo $listarTarifas[$i]->tarId; ?>" 
-                                    <?php if (isset($listarTarifas[$i]->tarId) && isset($actualizarVehiculos->tarValorTarifa) && $listarValorTarifa[$i]->tarId == $actualizarTarifas->tarValorTarifa) {
-                                        echo "selected";
-                                    } ?>
-                                    >
 
-                                    <?php echo $listarTarifas[$i]->tarValorTarifa; ?></option>
-                                <?php
-                                }
-                                ?>
-                            </select>
-                    </td>
-                </tr>
                 <tr>
-                   
                     <td>
                         <br>
-                        <button type="submit" name="ruta" value="cancelarActualizarVehiculos" >Cancelar</button>
+                        <button type="submit" name="ruta" value="cancelarActualizarVehiculo" >Cancelar</button>
                     </td>
                     <td>
                         <br>
-                        &nbsp;&nbsp;||&nbsp;&nbsp;<button type="submit" name="ruta" value="confirmarActualizarVehiculos">Actualización de Vehiculos</button>
+                        <button type="submit" name="ruta" value="confirmarActualizarVehiculo">Confirmar       </button>
                     </td>
                 </tr>
             </table>

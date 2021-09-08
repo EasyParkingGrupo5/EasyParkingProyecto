@@ -59,7 +59,7 @@ form input[type="number"]{
                     <td>
                         <input placeholder="Id Documento" name = "tipDocId" type="number" pattern="" size="25" require="required" autofocus readonly="readonly"
                         value="<?php if (isset($actualizarTipoDocumento->tipDocId)) {
-                            echo $actualizarTipoDocumento->tipDocId;}?>">
+                            echo $actualizarTipoDocumento->tipDocId;}?>" >
                     </td>
                 </tr>
                 <tr>
@@ -68,7 +68,7 @@ form input[type="number"]{
                             <input type="text" name="tipDocSigla" placeholder="Sigla"  size="25"
                             value="<?php if (isset($actualizarTipoDocumento->tipDocSigla)) {
                                 echo $actualizarTipoDocumento->tipDocSigla;
-                            } ?>">
+                            } ?>" autocomplete="off">
                     </td>
                 </tr>
                 <tr>
@@ -77,7 +77,7 @@ form input[type="number"]{
                             <input type="text" name="tipDocNombre_documento" placeholder="Nombre Documento" size="25" 
                             value="<?php if (isset($actualizarTipoDocumento->tipDocNombre_documento)) {
                                 echo $actualizarTipoDocumento->tipDocNombre_documento;
-                            } ?>">
+                            } ?>" autocomplete="off">
                     </td>
                 </tr>
                 <tr>

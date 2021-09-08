@@ -30,42 +30,38 @@ if (isset($_SESSION['mensaje'])) {
 	
 	<body>
 <?php
-if(isset($_SESSION['listaDeRoles'])){
+if(isset($_SESSION['listaDeUsuarios_Roles'])){
 	
-    $listaDeRoles=$_SESSION['listaDeRoles'];
-	 unset($_SESSION['listaDeRoles']);
+    $listaDeUsuarios_Roles=$_SESSION['listaDeUsuarios_Roles'];
+	 unset($_SESSION['listaDeUsuarios_Roles']);
 	
 }
 ?>
     <table id="example" class="table-responsive table-hover table-bordered table-striped" style="width:100%">
         <thead>
-            <h3>Listado de la Tabla Rol</h3>
-            <tr> 
-                <th>Id</th>
-                <th>Nombre</th> 
-                <th>Descripcion</th>
+            <h3>Listado de la Tabla Rol y Usuarop</h3>
+            <tr>
+                <th>Usuario</th> 
+                <th>Rol</th>
                 <!--<th>Estado</th>-->
-                <th>Actualizar</th> 
                 <th>Eliminar</th> 
             </tr>
         </thead>
         <tbody>
             <?php
             $i = 0;
-            foreach ($listaDeRoles as $key => $value) {
+            foreach ($listaDeUsuarios_Roles as $key => $value) {
                 ?>
-                <tr> 
-                    <td><?php echo $listaDeRoles[$i]->rolId; ?></td> 
-                    <td><?php echo $listaDeRoles[$i]->rolNombre; ?></td>  
-                    <td><?php echo $listaDeRoles[$i]->rolDescripcion; ?></td>
-                    <!--<td>d>--> 
-                    <td><a href="Controlador.php?ruta=actualizarRol&rolId=<?php echo $listaDeRoles[$i]->rolId; ?>">Actualizar</a></td>  
-                    <td><a href="Controlador.php?ruta=eliminarRol&rolId=<?php echo $listaDeRoles[$i]->rolId; ?>" onclick="return confirm('Está seguro de eliminar el registro?')">Eliminar</a></td>  
+                <tr>
+                    <td><?php echo $listaDeUsuarios_Roles[$i]->usuId; ?></td>  
+                    <td><?php echo $listaDeUsuarios_Roles[$i]->rolId; ?></td>
+                    <!--<td>d>-->
+                    <td><a href="Controlador.php?ruta=eliminarUsuarios&usuId=<?php echo $listaDeUsuarios_Roles[$i]->id_usuario_s; ?>" onclick="return confirm('Está seguro de eliminar el registro?')">Eliminar</a></td>  
                 </tr>   
                 <?php
                 $i++;
             }
-            $listaDeRoles=null;
+            $listaDeUsuarios=null;
             ?>
         </tbody>
     </table>
