@@ -125,6 +125,9 @@ class ControladorPrincipal{
             case 'mostrarInsertarticket':
                 $this -> mostrarInsertarticket();
                 break;
+            case 'confirmarInsertarTickets':
+                $this -> confirmarInsertarTickets();
+                break;
             case 'habilitarTickets':
                 $this -> habilitarTickets();
                 break;
@@ -293,6 +296,9 @@ class ControladorPrincipal{
     }
     
     public function habilitarTickets(){
+        $ticketsControlador = new TicketsControlador($this -> datos);
+    }
+    public function confirmarInsertarTickets(){
         $ticketsControlador = new TicketsControlador($this -> datos);
     }
     

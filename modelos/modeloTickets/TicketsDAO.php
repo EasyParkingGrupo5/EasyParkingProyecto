@@ -48,28 +48,19 @@ class TicketsDAO extends ConDbMySql{
     public function insertar($registro){ 
 
         try {
-            $consulta = "INSERT INTO tickets (ticId, ticNumero, ticFecha, ticHoraIngreso, ticHoraSalida, ticValorFinal, 
-            ticEstado,tic_created_at,tic_updated_at, ticUsuSesion,Empleados_empId, 			
-            Tarifas_tarId) VALUES (:ticId, :ticNumero , :ticFecha,
-            :ticHoraIngreso , :ticHoraSalida , :ticValorFinal ,:ticEstado,:tic_created_at,:tic_updated_at,:ticUsuSesion,
-            :Empleados_empId,:Tarifas_tarId);";
+            $consulta = "INSERT INTO tickets (ticNumero,ticFecha,ticHoraIngreso,ticHoraSalida,ticValorFinal, 
+            Empleados_empId,Tarifas_tarId) VALUES (:ticNumero,:ticFecha,
+            :ticHoraIngreso,:ticHoraSalida,:ticValorFinal,:Empleados_empId,:Tarifas_tarId);";
 
             $insertar = $this->conexion->prepare($consulta);
 
-            $insertar -> bindParam(":ticId", $registro['ticId']);
             $insertar -> bindParam(":ticNumero", $registro['ticNumero']);
             $insertar -> bindParam(":ticFecha", $registro['ticFecha']);
             $insertar -> bindParam(":ticHoraIngreso", $registro['ticHoraIngreso']);
             $insertar -> bindParam(":ticHoraSalida", $registro['ticHoraSalida']);
             $insertar -> bindParam(":ticValorFinal", $registro['ticValorFinal']);
-            $insertar -> bindParam(":ticEstado", $registro['ticEstado']);
-            $insertar -> bindParam(":tic_created_at", $registro['tic_created_at']);
-            $insertar -> bindParam(":tic_updated_at", $registro['tic_updated_at']);
-            $insertar -> bindParam(":ticUsuSesion", $registro['ticUsuSesion']);
             $insertar -> bindParam(":Empleados_empId", $registro['Empleados_empId']);
             $insertar -> bindParam(":Tarifas_tarId", $registro['Tarifas_tarId']);
-
-
 
             $insercion = $insertar->execute();
 

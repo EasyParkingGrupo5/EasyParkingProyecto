@@ -11,6 +11,14 @@ if (isset($_SESSION['mensaje'])) {
     echo "<script languaje='javascript'>alert('$mensaje')</script>";
     unset($_SESSION['mensaje']);
 }
+if (isset($_SESSION['listarEmpleados'])) {
+    $listarEmpleados = $_SESSION['listarEmpleados'];
+    $empleadosCantidad = count($listarEmpleados);
+}
+if (isset($_SESSION['listarTarifa'])) {
+    $listarTarifa = $_SESSION['listarTarifa'];
+    $tarifaCantidad = count($listarTarifa);
+}
 
 
 
@@ -73,12 +81,7 @@ form select{
         <center>
         <form role="form" action="Controlador.php" method="POST" id="formRegistro" autocomplete="off">
             <table>
-                <tr>
-                    <td class="letras">Id:</td>
-                    <td>
-                        <input placeholder="Id" name = "ticId" type="number" required="required" value="<?php if(isset($_SESSION['ticId'])){echo $_SESSION['ticId']; unset($_SESSION['ticId']);}?>">
-                    </td>
-                </tr>
+                
                 <tr>
                     <td class="letras">Numero:</td>
                     <td>
@@ -130,7 +133,7 @@ form select{
                     </td>
                 </tr>
                 <td>Tipo Tarifa:</td>
-                    <td>
+                <td>
                             <select name="Tarifas_tarId" id="tarValorTarifa" style="width: 338px">
                                 <?php for ($i=0; $i < $tarifaCantidad; $i++) { 
                                 ?>
@@ -150,11 +153,11 @@ form select{
                    
                     <td>
                         <br>
-                        <button class="botonCancelar" type="submit" name="ruta" value="listarLibros" formnovalidate>Cancelar</button>
+                        <button class="botonCancelar" type="submit" name="ruta" value="listarTickets" formnovalidate>Cancelar</button>
                     </td>
                     <td>
                         <br>
-                        <button class="botonInsertar" type="submit" name="ruta" value="confirmarInsertarLibro">Insertar Libro</button>
+                        <button class="botonInsertar" type="submit" name="ruta" value="confirmarInsertarTickets">Insertar Tickets</button>
                     </td>
                 </tr>
             </table>

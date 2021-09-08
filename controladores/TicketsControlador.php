@@ -44,6 +44,10 @@ class TicketsControlador{
             case 'habilitarTickets':
                 $this -> habilitarTickets();
                  break;
+            case 'mostrarInsertarticket':
+                $this -> mostrarInsertarticket();
+                break;
+            
             
         }
     }
@@ -89,6 +93,51 @@ class TicketsControlador{
         $_SESSION['mensaje'] = "Registro Actualizado";
         header("location:Controlador.php?ruta=listarTickets");
     }
+    public function confirmarInsertarTickets(){
+        $gestarTickets = new TicketsDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $buscarTickets = $gestarTickets -> seleccionarID(array($this->datos['ticId']));
+
+        if(!$buscarTickets['exitoSeleccionId']){
+            $insertarTickets = new TicketsDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+            $insertoTickets = $insertarTickets -> insertar($this -> datos);
+
+            session_start();
+
+            $_SESSION['mensaje'] = 'Fue insertado con exito con el código '.$insertoTickets['resultado'];
+            header("location:Controlador.php?ruta=listarTickets");
+        }else{
+            session_start();
+                $_SESSION['ticId'] = $this->datos['ticId'];
+                $_SESSION['ticNumero'] = $this->datos['ticNumero'];
+                $_SESSION['ticFecha'] = $this->datos['autticFechaor'];
+                $_SESSION['ticHoraIngreso'] = $this->datos['ticHoraIngreso'];
+                $_SESSION['ticHoraSalida'] = $this->datos['ticHoraSalida'];
+                $_SESSION['ticValorFinal'] = $this->datos['ticValorFinal'];
+                $_SESSION['Empleados_empId'] = $this->datos['Empleados_empId'];
+                $_SESSION['tarTipoVehiculo'] = $this->datos['tarTipoVehiculo'];					
+					
+                $_SESSION['mensaje'] = "El código " . $this->datos['ticId'] . " ya existe en el sistema.";
+
+                header("location:Controlador.php?ruta=agregarTickets");
+        }
+    }
+    public function mostrarInsertarticket(){
+
+        $gestarEmpleados = new EmpleadosDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $listarEmpleados = $gestarEmpleados -> seleccionarTodos(1);
+        
+        $gestarTarifas = new TarifasDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $listarValorTarifa = $gestarTarifas -> seleccionarTodos (1);
+
+        session_start();
+
+        
+        $_SESSION['listarEmpleados'] = $listarEmpleados;
+        $_SESSION['listarValorTarifa'] = $listarValorTarifa;
+
+        header('location:principal.php?contenido=vistas/vistasTickets/vistaInsertarTickets.php');
+    }
+
 
     public function cancelarActualizarTickets(){
         
@@ -105,38 +154,7 @@ class TicketsControlador{
 
         header('location:principal.php?contenido=vistas/vistasTickets/vistaInsertarTickets.php');
     }
-
-    public function confirmarInsertarTickets(){
-        $gestarTickets = new TicketsDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
-        $buscarTickets = $gestarTickets -> seleccionarID(array($this->datos['isbn']));
-
-        if(!$buscarTickets['exitoSeleccionId']){
-            $insertarTickets = new TicketsDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
-            $insertoTickets = $insertarTickets -> insertar($this -> datos);
-
-            session_start();
-
-            $_SESSION['mensaje'] = 'Fue insertado con exito con el código '.$insertoTickets['resultado'];
-            header("location:Controlador.php?ruta=listarTickets");
-        }else{
-            session_start();
-                $_SESSION['ticId'] = $this->datos['ticId'];
-                $_SESSION['ticNumero'] = $this->datos['ticNumero'];
-                $_SESSION['ticFecha'] = $this->datos['ticFecha'];
-                $_SESSION['ticHoraIngreso'] = $this->datos['ticHoraIngreso'];
-                $_SESSION['ticHoraSalida'] = $this->datos['ticHoraSalida'];
-                $_SESSION['ticValorFinal'] = $this->datos['ticValorFinal'];
-                $_SESSION['empId'] = $this->datos['empId'];
-                $_SESSION['tarTipoVehiculo'] = $this->datos['tarTipoVehiculo'];
-                $_SESSION['tarValorTarifa'] = $this->datos['tarValorTarifa'];							
-					
-                $_SESSION['mensaje'] = "El código " . $this->datos['ticId'] . " ya existe en el sistema.";
-
-                header("location:Controlador.php?ruta=agregarTickets");
-        }
-
-        }
-        
+    
         public function eliminarTickets(){
             $gestarTickets = new TicketsDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
             $inhabilitarTickets = $gestarTickets -> eliminarLogico(array($this -> datos['idAct']));
