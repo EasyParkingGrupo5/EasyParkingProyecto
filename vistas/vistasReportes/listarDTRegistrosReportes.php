@@ -2,6 +2,11 @@
 /*echo "<pre>";
 print_r($_SESSION['listaDeReportes']);
 echo "</pre>";*/
+if (isset($_SESSION['mensaje'])) {
+    $mensaje = $_SESSION['mensaje'];
+    echo "<script languaje='javascript'>alert('$mensaje')</script>";
+    unset($_SESSION['mensaje']);
+}
 ?>
 <!DOCTYPE html>
 <html>
