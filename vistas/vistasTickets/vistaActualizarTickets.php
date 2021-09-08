@@ -132,7 +132,7 @@ form select{
                 <tr>
                     <td>Empleado:</td>
                     <td>
-                            <select name="empId" id="empId" style="width: 338px">
+                            <select name="Empleados_empId" id="empId" style="width: 338px">
                                 <?php for ($i=0; $i < $empleadosCantidad; $i++) { 
                                 ?>
                                     <option value="<?php echo $listarEmpleados[$i]->empId; ?>" 
@@ -150,7 +150,7 @@ form select{
                 </tr>
                 <td>Tipo Tarifa:</td>
                     <td>
-                            <select name="tarValorTarifa" id="tarValorTarifa" style="width: 338px">
+                            <select name="Tarifas_tarId" id="tarValorTarifa" style="width: 338px">
                                 <?php for ($i=0; $i < $tarifaCantidad; $i++) { 
                                 ?>
                                     <option value="<?php echo $listarTarifa[$i]->tarId; ?>" 

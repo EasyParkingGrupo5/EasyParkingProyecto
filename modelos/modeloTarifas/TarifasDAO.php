@@ -7,10 +7,11 @@ class TarifasDAO extends ConDbMySql{
         parent::__construct($servidor, $base, $loginDB, $passwordDB);  
     }
     
-    public function seleccionarTodos(){
-        $planconsulta = "select * from tarifas;";
+    public function seleccionarTodos($estado){
+        $planconsulta = "SELECT * FROM tarifas WHERE tarEstado=:tarEstado;";
 
         $registroTarifas = $this->conexion->prepare($planconsulta);
+        $registroTarifas->bindParam(':tarEstado',$estado);
         $registroTarifas->execute();
 
         $listadoRegistrosTarifas = array();
