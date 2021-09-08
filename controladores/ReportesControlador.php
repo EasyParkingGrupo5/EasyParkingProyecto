@@ -76,7 +76,7 @@ class ReportesControlador{
     }
 
     public function confirmarActualizarReportes(){
-        $gestarReportes = new LibroDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $gestarReportes = new ReportesDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
         $confirmarActualizarReportes = $gestarReportes -> actualizar(array($this->datos));
 
         session_start();
@@ -135,7 +135,7 @@ class ReportesControlador{
             session_start();
 
             $_SESSION['mensaje'] = "Registro Eliminado";
-            header("location:Controlador.php?ruta=listarLibros");
+            header("location:Controlador.php?ruta=listarReportes");
 
 
         }

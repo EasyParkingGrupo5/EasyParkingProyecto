@@ -329,6 +329,9 @@ class ControladorPrincipal{
     public function habilitarReportes(){
         $reportesControlador = new ReportesControlador($this -> datos);
     }
+    public function eliminarReportes(){
+        $reportesControlador = new ReportesControlador($this -> datos);
+    }
 }
 
 ?>
