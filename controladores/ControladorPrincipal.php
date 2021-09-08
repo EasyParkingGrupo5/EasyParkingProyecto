@@ -110,11 +110,26 @@ class ControladorPrincipal{
             case 'actualizarTickets':
                 $this -> actualizarTickets();
                 break;
+            case 'eliminarTickets':
+                $this -> eliminarTickets();
+                break;
             case 'confirmarActualizarTickets':
                 $this -> confirmarActualizarTickets();
                 break;
             case 'cancelarActualizarTickets':
                 $this -> cancelarActualizarTickets();
+                break;
+            case 'listarTicketsInactivos':
+                $this -> listarTicketsInactivos();
+                break;
+            case 'mostrarInsertarticket':
+                $this -> mostrarInsertarticket();
+                break;
+            case 'confirmarInsertarTickets':
+                $this -> confirmarInsertarTickets();
+                break;
+            case 'habilitarTickets':
+                $this -> habilitarTickets();
                 break;
             case 'listarVehiculos':
                 $this -> listarVehiculos();
@@ -134,11 +149,26 @@ class ControladorPrincipal{
             case 'actualizarReportes':
                 $this -> actualizarReportes();
                 break;
+            case 'eliminarReportes':
+                $this -> eliminarReportes();
+                break;
             case 'confirmarActualizarReportes':
                 $this -> confirmarActualizarReportes();
                 break;
             case 'cancelarActualizarReportes':
                 $this -> cancelarActualizarReportes();
+                break;
+            case 'listarReportesInactivos':
+                $this -> listarReportesInactivos();
+                break;
+            case 'mostrarInsertarReportes':
+                $this -> mostrarInsertarReportes();
+                break;
+            case 'habilitarReportes':
+                $this -> habilitarReportes();
+                break;
+            case 'confirmarInsertarReportes':
+                $this -> confirmarInsertarReportes();
                 break;
         }
     }
@@ -249,10 +279,26 @@ class ControladorPrincipal{
     public function actualizarTickets(){
         $ticketsControlador = new TicketsControlador($this -> datos);
     }
+    public function eliminarTickets(){
+        $ticketsControlador = new TicketsControlador($this -> datos);
+    }
     public function confirmarActualizarTickets(){
         $ticketsControlador = new TicketsControlador($this -> datos);
     }
     public function cancelarActualizarTickets(){
+        $ticketsControlador = new TicketsControlador($this -> datos);
+    }
+    public function listarTicketsInactivos(){
+        $ticketsControlador = new TicketsControlador($this -> datos);
+    }
+    public function mostrarInsertarticket(){
+        $ticketsControlador = new TicketsControlador($this -> datos);
+    }
+    
+    public function habilitarTickets(){
+        $ticketsControlador = new TicketsControlador($this -> datos);
+    }
+    public function confirmarInsertarTickets(){
         $ticketsControlador = new TicketsControlador($this -> datos);
     }
     
@@ -268,8 +314,7 @@ class ControladorPrincipal{
     public function cancelarActualizarVehiculos(){
         $vehiculosControlador = new VehiculosControlador($this -> datos);
     }
-
-
+    
     public function listarReportes(){
         $reportesControlador = new ReportesControlador($this -> datos);
     }
@@ -283,6 +328,23 @@ class ControladorPrincipal{
     public function cancelarActualizarReportes(){
         $reportesControlador = new ReportesControlador($this -> datos);
     }
+    public function listarReportesInactivos(){
+        $reportesControlador = new ReportesControlador($this -> datos);
+    }
+    public function mostrarInsertarReportes(){
+        $reportesControlador = new ReportesControlador($this -> datos);
+    }
+    
+    public function habilitarReportes(){
+        $reportesControlador = new ReportesControlador($this -> datos);
+    }
+    public function eliminarReportes(){
+        $reportesControlador = new ReportesControlador($this -> datos);
+    }
+    public function confirmarInsertarReportes(){
+        $reportesControlador = new ReportesControlador($this -> datos);
+    }
 }
+
 
 ?>

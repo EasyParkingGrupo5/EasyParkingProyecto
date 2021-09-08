@@ -84,7 +84,9 @@ session_start();
             <br>
             <a href="./Controlador.php?ruta=listarTickets">Listar Tickets</a>
             <br>
-            <a>Agregar Ticket</a>
+            <a href="./Controlador.php?ruta=mostrarInsertarticket">Agregar Ticket</a>
+            <br>
+            <a href="./Controlador.php?ruta=listarTicketsInactivos">Listar Tickets Inactivos</a>
         </div>
         <div class="gestion">Menú de Operaciones de Tabla Vehículos
             <br>
@@ -96,7 +98,9 @@ session_start();
             <br>
             <a href="./Controlador.php?ruta=listarReportes">Listar Reportes</a>
             <br>
-            <a>Agregar Reporte</a>
+            <a href="./Controlador.php?ruta=mostrarInsertarReportes">Agregar Reporte</a>
+            <br>
+            <a href="./Controlador.php?ruta=listarReportesInactivos">Listar Reportes Inactivos</a>
         </div>
         <div class="gestion">Menú de Operaciones de Tabla Empleados
             <br>

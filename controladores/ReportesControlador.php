@@ -20,11 +20,32 @@ class ReportesControlador{
             case 'actualizarReportes':
                 $this->actualizarReportes();
                 break;
+            case 'confirmarActualizarReportes': 
+                $this->confirmarActualizarReportes();
+                break;
+            case 'cancelarActualizarReportes':
+                $this -> cancelarActualizarReportes();
+                break;
+            case 'mostrarInsertarReportes':
+                $this -> mostrarInsertarReportes();
+                break;
+            case 'confirmarInsertarReportes':
+                $this -> confirmarInsertarReportes();
+                break;
+            case 'eliminarReportes':
+                $this -> eliminarReportes();
+                break;
+            case 'listarReportesInactivos':
+                $this -> listarReportesInactivos();
+                break;
+            case 'habilitarReportes':
+                $this -> habilitarReportes();
+                break;
         }
     }
     public function listarReportes(){
         $gestarReportes = new ReportesDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
-        $registroReportes = $gestarReportes -> seleccionarTodos();
+        $registroReportes = $gestarReportes -> seleccionarTodos(1);
     
         session_start();
     
@@ -40,17 +61,22 @@ class ReportesControlador{
         $actualizarDatosReportes = $actualizarReportes['registroEncontrado'][0];
 
         $gestarEmpleados = new EmpleadosDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
-        $listarEmpleados = $gestarEmpleados -> seleccionarTodos();
+        $listarEmpleados = $gestarEmpleados -> seleccionarTodos(1);
+
+        $gestarVehiculos = new VehiculosDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $listarVehiculos = $gestarVehiculos -> seleccionarTodos(1);
+        
+        
         session_start();
 
         $_SESSION['actualizarReportes'] = $actualizarDatosReportes;
         $_SESSION['listarEmpleados'] = $listarEmpleados;
-
+        $_SESSION['listarVehiculos'] = $listarVehiculos;
         header("location:principal.php?contenido=vistas/vistasReportes/vistaActualizarReportes.php");
     }
 
     public function confirmarActualizarReportes(){
-        $gestarReportes = new LibroDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $gestarReportes = new ReportesDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
         $confirmarActualizarReportes = $gestarReportes -> actualizar(array($this->datos));
 
         session_start();
@@ -58,35 +84,41 @@ class ReportesControlador{
         $_SESSION['mensaje'] = "Registro Actualizado";
         header("location:Controlador.php?ruta=listarReportes");
     }
+    public function mostrarInsertarReportes(){
+
+        $gestarEmpleados = new EmpleadosDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $listarEmpleados = $gestarEmpleados -> seleccionarTodos(1);
+        
+        $gestarVehiculos = new VehiculosDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $listarVehiculos = $gestarVehiculos -> seleccionarTodos(1);
+
+        session_start();
+
+        
+        $_SESSION['listarEmpleados'] = $listarEmpleados;
+        $_SESSION['listarVehiculos'] = $listarVehiculos;
+
+        header('location:principal.php?contenido=vistas/vistasReportes/vistaInsertarReportes.php');
+    }
 
     public function cancelarActualizarReportes(){
         
         header("location:Controlador.php?ruta=listarReportes");
     }
 
-    public function agregarReportes(){
-        $gestarEmpleados = new EmpleadosoDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
-        $listarEmpleados = $gestarEmpleados -> seleccionarTodos();
-
-        session_start();
-
-        $_SESSION['listarCategorias'] = $listarCategorias;
-
-        header('location:principal.php?contenido=vistas/vistasLibros/vistaInsertarLibro.php');
-    }
 
     public function confirmarInsertarReportes(){
         $gestarReportes = new ReportesDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
-        $buscarReportes = $gestarReportes -> seleccionarID(array($this->datos['isbn']));
+        $buscarReportes = $gestarReportes -> seleccionarID(array($this->datos['repId']));
 
-        if(!$buscarLibro['exitoSeleccionId']){
+        if(!$buscarReportes['exitoSeleccionId']){
             $insertarReportes = new ReportesDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
             $insertoReportes = $insertarReportes -> insertar($this -> datos);
 
             session_start();
 
-            $_SESSION['mensaje'] = 'Fue insertado con exito con el código '.$insertoLibro['resultado'];
-            header("location:Controlador.php?ruta=listarLibros");
+            $_SESSION['mensaje'] = 'Fue insertado con exito con el código '.$insertoReportes['resultado'];
+            header("location:Controlador.php?ruta=listarReportes");
         }else{
             session_start();
                 $_SESSION['repId'] = $this->datos['repId'];
@@ -97,7 +129,7 @@ class ReportesControlador{
 					
                 $_SESSION['mensaje'] = "El código " . $this->datos['repId'] . " ya existe en el sistema.";
 
-                header("location:Controlador.php?ruta=agregarLibro");
+                header("location:Controlador.php?ruta=mostrarInsertarReportes");
         }
 
         }
@@ -109,7 +141,7 @@ class ReportesControlador{
             session_start();
 
             $_SESSION['mensaje'] = "Registro Eliminado";
-            header("location:Controlador.php?ruta=listarLibros");
+            header("location:Controlador.php?ruta=listarReportes");
 
 
         }

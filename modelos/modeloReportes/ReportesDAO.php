@@ -7,15 +7,18 @@ class ReportesDAO extends ConDbMySql{
         parent::__construct($servidor, $base, $loginDB, $passwordDB);  
     }
     
-    public function seleccionarTodos(){
+    public function seleccionarTodos($estado){
         $planconsulta = "SELECT rep.repId, rep.repNumero, rep.repFecha, 
         rep.repEstado, rep.rep_created_at, rep.rep_updated_at, 
         rep.repUsuSesion, emp.empId, emp.empNumeroDocumento, veh.vehId, 
         veh.vehNumero_Placa FROM reportes rep JOIN empleados emp ON 
         rep.Empleados_empId = emp.empId JOIN vehiculos veh ON 
-        rep.Vehiculos_vehId = veh.vehId;";
+        rep.Vehiculos_vehId = veh.vehId WHERE repEstado = :repEstado;";
 
         $registroReportes = $this->conexion->prepare($planconsulta);
+    
+        $registroReportes->bindParam(':repEstado',$estado);
+        
         $registroReportes->execute();
 
         $listadoRegistrosReportes = array();
@@ -23,8 +26,8 @@ class ReportesDAO extends ConDbMySql{
         while( $registro = $registroReportes->fetch(PDO::FETCH_OBJ)){
             $listadoRegistrosReportes[]=$registro;
         }
-          $this->cierreBd();
-          return $listadoRegistrosReportes;
+        $this->cierreBd();
+        return $listadoRegistrosReportes;
     }
 
     public function seleccionarID($sId){
@@ -52,20 +55,14 @@ class ReportesDAO extends ConDbMySql{
     public function insertar($registro){ 
         
         try {
-        $consulta = "INSERT INTO reportes (repId, repNumero, repFecha,repEstado, rep_created_at, rep_updated_at, 
-       repUsuSesion,Empleados_empId,Vehiculos_vehId) VALUES(:repId, :repNumero, :repFecha,:repEstado,:rep_created_at,:rep_updated_at, 
-       :repUsuSesion,:Empleados_empId,:Vehiculos_vehId);"; 
+        $consulta = "INSERT INTO reportes ( repNumero, repFecha, 
+       Empleados_empId,Vehiculos_vehId) VALUES( :repNumero,:repFecha,
+       :Empleados_empId,:Vehiculos_vehId);"; 
 
         $insertar = $this->conexion->prepare($consulta);
 
-       
-        $insertar -> bindParam(":repId", $registro['repId']);
         $insertar -> bindParam(":repNumero", $registro['repNumero']);
         $insertar -> bindParam(":repFecha", $registro['repFecha']);
-        $insertar -> bindParam(":repEstado", $registro['repEstado']);
-        $insertar -> bindParam(":rep_created_at", $registro['rep_created_at']);
-        $insertar -> bindParam(":rep_updated_at", $registro['rep_updated_at']);
-        $insertar -> bindParam(":repUsuSesion", $registro['repUsuSesion']);
         $insertar -> bindParam(":Empleados_empId", $registro['Empleados_empId']);
         $insertar -> bindParam(":Vehiculos_vehId", $registro['Vehiculos_vehId']);
  
@@ -86,26 +83,36 @@ class ReportesDAO extends ConDbMySql{
  
 
     public function actualizar($registro){
-        try {
-            $consulta = "UPDATE reportes SET repNumero = :repNumero, repFecha = :repFecha, 
-            repEstado = :repEstado WHERE repId = :repId;";
-            
-            $actualizar = $this -> conexion -> prepare($consulta);
+        try{
+            $repNumero = $registro[0]['repNumero'];
+            $repFecha = $registro[0]['repFecha'];
+            $Empleados_empId = $registro[0]['Empleados_empId'];
+            $Vehiculos_vehId = $registro[0]['Vehiculos_vehId'];
+            $repId = $registro[0]['repId'];	
+			
+			
+			if(isset($repId)){
+				
+                $actualizar = "UPDATE reportes SET repNumero= ? , ";
+                $actualizar .= " repFecha = ? , ";
+                $actualizar .= " Empleados_empId = ?, ";
+                $actualizar .= " Vehiculos_vehId = ? ";
+                $actualizar .= " WHERE repId= ? ; ";
+				
+				$actualizacion = $this->conexion->prepare($actualizar);
+				
+				$resultadoAct=$actualizacion->execute(array($repNumero,$repFecha,$Empleados_empId,$Vehiculos_vehId,$repId));
+				
+				        $this->cierreBd();
+						
+                return ['actualizacion' => $resultadoAct, 'mensaje' => "Actualización realizada."];				
+				
+			}
 
-            $actualizar -> bindParam(":repNumero", $registro['repNumero']);
-            $actualizar -> bindParam(":repFecha", $registro['repFecha']);
-            $actualizar -> bindParam(":repEstado", $registro['repEstado']);
-            $actualizar -> bindParam(":repId", $registro['repId']);
-
-            $actualizacion = $actualizar -> execute();
-
-            $this->cierreBd();
-
-            return ['actualizacion' => $actualizacion, 'mensaje' => 'Resgistro Actualizado'];
 
         } catch (PDOException $pdoExc) {
-            $this->cierreBd();
-            return ['actualizacion' => $actualizacion, 'mensaje' => $pdoExc];
+			$this->cierreBd();
+            return ['actualizacion' => $resultadoAct, 'mensaje' => $pdoExc];
         }
         
     }

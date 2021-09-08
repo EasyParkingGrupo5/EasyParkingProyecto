@@ -7,14 +7,11 @@ class TicketsDAO extends ConDbMySql{
         parent::__construct($servidor, $base, $loginDB, $passwordDB);  
     }
     
-    public function seleccionarTodos(){
-        $planconsulta = "select tic.ticId, tic.ticNumero, tic.ticFecha, tic.ticHoraIngreso, tic.ticHoraSalida, tic.ticValorFinal, 
-        tic.ticEstado, tic.tic_created_at, tic.tic_updated_at, tic.ticUsuSesion,emp.empId, 			
-        emp.empNumeroDocumento, tar.tarTipoVehiculo, tar.tarValorTarifa 
-        from tickets tic JOIN empleados emp ON tic.Empleados_empId=emp.empId 
-        JOIN tarifas tar on tic.Tarifas_tarId=tar.tarId;";
+    public function seleccionarTodos($estado){
+        $planconsulta = "SELECT * FROM tickets t JOIN tarifas ta ON ta.tarId=t.Tarifas_tarId WHERE t.ticEstado=:ticEstado";
 
         $registroTickets = $this->conexion->prepare($planconsulta);
+        $registroTickets->bindParam(':ticEstado',$estado);
         $registroTickets->execute();
 
         $listadoRegistrosTickets = array();
@@ -51,28 +48,19 @@ class TicketsDAO extends ConDbMySql{
     public function insertar($registro){ 
 
         try {
-            $consulta = "INSERT INTO tickets (ticId, ticNumero, ticFecha, ticHoraIngreso, ticHoraSalida, ticValorFinal, 
-            ticEstado,tic_created_at,tic_updated_at, ticUsuSesion,Empleados_empId, 			
-            Tarifas_tarId) VALUES (:ticId, :ticNumero , :ticFecha,
-            :ticHoraIngreso , :ticHoraSalida , :ticValorFinal ,:ticEstado,:tic_created_at,:tic_updated_at,:ticUsuSesion,
-            :Empleados_empId,:Tarifas_tarId);";
+            $consulta = "INSERT INTO tickets (ticNumero,ticFecha,ticHoraIngreso,ticHoraSalida,ticValorFinal, 
+            Empleados_empId,Tarifas_tarId) VALUES (:ticNumero,:ticFecha,
+            :ticHoraIngreso,:ticHoraSalida,:ticValorFinal,:Empleados_empId,:Tarifas_tarId);";
 
             $insertar = $this->conexion->prepare($consulta);
 
-            $insertar -> bindParam(":ticId", $registro['ticId']);
             $insertar -> bindParam(":ticNumero", $registro['ticNumero']);
             $insertar -> bindParam(":ticFecha", $registro['ticFecha']);
             $insertar -> bindParam(":ticHoraIngreso", $registro['ticHoraIngreso']);
             $insertar -> bindParam(":ticHoraSalida", $registro['ticHoraSalida']);
             $insertar -> bindParam(":ticValorFinal", $registro['ticValorFinal']);
-            $insertar -> bindParam(":ticEstado", $registro['ticEstado']);
-            $insertar -> bindParam(":tic_created_at", $registro['tic_created_at']);
-            $insertar -> bindParam(":tic_updated_at", $registro['tic_updated_at']);
-            $insertar -> bindParam(":ticUsuSesion", $registro['ticUsuSesion']);
             $insertar -> bindParam(":Empleados_empId", $registro['Empleados_empId']);
             $insertar -> bindParam(":Tarifas_tarId", $registro['Tarifas_tarId']);
-
-
 
             $insercion = $insertar->execute();
 
@@ -96,7 +84,8 @@ class TicketsDAO extends ConDbMySql{
             $ticHoraIngreso = $registro[0]['ticHoraIngreso'];
             $ticHoraSalida = $registro[0]['ticHoraSalida'];
             $ticValorFinal = $registro[0]['ticValorFinal'];
-            $ticEstado = $registro[0]['ticEstado'];
+            $empleados_empId = $registro[0]['Empleados_empId'];
+            $tarifas_tarId = $registro[0]['Tarifas_tarId'];
             $ticId = $registro[0]['ticId'];	
 			
 			
@@ -105,14 +94,16 @@ class TicketsDAO extends ConDbMySql{
                 $actualizar = "UPDATE tickets SET ticNumero= ? , ";
                 $actualizar .= " ticFecha = ? , ";
                 $actualizar .= " ticHoraIngreso = ? , ";
-                $actualizar .= " ticHoraSalida = ? ";
-                $actualizar .= " ticValorFinal = ? ";
+                $actualizar .= " ticHoraSalida = ?, ";
+                $actualizar .= " ticValorFinal = ?, ";
+                $actualizar .= " Empleados_empId = ?, ";
+                $actualizar .= " Tarifas_tarId = ? ";
                 $actualizar .= " WHERE ticId= ? ; ";
 				
 				$actualizacion = $this->conexion->prepare($actualizar);
 				
 				$resultadoAct=$actualizacion->execute(array($ticNumero,$ticFecha,$ticHoraIngreso,$ticHoraSalida, 
-                $ticValorFinal,$ticId));
+                $ticValorFinal,$empleados_empId,$tarifas_tarId,$ticId));
 				
 				        $this->cierreBd();
 						
