@@ -15,6 +15,7 @@ if (isset($_SESSION['mensaje'])) {
 <!DOCTYPE html>
 <html>
     <head>
+
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,20 +27,22 @@ if (isset($_SESSION['mensaje'])) {
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"> 
         <!--**************************************** -->
+        <link rel="stylesheet" href="../../../css/vistas/vistaAdminUsuarios/vistaListarRoles.css">
     </head>
-	
+
 	<body>
 <?php
 if(isset($_SESSION['listaDeRoles'])){
 	
     $listaDeRoles=$_SESSION['listaDeRoles'];
-	 unset($_SESSION['listaDeRoles']);
 	
 }
-?>
-    <table id="example" class="table-responsive table-hover table-bordered table-striped" style="width:100%">
+?>            
+<h4 >Listado de la Tabla Rol</h4>
+<div class="table">
+    <table id="example" class="table-responsive table-hover table-bordered table-striped">
         <thead>
-            <h3>Listado de la Tabla Rol</h3>
+
             <tr> 
                 <th>Id</th>
                 <th>Nombre</th> 
@@ -59,8 +62,8 @@ if(isset($_SESSION['listaDeRoles'])){
                     <td><?php echo $listaDeRoles[$i]->rolNombre; ?></td>  
                     <td><?php echo $listaDeRoles[$i]->rolDescripcion; ?></td>
                     <!--<td>d>--> 
-                    <td><a href="Controlador.php?ruta=actualizarRol&rolId=<?php echo $listaDeRoles[$i]->rolId; ?>">Actualizar</a></td>  
-                    <td><a href="Controlador.php?ruta=eliminarRol&rolId=<?php echo $listaDeRoles[$i]->rolId; ?>" onclick="return confirm('Está seguro de eliminar el registro?')">Eliminar</a></td>  
+                    <td><a href="../../../Controlador.php?ruta=actualizarRol&rolId=<?php echo $listaDeRoles[$i]->rolId; ?>" style="color:#FF0000">Actualizar</a></td>  
+                    <td><a href="../../../Controlador.php?ruta=eliminarRol&rolId=<?php echo $listaDeRoles[$i]->rolId; ?>" onclick="return confirm('Está seguro de eliminar el registro?')" style="color:#FF0000">Eliminar</a></td>  
                 </tr>   
                 <?php
                 $i++;
@@ -70,7 +73,7 @@ if(isset($_SESSION['listaDeRoles'])){
         </tbody>
     </table>
 
-
+    </div>
     <!--**************************************** -->  
     <!--LAS siguientes lìneas se agregan con el propòsito de dar funcionalidad a un DataTable-->
     <!--**************************************** -->
@@ -81,6 +84,9 @@ if(isset($_SESSION['listaDeRoles'])){
                             $('#example').DataTable({
                                 pageLength: 5,
                                 lengthMenu: [[5, 10, 15, 20], [5, 10, 15, 20]],
+                                language: {
+                                    url: '//cdn.datatables.net/plug-ins/1.11.1/i18n/es_es.json'
+        }
                             });
                         });
     </script>     

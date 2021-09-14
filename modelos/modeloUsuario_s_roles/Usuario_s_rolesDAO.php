@@ -10,7 +10,7 @@ class UsuarioRolesDAO extends ConDbMySql{
     public function seleccionarTodos(){
         $planconsulta = "SELECT usu.estado, usu.fechaUserRol, 
         usu.obsFechaUserRol, usu.usuRolUsuSesion, usu.created_at, 
-        usu.updated_at, usus.usuId, rol.rolId, rol.rolNombre FROM 
+        usu.updated_at, usus.usuId, usus.usuLogin,rol.rolId, rol.rolNombre FROM 
         usuario_s_roles usu JOIN usuario_s usus ON usu.id_usuario_s = 
         usus.usuId JOIN rol ON usu.id_rol = rol.rolId;
         ";

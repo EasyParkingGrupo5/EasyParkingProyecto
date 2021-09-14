@@ -111,7 +111,7 @@ if(isset($_SESSION['listarTiposDocumentos'])){
                         </div>
                 <div class ="login">
                         Ya está registrado? 
-                        <a href="login.php" style="color:#FF0000">
+                        <a href="index.php" style="color:#FF0000">
                             Ingrese Aquí
                         </a>
             </form>

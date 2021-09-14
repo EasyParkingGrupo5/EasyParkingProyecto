@@ -42,14 +42,34 @@ class VehiculosDAO extends ConDbMySql{
         }else{
             return ['exitoSeleccionId' => false, 'registroEncontrado' => $registroEncontrado];  
 
+        }
     }
+
+    public function seleccionarPlaca($sId){
+
+            $consulta = "SELECT * FROM vehiculos veh WHERE veh.vehNumero_Placa = ?; ";
+            $listar = $this->conexion->prepare($consulta);
+            $listar -> execute(array($sId[0]));
+    
+            $registroEnco = array();
+    
+            while( $registro = $listar->fetch(PDO::FETCH_OBJ)){
+                $registroEnco[]=$registro;
+            }
+              
+            if(isset($registroEnco[0]->vehId) && $registroEnco[0]->vehId != FALSE){
+                return ['exitoSeleccionPlaca' => 1, 'registroEncontrado' => $registroEnco];
+            }else{
+                return ['exitoSeleccionPlaca' => 0, 'registroEncontrado' => $registroEnco];
+            }
+    
 
     }
 
     public function insertar($registro){
         try {
-            $consulta = "INSERT INTO vehiculos (vehNumero_Placa,vehColor,vehMarca, Empleados_empId, Tickets_ticId) 
-            VALUES (:vehNumero_Placa,:vehColor,:vehMarca, :Empleados_empId,:Tickets_ticId);";
+            $consulta = "INSERT INTO vehiculos (vehNumero_Placa,vehColor,vehMarca, Empleados_empId) 
+            VALUES (:vehNumero_Placa,:vehColor,:vehMarca, :Empleados_empId);";
 
             $insertar = $this->conexion->prepare($consulta);
 
@@ -57,7 +77,6 @@ class VehiculosDAO extends ConDbMySql{
             $insertar -> bindParam(":vehColor", $registro['vehColor']);
             $insertar -> bindParam(":vehMarca", $registro['vehMarca']);
             $insertar -> bindParam(":Empleados_empId", $registro['Empleados_empId']);
-            $insertar -> bindParam(":Tickets_ticId", $registro['Tickets_ticId']);
         
 
             $insercion = $insertar->execute();
@@ -76,9 +95,6 @@ class VehiculosDAO extends ConDbMySql{
     }
 
     public function actualizar($registro){
-           //print_r($registro);
-
-        //exit();
 
         try {
 
@@ -98,14 +114,6 @@ class VehiculosDAO extends ConDbMySql{
             $consulta.=" Tickets_ticId = ?, ";
             $consulta.=" Empleados_empId = ? ";
             $consulta.= "WHERE vehId = ?;";
-
-            //echo $placa."   ".$color."   ".$marca."   ".$vehId."   ".$empleados."   ".$tarifas;
-
-
-            //echo "<br>";
-            //echo $consulta;
-
-            //exit();
 
             $actualizar = $this -> conexion -> prepare($consulta);
 

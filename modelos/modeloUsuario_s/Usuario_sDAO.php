@@ -23,7 +23,7 @@ class Usuario_sDAO extends ConDbMySql{
           return $listadoRegistrosUsuario_s;
     }
 
-    public function seleccionarID($sId){
+    public function seleccionarIDLogin($sId){
 
         if(!isset($sId[2])){
             $consulta = "SELECT * FROM empleados emp JOIN usuario_s usu ON 
@@ -56,6 +56,26 @@ class Usuario_sDAO extends ConDbMySql{
             return ['exitoSeleccionId' => 1, 'registroEncontrado' => $registroEnco];
         }else{
             return ['exitoSeleccionId' => 0, 'registroEncontrado' => $registroEnco];
+        }
+
+    }
+
+    public function seleccionarID($sId){
+        $consulta="SELECT * FROM usuario_s WHERE usuId=?";
+
+        $lista=$this->conexion->prepare($consulta);
+        $lista->execute(array($sId[0]));
+
+        $registroEnco = array();
+
+        while( $registro = $lista->fetch(PDO::FETCH_OBJ)){
+            $registroEnco[]=$registro;
+        }
+          
+        if(!empty($registroEnco)){
+            return ['exitoSeleccionId' => true, 'registroEncontrado' => $registroEnco];
+        }else{
+            return ['exitosaSeleccionId' => false, 'registroEncontrado' => $registroEnco];
         }
 
     }

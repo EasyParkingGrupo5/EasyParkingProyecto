@@ -42,6 +42,10 @@ class VehiculosControlador{
             case 'habilitarVehiculo':
                 $this -> habilitarVehiculo();
                 break;
+            case 'buscarPlaca':
+                $this -> buscarPlaca();
+                break;
+            
         }
     }
     public function listarVehiculos(){
@@ -156,6 +160,37 @@ class VehiculosControlador{
 
     }					
     }
+
+    public function buscarPlaca(){
+
+        $buscarVehiculo = new VehiculosDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+    
+        $vehiculoHallado = $buscarVehiculo->seleccionarPlaca(array($this->datos['placa']));
+    
+            if(1==$vehiculoHallado['exitoSeleccionPlaca']){
+
+                session_start();
+                
+                $_SESSION['mensaje'] = "Placa encontrada";
+                $_SESSION['vehNumero_Placa'] = $vehiculoHallado['registroEncontrado'][0]->vehNumero_Placa;
+                $_SESSION['vehColor'] = $vehiculoHallado['registroEncontrado'][0]->vehColor;
+                $_SESSION['vehMarca'] = $vehiculoHallado['registroEncontrado'][0]->vehMarca;
+
+            }else{
+
+                session_start();
+                
+                $_SESSION['mensaje'] = "Placa no encontrada";
+    
+            }
+
+            $gestarTarifas = new TarifasDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+            $listarTarifas = $gestarTarifas -> seleccionarTodos(1);
+
+            $_SESSION['listarTarifas'] = $listarTarifas;
+    
+            header('location:vistas/vistaAdminTickets/vistaAdminTickets.php?contenido=vistas/vistasTickets/vistaInsertarTicket.php');
+       }
     
     public function eliminarVehiculos(){
         $gestarVehiculos = new VehiculosDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
@@ -197,17 +232,6 @@ class VehiculosControlador{
     header("location:Controlador.php?ruta=listarVehiculos");
     }
 
-    public function agregarVehiculos(){
-    $gestarEmpleados = new EmpleadosDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
-    $listarEmpleados = $gestarEmpleados -> seleccionarTodos();
-
-    session_start();
-
-    $_SESSION['listarEmpleados'] = $listarEmpleados;
-
-    header('location:principal.php?contenido=vistas/vistasVehiculos/vistaInsertarVehiculos.php');
-    }
-
     public function confirmarInsertarVehiculos(){
     $gestarVehiculos = new VehiculosDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
     $buscarVehiculos = $gestarVehiculos -> seleccionarID(array($this->datos['isbn']));
@@ -236,6 +260,9 @@ class VehiculosControlador{
     }
 
    }
+
+
+
 }
 
 ?>

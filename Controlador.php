@@ -4,6 +4,10 @@ include_once PATH . 'controladores/ControladorPrincipal.php';
 /*echo '<pre>';
 print_r($_POST);
 echo '</pre>';*/
+/*session_start();
+echo '<pre>';
+print_r($_SESSION);
+echo '</pre>';*/
 $control = new ControladorPrincipal();
 
 ?>

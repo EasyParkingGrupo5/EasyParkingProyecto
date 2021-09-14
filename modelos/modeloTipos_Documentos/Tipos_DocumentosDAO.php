@@ -8,7 +8,7 @@ class TiposDocumentosDAO extends ConDbMySql{
     }
     
     public function seleccionarTodos($estado){
-        $planconsulta = "SELECT * FROM tipos_documentos WHERE tipDocEstado = :tipDocEstado;";
+        $planconsulta = "SELECT * FROM tipos_documentos WHERE tipDocEstado = :tipDocEstado ORDER BY tipDocId ASC;";
 
         $registroTiposDocumentos = $this->conexion->prepare($planconsulta);
 
@@ -47,12 +47,11 @@ class TiposDocumentosDAO extends ConDbMySql{
     public function insertar($registro){
 
         try {
-            $consulta = "INSERT INTO tipos_documentos (tipDocSigla, tipDocNombre_documento, tipDocEstado)
-             VALUES (:tipDocSigla, :tipDocNombre_documento, :tipDocEstado);";
+            $consulta = "INSERT INTO tipos_documentos (tipDocSigla, tipDocNombre_documento)
+             VALUES (:tipDocSigla, :tipDocNombre_documento);";
 
             $insertar = $this->conexion->prepare($consulta);
 
-            $insertar -> bindParam(":tipDocEstado", $registro['tipDocEstado']);
             $insertar -> bindParam(":tipDocSigla", $registro['tipDocSigla']);
             $insertar -> bindParam(":tipDocNombre_documento", $registro['tipDocNombre_documento']);
 

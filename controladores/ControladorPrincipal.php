@@ -1,14 +1,14 @@
  <?php
 
 include_once PATH . 'controladores/RegistrarControlador.php';
-include_once PATH . 'controladores/LibrosControlador.php';
 include_once PATH . 'controladores/rolesControlador.php';
 include_once PATH . 'controladores/Usuario_sControlador.php';
 include_once PATH . 'controladores/TiposDocumentosControlador.php';
 include_once PATH . 'controladores/usuario_sRolesControlador.php';
 include_once PATH . 'controladores/TicketsControlador.php';
-include_once PATH . 'controladores/VehículosControlador.php';
+include_once PATH . 'controladores/VehiculosControlador.php';
 include_once PATH . 'controladores/ReportesControlador.php';
+include_once PATH . 'controladores/EmpleadosControlador.php';
 
 
 
@@ -39,30 +39,6 @@ class ControladorPrincipal{
             case 'gestionDeAcceso':
                 $this -> gestionDeAcceso();
                 break;
-            case 'listarLibros':
-                $this -> listarLibros();
-                break;
-            case 'actualizarLibro':
-                $this -> actualizarLibro();
-                break;
-            case 'confirmarActualizarLibro':
-                $this -> confirmarActualizarLibro();
-                break;
-            case 'agregarLibro':
-                $this -> agregarLibro();
-                break;
-            case 'confirmarInsertarLibro':
-                $this -> confirmarInsertarLibro();
-                break;
-            case 'eliminarLibro':
-                $this -> eliminarLibro();
-                break;
-            case 'listarLibrosInactivos':
-                $this -> listarLibrosInactivos();
-                break;
-            case 'habilitarLibro':
-                $this -> habilitarLibro();
-                break;
             case 'listarRoles':
                 $this -> listarRoles();
                 break;
@@ -71,6 +47,9 @@ class ControladorPrincipal{
                 break;
             case 'confirmarActualizarRol':
                 $this -> confirmarActualizarRol();
+                break;
+            case 'cancelarActualizarRol':
+                $this->cancelarActualizarRol();
                 break;
             case 'mostrarInsertarRoles':
                 $this -> mostrarInsertarRoles();
@@ -114,6 +93,27 @@ class ControladorPrincipal{
             case 'habilitarUsuario':
                 $this -> habilitarUsuario();
                 break;
+            case 'listarEmpleados':
+                $this->listarEmpleados();
+                break;
+            case 'actualizarEmpleado':
+                $this -> actualizarEmpleado();
+                break;
+            case 'cancelarActualizarEmpleado':
+                $this -> cancelarActualizarEmpleado();
+                break;
+            case 'confirmarActualizarEmpleado':
+                $this -> confirmarActualizarEmpleado();
+                break;
+            case 'eliminarEmpleado':
+                $this -> eliminarEmpleado();                
+                break;
+            case 'listarEmpleadosInactivos':
+                $this -> listarEmpleadosInactivos();
+                break;
+            case 'habilitarEmpleado':
+                $this -> habilitarEmpleado();
+                break;
             case 'listarTiposDocumentos':
                 $this -> listarTiposDocumentos();
                 break;
@@ -123,11 +123,20 @@ class ControladorPrincipal{
             case 'confirmarActualizarTipoDocumento':
                 $this -> confirmarActualizarTipoDocumento();
                 break;
-            case 'cancelarActualizarLibro':
-                $this -> cancelarActualizarLibro();
-                break;
             case 'cancelarActualizarTipoDocumento':
                 $this -> cancelarActualizarTipoDocumento();
+                break;
+            case 'eliminarTipoDocumento':
+                $this -> eliminarTipoDocumento();
+                break;
+            case 'insertarTipoDocumento':
+                $this -> insertarTipoDocumento();
+                break;
+            case 'confirmarInsertarTipoDocumento':
+                $this -> confirmarInsertarTipoDocumento();
+                break;
+            case 'listarTiposDocumentosInactivos':
+                $this -> listarTiposDocumentosInactivos();
                 break;
             case 'listarUsuarios_SRoles':
                 $this -> listarUsuarios_SRoles();
@@ -167,6 +176,9 @@ class ControladorPrincipal{
                 break;
             case 'habilitarTickets':
                 $this -> habilitarTickets();
+                break;
+            case 'insertarTicket':
+                $this -> insertarTicket();
                 break;
             case 'listarVehiculos':
                 $this -> listarVehiculos();
@@ -212,7 +224,29 @@ class ControladorPrincipal{
             case 'confirmarInsertarReportes':
                 $this -> confirmarInsertarReportes();
                 break;
-        }
+            case 'listarReportes':
+                $this -> listarReportes();
+                break;
+            case 'actualizarReportes':
+                $this -> actualizarReportes();
+                break;
+            case 'cancelarActualizarReportes':
+                $this -> cancelarActualizarReportes();
+                break;
+            case 'habilitarTipoDocumento':
+                $this -> habilitarTipoDocumento();
+                break;
+            case 'abrirTicket':
+                $this -> abrirTicket();
+                break;
+            case 'buscarPlaca':
+                $this -> buscarPlaca();
+                break;
+            case 'cerrarSesion':
+                $this -> cerrarSesion();              
+                break;
+            }
+        
     }
 
     public function registrar(){
@@ -225,38 +259,6 @@ class ControladorPrincipal{
 
     public function gestionDeAcceso(){
         $usuariosControlador = new Usuario_sControlador($this -> datos);
-    }
-
-    public function listarLibros(){
-        $librosControlador = new LibrosControlador($this ->datos);
-    }
-
-    public function actualizarLibro(){
-        $librosControlador = new LibrosControlador($this -> datos);
-    }
-
-    public function confirmarActualizarLibro(){
-        $librosControlador = new LibrosControlador($this -> datos);
-    }
-
-    public function agregarLibro(){
-        $librosControlador = new LibrosControlador($this -> datos);
-    }
-
-    public function confirmarInsertarLibro(){
-        $librosControlador = new LibrosControlador($this -> datos);
-    }
-
-    public function eliminarLibro(){
-        $librosControlador = new LibrosControlador($this -> datos);
-    }
-
-    public function listarLibrosInactivos(){
-        $librosControlador = new LibrosControlador($this -> datos);
-    }
-
-    public function habilitarLibro(){
-        $librosControlador = new LibrosControlador($this -> datos);
     }
 
     public function listarRoles(){
@@ -332,8 +334,32 @@ class ControladorPrincipal{
         $librosControlador = new Usuario_sControlador($this -> datos);
     }
 
-    public function cancelarActualizarLibro(){
-        $librosControlador = new LibrosControlador($this -> datos);
+    public function listarEmpleados(){
+        $empleadosControlador = new EmpleadosControlador($this -> datos);
+    }
+
+    public function actualizarEmpleado(){
+        $empleadosControlador = new EmpleadosControlador($this -> datos);
+    }
+
+    public function cancelarActualizarEmpleado(){
+        $empleadosControlador = new EmpleadosControlador($this -> datos);
+    }
+
+    public function confirmarActualizarEmpleado(){
+        $empleadosControlador = new EmpleadosControlador($this -> datos);
+    }
+
+    public function eliminarEmpleado(){
+        $empleadosControlador = new EmpleadosControlador($this -> datos);
+    }
+
+    public function listarEmpleadosInactivos(){
+        $empleadosControlador = new EmpleadosControlador($this -> datos);
+    }
+
+    public function habilitarEmpleado(){
+        $empleadosControlador = new EmpleadosControlador($this -> datos);
     }
 
     public function listarTiposDocumentos(){
@@ -349,6 +375,26 @@ class ControladorPrincipal{
     }
 
     public function cancelarActualizarTipoDocumento(){
+        $tiposDocumentos = new TiposDocumentosControlador($this -> datos);
+    }
+
+    public function eliminarTipoDocumento(){
+        $tiposDocumentos = new TiposDocumentosControlador($this -> datos);
+    }
+
+    public function insertarTipoDocumento(){
+        $tiposDocumentos = new TiposDocumentosControlador($this -> datos);
+    }
+
+    public function confirmarInsertarTipoDocumento(){
+        $tiposDocumentos = new TiposDocumentosControlador($this -> datos);
+    }
+
+    public function listarTiposDocumentosInactivos(){
+        $tiposDocumentos = new TiposDocumentosControlador($this -> datos);
+    }
+
+    public function habilitarTipoDocumento(){
         $tiposDocumentos = new TiposDocumentosControlador($this -> datos);
     }
 
@@ -392,6 +438,11 @@ class ControladorPrincipal{
     public function habilitarTickets(){
         $ticketsControlador = new TicketsControlador($this -> datos);
     }
+
+    public function insertarTicket(){
+        $ticketsControlador = new TicketsControlador($this -> datos);
+    }
+
     public function confirmarInsertarTickets(){
         $ticketsControlador = new TicketsControlador($this -> datos);
     }
@@ -460,6 +511,15 @@ class ControladorPrincipal{
     }
     public function confirmarInsertarReportes(){
         $reportesControlador = new ReportesControlador($this -> datos);
+    }
+    public function abrirTicket(){
+        $ticketsControlador = new TicketsControlador($this -> datos);
+    }
+    public function buscarPlaca(){
+        $vehiculosControlador = new VehiculosControlador($this -> datos);
+    }
+    public function cerrarSesion(){
+        $usuariosControlador = new Usuario_sControlador($this -> datos);
     }
 }
 

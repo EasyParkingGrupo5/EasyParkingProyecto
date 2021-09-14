@@ -26,6 +26,7 @@ if (isset($_SESSION['mensaje'])) {
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"> 
         <!--**************************************** -->
+        <link rel="stylesheet" href="../../../css/vistas/vistaAdminUsuarios/vistaListarRoles.css">
     </head>
 	
 	<body>
@@ -33,13 +34,14 @@ if (isset($_SESSION['mensaje'])) {
 if(isset($_SESSION['listaDeRoles'])){
 	
     $listaDeRoles=$_SESSION['listaDeRoles'];
-	 unset($_SESSION['listaDeRoles']);
 	
 }
 ?>
+    <h4>Listado de Roles inhabilitados </h4>
+    <div class="table">
     <table id="example" class="table-responsive table-hover table-bordered table-striped" style="width:100%">
         <thead>
-            <h3>Listado de Roles inhabilitados </h3>
+
             <tr> 
                 <th>Id</th>
                 <th>Nombre</th> 
@@ -58,7 +60,7 @@ if(isset($_SESSION['listaDeRoles'])){
                     <td><?php echo $listaDeRoles[$i]->rolNombre; ?></td>  
                     <td><?php echo $listaDeRoles[$i]->rolDescripcion; ?></td>
                     <!--<td>d>-->  
-                    <td><a href="Controlador.php?ruta=habilitarRol&rolId=<?php echo $listaDeRoles[$i]->rolId; ?>" onclick="return confirm('Está seguro de habilitar el registro?')">Habilitar</a></td>  
+                    <td><a href="../../../Controlador.php?ruta=habilitarRol&rolId=<?php echo $listaDeRoles[$i]->rolId; ?>" onclick="return confirm('Está seguro de habilitar el registro?')" style="color:#FF0000">Habilitar</a></td>  
                 </tr>   
                 <?php
                 $i++;
@@ -67,6 +69,7 @@ if(isset($_SESSION['listaDeRoles'])){
             ?>
         </tbody>
     </table>
+    </div>
 
 
     <!--**************************************** -->  
@@ -79,6 +82,9 @@ if(isset($_SESSION['listaDeRoles'])){
                             $('#example').DataTable({
                                 pageLength: 5,
                                 lengthMenu: [[5, 10, 15, 20], [5, 10, 15, 20]],
+                                language: {
+                                    url: '//cdn.datatables.net/plug-ins/1.11.1/i18n/es_es.json'
+        }
                             });
                         });
     </script>     

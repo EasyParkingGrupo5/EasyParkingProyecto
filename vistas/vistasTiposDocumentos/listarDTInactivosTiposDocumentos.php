@@ -1,7 +1,8 @@
 <?php
-//echo "<pre>";
-//print_r($_SESSION['listaDeLibros']);
-//echo "</pre>";
+
+/*echo "<pre>";
+print_r($_SESSION['listarTiposDocumentos']);
+echo "</pre>";*/
 
 if (isset($_SESSION['mensaje'])) {
     $mensaje = $_SESSION['mensaje'];
@@ -10,8 +11,6 @@ if (isset($_SESSION['mensaje'])) {
 }
 
 ?>
-
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -19,64 +18,55 @@ if (isset($_SESSION['mensaje'])) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <!--LAS siguientes lìneas se agregan con el propòsito de dar funcionalidad a un DataTable-->
-        <!--**************************************** -->
+
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"> 
-        <!--**************************************** -->
+        <link rel="stylesheet" href="../../../css/vistas/vistaAdminEmpleados/vistaListarDocumentosInactivos.css">
     </head>
-	
-	<body>
-        <h1>Listado de la tabla Libros Inactivos</h1>
-        <br>
+    <br>
+<body>
 <?php
-if(isset($_SESSION['listaDeLibros'])){
+if(isset($_SESSION['listarTiposDocumentos'])){
 	
-	 $listaDeLibros=$_SESSION['listaDeLibros'];
+	 $listaDeDocumentos = $_SESSION['listarTiposDocumentos'];
 
 	
 }
 ?>
+<h4>Listado de Tipos de Documentos Inactivos</h4>
+<div class="table">
     <table id="example" class="table-responsive table-hover table-bordered table-striped" style="width:100%">
         <thead>
             <tr>
-                <th>Isbn</th> 
-                <th>Titulo</th> 
-                <th>Autor</th> 
-                <th>Precio</th> 
-                <!--<th>Estado</th>--> 
-                <th>Categoria</th> 
-                <th>Habilitar</th>  
+                <th>Id</th> 
+                <th>Sigla</th> 
+                <th>Nombre Documentos</th>  
+                <th>Habilitar</th> 
             </tr>
         </thead>
         <tbody>
             <?php
             $i = 0;
-            foreach ($listaDeLibros as $key => $value) {
+            foreach ($listaDeDocumentos as $key => $value) {
                 ?>
                 <tr>
-                    <td><?php echo $listaDeLibros[$i]->isbn; ?></td>  
-                    <td><?php echo $listaDeLibros[$i]->titulo; ?></td>  
-                    <td><?php echo $listaDeLibros[$i]->autor; ?></td>  
-                    <td><?php echo $listaDeLibros[$i]->precio; ?></td>  
-                    <!--<td>d>-->  
-                    <td><?php echo $listaDeLibros[$i]->catLibNombre; ?></td>  
-                    <td><a href="Controlador.php?ruta=habilitarLibro&idAct=<?php echo $listaDeLibros[$i]->isbn; ?>" onclick="return confirm('¿Está seguro de habilitar el registro?')">Habilitar</a></td>   
+                    <td><?php echo $listaDeDocumentos[$i]->tipDocId; ?></td>  
+                    <td><?php echo $listaDeDocumentos[$i]->tipDocSigla; ?></td>  
+                    <td><?php echo $listaDeDocumentos[$i]->tipDocNombre_documento; ?></td>    
+                    <td><a href="../../../Controlador.php?ruta=habilitarTipoDocumento&idAct=<?php echo $listaDeDocumentos[$i]->tipDocId; ?>" onclick="return confirm('Está seguro de habilitar el registro?')" style="color:#FF0000">Habilitar</a></td>  
                 </tr>   
                 <?php
                 $i++;
             }
-            $listaDeLibros=null;
+            $listaDeDocumentos=null;
             ?>
         </tbody>
     </table>
+</div>
 
 
-    <!--**************************************** -->  
-    <!--LAS siguientes lìneas se agregan con el propòsito de dar funcionalidad a un DataTable-->
-    <!--**************************************** -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript">
@@ -84,11 +74,13 @@ if(isset($_SESSION['listaDeLibros'])){
                             $('#example').DataTable({
                                 pageLength: 5,
                                 lengthMenu: [[5, 10, 15, 20], [5, 10, 15, 20]],
+                                language: {
+                                    url: '//cdn.datatables.net/plug-ins/1.11.1/i18n/es_es.json'
+        }
                             });
                         });
     </script>     
-    <!--**************************************** -->
-    <!--**************************************** -->   
+
 
 
 

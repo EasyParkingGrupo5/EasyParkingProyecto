@@ -48,19 +48,17 @@ class TicketsDAO extends ConDbMySql{
     public function insertar($registro){ 
 
         try {
-            $consulta = "INSERT INTO tickets (ticNumero,ticFecha,ticHoraIngreso,ticHoraSalida,ticValorFinal, 
-            Empleados_empId,Tarifas_tarId) VALUES (:ticNumero,:ticFecha,
-            :ticHoraIngreso,:ticHoraSalida,:ticValorFinal,:Empleados_empId,:Tarifas_tarId);";
+            $consulta = "INSERT INTO tickets (ticFecha,ticHoraIngreso,
+            Empleados_empId,Tarifas_tarId, Vehiculos_vehId) VALUES (:ticFecha,
+            :ticHoraIngreso,:Empleados_empId,:Tarifas_tarId, :Vehiculos_vehId);";
 
             $insertar = $this->conexion->prepare($consulta);
 
-            $insertar -> bindParam(":ticNumero", $registro['ticNumero']);
             $insertar -> bindParam(":ticFecha", $registro['ticFecha']);
             $insertar -> bindParam(":ticHoraIngreso", $registro['ticHoraIngreso']);
-            $insertar -> bindParam(":ticHoraSalida", $registro['ticHoraSalida']);
-            $insertar -> bindParam(":ticValorFinal", $registro['ticValorFinal']);
             $insertar -> bindParam(":Empleados_empId", $registro['Empleados_empId']);
             $insertar -> bindParam(":Tarifas_tarId", $registro['Tarifas_tarId']);
+            $insertar -> bindParam(":Vehiculos_vehId", $registro['Vehiculos_vehId']);
 
             $insercion = $insertar->execute();
 

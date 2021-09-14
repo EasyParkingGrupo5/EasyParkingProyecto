@@ -50,7 +50,7 @@ class RolesControlador{
     
         $_SESSION['listaDeRoles'] = $registroRoles;
     
-        header("location:principal.php?contenido=vistas/vistasRoles/listarRegistroRoles.php");
+        header("location:vistas/vistaAdminUsuarios/vistasRoles/vistaAdminRoles.php?contenido=vistas/vistasRoles/listarRegistroRoles.php");
     }
 
     public  function actualizarRol(){
@@ -63,7 +63,7 @@ class RolesControlador{
         session_start();
         $_SESSION['actualizarDatosRoles']=$actualizarDatosRoles;
 
-        header("location:principal.php?contenido=vistas/vistasRoles/vistaActualizarRol.php");
+        header("location:vistas/vistaAdminUsuarios/vistasRoles/vistaAdminRoles.php?contenido=vistas/vistasRoles/vistaActualizarRol.php");
         
     }
 
@@ -73,22 +73,20 @@ class RolesControlador{
         $actualizarRoles = $gestarRoles -> actualizar(array($this->datos));
 
         session_start();
-            $_SESSION['mensaje'] = "Actualización realizada.";
-            header("location:Controlador.php?ruta=listarRoles");	
+        $_SESSION['mensaje'] = "Actualización realizada.";
+        header("location:Controlador.php?ruta=listarRoles");	
 
     }
 
     public function cancelarActualizarRol(){
 
-        session_start();
-                $_SESSION['mensaje'] = "Desistió de la actualización";
-		        header("location:Controlador.php?ruta=listarRoles");	
+		header("location:Controlador.php?ruta=listarRoles");	
 
     }
 
     public function mostrarInsertarRoles(){
 		
-        header("Location: principal.php?contenido=vistas/vistasRoles/vistaIngresarRol.php");
+        header("Location:vistas/vistaAdminUsuarios/vistasRoles/vistaAdminRoles.php?contenido=vistas/vistasRoles/vistaIngresarRol.php");
 
 }
     
@@ -120,7 +118,7 @@ class RolesControlador{
             
             $_SESSION['mensaje'] = " El id que trata de insertar ya existe en el sistema ";
 
-            header("location:Controlador.php?ruta=InsertarRoles");					
+            header("location:vistas/vistaAdminUsuarios/vistasRoles/vistaAdminRoles.php?ruta=InsertarRoles");					
 
         }					
     }	
@@ -145,7 +143,7 @@ class RolesControlador{
 
         $_SESSION['listaDeRoles'] = $listarInactivos;
 
-        header("location:principal.php?contenido=vistas/vistasRoles/listarRolesInactivos.php");
+        header("location:vistas/vistaAdminUsuarios/vistasRoles/vistaAdminRoles.php?contenido=vistas/vistasRoles/listarRolesInactivos.php");
     }
 
     public function habilitarRol(){

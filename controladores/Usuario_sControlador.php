@@ -4,6 +4,7 @@ include_once PATH . 'modelos/modeloUsuario_s/Usuario_sDAO.php';
 include_once PATH . 'modelos/modeloEmpleados/EmpleadosDAO.php';
 include_once PATH . 'modelos/modeloUsuario_s_roles/Usuario_s_rolesDAO.php';
 include_once PATH . 'modelos/modeloRol/RolDAO.php';
+include_once PATH . 'controladores/ManejoSesiones/ClaseSesion.php';
 
 class Usuario_sControlador{
 
@@ -49,12 +50,15 @@ class Usuario_sControlador{
             case 'habilitarUsuario':
                 $this -> habilitarUsuario();
                 break;
+            case 'cerrarSesion':
+                $this -> cerrarSesion();
+                break;
         }
     }
 
     public function gestionDeRegistro(){
         $gestarUsuarios = new Usuario_sDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
-        $existeUsuario = $gestarUsuarios -> seleccionarID(array($this -> datos['empNumeroDocumento'], $this -> datos['usuLogin']));
+        $existeUsuario = $gestarUsuarios -> seleccionarIDLogin(array($this -> datos['empNumeroDocumento'], $this -> datos['usuLogin']));
         
         if (0 == $existeUsuario['exitoSeleccionId']) {
             $this -> datos['usuPassword'] = md5($this -> datos ['usuPassword']);
@@ -75,7 +79,7 @@ class Usuario_sControlador{
 
             $_SESSION['mensaje'] = "Registrado con èxito para ingreso al sistema";				
 
-            header("location:login.php");
+            header("location:index.php");
         }else{
             session_start();
 
@@ -97,7 +101,7 @@ class Usuario_sControlador{
 
         $this -> datos['usuPassword'] = md5($this -> datos['usuPassword']);
         $this -> datos['documento'] = "";
-        $existeUsuario = $gestarUsuarios -> seleccionarID(array($this->datos['documento'], $this->datos['usuLogin'], $this -> datos['usuPassword']));
+        $existeUsuario = $gestarUsuarios -> seleccionarIDLogin(array($this->datos['documento'], $this->datos['usuLogin'], $this -> datos['usuPassword']));
 
         if (($existeUsuario['exitoSeleccionId'] == 1) && ($existeUsuario['registroEncontrado'][0]->usuLogin == $this -> datos ['usuLogin'])) {
             session_start();
@@ -105,7 +109,6 @@ class Usuario_sControlador{
             $_SESSION['mensaje'] = "Bienvenido a EasyParking";
             $_SESSION['nombre'] = $existeUsuario['registroEncontrado'][0]->empPrimerNombre;
             $_SESSION['apellido'] = $existeUsuario['registroEncontrado'][0]->empPrimerApellido;
-
             $gestarRoles = new RolDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
             $rolesUsuario = $gestarRoles->seleccionarRolPorPersona(array($existeUsuario['registroEncontrado'][0]->empNumeroDocumento ));
             $cantidadRoles = count($rolesUsuario['registroEncontrado']);
@@ -114,13 +117,16 @@ class Usuario_sControlador{
                 $rolesEnSesion[] = $rolesUsuario['registroEncontrado'][$i]->rolId;
             }
 
+            $sesionPermitida = new ClaseSesion();				
+            $sesionPermitida->crearSesion(array($existeUsuario['registroEncontrado'][0], "", $rolesEnSesion));
+
             header("location:principal.php");
 
         }else{
             session_start();
 
             $_SESSION['mensaje'] = "Credenciales de acceso incorrectas"; 
-            header("location:login.php");	
+            header("location:index.php");	
 
         }
     }
@@ -133,7 +139,7 @@ class Usuario_sControlador{
     
         $_SESSION['listaDeUsuarios'] = $registroUsuarios;
     
-        header("location:principal.php?contenido=vistas/vistasUsuarios_S/listarRegistroUsuarios_S.php");
+        header("location:vistas/vistaAdminUsuarios/vistasUsuarios/vistaAdminUsuarios.php?contenido=vistas/vistasUsuarios_S/listarRegistroUsuarios_S.php");
     }
 
     public  function actualizarUsuarios(){
@@ -146,7 +152,7 @@ class Usuario_sControlador{
         session_start();
         $_SESSION['actualizarDatosUsuarios']=$actualizarDatosUsuarios;
 
-        header("location:principal.php?contenido=vistas/vistasUsuarios_S/vistaActualizarUsuarios_S.php");
+        header("location:vistas/vistaAdminUsuarios/vistasUsuarios/vistaAdminUsuarios.php?contenido=vistas/vistasUsuarios_S/vistaActualizarUsuarios_S.php");
         
     }
 
@@ -156,6 +162,7 @@ class Usuario_sControlador{
         $actualizarUsuarios = $gestarUsuarios -> actualizar(array($this->datos));
 
         session_start();
+        $_SESSION['mensaje']="Actualizado Correctamente.";
             header("location:Controlador.php?ruta=listarUsuarios");	
 
     }
@@ -163,13 +170,14 @@ class Usuario_sControlador{
     public function cancelarActualizarUsuarios(){
 
         session_start();
+
 		        header("location:Controlador.php?ruta=listarUsuarios");	
 
     }
     
     public function mostrarInsertarUsuarios(){
 		
-        header("Location: principal.php?contenido=vistas/vistasUsuarios_S/vistaIngresarUsuario_S.php");
+        header("Location:vistas/vistaAdminUsuarios/vistasUsuarios/vistaAdminUsuarios.php?contenido=vistas/vistasUsuarios_S/vistaIngresarUsuario_S.php");
 
 }
     
@@ -224,7 +232,7 @@ class Usuario_sControlador{
 
         $_SESSION['listaDeUsuarios'] = $listarInactivos;
 
-        header("location:principal.php?contenido=vistas/vistasUsuarios_S/listarUsuariosInactivos.php");
+        header("location:vistas/vistaAdminUsuarios/vistasUsuarios/vistaAdminUsuarios.php?contenido=vistas/vistasUsuarios_S/listarUsuariosInactivos.php");
     }
 
     public function habilitarUsuario(){
@@ -236,6 +244,11 @@ class Usuario_sControlador{
         $_SESSION['mensaje'] = "Registro Habilitado";
         header("location:Controlador.php?ruta=listarUsuariosInactivos");
     }
+
+    public function cerrarSesion(){
+        $cerrarSesion = new ClaseSesion();
+        $cerrarSesion->cerrarSesion();
+   }
 }
 
 ?>

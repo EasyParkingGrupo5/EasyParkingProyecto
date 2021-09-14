@@ -47,7 +47,12 @@ class TicketsControlador{
             case 'mostrarInsertarticket':
                 $this -> mostrarInsertarticket();
                 break;
-            
+            case 'insertarTicket':
+                $this -> insertarTicket();
+                break;
+            case 'abrirTicket':
+                $this -> abrirTicket();
+                break;
             
         }
     }
@@ -187,8 +192,30 @@ class TicketsControlador{
             $_SESSION['mensaje'] = "Registro Habilitado";
             header("location:Controlador.php?ruta=listarTicketsInactivos");
         }
+
+    public function insertarTicket(){
+        $gestarVehiculo = new VehiculosDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $buscarPlaca = $gestarVehiculo->seleccionarPlaca(array($this->datos['vehNumero_Placa']));
+
+        if(1==$buscarPlaca['exitoSeleccionPlaca']){
+            echo "encontrada";
+            $gestarTickets = new TicketsDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+            $this -> datos['Vehiculos_vehId'] = $buscarPlaca['registroEncontrado'][0]-> vehId;
+            $this -> datos['Empleados_empId'] = 3;
+            $gestarTickets ->insertar($this -> datos);
+        }else{
+            $this -> datos['Empleados_empId'] = 3;
+            $insertarVehiculoNuevo = $gestarVehiculo->insertar($this->datos);
+            $this -> datos['Vehiculos_vehId'] = $insertarVehiculoNuevo['resultado'];
+            $gestarTickets = new TicketsDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+            $gestarTickets ->insertar($this -> datos);
+        }
     }
 
+    public function abrirTicket(){
+        header('location:vistas/vistaAdminTickets/vistaAdminTickets.php?contenido=vistas/vistasTickets/vistaAbrirTicket.php');
+    }
+}
 ?>
 
   

@@ -35,7 +35,7 @@ class Usuarios_SRolesControlador{
     
         $_SESSION['listaDeUsuarios_Roles'] = $registroUsuarios;
     
-        header("location:principal.php?contenido=vistas/vistasUsuarios_S_Roles/listarRegistroUsuarios_S_Roles.php");
+        header("location:vistas/vistaAdminUsuarios/vistasUsuarioRol/vistaAdminUsuarioRol.php?contenido=vistas/vistasUsuarios_S_Roles/listarRegistroUsuarios_S_Roles.php");
     }
 
     public  function actualizarUsuarios_SRoles(){

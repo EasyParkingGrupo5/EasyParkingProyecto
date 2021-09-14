@@ -23,8 +23,8 @@ if (isset($_SESSION['mensaje'])) {
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"> 
+        <link rel="stylesheet" href="../../../css/vistas/vistaAdminEmpleados/vistaListarTiposDocumentos.css">
     </head>
-	<h1>Listado de la tabla Tipos de Documentos</h1>
     <br>
 <body>
 <?php
@@ -35,6 +35,8 @@ if(isset($_SESSION['listarTiposDocumentos'])){
 	
 }
 ?>
+<h4>Listado de Tipos de Documentos</h4>
+<div class="table">
     <table id="example" class="table-responsive table-hover table-bordered table-striped" style="width:100%">
         <thead>
             <tr>
@@ -54,8 +56,8 @@ if(isset($_SESSION['listarTiposDocumentos'])){
                     <td><?php echo $listaDeDocumentos[$i]->tipDocId; ?></td>  
                     <td><?php echo $listaDeDocumentos[$i]->tipDocSigla; ?></td>  
                     <td><?php echo $listaDeDocumentos[$i]->tipDocNombre_documento; ?></td>   
-                    <td><a href="Controlador.php?ruta=actualizarTipoDocumento&idAct=<?php echo $listaDeDocumentos[$i]->tipDocId; ?>">Actualizar</a></td>  
-                    <td><a href="Controlador.php?ruta=eliminarTipoDocumento&idAct=<?php echo $listaDeDocumentos[$i]->tipDocId; ?>" onclick="return confirm('Está seguro de eliminar el registro?')">Eliminar</a></td>  
+                    <td><a href="../../../Controlador.php?ruta=actualizarTipoDocumento&idAct=<?php echo $listaDeDocumentos[$i]->tipDocId; ?>" style="color:#FF0000">Actualizar</a></td>  
+                    <td><a href="../../../Controlador.php?ruta=eliminarTipoDocumento&idAct=<?php echo $listaDeDocumentos[$i]->tipDocId; ?>" onclick="return confirm('Está seguro de eliminar el registro?')" style="color:#FF0000">Eliminar</a></td>  
                 </tr>   
                 <?php
                 $i++;
@@ -64,7 +66,7 @@ if(isset($_SESSION['listarTiposDocumentos'])){
             ?>
         </tbody>
     </table>
-
+</div>
 
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
@@ -74,6 +76,9 @@ if(isset($_SESSION['listarTiposDocumentos'])){
                             $('#example').DataTable({
                                 pageLength: 5,
                                 lengthMenu: [[5, 10, 15, 20], [5, 10, 15, 20]],
+                                language: {
+                                    url: '//cdn.datatables.net/plug-ins/1.11.1/i18n/es_es.json'
+        }
                             });
                         });
     </script>     

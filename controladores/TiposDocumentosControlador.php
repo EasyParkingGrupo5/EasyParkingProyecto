@@ -24,6 +24,21 @@ class TiposDocumentosControlador{
             case 'cancelarActualizarTipoDocumento':
                 $this -> cancelarActualizarTipoDocumento();
                 break;
+            case 'eliminarTipoDocumento':
+                $this -> eliminarTipoDocumento();
+                break;
+            case 'insertarTipoDocumento':
+                $this -> insertarTipoDocumento();
+                break;
+            case 'confirmarInsertarTipoDocumento':
+                $this -> confirmarInsertarTipoDocumento();
+                break;
+            case 'listarTiposDocumentosInactivos':
+                $this -> listarTiposDocumentosInactivos();
+                break;
+            case 'habilitarTipoDocumento':
+                $this -> habilitarTipoDocumento();
+                break;
         }
     }
 
@@ -35,7 +50,7 @@ class TiposDocumentosControlador{
 
         $_SESSION['listarTiposDocumentos'] = $listarTiposDocumentos;
 
-        header("location:principal.php?contenido=vistas/vistasTiposDocumentos/listarDTRegistrosTiposDocumentos.php");
+        header("location:vistas/vistaAdminEmpleados/vistaAdminTipoDocumento/vistaAdminTipoDocumento.php?contenido=vistas/vistasTiposDocumentos/listarDTRegistrosTiposDocumentos.php");
 
     }
 
@@ -49,7 +64,7 @@ class TiposDocumentosControlador{
 
         $_SESSION['actualizarTipoDocumento'] = $actualizarDatosTipoDocumento;
 
-        header("location:principal.php?contenido=vistas/vistasTiposDocumentos/vistaActualizarTipoDocumento.php");
+        header("location:vistas/vistaAdminEmpleados/vistaAdminTipoDocumento/vistaAdminTipoDocumento.php?contenido=vistas/vistasTiposDocumentos/vistaActualizarTipoDocumento.php");
     }
 
     public function confirmarActualizarTipoDocumento(){
@@ -64,6 +79,68 @@ class TiposDocumentosControlador{
 
     public function cancelarActualizarTipoDocumento(){
         header("location:Controlador.php?ruta=listarTiposDocumentos");
+    }
+
+    public function eliminarTipoDocumento(){
+        $gestarTiposDocumentos = new TiposDocumentosDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $eliminarDocumento = $gestarTiposDocumentos -> eliminarLogico(array($this -> datos['idAct']));
+
+        session_start();
+
+        $_SESSION['mensaje'] = 'Registro Eliminado';
+
+        header('location:Controlador.php?ruta=listarTiposDocumentos');
+    }
+
+    public function insertarTipoDocumento(){
+        header('location:vistas/vistaAdminEmpleados/vistaAdminTipoDocumento/vistaAdminTipoDocumento.php?contenido=vistas/vistasTiposDocumentos/vistaInsertarTipoDocumento.php');
+    }
+
+    public function confirmarInsertarTipoDocumento(){
+        $gestarTiposDocumentos = new TiposDocumentosDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $buscarTipoDocumento = $gestarTiposDocumentos -> seleccionarID($this -> datos['tipDocId']);
+
+        if(!$buscarTipoDocumento['exitoSeleccionId']){
+            $insertarTipoDocumento = $gestarTiposDocumentos -> insertar($this->datos);
+
+            $resultadoInsercion = $insertarTipoDocumento['resultado'];
+
+            session_start();
+            $_SESSION['mensaje'] = "Se ha insertado con el id " . $resultadoInsercion;
+             
+            header("location:Controlador.php?ruta=listarTiposDocumentos");
+        }else{
+            session_start();
+            $_SESSION['tipDocSigla'] = $this->datos['tipDocSigla'];
+            $_SESSION['tipDocNombre_documento'] = $this->datos['tipDocNombre_documento'];			
+            
+            $_SESSION['mensaje'] = "El tipo de documento que trata de insertar ya existe en el sistema";
+
+            header("location:vistas/vistaAdminEmpleados/vistaAdminTipoDocumento/vistaAdminTipoDocumento.php?ruta=insertarTipoDocumento");
+        }
+    }
+
+    public function listarTiposDocumentosInactivos(){
+        $gestarTiposDocumentos = new TiposDocumentosDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $listarTiposDocumentos = $gestarTiposDocumentos -> seleccionarTodos(0);
+
+        session_start();
+
+        $_SESSION['listarTiposDocumentos'] = $listarTiposDocumentos;
+
+        header("location:vistas/vistaAdminEmpleados/vistaAdminTipoDocumento/vistaAdminTipoDocumento.php?contenido=vistas/vistasTiposDocumentos/listarDTInactivosTiposDocumentos.php");
+
+    }
+
+    public function habilitarTipoDocumento(){
+        $gestarTiposDocumentos = new TiposDocumentosDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $eliminarDocumento = $gestarTiposDocumentos -> habilitar(array($this -> datos['idAct']));
+
+        session_start();
+
+        $_SESSION['mensaje'] = 'Registro Habilitado';
+
+        header('location:Controlador.php?ruta=listarTiposDocumentosInactivos');
     }
     
 }

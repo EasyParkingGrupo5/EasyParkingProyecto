@@ -7,7 +7,7 @@ class EmpleadosDAO extends ConDbMySql{
         parent::__construct($servidor, $base, $usuario_db, $contrasenia_db);
     }
 
-    public function seleccionarTodos(){
+    public function seleccionarTodos($estado){
         $planconsulta = "SELECT emp.empId, emp.empNumeroDocumento, 
         emp.empPrimerNombre, emp.empSegundoNombre, emp.empPrimerApellido, 
         emp.empSegundoApellido, emp.empTelefono, emp.empTipoSangre, 
@@ -15,9 +15,10 @@ class EmpleadosDAO extends ConDbMySql{
          emp.emp_updated_at, usu.usuLogin, tip.tipDocNombre_documento 
          FROM empleados emp JOIN usuario_s usu ON emp.usuario_s_usuId = 
          usu.usuId JOIN tipos_documentos tip ON emp.Tipos_Documentos_tipDocId = 
-         tip.tipDocId ORDER BY emp.empId ASC;";
+         tip.tipDocId WHERE empEstado = :empEstado";
 
         $registroLibros = $this->conexion->prepare($planconsulta);
+        $registroLibros -> bindParam(":empEstado", $estado);
         $registroLibros->execute();
 
         $listadoRegistrosLibros = array();
@@ -84,30 +85,33 @@ class EmpleadosDAO extends ConDbMySql{
     }
     public function actualizar($registro){
         try {
-            $consulta = "UPDATE empleados SET empNumeroDocumento = :empNumeroDocumento, empPrimerNombre = :empPrimerNombre, 
-            empSegundoNombre = :empSegundoNombre, empPrimerApellido = :empPrimerApellido, empSegundoApellido = :empSegundoApellido, 
-            empTelefono = :empTelefono, empTipoSangre = :empTipoSangre, empRh = :empRh, Tipos_Documentos_tipDocId = :Tipos_Documentos_tipDocId WHERE 
-            empId = :empId;";
-            
-            $actualizar = $this -> conexion -> prepare($consulta);
+            $id = $registro[0]['empId'];
+            $documento = $registro[0]['empNumeroDocumento'];
+            $primerNombre = $registro[0]['empPrimerNombre'];
+            $segundoNombre = $registro[0]['empSegundoNombre'];
+            $primerApellido = $registro[0]['empPrimerApellido'];
+            $segundoApellido = $registro[0]['empSegundoApellido'];
+            $telefono = $registro[0]['empTelefono'];
+            $tipoSangre = $registro[0]['empTipoSangre'];
+            $rh = $registro[0]['empRh'];
+            $tipoDocumento = $registro[0]['Tipos_Documentos_tipDocId'];
 
-            $actualizar -> bindParam(":empNumeroDocumento", $registro['empNumeroDocumento']);
-            $actualizar -> bindParam(":empPrimerNombre", $registro['empPrimerNombre']);
-            $actualizar -> bindParam(":empSegundoNombre", $registro['empSegundoNombre']);
-            $actualizar -> bindParam(":empPrimerApellido", $registro['empPrimerApellido']);
-            $actualizar -> bindParam(":empSegundoApellido", $registro['empSegundoApellido']);
-            $actualizar -> bindParam(":empTelefono", $registro['empTelefono']);
-            $actualizar -> bindParam(":empTipoSangre", $registro['empTipoSangre']);
-            $actualizar -> bindParam(":empRh", $registro['empRh']);
-            $actualizar -> bindParam(":empId", $registro['empId']);
-            $actualizar -> bindParam(":Tipos_Documentos_tipDocId", $registro['Tipos_Documentos_tipDocId']);
+            if(isset($id)){
 
-            $actualizacion = $actualizar -> execute();
+                $consulta = "UPDATE empleados SET empNumeroDocumento = ?, empPrimerNombre = ?, 
+                empSegundoNombre = ?, empPrimerApellido = ?, empSegundoApellido = ?, 
+                empTelefono = ?, empTipoSangre = ?, empRh = ?, Tipos_Documentos_tipDocId = ? WHERE 
+                empId = ?;";
+                
+                $actualizar = $this -> conexion -> prepare($consulta);
 
-            $this->cierreBd();
+                $actualizacion = $actualizar -> execute(array($documento, $primerNombre, $segundoNombre, $primerApellido, $segundoApellido, $telefono, $tipoSangre, $rh, $tipoDocumento, $id));
 
-            return ['actualizacion' => $actualizacion, 'mensaje' => 'Resgistro Actualizado'];
+                $this->cierreBd();
 
+                return ['actualizacion' => $actualizacion, 'mensaje' => 'Resgistro Actualizado'];
+
+            }
         } catch (PDOException $pdoExc) {
             return ['actualizacion' => $actualizacion, 'mensaje' => $pdoExc];
         }

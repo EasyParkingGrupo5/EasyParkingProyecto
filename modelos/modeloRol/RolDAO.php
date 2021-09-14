@@ -7,9 +7,9 @@ class RolDAO extends ConDbMySql{
         parent::__construct($servidor, $base, $loginDB, $passwordDB);  
     }
 
-    public function seleccionarRolPorPersona(){
+    public function seleccionarRolPorPersona($sId){
         
-        $consulta="SELECT rol.rolId, rol.rolNombre, rol.rolDescripcion FROM rol rol JOIN 
+        $consulta="SELECT rolId, rolNombre, rolDescripcion FROM rol JOIN 
         usuario_s_roles usr on usr.id_rol = rol.rolId JOIN usuario_s usu on usu.usuId = usr.id_usuario_s 
         RIGHT JOIN empleados emp on emp.empId = usr.id_usuario_s WHERE emp.empNumeroDocumento = ?";
 
@@ -69,11 +69,10 @@ class RolDAO extends ConDbMySql{
 
         try {
             
-            $consulta="INSERT INTO rol (rolId, rolNombre, rolDescripcion) VALUES (:rolId, :rolNombre, :rolDescripcion)" ;
+            $consulta="INSERT INTO rol (rolNombre, rolDescripcion) VALUES (:rolNombre, :rolDescripcion)" ;
 
             $insertar=$this->conexion->prepare($consulta);
 
-            $insertar -> bindParam(":rolId", $registro['rolId']);
             $insertar -> bindParam(":rolNombre", $registro['rolNombre']);
             $insertar -> bindParam(":rolDescripcion", $registro['rolDescripcion']);
 
