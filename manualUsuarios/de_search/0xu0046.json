@@ -1,0 +1,12 @@
+[
+	{ "s": "FILA", "p": [9, 8] },
+	{ "s": "FINALIZANDO", "p": [12] },
+	{ "s": "FLECHA", "p": [7] },
+	{ "s": "FONDO", "p": [5, 9, 8, 7, 6] },
+	{ "s": "FRASE", "p": [4, 5] },
+	{ "s": "FUE", "p": [11] },
+	{ "s": "FUERA", "p": [5] },
+	{ "s": "FUNCIONALIDADES", "p": [9] },
+	{ "s": "FUNCIONES", "p": [8, 7, 6] },
+	{ "s": "FUNCIÓN", "p": [7, 6] }
+]

@@ -25,6 +25,12 @@
         margin: 100px;
     }
     
+    h2 {
+        text-align: center;
+        color: white;
+        margin: 100px;
+    }
+    
     .contenedor {
         width: 195px;
         height: 230px;

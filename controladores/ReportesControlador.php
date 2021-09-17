@@ -41,6 +41,18 @@ class ReportesControlador{
             case 'habilitarReportes':
                 $this -> habilitarReportes();
                 break;
+            case 'vistaReporteFecha':
+                $this -> vistaReporteFecha();
+                break;
+            case 'generarReporteFecha':
+                $this -> generarReporteFecha();
+                break;
+            case 'vistaReportePlaca':
+                $this -> vistaReportePlaca();
+                break;
+            case 'buscarReportePlaca':
+                $this -> buscarReportePlaca();
+                break;
         }
     }
     public function listarReportes(){
@@ -165,6 +177,45 @@ class ReportesControlador{
 
             $_SESSION['mensaje'] = "Registro Habilitado";
             header("location:Controlador.php?ruta=listarReportesInactivos");
+        }
+
+        public function vistaReporteFecha(){
+            header('location:vistas/vistaAdminReportes/vistaAdminReportes.php?contenido=vistas/vistasReportes/vistaReporteFecha.php');
+        }
+
+        public function generarReporteFecha(){
+            $gestarReportes = new ReportesDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+            $reporteFecha = $gestarReportes -> reportePorFecha($this->datos);
+
+            session_start();
+
+            $_SESSION['listaDeReportes'] = $reporteFecha;
+
+            header('location:vistas/vistaAdminReportes/vistaAdminReportes.php?contenido=vistas/vistasReportes/listarDTRegistrosReportesFecha.php');
+
+        }
+
+        public function vistaReportePlaca(){
+            header('location:vistas/vistaAdminReportes/vistaAdminReportes.php?contenido=vistas/vistasReportes/vistaReportePlaca.php');
+        }
+
+        public function buscarReportePlaca(){
+            $gestarReportes = new ReportesDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+            $reportePlaca = $gestarReportes -> reportePorPlaca($this->datos);
+
+            if($reportePlaca['exitoSeleccion']){
+                session_start();
+
+                $_SESSION['listaDeReportes'] = $reportePlaca['registroEncontrado'];
+
+                header('location:vistas/vistaAdminReportes/vistaAdminReportes.php?contenido=vistas/vistasReportes/listarDTRegistrosReportesPlaca.php');
+            }else{
+                session_start();
+                
+                $_SESSION['mensaje'] = 'Placa no encontrada';
+
+                header('location:vistas/vistaAdminReportes/vistaAdminReportes.php?contenido=vistas/vistasReportes/vistaReportePlaca.php');
+            }
         }
     }
 

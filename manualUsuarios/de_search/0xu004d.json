@@ -1,0 +1,16 @@
+[
+	{ "s": "MANERA", "p": [4] },
+	{ "s": "MANUAL", "p": [1] },
+	{ "s": "MAYUSCULAS", "p": [5] },
+	{ "s": "MISMO", "p": [8] },
+	{ "s": "MISMOS", "p": [5] },
+	{ "s": "MODIFICAR", "p": [12] },
+	{ "s": "MOSTRADA", "p": [8] },
+	{ "s": "MOSTRARA", "p": [8, 5] },
+	{ "s": "MOSTRARAN", "p": [6] },
+	{ "s": "MOSTRARÁ", "p": [12, 9, 6] },
+	{ "s": "MOVERNOS", "p": [11] },
+	{ "s": "MUESTRA", "p": [9] },
+	{ "s": "MUESTRAN", "p": [9] },
+	{ "s": "MÁS", "p": [8, 6] }
+]

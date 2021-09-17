@@ -242,9 +242,31 @@ class ControladorPrincipal{
             case 'buscarPlaca':
                 $this -> buscarPlaca();
                 break;
+            case 'calcularValorFinal':
+                $this -> calcularValorFinal();
+                break;
             case 'cerrarSesion':
                 $this -> cerrarSesion();              
                 break;
+            case 'calcularCambio':
+                $this -> calcularCambio();
+                break;
+            case 'cerrarTicket':
+                $this -> cerrarTicket();
+                break;
+            case 'vistaReporteFecha':
+                $this -> vistaReporteFecha();
+                break;
+            case 'generarReporteFecha':
+                $this -> generarReporteFecha();
+                break;
+            case 'vistaReportePlaca':
+                $this -> vistaReportePlaca();
+                break;
+            case 'buscarReportePlaca':
+                $this -> buscarReportePlaca();
+                break;
+
             }
         
     }
@@ -520,6 +542,31 @@ class ControladorPrincipal{
     }
     public function cerrarSesion(){
         $usuariosControlador = new Usuario_sControlador($this -> datos);
+    }
+    public function calcularValorFinal(){
+        $ticketsControlador = new TicketsControlador($this -> datos);
+    }
+    public function calcularCambio(){
+        $ticketsControlador = new TicketsControlador($this -> datos);
+    }
+
+    public function cerrarTicket(){
+        $ticketsControlador = new TicketsControlador($this -> datos);
+    }
+
+    public function vistaReporteFecha(){
+        $reportesControlador = new ReportesControlador($this -> datos);
+    }
+
+    public function generarReporteFecha(){
+        $reportesControlador = new ReportesControlador($this -> datos);
+    }
+    public function vistaReportePlaca(){
+        $reportesControlador = new ReportesControlador($this -> datos);
+    }
+
+    public function buscarReportePlaca(){
+        $reportesControlador = new ReportesControlador($this -> datos);
     }
 }
 

@@ -66,7 +66,7 @@ echo "</pre>";*/
         }
         ?>">
         <h6>Tarifa:</h6>
-        <select class="select-48" name="Tarifas_tarId" id="Tipos_Documentos_tipDocId">
+        <select class="select-48" name="Tarifas_tarId">
             <?php for($i=0; $i < $cantidadTarifas; $i++){
                 ?><option value="<?php echo $listarTarifas[$i]->tarId?>"
                 >    

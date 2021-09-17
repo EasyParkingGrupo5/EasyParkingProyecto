@@ -29,7 +29,7 @@
         margin: 100px;
     }
     
-    .formAbrirTicket {
+    .formBuscarPlaca {
         text-align: center;
         width: 20%;
         max-width: 550px;
@@ -46,7 +46,6 @@
     }
     
     .input-100 {
-        background-color: white;
         width: 70%;
         text-align: center;
     }

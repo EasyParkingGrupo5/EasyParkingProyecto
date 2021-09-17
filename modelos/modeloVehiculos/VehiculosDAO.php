@@ -8,7 +8,7 @@ class VehiculosDAO extends ConDbMySql{
     }
     
     public function seleccionarTodos($estado){
-        $planconsulta = "SELECT * FROM vehiculos v JOIN tickets t on v.Tickets_ticId=t.ticId JOIN empleados e on e.empId=v.Empleados_empId WHERE vehEstado= :vehEstado;";
+        $planconsulta = "SELECT * FROM vehiculos v  JOIN empleados e on e.empId=v.Empleados_empId WHERE vehEstado= :vehEstado;";
 
         $registroVehiculos = $this->conexion->prepare($planconsulta);
         $registroVehiculos -> bindParam(":vehEstado", $estado);

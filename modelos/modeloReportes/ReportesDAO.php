@@ -30,6 +30,58 @@ class ReportesDAO extends ConDbMySql{
         return $listadoRegistrosReportes;
     }
 
+    public function reportePorFecha($registro){
+        $consulta = "SELECT tic.ticNumero, tic.ticFecha, veh.vehNumero_Placa, 
+        tar.tarTipoVehiculo, tic.ticHoraIngreso, tic.ticHoraSalida, tic.ticValorFinal 
+        FROM tickets tic JOIN vehiculos veh ON veh.vehId=tic.Vehiculos_vehId JOIN tarifas tar 
+        ON tar.tarId=tic.Tarifas_tarId WHERE ticFecha BETWEEN :fechaDesde AND :fechaHasta AND 
+        tic.ticEstado = 0
+        ORDER BY tic.ticFecha ASC";
+
+        $registroReportes = $this->conexion->prepare($consulta);
+
+        $registroReportes -> bindParam(":fechaDesde", $registro['fechaDesde']);
+        $registroReportes -> bindParam(":fechaHasta", $registro['fechaHasta']);
+
+        $registroReportes->execute();
+
+        $listadoRegistrosReportes = array();
+
+        while( $registro = $registroReportes->fetch(PDO::FETCH_OBJ)){
+            $listadoRegistrosReportes[]=$registro;
+        }
+        $this->cierreBd();
+        return $listadoRegistrosReportes;
+    }
+
+    public function reportePorPlaca($registro){
+        $consulta = "SELECT tic.ticNumero, tic.ticFecha, veh.vehNumero_Placa, 
+        tar.tarTipoVehiculo, tic.ticHoraIngreso, tic.ticHoraSalida, tic.ticValorFinal, tic.ticEstado
+        FROM tickets tic JOIN vehiculos veh ON veh.vehId=tic.Vehiculos_vehId JOIN tarifas tar 
+        ON tar.tarId=tic.Tarifas_tarId WHERE veh.vehNumero_Placa = :placa AND 
+        tic.ticEstado = 0
+        ORDER BY tic.ticFecha ASC";
+
+        $registroReportes = $this->conexion->prepare($consulta);
+
+        $registroReportes -> bindParam(":placa", $registro['placa']);
+
+        $registroReportes->execute();
+
+        $listadoRegistrosReportes = array();
+
+        while( $registro = $registroReportes->fetch(PDO::FETCH_OBJ)){
+            $listadoRegistrosReportes[]=$registro;
+        }
+        $this->cierreBd();
+        if(!empty($listadoRegistrosReportes)){
+            return ['exitoSeleccion' => true, 'registroEncontrado' => $listadoRegistrosReportes];
+        }else{
+            return ['exitoSeleccion' => false, 'registroEncontrado' => $listadoRegistrosReportes]; 
+     
+        }
+    }
+
     public function seleccionarID($sId){
         $consulta = "SELECT * FROM reportes WHERE repId=?; ";
 

@@ -26,10 +26,11 @@ if (isset($_SESSION['mensaje'])) {
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"> 
         <!--**************************************** -->
+        <link rel="stylesheet" href="../../css/vistas/vistaAdminTickets/vistaListarTickets.css">
     </head>
 	
 	<body>
-        <h1>Listado de la tabla Tickets</h1>
+
         <br>
 <?php
 if(isset($_SESSION['listaDeTickets'])){
@@ -44,20 +45,17 @@ if(isset($_SESSION['listaDeTarifas'])){
 
    
 }
-?>
+?><h4>Listado de Tickets Abiertos</h4>
+<div class="table">
     <table id="example" class="table-responsive table-hover table-bordered table-striped" style="width:100%">
         <thead>
             <tr>
-                <th>Id</th> 
-                <th>Numero</th> 
+                <th>Numero Ticket</th> 
+                <th>Placa</th> 
                 <th>Fecha</th> 
                 <th>Hora Ingreso</th> 
-                <th>Hora Salida</th> 
-                <th>Valor Valor Final</th>
-                <th>Empleado</th>
                 <th>Tipo Tarifa</th>
-                <th>Editar</th> 
-                <th>Eliminar</th> 
+                <th>Cerrar Ticket</th> 
             </tr>
         </thead>
         <tbody>
@@ -66,16 +64,12 @@ if(isset($_SESSION['listaDeTarifas'])){
             foreach ($listaDeTickets as $key => $value) {
                 ?>
                 <tr>
-                    <td><?php echo $listaDeTickets[$i]->ticId; ?></td>  
-                    <td><?php echo $listaDeTickets[$i]->ticNumero; ?></td>  
+                    <td><?php echo $listaDeTickets[$i]->ticNumero; ?></td> 
+                    <td><?php echo $listaDeTickets[$i]->vehNumero_Placa; ?></td>  
                     <td><?php echo $listaDeTickets[$i]->ticFecha; ?></td>  
-                    <td><?php echo $listaDeTickets[$i]->ticHoraIngreso; ?></td>
-                    <td><?php echo $listaDeTickets[$i]->ticHoraSalida; ?></td>
-                    <td><?php echo $listaDeTickets[$i]->ticValorFinal; ?></td>
-                    <td><?php echo $listaDeTickets[$i]->Empleados_empId ; ?></td>  
-                    <td><?php echo $listaDeTickets[$i]->tarTipoVehiculo.' - '.$listaDeTickets[$i]->tarValorTarifa;?></td> 
-                    <td><a href="Controlador.php?ruta=actualizarTickets&idAct=<?php echo $listaDeTickets[$i]->ticId; ?>">Actualizar</a></td>  
-                    <td><a href="Controlador.php?ruta=eliminarTickets&idAct=<?php echo $listaDeTickets[$i]->ticId; ?>" onclick="return confirm('¿Está seguro de eliminar el registro?')">Eliminar</a></td>  
+                    <td><?php echo $listaDeTickets[$i]->ticHoraIngreso; ?></td>  
+                    <td><?php echo $listaDeTickets[$i]->tarTipoVehiculo.' - $'.$listaDeTickets[$i]->tarValorTarifa.' pesos minuto';?></td> 
+                    <td><a href="../../Controlador.php?ruta=actualizarTickets&idAct=<?php echo $listaDeTickets[$i]->ticNumero; ?>" style="color:#FF0000">Cerrar este Ticket</a></td>  
                 </tr>   
                 <?php
                 $i++;
@@ -84,6 +78,7 @@ if(isset($_SESSION['listaDeTarifas'])){
             ?>
         </tbody>
     </table>
+</div>
 
 
     <!--**************************************** -->  
@@ -96,6 +91,11 @@ if(isset($_SESSION['listaDeTarifas'])){
                             $('#example').DataTable({
                                 pageLength: 5,
                                 lengthMenu: [[5, 10, 15, 20], [5, 10, 15, 20]],
+                                ordering: true,
+                                order: [[ 1, 'asd' ]],
+                                language: {
+                                    url: '//cdn.datatables.net/plug-ins/1.11.1/i18n/es_es.json'
+        }
                             });
                         });
     </script>     

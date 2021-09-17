@@ -1,0 +1,210 @@
+    body {
+        font-family: Century Gothic;
+        background-color: black;
+    }
+    
+    #text-1 {
+        text-align: center;
+        color: red;
+        margin: 0px;
+    }
+    
+    #text-2 {
+        text-align: center;
+        color: red;
+        margin: 0px;
+    }
+    
+    h1 {
+        font-size: 32px;
+        text-align: center;
+        color: red;
+        margin-bottom: 50px;
+    }
+    
+    h3 {
+        font-size: 18.72px;
+        text-align: right;
+        color: white;
+        margin: 100px;
+    }
+    
+    .input-48 {
+        text-align: center;
+        width: 90%;
+        padding: 10px 20px;
+    }
+    
+    .form {
+        text-align: center;
+    }
+    
+    .contenedor-input {
+        padding: 10px 30px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    
+    .contenedor-input2 {
+        padding: 10px 30px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    
+    .formInsertarTicket {
+        margin: 0 auto;
+        text-align: center;
+        width: 800%;
+        max-width: 550px;
+        border-radius: 10px;
+        border: 2px solid red;
+    }
+    
+    .contenedor-input {
+        text-align: center;
+        padding: 10px 20px;
+    }
+    
+    .contenedor-input2 {
+        text-align: center;
+        padding: 10px 20px;
+    }
+    
+    .input-100 {
+        width: 100%;
+        text-align: center;
+    }
+    
+    input {
+        color: white;
+        background: none;
+        border: none;
+        margin-bottom: 15px;
+        padding: 10px;
+        border-bottom: 2px solid red;
+        outline: none;
+    }
+    
+    h6 {
+        color: white;
+    }
+    
+    .btnInsertarTicket {
+        width: 90%;
+        background: none;
+        border: 2px solid #ff0000;
+        color: #ff0000;
+        padding: 5px;
+        font-size: 18px;
+        cursor: pointer;
+        transform: uppercase;
+        transition: 0.2s linear;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        margin: 10px auto;
+    }
+    
+    .btnInsertarTicket:hover {
+        background: #ff0000;
+        color: #fff;
+    }
+    
+    .btnCalcularCambio {
+        width: 100%;
+        background: none;
+        border: 2px solid #ff0000;
+        color: #ff0000;
+        padding: 5px;
+        font-size: 18px;
+        cursor: pointer;
+        transform: uppercase;
+        transition: 0.2s linear;
+        border-radius: 10px;
+        margin: 15px auto;
+    }
+    
+    .btnCalcularCambio:hover {
+        background: #ff0000;
+        color: #fff;
+    }
+    
+    .btnCerrarTicket {
+        width: 100%;
+        background: none;
+        border: 2px solid #ff0000;
+        color: #ff0000;
+        padding: 5px;
+        font-size: 18px;
+        cursor: pointer;
+        transform: uppercase;
+        transition: 0.2s linear;
+        border-radius: 10px;
+        margin: 15px auto;
+    }
+    
+    .btnCerrarTicket:hover {
+        background: #ff0000;
+        color: #fff;
+    }
+    
+    input[type=time] {
+        width: 90%;
+        border: none;
+        color: white;
+        font-size: 14px;
+        font-family: helvetica;
+        background: rgba(184, 39, 39, 0.692);
+        border-radius: 10px;
+    }
+    
+    input[type=time]::-webkit-datetime-edit-text {
+        padding: 19px 4px;
+    }
+    
+    .uno {
+        width: 50%;
+    }
+    
+    .dos {
+        width: 50%;
+    }
+    
+    .tres {
+        width: 100%;
+    }
+    
+    .cuatro {
+        width: 50%;
+    }
+    
+    .cinco {
+        width: 50%;
+    }
+    
+    .seis {
+        width: 100%;
+    }
+    
+    .siete {
+        width: 50%;
+    }
+    
+    .ocho {
+        width: 50%;
+    }
+    
+    .nueve {
+        width: 100%;
+    }
+    
+    .diez {
+        margin: 0 auto;
+        width: 90%;
+    }
+    
+    .once {
+        margin: 0 auto;
+        width: 90%;
+    }

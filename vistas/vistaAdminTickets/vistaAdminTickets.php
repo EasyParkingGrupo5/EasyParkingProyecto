@@ -24,7 +24,7 @@ if (isset($_SESSION['mensaje'])){
     <title>EasyParking</title>
 </head>
 <body>
-<h3>Usuario: <?php echo  $_SESSION['nombre']." ".$_SESSION['apellido']?>   <a href="../../../Controlador.php?ruta=cerrarSesion" onclick="return confirm('¿Está seguro de cerrar sesión?')" style="color:#FF0000">  Salir</a></h3>
+<h3>Usuario: <?php echo  $_SESSION['nombre']." ".$_SESSION['apellido']?>   <a href="../../Controlador.php?ruta=cerrarSesion" onclick="return confirm('¿Está seguro de cerrar sesión?')" style="color:#FF0000">  Salir</a></h3>
 <a href="../../principal.php">
 <i class="fas fa-chevron-circle-left" id="btnVolver"><h6 id="txtVolver">Volver</h6></i>
 </a>
@@ -36,21 +36,22 @@ if (isset($_SESSION['mensaje'])){
         <p class="texto">Abrir Ticket</p>
         </div>
         </a>
-        <a href="">
+        <a href="../../Controlador.php?ruta=listarTickets">
         <div class="contenedor" id="dos">
         <i class="fas fa-handshake" id="icoCerrarTicket"></i>
         <p class="texto">Cerrar Ticket</p>
         </div>
         </a>
     </header>
-    <div id="">
+
         <?php
             if(isset($_GET['contenido'])){
                 include(PATH.$_GET['contenido']);
 
             }
         ?>
-    </div>
+
+
 </body>
 </html>
 <?php

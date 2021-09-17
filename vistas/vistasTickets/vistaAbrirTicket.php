@@ -18,7 +18,7 @@ if (isset($_SESSION['mensaje'])) {
 <body>
     <form class="formAbrirTicket" role="form" action="../../Controlador.php" method="post" autocomplete="off">
         <h6>Buscar placa: </h6>
-        <input class="input-100" type="text" name="placa">
+        <input class="input-100" type="text" name="placa" pattern="[a-zA-Z]{3}[0-9]{2}[a-zA-Z0-9]">
         <button class="btnBuscar" type="submit" name="ruta" value="buscarPlaca">Aceptar</button>
     </form>
     <?php

@@ -53,6 +53,15 @@ class TicketsControlador{
             case 'abrirTicket':
                 $this -> abrirTicket();
                 break;
+            case 'calcularValorFinal':
+                $this -> calcularValorFinal();
+                break;
+            case 'calcularCambio':
+                $this -> calcularCambio();
+                break;
+            case 'cerrarTicket':
+                $this -> cerrarTicket();
+                break;
             
         }
     }
@@ -64,7 +73,7 @@ class TicketsControlador{
     
         $_SESSION['listaDeTickets'] = $registroTickets;
     
-        header("location:principal.php?contenido=vistas/vistasTickets/listarDTRegistrosTickets.php");
+        header("location:vistas/vistaAdminTickets/vistaAdminTickets.php?contenido=vistas/vistasTickets/listarTicketsAbiertos.php");
     }
 
     public  function actualizarTickets(){
@@ -73,20 +82,20 @@ class TicketsControlador{
 
         $actualizarDatosTickets = $actualizarTickets['registroEncontrado'][0];
 
-        $gestarEmpleados = new EmpleadosDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
-        $listarEmpleados = $gestarEmpleados -> seleccionarTodos(1);
-
         $gestarTarifas = new TarifasDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
         $listarValorTarifa = $gestarTarifas -> seleccionarTodos (1);
+
+        $gestarVehiculos = new VehiculosDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $listarVehiculos = $gestarVehiculos -> seleccionarTodos (1);
 
         
         session_start();
 
         $_SESSION['actualizarTickets'] = $actualizarDatosTickets;
-        $_SESSION['listarEmpleados'] = $listarEmpleados;
         $_SESSION['listarTarifa'] = $listarValorTarifa;
+        $_SESSION['listarVehiculos'] = $listarVehiculos;
        
-        header("location:principal.php?contenido=vistas/vistasTickets/vistaActualizarTickets.php");
+        header("location:vistas/vistaAdminTickets/vistaAdminTickets.php?contenido=vistas/vistasTickets/vistaCerrarTicket.php");
         
     }
     public function confirmarActualizarTickets(){
@@ -160,14 +169,18 @@ class TicketsControlador{
         header('location:principal.php?contenido=vistas/vistasTickets/vistaInsertarTickets.php');
     }
     
-        public function eliminarTickets(){
+        public function cerrarTicket(){
             $gestarTickets = new TicketsDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
-            $inhabilitarTickets = $gestarTickets -> eliminarLogico(array($this -> datos['idAct']));
+            $inhabilitarTickets = $gestarTickets -> eliminarLogico(array($this -> datos['ticNumero']));
 
             session_start();
 
-            $_SESSION['mensaje'] = "Registro Eliminado";
-            header("location:Controlador.php?ruta=listarTickets");
+            $_SESSION['mensaje'] = "Ticket cerrado";
+            unset($_SESSION['valorTotal']);
+            unset($_SESSION['horaFinal']);
+            unset($_SESSION['valorRecibido']);
+            unset($_SESSION['totalCambio1']);
+            header("location:vistas/vistaAdminTickets/vistaAdminTickets.php");
 
 
         }
@@ -180,7 +193,7 @@ class TicketsControlador{
     
             $_SESSION['listaDeTickets'] = $listarInactivos;
     
-            header("location:principal.php?contenido=vistas/vistasTickets/listarDTRegistrosInactivos.php");
+            header("location:vistas/vistaAdminTickets/vistaAdminTickets.php?contenido=vistas/vistasTickets/listarTicketsAbiertos.php");
         }
 
         public function habilitarTickets(){
@@ -198,24 +211,118 @@ class TicketsControlador{
         $buscarPlaca = $gestarVehiculo->seleccionarPlaca(array($this->datos['vehNumero_Placa']));
 
         if(1==$buscarPlaca['exitoSeleccionPlaca']){
-            echo "encontrada";
             $gestarTickets = new TicketsDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
             $this -> datos['Vehiculos_vehId'] = $buscarPlaca['registroEncontrado'][0]-> vehId;
-            $this -> datos['Empleados_empId'] = 3;
+            session_start();
+            $this -> datos['Empleados_empId'] = $_SESSION['rolesEnSesion'][0];
             $gestarTickets ->insertar($this -> datos);
         }else{
-            $this -> datos['Empleados_empId'] = 3;
+            session_start();
+            $this -> datos['Empleados_empId'] = $_SESSION['rolesEnSesion'][0];
             $insertarVehiculoNuevo = $gestarVehiculo->insertar($this->datos);
             $this -> datos['Vehiculos_vehId'] = $insertarVehiculoNuevo['resultado'];
             $gestarTickets = new TicketsDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
             $gestarTickets ->insertar($this -> datos);
         }
+        
+        $_SESSION['mensaje'] = 'Ticket agregado.';
+
+        header('location:vistas/vistaAdminTickets/vistaAdminTickets.php');
     }
 
     public function abrirTicket(){
         header('location:vistas/vistaAdminTickets/vistaAdminTickets.php?contenido=vistas/vistasTickets/vistaAbrirTicket.php');
     }
+
+    public function calcularValorFinal(){
+        $gestarTickets = new TicketsDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $insertarValorFinal = $gestarTickets -> actualizarValorFinal(array($this->datos));
+
+        $ticketActualizado = $gestarTickets -> seleccionarID(array($this->datos['ticNumero']));
+
+        $gestarTarifas = new TarifasDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $buscarTarifa = $gestarTarifas -> seleccionarID(array($ticketActualizado['registroEncontrado'][0]->Tarifas_tarId));
+        $valorTarifa = $buscarTarifa['registroEncontrado'][0] ->tarValorTarifa;
+
+        $tiempoIngreso = strtotime($ticketActualizado['registroEncontrado'][0] -> ticHoraIngreso);
+        $horaIngreso = date('H', $tiempoIngreso);
+        $minutosIngreso = date('i', $tiempoIngreso);
+
+        $tiempoSalida = strtotime($ticketActualizado['registroEncontrado'][0] -> ticHoraSalida);
+        $horaSalida = date('H', $tiempoSalida);
+        $minutosSalida = date('i', $tiempoSalida);
+
+        if($minutosIngreso < $minutosSalida){
+
+            $difHoras = abs($horaIngreso - $horaSalida);
+            $difMinutos = abs($minutosIngreso - $minutosSalida);
+
+            $horasMinutos = $difHoras*60;
+
+            $totalMinutos = $horasMinutos + $difMinutos;
+
+        }else if($minutosIngreso == $minutosSalida){
+            $difHoras = abs($horaIngreso - $horaSalida);
+            $difMinutos = 0;
+
+            $horasMinutos = $difHoras*60;
+
+            $totalMinutos = $horasMinutos + $difMinutos;
+
+        }else{
+            $difHoras = abs($horaIngreso - $horaSalida) - 1;
+            $difMinutos = abs(abs($minutosIngreso - $minutosSalida) - 60);
+
+            $horasMinutos = $difHoras*60;
+
+            $totalMinutos = $horasMinutos + $difMinutos;
+        }
+
+        $totalTicket = $valorTarifa * $totalMinutos;
+        $totalTicket = round($totalTicket / 100) * 100;
+
+        $this ->datos['ticValorFinal'] = $totalTicket;
+
+        $hola = $gestarTickets -> actualizarValorTotal(array($this -> datos));
+
+        $totalTicket = number_format($totalTicket, 2, '.', ',');
+
+        session_start();
+
+        $_SESSION['valorTotal'] = $totalTicket;
+        $_SESSION['horaFinal'] = $ticketActualizado['registroEncontrado'][0] -> ticHoraSalida;
+
+        header('location:vistas/vistaAdminTickets/vistaAdminTickets.php?contenido=vistas/vistasTickets/vistaCerrarTicket.php');
+
+    }
+
+    public function calcularCambio(){
+        $gestarTickets = new TicketsDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $seleccionarTicket = $gestarTickets -> seleccionarID(array($this->datos['ticNumero']));
+
+        $valorFinal = $seleccionarTicket['registroEncontrado'][0] -> ticValorFinal;
+
+        $valorRecibido = $this -> datos['valorRecibido'];
+
+        echo $valorFinal.' - '.$valorRecibido;
+
+        if($valorRecibido >= $valorFinal){
+            $cambioTotal = $valorRecibido - $valorFinal;
+            $cambioFinal = number_format($cambioTotal, 2, '.', ',');
+            session_start();
+            $_SESSION['totalCambio1'] = $cambioFinal;
+            $_SESSION['valorRecibido'] = $this -> datos['valorRecibido'];
+        }else{
+            session_start();
+            $_SESSION['mensaje'] = 'El valor recibido debe ser mayor al total a pagar.';
+        }
+
+        header('location:vistas/vistaAdminTickets/vistaAdminTickets.php?contenido=vistas/vistasTickets/vistaCerrarTicket.php');
+    }
+
 }
+
+
 ?>
 
   

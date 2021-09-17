@@ -8,7 +8,8 @@ class TicketsDAO extends ConDbMySql{
     }
     
     public function seleccionarTodos($estado){
-        $planconsulta = "SELECT * FROM tickets t JOIN tarifas ta ON ta.tarId=t.Tarifas_tarId WHERE t.ticEstado=:ticEstado";
+        $planconsulta = "SELECT * FROM tickets t JOIN tarifas ta ON ta.tarId=t.Tarifas_tarId JOIN vehiculos veh 
+        ON t.Vehiculos_vehId=veh.vehId WHERE t.ticEstado=:ticEstado";
 
         $registroTickets = $this->conexion->prepare($planconsulta);
         $registroTickets->bindParam(':ticEstado',$estado);
@@ -25,7 +26,7 @@ class TicketsDAO extends ConDbMySql{
 
     public function seleccionarID($sId){
 
-        $consulta = "SELECT * FROM tickets WHERE ticId=?; ";
+        $consulta = "SELECT * FROM tickets WHERE ticNumero=?; ";
 
         $listar = $this->conexion->prepare($consulta);
         $listar->execute(array($sId[0]));
@@ -35,7 +36,6 @@ class TicketsDAO extends ConDbMySql{
         while( $registro = $listar->fetch(PDO::FETCH_OBJ)){
             $registroEncontrado[]=$registro;
         }
-          $this->cierreBd();
           
         if(!empty($registroEncontrado)){
             return ['exitoSeleccionId' => true, 'registroEncontrado' => $registroEncontrado];
@@ -75,37 +75,50 @@ class TicketsDAO extends ConDbMySql{
 
     
 
-    public function actualizar($registro){
+    public function actualizarValorTotal($registro){
         try{
             $ticNumero = $registro[0]['ticNumero'];
-            $ticFecha = $registro[0]['ticFecha'];
-            $ticHoraIngreso = $registro[0]['ticHoraIngreso'];
-            $ticHoraSalida = $registro[0]['ticHoraSalida'];
             $ticValorFinal = $registro[0]['ticValorFinal'];
-            $empleados_empId = $registro[0]['Empleados_empId'];
-            $tarifas_tarId = $registro[0]['Tarifas_tarId'];
-            $ticId = $registro[0]['ticId'];	
 			
 			
-			if(isset($ticId)){
+			if(isset($ticNumero)){
 				
-                $actualizar = "UPDATE tickets SET ticNumero= ? , ";
-                $actualizar .= " ticFecha = ? , ";
-                $actualizar .= " ticHoraIngreso = ? , ";
-                $actualizar .= " ticHoraSalida = ?, ";
-                $actualizar .= " ticValorFinal = ?, ";
-                $actualizar .= " Empleados_empId = ?, ";
-                $actualizar .= " Tarifas_tarId = ? ";
-                $actualizar .= " WHERE ticId= ? ; ";
+                $actualizar = "UPDATE tickets SET ticValorFinal = ?  WHERE ticNumero= ? ; ";
 				
 				$actualizacion = $this->conexion->prepare($actualizar);
 				
-				$resultadoAct=$actualizacion->execute(array($ticNumero,$ticFecha,$ticHoraIngreso,$ticHoraSalida, 
-                $ticValorFinal,$empleados_empId,$tarifas_tarId,$ticId));
+				$resultadoAct=$actualizacion->execute(array($ticValorFinal,$ticNumero));
 				
 				        $this->cierreBd();
 						
                 return ['actualizacion' => $resultadoAct, 'mensaje' => "Actualización realizada."];				
+				
+			}
+
+
+        } catch (PDOException $pdoExc) {
+			$this->cierreBd();
+            return ['actualizacion' => $resultadoAct, 'mensaje' => $pdoExc];
+        }
+    
+        
+    }
+
+    public function actualizarValorFinal($registro){
+        try{
+            $ticNumero = $registro[0]['ticNumero'];
+            $ticHoraSalida = $registro[0]['ticHoraSalida'];
+			
+			if(isset($ticNumero)){
+				
+                $actualizar = "UPDATE tickets SET ticHoraSalida = ? WHERE ticNumero= ? ; ";
+				
+				$actualizacion = $this->conexion->prepare($actualizar);
+				
+				$resultadoAct=$actualizacion->execute(array($ticHoraSalida, $ticNumero));
+				
+						
+                return ['actualizacion' => $resultadoAct];				
 				
 			}
 
@@ -162,7 +175,7 @@ class TicketsDAO extends ConDbMySql{
             $cambiarEstado = 0;
 
             if(isset($sId[0])){
-                $actualizar = "UPDATE tickets SET ticEstado = ? WHERE ticId = ?";
+                $actualizar = "UPDATE tickets SET ticEstado = ? WHERE ticNumero = ?";
                 $actualizacion = $this->conexion->prepare($actualizar);
                 $actualizacion = $actualizacion->execute(array($cambiarEstado, $sId[0]));
                 return ['actualizacion' => $actualizacion, 'mensaje' => 'Resgistro Desactivado'];

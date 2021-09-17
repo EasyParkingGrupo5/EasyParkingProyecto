@@ -1,0 +1,61 @@
+@import "https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css";
+body {
+    font-family: Century Gothic;
+    background-color: black;
+    margin: 0px;
+    padding: 0px;
+}
+
+.table {
+    border: 3px solid red;
+    margin: auto;
+    width: 80%;
+    background-color: white;
+    padding: 8px 8px 8px 8px;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+h1 {
+    font-size: 32px;
+    text-align: center;
+    color: red;
+    margin-bottom: 50px;
+}
+
+h2 {
+    font-size: 32px;
+    text-align: center;
+    color: white;
+    margin-bottom: 50px;
+    margin-top: 20px;
+}
+
+h3 {
+    font-size: 18.72px;
+    text-align: right;
+    color: white;
+    margin: 100px;
+}
+
+h4 {
+    font-size: 30px;
+    margin: 20px;
+    text-align: center;
+    color: red;
+}
+
+#btnVolver {
+    font-size: 40px;
+    color: red;
+    position: absolute;
+    top: 15%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+}
+
+#txtVolver {
+    text-align: left;
+    font-size: 15px;
+    color: white;
+}
