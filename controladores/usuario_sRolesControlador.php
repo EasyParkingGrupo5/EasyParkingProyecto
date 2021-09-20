@@ -19,12 +19,12 @@ class Usuarios_SRolesControlador{
             case 'actualizarUsuarios_SRoles':
                 $this->actualizarUsuarios_SRoles();
                 break;
-            case 'confirmarActualizarUsuarios':
-                 $this -> confirmarActualizarUsuarios_SRoles();
+            case 'confirmarActualizarUsuarioRol':
+                 $this -> confirmarActualizarUsuarioRol();
                 break;
-            case 'cancelarActualizarUsuarios':
-                 $this -> cancelarActualizarUsuarios_SRoles();
-                 break;
+            case 'actualizarUsuarioRol':
+                $this->ActualizarUsuarioRol();
+                break;
         }
     }
     public function listarUsuarios_SRoles(){
@@ -52,23 +52,37 @@ class Usuarios_SRolesControlador{
         
     }
 
-    public function confirmarActualizarUsuarios_SRoles(){
+    public function confirmarActualizarUsuarioRol(){
 
         $gestarUsuarios = new UsuarioRolesDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
         $actualizarUsuarios = $gestarUsuarios -> actualizar(array($this->datos));
 
         session_start();
             $_SESSION['mensaje'] = "Actualización realizada.";
-            header("location:Controlador.php?ruta=listarUsuarios");	
+            header("location:Controlador.php?ruta=listarUsuarios_SRoles");	
 
     }
 
-    public function cancelarActualizarUsuarios_SRoles(){
+    public  function actualizarUsuarioRol(){
+
+        $gestarUsuariosRoles = new UsuarioRolesDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $actualizarUsuariosRoles = $gestarUsuariosRoles -> seleccionarID(array($this->datos['usuId']));
+
+        $actualizarDatosUsuariosRoles = $actualizarUsuariosRoles['registroEncontrado'][0];
+
+        $gestarRol = new RolDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $listarRol = $gestarRol -> seleccionarTodos(1);
+
+        $gestarUsuarios = new Usuario_sDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
+        $listarUsuarios = $gestarUsuarios -> seleccionarTodos(1);
 
         session_start();
-                $_SESSION['mensaje'] = "Desistió de la actualización";
-		        header("location:Controlador.php?ruta=listarUsuarios");	
+        $_SESSION['actualizarDatosUsuarios_Roles']=$actualizarDatosUsuariosRoles;
+        $_SESSION['listarUsuarios']=$listarUsuarios;
+        $_SESSION['listarRol']=$listarRol;
 
+        header("location:vistas/vistaAdminUsuarios/vistasUsuarioRol/vistaAdminUsuarioRol.php?contenido=vistas/vistasUsuarios_S_Roles/vistaActualizarUsuarioRoles.php");
+        
     }
     
 }

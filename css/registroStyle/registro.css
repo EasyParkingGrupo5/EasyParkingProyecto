@@ -121,6 +121,6 @@
             transform: translate(2.5%, 0%);
         }
         img {
-            width: 0%;
+            width: 0px;
         }
     }

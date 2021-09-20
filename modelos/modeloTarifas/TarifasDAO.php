@@ -45,15 +45,13 @@ class TarifasDAO extends ConDbMySql{
 
     public function insertar($registro){
         try {
-            $consulta = "INSERT INTO tarifas (tarId, tarTipoVehiculo,tarValorTarifa,tarEstado)
-             VALUES (:tarId, :tarTipoVehiculo, :tarValorTarifa, :tarEstado);";
+            $consulta = "INSERT INTO tarifas (tarTipoVehiculo,tarValorTarifa)
+             VALUES (:tarTipoVehiculo, :tarValorTarifa);";
 
             $insertar = $this->conexion->prepare($consulta);
 
-            $insertar -> bindParam(":tarId", $registro['tarId']);
             $insertar -> bindParam(":tarTipoVehiculo", $registro['tarTipoVehiculo']);
             $insertar -> bindParam(":tarValorTarifa", $registro['tarValorTarifa']);
-            $insertar -> bindParam(":tarEstado", $registro['tarEstado']);
 
             $insercion = $insertar->execute();
 
@@ -70,20 +68,24 @@ class TarifasDAO extends ConDbMySql{
 
     public function actualizar($registro){
         try {
-            $consulta = "UPDATE tarifas SET tarTipoVehiculo = :tarTipoVehiculo, 
-            tarValorTarifa = :tarValorTarifa WHERE tarId = :tarId;";
+
+            $tarId = $registro[0]['tarId'];
+            $tarTipoVehiculo = $registro[0]['tarTipoVehiculo'];
+            $tarValorTarifa = $registro[0]['tarValorTarifa'];
+
+            if(isset($tarId)){
+
+            $consulta = "UPDATE tarifas SET tarTipoVehiculo = ?, 
+            tarValorTarifa = ? WHERE tarId = ?;";
             
             $actualizar = $this -> conexion -> prepare($consulta);
 
-            $actualizar -> bindParam(":tarTipoVehiculo", $registro['tarTipoVehiculo']);
-            $actualizar -> bindParam(":tarValorTarifa", $registro['tarValorTarifa']);
-            $actualizar -> bindParam(":tarId", $registro['tarId']);
-
-            $actualizacion = $actualizar -> execute();
+            $actualizacion = $actualizar -> execute(array($tarTipoVehiculo, $tarValorTarifa, $tarId));
 
             $this->cierreBd();
 
             return ['actualizacion' => $actualizacion, 'mensaje' => 'Resgistro Actualizado'];
+            }
 
         } catch (PDOException $pdoExc) {
             return ['actualizacion' => $actualizacion, 'mensaje' => $pdoExc];

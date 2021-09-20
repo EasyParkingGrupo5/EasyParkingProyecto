@@ -40,7 +40,7 @@ if(isset($_SESSION['listaDeRoles'])){
 ?>            
 <h4 >Listado de la Tabla Rol</h4>
 <div class="table">
-    <table id="example" class="table-responsive table-hover table-bordered table-striped">
+    <table id="example" class="table-responsive table-hover table-bordered table-striped dataTable no-footer" style="width:100%" role="grid" aria-describedby="exampleLugar_info">
         <thead>
 
             <tr> 

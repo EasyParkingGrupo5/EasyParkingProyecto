@@ -22,41 +22,39 @@ echo "</pre>";*/
 	
 	<body>
 <?php
-if(isset($_SESSION['listaDeVehiculos'])){
+if(isset($_SESSION['listadoTarifas'])){
 	
-	 $listaDeVehiculos=$_SESSION['listaDeVehiculos'];	
+	 $listadoTarifas=$_SESSION['listadoTarifas'];	
 }
 ?>
-<h4>Listado de Vehículos Registrados</h4>
+<h4>Listado de Tarifas Inactivas</h4>
 <div class="table">
     <table id="example" class="table-responsive table-hover table-bordered table-striped" style="width:100%">
         <thead>
             <tr>
                 <th>Id</th> 
-                <th>Numero de Placa</th> 
-                <th>Color</th> 
-                <th>Marca</th>
-                <th>Actualizar</th> 
+                <th>Tipo de Vehículos</th> 
+                <th>Valor Tarifa</th> 
+                <th>Habilitar</th> 
             </tr>
         </thead>
         <tbody>
             <?php
 
             $i = 0;
-            foreach ($listaDeVehiculos as $key => $value) {
+            foreach ($listadoTarifas as $key => $value) {
                 ?>
                 <tr>
-                    <td><?php echo $listaDeVehiculos[$i]->vehId; ?></td>  
-                    <td><?php echo $listaDeVehiculos[$i]->vehNumero_Placa; ?></td>  
-                    <td><?php echo $listaDeVehiculos[$i]->vehColor; ?></td>  
-                    <td><?php echo $listaDeVehiculos[$i]->vehMarca; ?></td>
+                    <td><?php echo $listadoTarifas[$i]->tarId; ?></td>  
+                    <td><?php echo $listadoTarifas[$i]->tarTipoVehiculo; ?></td>  
+                    <td><?php echo '$'.$listadoTarifas[$i]->tarValorTarifa.' pesos por minuto'; ?></td>  
                     <!--<td>d>-->
-                    <td><a href="../../Controlador.php?ruta=actualizarVehiculos&vehId=<?php echo $listaDeVehiculos[$i]->vehId; ?>" style="color:red">Actualizar</a></td>    
+                    <td><a href="../../Controlador.php?ruta=habilitarTarifa&sId=<?php echo $listadoTarifas[$i]->tarId; ?>" onclick="return confirm('Está seguro de habilitar el registro?')" style="color:#FF0000">Habilitar</a></td>     
                 </tr>   
                 <?php
                 $i++;
             }
-            $listaDeVehiculos=null;
+            $listadoTarifas=null;
             ?>
         </tbody>
     </table>

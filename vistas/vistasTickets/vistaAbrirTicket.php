@@ -21,10 +21,5 @@ if (isset($_SESSION['mensaje'])) {
         <input class="input-100" type="text" name="placa" pattern="[a-zA-Z]{3}[0-9]{2}[a-zA-Z0-9]">
         <button class="btnBuscar" type="submit" name="ruta" value="buscarPlaca">Aceptar</button>
     </form>
-    <?php
-            if(isset($_GET['contenido1'])){
-                include(PATH.$_GET['contenido1']);
-        }
-    ?>
 </body>
 </html>

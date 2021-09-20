@@ -54,24 +54,28 @@ if (isset($_SESSION['mensaje']) && isset($_SESSION['nombre']) && isset($_SESSION
         <p class="texto">Administración de Tickets</p>
         </div>
         </a>
+        <a href="./vistas/vistaAdminVehiculo/vistaAdminVehiculo.php">
         <div class="contenedor" id="cuatro">
         <i class="fas fa-car" id="icoempleados"></i>
         <p class="texto">Administración de Vehículos</p>
         </div>
+        </a>
         <a href="./vistas/vistaAdminReportes/vistaAdminReportes.php">
         <div class="contenedor" id="cinco">
         <i class="fas fa-chart-bar" id="icoempleados"></i>
         <p class="texto">Administración de Reportes</p>
         </div>
         </a>
+        <a href="./vistas/vistaAdminTarifas/vistaAdminTarifas.php">
         <div class="contenedor" id="seis">
         <i class="fas fa-money-bill-wave" id="icotickets"></i>
         <p class="texto">Administración de Tarifas</p>
         </div>
+        </a>
 
         </header>
 
-        <h2 class="manual-link"><a href="./manualUsuarios" target="_blank" style="color:white">Manuel de Usuario</a></h2>
+        <!--<h2 class="manual-link"><a href="./manualUsuarios" target="_blank" style="color:white">Manuel de Usuario</a></h2>-->
 
 </body>
 </html>

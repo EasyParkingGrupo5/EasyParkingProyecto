@@ -12,7 +12,7 @@ if (isset($_SESSION['mensaje'])){
     unset($_SESSION['mensaje']);
 }
 ?>
-<?php if($_SESSION['rolesEnSesion'][0] == 1){?>
+<?php if($_SESSION['rolesEnSesion'][0] == 1 || $_SESSION['rolesEnSesion'][0] == 2){?>
 <!DOCTYPE html>
 <html>
 <head>

@@ -49,7 +49,7 @@ if(isset($_SESSION['listaDeUsuarios_Roles'])){
                 <th>Id Rol</th>
                 <th>Nombre Rol</th>
                 <!--<th>Estado</th>-->
-                <th>Eliminar</th> 
+                <th>Actualizar</th>
             </tr>
         </thead>
         <tbody>
@@ -63,7 +63,7 @@ if(isset($_SESSION['listaDeUsuarios_Roles'])){
                     <td><?php echo $listaDeUsuarios_Roles[$i]->rolId; ?></td>
                     <td><?php echo $listaDeUsuarios_Roles[$i]->rolNombre; ?></td>
                     <!--<td>d>-->
-                    <td><a href="Controlador.php?ruta=eliminarUsuarios&usuId=<?php echo $listaDeUsuarios_Roles[$i]->id_usuario_s; ?>" onclick="return confirm('Está seguro de eliminar el registro?')" style="color:#FF0000">Eliminar</a></td>  
+                    <td><a href="../../../Controlador.php?ruta=actualizarUsuarioRol&usuId=<?php echo $listaDeUsuarios_Roles[$i]->usuId; ?>" style="color:#FF0000">Actualizar</a></td>  
                 </tr>   
                 <?php
                 $i++;

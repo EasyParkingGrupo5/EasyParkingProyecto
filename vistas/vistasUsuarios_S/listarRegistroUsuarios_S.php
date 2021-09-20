@@ -25,6 +25,7 @@ if (isset($_SESSION['mensaje'])) {
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"> 
+        <link rel="stylesheet" href="<../../assets/template/datatables.net-bs/css/responsive.dataTables.min.css">
         <!--**************************************** -->
         <link rel="stylesheet" href="../../../css/vistas/vistaAdminUsuarios/vistaListarUsuarios.css">
     </head>
@@ -38,8 +39,8 @@ if(isset($_SESSION['listaDeUsuarios'])){
 }
 ?>
 <h4>Listado de la Tabla Usuario</h4>
-<div class="table">
-    <table id="example" class="table-responsive table-hover table-bordered table-striped" style="width:100%">
+<div class="table1">
+    <table id="example" class="table table-responsive table-hover table-bordered table-striped dataTable no-footer" style="width:100%">
         <thead>
             <tr>
                 <th>Id</th>
@@ -81,6 +82,7 @@ if(isset($_SESSION['listaDeUsuarios'])){
     <script type="text/javascript">
                         $(document).ready(function () {
                             $('#example').DataTable({
+                                responsive: true,
                                 pageLength: 5,
                                 lengthMenu: [[5, 10, 15, 20], [5, 10, 15, 20]],
                                 language: {

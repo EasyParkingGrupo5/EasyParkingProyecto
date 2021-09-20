@@ -8,7 +8,7 @@ body {
 
 header {
     margin: 100px auto;
-    width: 480px;
+    width: 240px;
     height: 230px;
     background-color: black;
 }
@@ -98,44 +98,4 @@ div#tres {
     text-align: center;
     font-size: 15px;
     color: white;
-}
-
-@media (max-width:1250px) {
-    header {
-        width: 400px;
-        margin-bottom: 50px;
-        margin-top: 20px;
-    }
-    h1 {
-        margin-left: 100px;
-        margin-right: 100px;
-        padding-top: 50px;
-    }
-    h3 {
-        margin: 20px 20px 0;
-    }
-}
-
-@media (max-width:600px) {
-    header {
-        width: 200px;
-        margin-bottom: 50px;
-        margin-top: 20px;
-    }
-    h1 {
-        margin-left: 100px;
-        margin-right: 100px;
-        padding-top: 50px;
-    }
-    h3 {
-        margin: 20px 20px 0;
-    }
-    #btnVolver {
-        font-size: 40px;
-        color: red;
-        position: absolute;
-        top: 15%;
-        left: 10%;
-        transform: translate(-50%, -50%);
-    }
 }

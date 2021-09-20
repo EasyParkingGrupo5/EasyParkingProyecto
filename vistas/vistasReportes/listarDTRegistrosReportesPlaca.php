@@ -37,8 +37,6 @@ if (isset($_SESSION['mensaje'])) {
     </head>
 	
 	<body>
-        <h1>Listado de la tabla Reportes Inactivos</h1>
-        <br>
 <?php
 if(isset($_SESSION['listaDeReportes'])){
 	

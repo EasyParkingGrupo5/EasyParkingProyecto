@@ -9,6 +9,7 @@ include_once PATH . 'controladores/TicketsControlador.php';
 include_once PATH . 'controladores/VehiculosControlador.php';
 include_once PATH . 'controladores/ReportesControlador.php';
 include_once PATH . 'controladores/EmpleadosControlador.php';
+include_once PATH . 'controladores/TarifasControlador.php';
 
 
 
@@ -266,7 +267,39 @@ class ControladorPrincipal{
             case 'buscarReportePlaca':
                 $this -> buscarReportePlaca();
                 break;
-
+            case 'listarTarifas':
+                $this -> listarTarifas();
+                break;
+            case 'vistaActualizarTarifa':
+                $this -> vistaActualizarTarifa();
+                break;
+            case 'cancelarActualizarTarifa':
+                $this -> cancelarActualizarTarifa();
+                break;
+            case 'confirmarActualizarTarifa':
+                $this -> confirmarActualizarTarifa();
+                break;
+            case 'eliminarTarifa':
+                $this -> eliminarTarifa();
+                break;
+            case 'vistaInsertarTarifa':
+                $this -> vistaInsertarTarifa();
+                break;
+            case 'insertarTarifa':
+                $this -> insertarTarifa();
+                break;
+            case 'listarTarifasInactivas':
+                $this -> listarTarifasInactivas();
+                break;
+            case 'habilitarTarifa':
+                $this -> habilitarTarifa();
+                break;
+            case 'actualizarUsuarioRol':
+                $this -> actualizarUsuarioRol();
+                break;
+            case 'confirmarActualizarUsuarioRol':
+                $this -> confirmarActualizarUsuarioRol();
+                break;
             }
         
     }
@@ -567,6 +600,45 @@ class ControladorPrincipal{
 
     public function buscarReportePlaca(){
         $reportesControlador = new ReportesControlador($this -> datos);
+    }
+
+    public function listarTarifas(){
+        $tarifasControlador = new TarifasControlador($this -> datos);
+    }
+
+    public function vistaActualizarTarifa(){
+        $tarifasControlador = new TarifasControlador($this -> datos);
+    }
+
+    public function cancelarActualizarTarifa(){
+        $tarifasControlador = new TarifasControlador($this -> datos);
+    }
+
+    public function confirmarActualizarTarifa(){
+        $tarifasControlador = new TarifasControlador($this -> datos);
+    }
+    public function eliminarTarifa(){
+        $tarifasControlador = new TarifasControlador($this -> datos);
+    }
+    public function vistaInsertarTarifa(){
+        $tarifasControlador = new TarifasControlador($this -> datos);
+    }
+
+    public function insertarTarifa(){
+        $tarifasControlador = new TarifasControlador($this -> datos);
+    }
+
+    public function listarTarifasInactivas(){
+        $tarifasControlador = new TarifasControlador($this -> datos);
+    }
+    public function habilitarTarifa(){
+        $tarifasControlador = new TarifasControlador($this -> datos);
+    }
+    public function actualizarUsuarioRol(){
+        $Usuarios_SRolesControlador = new Usuarios_SRolesControlador($this -> datos);
+    }
+    public function confirmarActualizarUsuarioRol(){
+        $Usuarios_SRolesControlador = new Usuarios_SRolesControlador($this -> datos);
     }
 }
 

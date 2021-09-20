@@ -51,22 +51,12 @@ class VehiculosControlador{
     public function listarVehiculos(){
         $gestarVehiculos = new VehiculosDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
         $registroVehiculos = $gestarVehiculos -> seleccionarTodos(1);
-
-        $gestarTickets = new TicketsDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
-        $registroTickets = $gestarTickets -> seleccionarTodos(1);
-
-        $gestarEmpleados = new EmpleadosDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
-        $registroEmpleados = $gestarEmpleados -> seleccionarTodos(1);
     
         session_start();
-
-        $_SESSION['listaDeTickets'] = $registroTickets;
     
         $_SESSION['listaDeVehiculos'] = $registroVehiculos;
-
-        $_SESSION['listaDeEmpleados'] = $registroEmpleados;
     
-        header("location:principal.php?contenido=vistas/vistasVehiculos/listarDTRegistrosVehiculos.php");
+        header("location:vistas/vistaAdminVehiculo/vistaAdminVehiculo.php?contenido=vistas/vistasVehiculos/listarDTRegistrosVehiculos.php");
     }
 
     public  function actualizarVehiculos(){
@@ -77,19 +67,12 @@ class VehiculosControlador{
         $actualizarVehiculos = $gestarVehiculos -> seleccionarID(array($this->datos['vehId']));
 
         $actualizarDatosVehiculos = $actualizarVehiculos['registroEncontrado'][0];
-        
-        $gestarTickets = new TicketsDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
-        $actualizarTickets = $gestarTickets -> seleccionarTodos(1);
 
-        $gestarEmpleados = new EmpleadosDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
-        $actualizarEmpleados = $gestarEmpleados -> seleccionarTodos(1);
 
         session_start();
         $_SESSION['actualizarDatosVehiculos']=$actualizarDatosVehiculos;
-        $_SESSION['listarTickets']=$actualizarTickets;
-        $_SESSION['listarEmpleados']=$actualizarEmpleados;
 
-        header("location:principal.php?contenido=vistas/vistasVehiculos/vistaActualizarVehiculos.php");
+        header("location:vistas/vistaAdminVehiculo/vistaAdminVehiculo.php?contenido=vistas/vistasVehiculos/vistaActualizarVehiculos.php");
         
     }
 

@@ -75,27 +75,27 @@ class UsuarioRolesDAO extends ConDbMySql{
     public function actualizar($registro){
 
         try {
-            $consulta = "UPDATE usuario_s_roles SET id_rol = :id_rol, 
-            estado = :estado, fechaUserRol = :fechaUserRol, obsFechaUserRol = :obsFechaUserRol,
-            usuRolUsuSesion = :usuRolUsuSesion, created_at = :created_at,
-            updated_at = :updated_at WHERE id_usuario_s = :id_usuario_s";
+
+            $nombre = $registro[0]['id_rol'];
+            $id_usuario_s = $registro[0]['id_usuario_s'];
+
+            if(isset($id_usuario_s)){
+
+                $consulta = "UPDATE usuario_s_roles ";
+                $consulta.= "SET id_rol = ?";
+                $consulta.= "WHERE id_usuario_s = ?;";
+                
+                $actualizar = $this -> conexion -> prepare($consulta);
+    
+                $actualizacion = $actualizar->execute(array($nombre, $id_usuario_s));
+    
+                $this->cierreBd();
+    
+                return ['actualizacion' => $actualizacion, 'mensaje' => 'Resgistro Actualizado'];
+
+            }
+
             
-            $actualizar = $this -> conexion -> prepare($consulta);
-
-            $actualizar -> bindParam(":id_rol", $registro['id_rol']);
-            $actualizar -> bindParam(":estado", $registro['estado']);
-            $actualizar -> bindParam(":fechaUserRol", $registro['fechaUserRol']);
-            $actualizar -> bindParam(":obsFechaUserRol", $registro['obsFechaUserRol']);
-            $actualizar -> bindParam(":usuRolUsuSesion", $registro['usuRolUsuSesion']);
-            $actualizar -> bindParam(":created_at", $registro['created_at']);
-            $actualizar -> bindParam(":updated_at", $registro['updated_at']);
-            $actualizar -> bindParam(":id_usuario_s", $registro['id_usuario_s']);
-
-            $actualizacion = $actualizar->execute();
-
-            $this->cierreBd();
-
-            return ['actualizacion' => $actualizacion, 'mensaje' => 'Resgistro Actualizado'];
 
         } catch (PDOException $pdoExc) {
             return ['actualizacion' => $actualizacion, 'mensaje' => $pdoExc];

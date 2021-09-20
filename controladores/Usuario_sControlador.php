@@ -77,7 +77,7 @@ class Usuario_sControlador{
 
             session_start();
 
-            $_SESSION['mensaje'] = "Registrado con èxito para ingreso al sistema";				
+            $_SESSION['mensaje'] = "Registrado con éxito para ingreso al sistema";				
 
             header("location:index.php");
         }else{
