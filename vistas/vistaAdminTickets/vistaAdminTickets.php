@@ -47,7 +47,14 @@ if (isset($_SESSION['mensaje'])){
         <?php
             if(isset($_GET['contenido'])){
                 include(PATH.$_GET['contenido']);
-
+            }
+            if(isset($_SESSION['ticketNuevo'])){
+                ?><script>window.open('../../vistas/libreriaTickets/ticket/ticketAbierto.php', '_blank');</script>";
+                <?php
+            }
+            if(isset($_SESSION['ticketCerrado'])){
+                ?><script>window.open('../../vistas/libreriaTickets/ticket/ticketCerrado.php', '_blank');</script>";
+                <?php
             }
         ?>
 

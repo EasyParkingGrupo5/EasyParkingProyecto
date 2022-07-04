@@ -4,6 +4,7 @@ include_once PATH . 'modelos/modeloTickets/TicketsDAO.php';
 include_once PATH . 'modelos/modeloEmpleados/EmpleadosDAO.php';
 include_once PATH . 'modelos/modeloVehiculos/VehiculosDAO.php';
 include_once PATH . 'modelos/modeloTarifas/TarifasDAO.php';
+require_once PATH . 'vistas/libreriaTickets/vendor/autoload.php';
 
 
 class TicketsControlador{
@@ -173,8 +174,11 @@ class TicketsControlador{
             $gestarTickets = new TicketsDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
             $inhabilitarTickets = $gestarTickets -> eliminarLogico(array($this -> datos['ticNumero']));
 
+            $ticketCerrado = $gestarTickets -> seleccionarID(array($this->datos['ticNumero']));
+
             session_start();
 
+            $_SESSION['ticketCerrado'] = $ticketCerrado['registroEncontrado'][0]->ticNumero;
             $_SESSION['mensaje'] = "Ticket cerrado";
             unset($_SESSION['valorTotal']);
             unset($_SESSION['horaFinal']);
@@ -214,20 +218,25 @@ class TicketsControlador{
             $gestarTickets = new TicketsDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
             $this -> datos['Vehiculos_vehId'] = $buscarPlaca['registroEncontrado'][0]-> vehId;
             session_start();
-            $this -> datos['Empleados_empId'] = $_SESSION['rolesEnSesion'][0];
-            $gestarTickets ->insertar($this -> datos);
+            $this -> datos['Empleados_empId'] = $_SESSION['datosUsuario']->empId;
+            $insertarTicket = $gestarTickets ->insertar($this -> datos);
+            $numeroTicket = $insertarTicket['resultado'];
         }else{
             session_start();
             $this -> datos['Empleados_empId'] = $_SESSION['rolesEnSesion'][0];
             $insertarVehiculoNuevo = $gestarVehiculo->insertar($this->datos);
             $this -> datos['Vehiculos_vehId'] = $insertarVehiculoNuevo['resultado'];
             $gestarTickets = new TicketsDAO(SERVIDOR, BASE, USUARIO_DB, CONTRASENIA_DB);
-            $gestarTickets ->insertar($this -> datos);
+            $insertarTicket = $gestarTickets ->insertar($this -> datos);
+            $numeroTicket = $insertarTicket['resultado'];
         }
         
         $_SESSION['mensaje'] = 'Ticket agregado.';
+        $_SESSION['ticketNuevo'] = $numeroTicket;
 
-        header('location:vistas/vistaAdminTickets/vistaAdminTickets.php');
+
+        header('location: vistas/vistaAdminTickets/vistaAdminTickets.php');
+
     }
 
     public function abrirTicket(){
@@ -291,6 +300,7 @@ class TicketsControlador{
 
         $_SESSION['valorTotal'] = $totalTicket;
         $_SESSION['horaFinal'] = $ticketActualizado['registroEncontrado'][0] -> ticHoraSalida;
+
 
         header('location:vistas/vistaAdminTickets/vistaAdminTickets.php?contenido=vistas/vistasTickets/vistaCerrarTicket.php');
 

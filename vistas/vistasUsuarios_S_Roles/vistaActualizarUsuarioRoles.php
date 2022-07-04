@@ -23,8 +23,8 @@ if (isset($_SESSION['listarRol'])) {
     <link rel="stylesheet" href="../../../css/vistas/vistaAdminUsuarios/vistaActualizarUsuRol.css">
 </head>
 <body>
-    <h2 id="text-1">Gestión de Vehiculos</h2>
-    <h3 id="text-2">Actualización de Vehiculos</h3>
+    <h2 id="text-1">Gestión de Usuarios Roles</h2>
+    <h3 id="text-2">Actualización de Usuario con Rol</h3>
 <div class="formActualizarUsuRol">
         <form role="form" action="../../../Controlador.php" method="POST" autocomplete="off">
         <div class="contenedor-input">

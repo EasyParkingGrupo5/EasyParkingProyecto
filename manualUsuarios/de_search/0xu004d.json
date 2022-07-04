@@ -1,16 +1,23 @@
 [
 	{ "s": "MANERA", "p": [4] },
-	{ "s": "MANUAL", "p": [1] },
+	{ "s": "MANOS", "p": [16] },
+	{ "s": "MANUAL", "p": [6, 1] },
+	{ "s": "MARCA", "p": [18, 15] },
 	{ "s": "MAYUSCULAS", "p": [5] },
-	{ "s": "MISMO", "p": [8] },
+	{ "s": "MEJOR", "p": [6] },
+	{ "s": "MENSAJE", "p": [23, 12, 9] },
+	{ "s": "MERCHAN", "p": [2] },
+	{ "s": "MINUTO", "p": [23] },
+	{ "s": "MISMO", "p": [14, 8] },
 	{ "s": "MISMOS", "p": [5] },
 	{ "s": "MODIFICAR", "p": [12] },
 	{ "s": "MOSTRADA", "p": [8] },
-	{ "s": "MOSTRARA", "p": [8, 5] },
+	{ "s": "MOSTRARA", "p": [8, 5, 23, 13, 18, 10] },
 	{ "s": "MOSTRARAN", "p": [6] },
 	{ "s": "MOSTRARÁ", "p": [12, 9, 6] },
+	{ "s": "MOTO", "p": [16, 15] },
 	{ "s": "MOVERNOS", "p": [11] },
 	{ "s": "MUESTRA", "p": [9] },
-	{ "s": "MUESTRAN", "p": [9] },
-	{ "s": "MÁS", "p": [8, 6] }
+	{ "s": "MUESTRAN", "p": [18, 9] },
+	{ "s": "MÁS", "p": [15, 8, 6] }
 ]

@@ -1181,10 +1181,10 @@ InputSync.prototype ={
 DR_EXPLAIN.namespace( 'DR_EXPLAIN.data_menu' );
 DR_EXPLAIN.data_menu = {
     // menu
-    DREX_NODE_NAMES: ["Página principal","Creadores","Tabla de contenido","1. Login","2. Registro","3. Interfaz Principal","3.1. Administración de Usuarios","3.2. Administración de Empleados","3.1.1. Administración de Roles","3.1.2. Administración de Usuarios ","3.1.3. Administración Usuarios Roles","3.2.1. Administración de Empleados"],
-    DREX_NODE_LINKS: ["index.htm","creadores.htm","tabla_de_contenido.htm","login.htm","registro.htm","interfaz_principal.htm","administracion_de_usuarios.htm","administracion_de_empleados_1.htm","administracion_de_roles.htm","administracion_de_usuarios_.htm","administracion_usuarios_roles.htm","administracion_de_empleados_2.htm"],
-    DREX_NODE_CHILD_START: [1,6,6,6,6,6,8,11,12,12,12,12],
-    DREX_NODE_CHILD_END: [6,6,6,6,6,8,11,12,12,12,12,12],
+    DREX_NODE_NAMES: ["Página principal","Creadores de EasyParking","Tabla de contenido","1. Login","2. Registro","3. Interfaz Principal","3.1. Administración de Usuarios","3.2. Administración de Empleados","3.3. Administración de Tickets","3.4. Administración Vehículos","3.5. Administración de Reportes ","3.6. Administración Tarifas","3.1.1. Administración de Roles","3.1.2. Administración de Usuarios ","3.1.3. Administración Usuarios Roles","3.2.1. Administración de Empleados","3.2.2. Administración Tipo de Documento ","3.3.1. Abrir Ticket","3.3.2. Cerrar Ticket","3.4.1. Administración de Vehículos ","3.5.1. Generar Reporte por Fecha ","3.5.2. Generar Reporte por Vehículos ","3.6.1. Administración Tarifas"],
+    DREX_NODE_LINKS: ["index.htm","creadores_de_easyparking.htm","tabla_de_contenido.htm","login.htm","registro.htm","interfaz_principal.htm","administracion_de_usuarios.htm","administracion_de_empleados_1.htm","administracion_de_tickets.htm","administracion_vehiculos.htm","administracion_de_reportes_.htm","administracion_tarifas_1.htm","administracion_de_roles.htm","administracion_de_usuarios_.htm","administracion_usuarios_roles.htm","administracion_de_empleados_2.htm","administracion_tipo_de_documento_.htm","abrir_ticket.htm","cerrar_ticket.htm","administracion_de_vehiculos_.htm","generar_reporte_por_fecha_.htm","generar_reporte_por_vehiculos_.htm","administracion_tarifas_2.htm"],
+    DREX_NODE_CHILD_START: [1,6,6,6,6,6,12,15,17,19,20,22,23,23,23,23,23,23,23,23,23,23,23],
+    DREX_NODE_CHILD_END: [6,6,6,6,6,12,15,17,19,20,22,23,23,23,23,23,23,23,23,23,23,23,23],
     DREX_MENU_TYPE: 2,
     DREX_HAS_ROOT_NODE: 0};
 
@@ -1208,7 +1208,7 @@ DR_EXPLAIN.namespace( 'DR_EXPLAIN.data_resize' );
 DR_EXPLAIN.data_resize = {
 
     DREXPLAIN_FIT_HEIGHT_TO_WINDOW: 1,
-    DREX_INITIAL_MENU_WIDTH: "320px"
+    DREX_INITIAL_MENU_WIDTH: "340px"
 
 };
 

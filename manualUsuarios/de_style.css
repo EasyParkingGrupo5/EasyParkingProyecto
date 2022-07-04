@@ -87,13 +87,22 @@ margin-top: 3px; margin-right: 3px; margin-bottom: 3px; margin-left: 3px;}
 img.de_780D01ADE8
 {
 margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;}
-span.de_39E43CC1C9
+span.de_1376058C6C
 {
-	color:#49b6b5;
-}
-span.de_496AA02164
-{
+	font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 12pt;
+	color:#000000;
+}
+span.de_4A06449470
+{
+	font-family: "Courier New";
+	font-size: 11pt;
+	color:#000000;
+}
+span.de_4AF4BF9DD6
+{
+	font-family: "Arial";
+	font-size: 11pt;
 	color:#000000;
 }
 span.de_4CD179DA38
@@ -102,20 +111,47 @@ span.de_4CD179DA38
 	font-size: 11pt;
 	color:#000000;
 }
-span.de_7C1CAF654A
+span.de_6B7F0857AE
 {
-	font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-size: 11pt;
+	font-family: "Calibri";
+	font-size: 14pt;
 	color:#000000;
+}
+span.de_6D2D8B1FD4
+{
+	font-size: 12pt;
 }
 span.de_AD3B714EC2
 {
 	font-size: 14pt;
 	color:#000000;
 }
-span.de_E63A2C15A9
+span.de_B19D0BCACC
 {
+	font-size: 20pt;
+	color:#bd0d11;
+}
+span.de_C73B169FB7
+{
+	font-family: "Leelawadee UI";
 	font-size: 11pt;
+	color:#000000;
+}
+span.de_D8BCB2AC4C
+{
+	font-family: "Calibri";
+	font-size: 12pt;
+	color:#000000;
+}
+span.de_E27DFBFFD7
+{
+	font-family: "Calibri";
+	color:#49b6b5;
+}
+span.de_ED3ECC54E7
+{
+	font-family: "Courier New";
+	font-size: 18pt;
 	color:#000000;
 }
 span.de_FFB638AC42

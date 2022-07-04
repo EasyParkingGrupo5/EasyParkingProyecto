@@ -26,7 +26,7 @@ class TicketsDAO extends ConDbMySql{
 
     public function seleccionarID($sId){
 
-        $consulta = "SELECT * FROM tickets WHERE ticNumero=?; ";
+        $consulta = "SELECT * FROM tickets JOIN vehiculos ON Vehiculos_vehId=vehId WHERE ticNumero=?; ";
 
         $listar = $this->conexion->prepare($consulta);
         $listar->execute(array($sId[0]));

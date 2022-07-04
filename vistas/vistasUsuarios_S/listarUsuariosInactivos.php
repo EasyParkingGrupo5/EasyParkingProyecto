@@ -38,7 +38,7 @@ if(isset($_SESSION['listaDeUsuarios'])){
 }
 ?>
             <h4>Listado de Usuarios inhabilitados </h4>
-            <div class= "table">
+            <div class= "table1">
     <table id="example" class="table-responsive table-hover table-bordered table-striped" style="width:100%">
         <thead>
 

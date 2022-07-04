@@ -75,7 +75,7 @@ if (isset($_SESSION['mensaje']) && isset($_SESSION['nombre']) && isset($_SESSION
 
         </header>
 
-        <!--<h2 class="manual-link"><a href="./manualUsuarios" target="_blank" style="color:white">Manuel de Usuario</a></h2>-->
+        <h2 class="manual-link"><a href="./manualUsuarios" target="_blank" style="color:white">Manuel de Usuario</a></h2>
 
 </body>
 </html>
